@@ -1,0 +1,33 @@
+import 'package:lemirageelevators/data/model/response/base/api_response.dart';
+import 'package:lemirageelevators/data/model/response/onboarding_model.dart';
+import 'package:lemirageelevators/data/repository/onboarding_repo.dart';
+import 'package:lemirageelevators/helper/api_checker.dart';
+import 'package:flutter/material.dart';
+
+class OnBoardingProvider with ChangeNotifier {
+  final OnBoardingRepo onboardingRepo;
+
+  OnBoardingProvider({required this.onboardingRepo});
+
+  List<OnboardingModel> _onBoardingList = [];
+  List<OnboardingModel> get onBoardingList => _onBoardingList;
+
+  int _selectedIndex = 0;
+  int get selectedIndex =>_selectedIndex;
+
+  changeSelectIndex(int index){
+    _selectedIndex=index;
+    notifyListeners();
+  }
+
+  void initBoardingList(BuildContext context) async {
+    ApiResponse apiResponse = await onboardingRepo.getOnBoardingList(context);
+    if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
+      _onBoardingList.clear();
+      _onBoardingList.addAll(apiResponse.response!.data);
+    } else {
+      ApiChecker.checkApi(context, apiResponse);
+    }
+    notifyListeners();
+  }
+}
