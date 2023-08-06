@@ -67,7 +67,7 @@ class ReadMoreTextState extends State<ReadMoreText> {
         widget.locale ?? Localizations.localeOf(context);
 
     final colorClickableText =
-        widget.colorClickableText ?? Theme.of(context).accentColor;
+        widget.colorClickableText ?? Theme.of(context).colorScheme.secondary;
 
     TextSpan link = TextSpan(
       text: _readMore ? widget.trimCollapsedText : widget.trimExpandedText,
