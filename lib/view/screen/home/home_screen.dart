@@ -1,4 +1,4 @@
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badge;
 import 'package:flutter/material.dart';
 import 'package:lemirageelevators/provider/cart_provider.dart';
 import 'package:lemirageelevators/provider/home_provider.dart';
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(builder: (_) => CartScreen()));
                     },
-                    icon: Badge(
+                    icon: badge.Badge(
                       badgeContent: Text(
                           Provider.of<CartProvider>(context).cartList.length.toString(),
                         style: cairoRegular.copyWith(
@@ -60,12 +60,12 @@ class _HomePageState extends State<HomePage> {
                         )
                       ),
                       showBadge: true,
-                      shape: BadgeShape.circle,
+                      shape: badge.BadgeShape.circle,
                       badgeColor: Colors.red,
                       elevation: 4,
                       padding: EdgeInsets.all(4),
-                      position: BadgePosition.topStart(top: -9, start : -12),
-                      animationType: BadgeAnimationType.scale,
+                      position: badge.BadgePosition.topStart(top: -9, start : -12),
+                      animationType: badge.BadgeAnimationType.scale,
                       toAnimate: true,
                       child: Icon(
                         Icons.shopping_cart,
