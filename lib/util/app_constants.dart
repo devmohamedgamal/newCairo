@@ -7,33 +7,33 @@ class AppConstants {
   // ALL URLs
   // static const String BASE_URL = 'https://www.gddeaf.net/App_api/';
   static const String BASE_URL = 'http://213.136.84.116/~souq/mr_test/App_api/';
-  static const String BASE_URL_IMAGE = "https://www.gddeaf.net/uploads/"; //BASE URL IMAGE
+  static const String BASE_URL_IMAGE = "https://www.gddeaf.net/uploads/";
 
-  static const String GET_PRODUCT_URL = 'get_product'; // GET PRODUCT URL
-  static const String CATEGORY_PRODUCT_URI = 'category_producte/'; // GET PRODUCT URL
-  static const String HOME_URI = 'homepage'; // home page URL
-  static const String PRODUCT_DETAILS_URL = 'product_details?product_id='; // product details URL
-  static const String SETTINGS_URL = 'settings'; // settings URL
-  static const String LOGIN_URI = 'login'; // login URL
-  static const String REGISTRATION_URI = 'register'; // register URL
-  static const String LOGIN_SOCIAL_URI = 'login_social'; // register URL
-  static const String FORGET_PASSWORD_URI = 'forgot_password'; // register URL
-  static const String ALL_ALBUMS_URL = 'pics'; // ALL ALBUMS URL
-  static const String ALBUM_URL = 'album?albom_id='; // album URL
-  static const String CLIENT_PROFILE_URL = 'client_profile?client_id='; // client profile URL
-  static const String VIDEO_URL = 'video'; // video URL
-  static const String SHIPPING_URL = 'shipping'; // shipping URL
-  static const String ORDER_PLACE_URI = 'placeorder'; // place order URL
-  static const String ORDER_URI = 'last_order?client_id='; // last order URL
-  static const String GET_WISH_URL = 'get_wish?client_id='; // get wish URL
-  static const String ADD_WISH_URL = 'add_wish?customer_id='; // get wish URL
-  static const String NOTIFICATION_URI = 'get_all_not?client_id='; // get all notification URL
-  static const String RATING_URL = 'rating'; // rating URL
-  static const String CONTACT_URL = 'contact'; // CONTACT URL
-  static const String ABOUT_URL = 'about'; // about URL
-  static const String SEARCH_URI = 'search?search='; // about URL
-  static const String UPDATE_PROFILE_URI = 'update_profile'; // about URL
-  static const String CANCEL_ORDER_URI = 'cancel_order?id='; // about URL
+  static const String GET_PRODUCT_URL = 'get_product';
+  static const String CATEGORY_PRODUCT_URI = 'category_producte/';
+  static const String HOME_URI = 'homepage';
+  static const String PRODUCT_DETAILS_URL = 'product_details?product_id=';
+  static const String SETTINGS_URL = 'settings';
+  static const String LOGIN_URI = 'login';
+  static const String REGISTRATION_URI = 'register';
+  static const String LOGIN_SOCIAL_URI = 'login_social';
+  static const String FORGET_PASSWORD_URI = 'forgot_password';
+  static const String ALL_ALBUMS_URL = 'pics';
+  static const String ALBUM_URL = 'album?albom_id=';
+  static const String CLIENT_PROFILE_URL = 'client_profile?client_id=';
+  static const String VIDEO_URL = 'video';
+  static const String SHIPPING_URL = 'shipping';
+  static const String ORDER_PLACE_URI = 'placeorder';
+  static const String ORDER_URI = 'last_order?client_id=';
+  static const String GET_WISH_URL = 'get_wish?client_id=';
+  static const String ADD_WISH_URL = 'add_wish?customer_id=';
+  static const String NOTIFICATION_URI = 'get_all_not?client_id=';
+  static const String RATING_URL = 'rating';
+  static const String CONTACT_URL = 'contact';
+  static const String ABOUT_URL = 'about';
+  static const String SEARCH_URI = 'search?search=';
+  static const String UPDATE_PROFILE_URI = 'update_profile';
+  static const String CANCEL_ORDER_URI = 'cancel_order?id=';
 
   // sharePreference
   static const String COUNTRY_CODE = 'country_code';
