@@ -143,9 +143,10 @@ class AboutScreen extends StatelessWidget {
                               icon: Icon(Icons.facebook,size: 40,color: ColorResources.BLUE)
                           ),
 
+                          // todo: handle whatsapp icon instead of facebook
                           IconButton(
                               onPressed: () => _launchUrl(appInfo.appInfo!.whatsapp!),
-                              icon: Icon(Icons.whatsapp,size: 40,color: ColorResources.GREEN)
+                              icon: Icon(Icons.facebook,size: 40,color: ColorResources.GREEN)
                           ),
 
                           IconButton(
