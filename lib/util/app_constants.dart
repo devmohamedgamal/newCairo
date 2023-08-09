@@ -4,9 +4,11 @@ import '../data/model/response/language_model.dart';
 class AppConstants {
   static const String APP_NAME = 'GDDeaf';  //NAME APP
 
-  // ALL URL
+  // ALL URLs
+  // static const String BASE_URL = 'https://www.gddeaf.net/App_api/';
+  static const String BASE_URL = 'http://213.136.84.116/~souq/mr_test/App_api/';
   static const String BASE_URL_IMAGE = "https://www.gddeaf.net/uploads/"; //BASE URL IMAGE
-  static const String BASE_URL = 'https://www.gddeaf.net/App_api/'; //BASE URL
+
   static const String GET_PRODUCT_URL = 'get_product'; // GET PRODUCT URL
   static const String CATEGORY_PRODUCT_URI = 'category_producte/'; // GET PRODUCT URL
   static const String HOME_URI = 'homepage'; // home page URL
