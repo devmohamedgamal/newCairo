@@ -56,10 +56,10 @@ Future<void> main() async {
   await MyNotification.initialize(flutterLocalNotificationsPlugin);
   FirebaseMessaging.onBackgroundMessage(myBackgroundMessageHandler);
 
-  if(Platform.isAndroid){
-    final token = FirebaseMessaging.instance.getToken();
+  // if(Platform.isAndroid){
+    final token = await FirebaseMessaging.instance.getToken();
     debugPrint('token: $token');
-  }
+  // }
 
   runApp(MultiProvider(
     providers: [
