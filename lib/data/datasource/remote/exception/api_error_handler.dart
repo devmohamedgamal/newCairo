@@ -9,20 +9,22 @@ class ApiErrorHandler {
       try {
         if (error is DioError) {
           switch (error.type) {
-            case DioErrorType.cancel:
+            case DioExceptionType.cancel:
               errorDescription = "تم إلغاء الطلب إلى خادم API";
               break;
-            case DioErrorType.connectTimeout:
+            case DioExceptionType.connectionTimeout:
               errorDescription = "يجب فحص حالة الانترنت واعادة المحاولة";
               break;
-            case DioErrorType.other:
-              errorDescription = "فشل الاتصال بخادم API بسبب الاتصال بالإنترنت";
+            case DioExceptionType.badCertificate:
+            case DioExceptionType.connectionError:
+            case DioExceptionType.unknown:
+              errorDescription = "فشل الاتصال بخادم API";
               break;
-            case DioErrorType.receiveTimeout:
+            case DioExceptionType.receiveTimeout:
               errorDescription =
               "تلقي المهلة فيما يتعلق بخادم API";
               break;
-            case DioErrorType.response:
+            case DioExceptionType.badResponse:
               switch (error.response!.statusCode) {
                 case 400:
                   ErrorResponse errorResponse = ErrorResponse.fromJson(error.response!.data);
