@@ -31,8 +31,13 @@ class ProductRepo {
 
   Future<ApiResponse> getDetailsProduct(String productID,String customerID) async {
     try {
-      final response = await dioClient.get(
-        AppConstants.PRODUCT_DETAILS_URL + productID + "&customer_id=" + customerID);
+      final response = await dioClient.post(
+        AppConstants.PRODUCT_DETAILS_URL,
+        data: {
+          'product_id': productID,
+          'customer_id': customerID,
+        }
+      );
       return ApiResponse.withSuccess(response);
     } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));

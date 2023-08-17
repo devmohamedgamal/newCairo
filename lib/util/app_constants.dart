@@ -13,7 +13,7 @@ class AppConstants {
   static const String GET_PRODUCT_URL = 'get_product';
   static const String CATEGORY_PRODUCT_URI = 'category_producte/';
   static const String HOME_URI = 'homepage';
-  static const String PRODUCT_DETAILS_URL = 'product_details?product_id=';
+  static const String PRODUCT_DETAILS_URL = 'product_details';
   static const String SETTINGS_URL = 'settings';
   static const String LOGIN_URI = 'login';
   static const String REGISTRATION_URI = 'register';
