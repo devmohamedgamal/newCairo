@@ -6,8 +6,9 @@ class AppConstants {
 
   // ALL URLs
   // static const String BASE_URL = 'https://www.gddeaf.net/App_api/';
-  static const String BASE_URL = 'http://213.136.84.116/~souq/mr_test/App_api/';
-  static const String BASE_URL_IMAGE = "https://www.gddeaf.net/uploads/";
+  static const String _DOMAIN = 'http://213.136.84.116/~souq/mr_test';
+  static const String BASE_URL = '$_DOMAIN/App_api/';
+  static const String BASE_URL_IMAGE = "$_DOMAIN/uploads/";
 
   static const String GET_PRODUCT_URL = 'get_product';
   static const String CATEGORY_PRODUCT_URI = 'category_producte/';
