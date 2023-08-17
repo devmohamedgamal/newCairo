@@ -22,15 +22,19 @@ class SocialLoginModel {
     tokenId = json['token_id'];
   }
 
+  Map<String, dynamic> toMap() {
+    return {
+      'uuiid': this.uuiId,
+      'fullname': this.fullName,
+      'clientname': this.clientName,
+      'mobile': this.mobile,
+      'email': this.email,
+      'address': this.address,
+      'token_id': this.tokenId,
+    };
+  }
+
   FormData toJson() {
-    return FormData.fromMap({
-    'uuiid': this.uuiId,
-    'fullname': this.fullName,
-    'clientname': this.clientName,
-    'mobile': this.mobile,
-    'email': this.email,
-    'address': this.address,
-    'token_id': this.tokenId,
-    });
+    return FormData.fromMap(toMap());
   }
 }

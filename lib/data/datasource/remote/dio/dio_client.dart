@@ -18,8 +18,8 @@ class DioClient {
 
     dio!
       ..options.baseUrl = baseUrl!
-      ..options.connectTimeout = 30000
-      ..options.receiveTimeout = 30000
+      ..options.connectTimeout = const Duration(seconds: 30)
+      ..options.receiveTimeout = const Duration(seconds: 30)
       ..httpClientAdapter
       ..options.followRedirects = false;
 
