@@ -35,7 +35,7 @@ class AuthRepo {
     try {
       Response response = await dioClient.post(
         AppConstants.REGISTRATION_URI,
-        data: register.toJsonApi(),
+        data: register.toJson(),
       );
       return ApiResponse.withSuccess(response);
     } on DioError catch (e) {
