@@ -14,7 +14,7 @@ class SplashRepo {
     try {
       final response = await dioClient.get(AppConstants.ABOUT_URL);
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }

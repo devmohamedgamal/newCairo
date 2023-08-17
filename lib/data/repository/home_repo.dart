@@ -13,7 +13,7 @@ class HomeRepo {
       final response = await dioClient.get(
         AppConstants.HOME_URI);
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }

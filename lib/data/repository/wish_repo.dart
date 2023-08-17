@@ -12,7 +12,7 @@ class WishRepo {
     try {
       final response = await dioClient.get(AppConstants.GET_WISH_URL + clientId);
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
@@ -22,7 +22,7 @@ class WishRepo {
       final response = await dioClient.post(AppConstants.ADD_WISH_URL +
           customerID + "&product_id=" + productID);
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
@@ -31,7 +31,7 @@ class WishRepo {
     try {
       final response = await dioClient.delete(AppConstants.ADD_WISH_URL + customerID + "&product_id=" + productID);
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }

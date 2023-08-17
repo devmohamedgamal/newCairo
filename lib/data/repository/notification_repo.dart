@@ -12,7 +12,7 @@ class NotificationRepo {
     try {
       Response response = await dioClient.get(AppConstants.NOTIFICATION_URI + clientId);
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }

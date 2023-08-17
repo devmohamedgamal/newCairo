@@ -31,7 +31,7 @@ class CartRepo{
     try {
       final response = await dioClient.get(AppConstants.SHIPPING_URL);
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
@@ -46,7 +46,7 @@ class CartRepo{
       ];
       Response response = Response(requestOptions: RequestOptions(path: ''), data: addressTypeList, statusCode: 200);
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }

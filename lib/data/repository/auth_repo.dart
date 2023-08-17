@@ -28,7 +28,7 @@ class AuthRepo {
       );
       debugPrint('socialLogin with success');
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
@@ -41,7 +41,7 @@ class AuthRepo {
         data: register.toJson(),
       );
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
@@ -53,7 +53,7 @@ class AuthRepo {
         data: loginBody.toJsonApi(),
       );
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
@@ -100,7 +100,7 @@ class AuthRepo {
           })
       );
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }

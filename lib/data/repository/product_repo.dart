@@ -14,7 +14,7 @@ class ProductRepo {
     try {
       final response = await dioClient.get(AppConstants.GET_PRODUCT_URL);
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
@@ -24,7 +24,7 @@ class ProductRepo {
       final response = await dioClient.get(
         AppConstants.CATEGORY_PRODUCT_URI + id);
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
@@ -34,7 +34,7 @@ class ProductRepo {
       final response = await dioClient.get(
         AppConstants.PRODUCT_DETAILS_URL + productID + "&customer_id=" + customerID);
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
@@ -46,7 +46,7 @@ class ProductRepo {
         data: reviewBody.toJsonApi(),
       );
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }

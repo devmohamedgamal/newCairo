@@ -12,7 +12,7 @@ class GalleryRepo {
     try {
       final response = await dioClient.get(AppConstants.VIDEO_URL);
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
@@ -22,7 +22,7 @@ class GalleryRepo {
     try {
       final response = await dioClient.get(AppConstants.ALL_ALBUMS_URL);
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
@@ -32,7 +32,7 @@ class GalleryRepo {
     try {
       final response = await dioClient.get(AppConstants.ALBUM_URL + albumId);
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }

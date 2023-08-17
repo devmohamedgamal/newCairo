@@ -14,7 +14,7 @@ class SearchRepo {
     try {
       final response = await dioClient.get(AppConstants.SEARCH_URI + query);
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }

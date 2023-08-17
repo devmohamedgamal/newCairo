@@ -13,7 +13,7 @@ class OrderRepo {
     try {
       final response = await dioClient.get(AppConstants.ORDER_URI + clientId);
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
@@ -32,7 +32,7 @@ class OrderRepo {
                     : cartModel.toJsonCashApp()
       );
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
@@ -43,7 +43,7 @@ class OrderRepo {
           AppConstants.CANCEL_ORDER_URI + orderId
       );
       return ApiResponse.withSuccess(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
