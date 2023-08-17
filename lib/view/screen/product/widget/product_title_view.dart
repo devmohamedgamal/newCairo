@@ -51,7 +51,7 @@ class ProductTitleView extends StatelessWidget {
               ),
             ]),
 
-            double.parse(product.priceBefore!.replaceAll(",","")) > 0
+            double.parse(product.priceBefore?.replaceAll(",","")??'0') > 0
                 ? Text(product.priceBefore! + " \$",
               style: cairoRegular.copyWith(color: Theme.of(context).hintColor, decoration: TextDecoration.lineThrough),
             )
