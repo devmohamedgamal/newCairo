@@ -169,7 +169,7 @@ class _SocialLoginWidgetState extends State<SocialLoginWidget> {
                   id = Provider.of<FacebookLoginProvider>(context,
                       listen: false).result!.accessToken!.userId;
                   email = Provider.of<FacebookLoginProvider>(context,
-                      listen: false).userData!['email'];
+                      listen: false).userData!['email']??'';
                   fullName = Provider.of<FacebookLoginProvider>(context,
                       listen: false).userData!['name'];
 
