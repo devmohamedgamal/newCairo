@@ -22,10 +22,13 @@ import 'masterCard.dart';
 
 class ChoicePayment extends StatefulWidget {
   final String note;
+
   const ChoicePayment({required this.note});
+
   @override
   _ChoicePaymentState createState() => _ChoicePaymentState();
 }
+
 class _ChoicePaymentState extends State<ChoicePayment> {
   int typePayment = 0;
 
@@ -42,10 +45,7 @@ class _ChoicePaymentState extends State<ChoicePayment> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Provider.of<SplashProvider>(context, listen: false)
-                              .appInfo!
-                              .master ==
-                          "1"
+                  Provider.of<SplashProvider>(context, listen: false).appInfo!.master == "1"
                       ? typePaymentWidget(
                           title: "MasterCard",
                           image: Images.master_card,
@@ -56,10 +56,7 @@ class _ChoicePaymentState extends State<ChoicePayment> {
                             });
                           })
                       : Container(),
-                  Provider.of<SplashProvider>(context, listen: false)
-                              .appInfo!
-                              .fawry ==
-                          "1"
+                  Provider.of<SplashProvider>(context, listen: false).appInfo!.fawry == "1"
                       ? typePaymentWidget(
                           title: "Fawry",
                           image: Images.fawry,
@@ -70,10 +67,7 @@ class _ChoicePaymentState extends State<ChoicePayment> {
                             });
                           })
                       : Container(),
-                  Provider.of<SplashProvider>(context, listen: false)
-                              .appInfo!
-                              .stripe ==
-                          "1"
+                  Provider.of<SplashProvider>(context, listen: false).appInfo!.stripe == "1"
                       ? typePaymentWidget(
                           title: "Stripe",
                           value: typePayment == 2 ? true : false,
@@ -84,10 +78,7 @@ class _ChoicePaymentState extends State<ChoicePayment> {
                             });
                           })
                       : Container(),
-                  Provider.of<SplashProvider>(context, listen: false)
-                              .appInfo!
-                              .paypal ==
-                          "1"
+                  Provider.of<SplashProvider>(context, listen: false).appInfo!.paypal == "1"
                       ? typePaymentWidget(
                           title: "PayPal",
                           value: typePayment == 3 ? true : false,
@@ -98,10 +89,7 @@ class _ChoicePaymentState extends State<ChoicePayment> {
                             });
                           })
                       : Container(),
-                  Provider.of<SplashProvider>(context, listen: false)
-                              .appInfo!
-                              .cashApp ==
-                          "1"
+                  Provider.of<SplashProvider>(context, listen: false).appInfo!.cashApp == "1"
                       ? typePaymentWidget(
                           title: "Cash App",
                           value: typePayment == 4 ? true : false,
@@ -112,10 +100,8 @@ class _ChoicePaymentState extends State<ChoicePayment> {
                             });
                           })
                       : Container(),
-
                   typePayment == 4
-                      ? Consumer<CartProvider>(
-                          builder: (context, cardProvider, child) {
+                      ? Consumer<CartProvider>(builder: (context, cardProvider, child) {
                           return Container(
                             padding: EdgeInsets.only(
                               left: Dimensions.PADDING_SIZE_DEFAULT,
@@ -128,36 +114,25 @@ class _ChoicePaymentState extends State<ChoicePayment> {
                                   color: Colors.grey.withOpacity(0.2),
                                   spreadRadius: 1,
                                   blurRadius: 7,
-                                  offset: Offset(
-                                      0, 1), // changes position of shadow
+                                  offset: Offset(0, 1), // changes position of shadow
                                 )
                               ],
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(6),
-                                  bottomLeft: Radius.circular(6)),
+                              borderRadius: BorderRadius.only(topLeft: Radius.circular(6), bottomLeft: Radius.circular(6)),
                             ),
                             alignment: Alignment.center,
                             child: DropdownButtonFormField<String>(
                               value: cardProvider.paymentType,
                               isExpanded: true,
-                              icon: Icon(Icons.keyboard_arrow_down,
-                                  color: Theme.of(context).primaryColor),
+                              icon: Icon(Icons.keyboard_arrow_down, color: Theme.of(context).primaryColor),
                               decoration: InputDecoration(border: InputBorder.none),
                               iconSize: 24,
                               elevation: 16,
                               style: cairoRegular,
                               onChanged: cardProvider.updatePaymentType,
-                              items: cardProvider.paymentTypeList
-                                  .map<DropdownMenuItem<String>>(
-                                      (String value) {
+                              items: cardProvider.paymentTypeList.map<DropdownMenuItem<String>>((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
-                                  child: Text(value,
-                                      style: cairoRegular.copyWith(
-                                          color: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1!
-                                              .color)),
+                                  child: Text(value, style: cairoRegular.copyWith(color: Theme.of(context).textTheme.bodyText1!.color)),
                                 );
                               }).toList(),
                             ),
@@ -168,8 +143,6 @@ class _ChoicePaymentState extends State<ChoicePayment> {
               ),
             ),
           ),
-
-
           Expanded(
             child: Container(
               height: MediaQuery.of(context).size.width,
@@ -190,49 +163,27 @@ class _ChoicePaymentState extends State<ChoicePayment> {
             onTap: () async {
               if (Platform.isAndroid) {
                 if (typePayment == 0) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              MasterCard(note: widget.note, type: "Android")));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => MasterCard(note: widget.note, type: "Android")));
                 } else if (typePayment == 1) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              PhoneNumber(note: widget.note, type: "Android")));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => PhoneNumber(note: widget.note, type: "Android")));
                 } else if (typePayment == 2) {
-                  _paymentIsStripeOrPayPalOrCashApp(
-                      type: 4, note: widget.note, mobileType: "Android");
+                  _paymentIsStripeOrPayPalOrCashApp(type: 4, note: widget.note, mobileType: "Android");
                 } else if (typePayment == 3) {
-                  _paymentIsStripeOrPayPalOrCashApp(
-                      type: 5, note: widget.note, mobileType: "Android");
+                  _paymentIsStripeOrPayPalOrCashApp(type: 5, note: widget.note, mobileType: "Android");
                 } else if (typePayment == 4) {
-                  _paymentIsStripeOrPayPalOrCashApp(
-                      type: 6, note: widget.note, mobileType: "Android");
+                  _paymentIsStripeOrPayPalOrCashApp(type: 6, note: widget.note, mobileType: "Android");
                 }
               } else {
                 if (typePayment == 0) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              MasterCard(note: widget.note, type: "Iphone")));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => MasterCard(note: widget.note, type: "Iphone")));
                 } else if (typePayment == 1) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              PhoneNumber(note: widget.note, type: "Iphone")));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => PhoneNumber(note: widget.note, type: "Iphone")));
                 } else if (typePayment == 2) {
-                  _paymentIsStripeOrPayPalOrCashApp(
-                      type: 4, note: widget.note, mobileType: "Iphone");
+                  _paymentIsStripeOrPayPalOrCashApp(type: 4, note: widget.note, mobileType: "Iphone");
                 } else if (typePayment == 3) {
-                  _paymentIsStripeOrPayPalOrCashApp(
-                      type: 5, note: widget.note, mobileType: "Iphone");
+                  _paymentIsStripeOrPayPalOrCashApp(type: 5, note: widget.note, mobileType: "Iphone");
                 } else if (typePayment == 4) {
-                  _paymentIsStripeOrPayPalOrCashApp(
-                      type: 6, note: widget.note, mobileType: "Iphone");
+                  _paymentIsStripeOrPayPalOrCashApp(type: 6, note: widget.note, mobileType: "Iphone");
                 }
               }
             },
@@ -242,29 +193,18 @@ class _ChoicePaymentState extends State<ChoicePayment> {
     );
   }
 
-  Widget typePaymentWidget(
-      {required String title,
-      required bool value,
-      String? image,
-      required Function onChanged}) {
+  Widget typePaymentWidget({required String title, required bool value, String? image, required Function onChanged}) {
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
       child: CheckboxListTile(
           title: Row(
-            children: [
-              image == null
-                  ? Container()
-                  : Image.asset(image, width: 30, height: 50),
-              WSpacer(8),
-              Text(title)
-            ],
+            children: [image == null ? Container() : Image.asset(image, width: 30, height: 50), WSpacer(8), Text(title)],
           ),
           activeColor: Colors.teal,
           contentPadding: EdgeInsets.all(5),
           controlAffinity: ListTileControlAffinity.leading,
           shape: RoundedRectangleBorder(
-            side: BorderSide(
-                color: ColorResources.BLACK.withOpacity(0.1), width: 1),
+            side: BorderSide(color: ColorResources.BLACK.withOpacity(0.1), width: 1),
             borderRadius: BorderRadius.all(Radius.circular(5.0)),
           ),
           value: value,
@@ -274,10 +214,7 @@ class _ChoicePaymentState extends State<ChoicePayment> {
     );
   }
 
-  Future<void> _paymentIsStripeOrPayPalOrCashApp(
-      {required int type,
-      required String mobileType,
-      required String note}) async {
+  Future<void> _paymentIsStripeOrPayPalOrCashApp({required int type, required String mobileType, required String note}) async {
     // items
     List<CartItem>? _items = [];
     Provider.of<CartProvider>(context, listen: false).cartList.forEach((item) {
@@ -289,47 +226,36 @@ class _ChoicePaymentState extends State<ChoicePayment> {
     });
 
     // client Id
-    String clientId =
-        await Provider.of<AuthProvider>(context, listen: false).user!.userId!;
+    String clientId = await Provider.of<AuthProvider>(context, listen: false).user!.userId!;
 
     // mobile
-    String mobile =
-        await Provider.of<AuthProvider>(context, listen: false).user!.mobile!;
+    String mobile = await Provider.of<AuthProvider>(context, listen: false).user!.mobile!;
 
     // address City
-    String addressCity =
-        await Provider.of<ProfileProvider>(context, listen: false)
-            .addressList[Provider.of<ProfileProvider>(context, listen: false)
-                .addressIndex!]
-            .city!;
+    String addressCity = await Provider.of<ProfileProvider>(context, listen: false)
+        .addressList[Provider.of<ProfileProvider>(context, listen: false).addressIndex!]
+        .city!;
 
     // full Address
     String fullAddress = Provider.of<ProfileProvider>(context, listen: false)
-        .addressList[
-            Provider.of<ProfileProvider>(context, listen: false).addressIndex!]
+        .addressList[Provider.of<ProfileProvider>(context, listen: false).addressIndex!]
         .address
         .toString();
 
     // type Address is home || office
-    String typeAddress =
-        await Provider.of<ProfileProvider>(context, listen: false)
-            .addressList[Provider.of<ProfileProvider>(context, listen: false)
-                .addressIndex!]
-            .addressType!;
+    String typeAddress = await Provider.of<ProfileProvider>(context, listen: false)
+        .addressList[Provider.of<ProfileProvider>(context, listen: false).addressIndex!]
+        .addressType!;
 
     // shipping id
     String shipping = await Provider.of<CartProvider>(context, listen: false)
-        .shippingPlacesList[Provider.of<CartProvider>(context, listen: false)
-                .shippingPlacesIndex ??
-            0]
+        .shippingPlacesList[Provider.of<CartProvider>(context, listen: false).shippingPlacesIndex ?? 0]
         .id
         .toString();
 
-    String amount =
-        Provider.of<CartProvider>(context, listen: false).amount.toString();
+    String amount = Provider.of<CartProvider>(context, listen: false).amount.toString();
 
-    int? indexTypeCashApp =
-    Provider.of<CartProvider>(context, listen: false).indexType;
+    int? indexTypeCashApp = Provider.of<CartProvider>(context, listen: false).indexType;
 
     Provider.of<OrderProvider>(context, listen: false).placeOrder(
         CartModel(
@@ -338,7 +264,8 @@ class _ChoicePaymentState extends State<ChoicePayment> {
             mobile,
             addressCity,
             type,
-            indexTypeCashApp,  //1 google pay 2 apple pay 3 credit card
+            indexTypeCashApp,
+            //1 google pay 2 apple pay 3 credit card
             fullAddress,
             typeAddress,
             int.parse(shipping),
