@@ -53,7 +53,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       key: _scaffoldKey,
       body: Column(
         children: [
-          CustomAppBar(title: getTranslated('checkout', context)!),
+          CustomAppBar(title: getTranslated('checkout', context)),
           Expanded(
             child: ListView(
                 physics: BouncingScrollPhysics(),
@@ -73,15 +73,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(getTranslated('SHIPPING_TO', context)!,
+                              Text(getTranslated('SHIPPING_TO', context),
                                   style: cairoRegular),
                               Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Text(
                                       Provider.of<ProfileProvider>(context).addressIndex == null
-                                          ? getTranslated('add_your_address', context)!
-                                          : Provider.of<ProfileProvider>(context,listen: false)
+                                          ? getTranslated('add_your_address', context): Provider.of<ProfileProvider>(context,listen: false)
                                               .addressList[Provider.of<ProfileProvider>(context,
                                                    listen: false).addressIndex!].address!,
                                       style: cairoRegular.copyWith(
@@ -115,12 +114,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               listen: false).shippingPlacesIndex ?? 0),
                         ),
                         child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                          Text(getTranslated('SHIPPING_PARTNER', context)!, style: cairoRegular),
+                          Text(getTranslated('SHIPPING_PARTNER', context), style: cairoRegular),
                           Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                             Text(
                               Provider.of<CartProvider>(context).shippingPlacesIndex == null
-                                  ? getTranslated('select_shipping_method', context)!
-                                  : Provider.of<LocalizationProvider>(context).locale!.languageCode == "en"
+                                  ? getTranslated('select_shipping_method', context): Provider.of<LocalizationProvider>(context).locale!.languageCode == "en"
                                   ? Provider.of<CartProvider>(context,
                                   listen: false).shippingPlacesList[
                                     widget.shippingIndex].english!
@@ -148,7 +146,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           TitleRow(
-                              title: getTranslated('ORDER_DETAILS', context)!,
+                              title: getTranslated('ORDER_DETAILS', context),
                               onTap: () {
                                 Navigator.push(context,MaterialPageRoute(builder: (_) => CartScreen()));
                               }),
@@ -256,18 +254,18 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              TitleRow(title: getTranslated('TOTAL', context)!),
+                              TitleRow(title: getTranslated('TOTAL', context)),
                               AmountWidget(
-                                  title: getTranslated('ORDER', context)!,
+                                  title: getTranslated('ORDER', context),
                                   amount: (widget.totalOrderAmount - widget.shippingCost).toString() + " \$"),
                               AmountWidget(
-                                  title: getTranslated('SHIPPING_FEE', context)!,
+                                  title: getTranslated('SHIPPING_FEE', context),
                                   amount: widget.shippingCost.toString() + " \$"),
                               Divider(
                                   height: 5,
                                   color: Theme.of(context).hintColor),
                               AmountWidget(
-                                  title: getTranslated('TOTAL_PAYABLE', context)!,
+                                  title: getTranslated('TOTAL_PAYABLE', context),
                                   amount: widget.totalOrderAmount.toString() + " \$"),
                             ]);
                       },
@@ -280,10 +278,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
                     color: Theme.of(context).highlightColor,
                     child: Column(children: [
-                      TitleRow(title: getTranslated('payment_method', context)!),
+                      TitleRow(title: getTranslated('payment_method', context)),
                       SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                       CustomCheckBox(
-                              title: getTranslated('digital_payment', context)!,
+                              title: getTranslated('digital_payment', context),
                               index: 0)
                     ]),
                   ),
@@ -296,7 +294,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(getTranslated('Responsible_Person', context)!,
+                            Text(getTranslated('Responsible_Person', context),
                                 style: cairoRegular),
 
                             Image.asset(Images.EDIT_TWO,
@@ -342,7 +340,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    getTranslated('TOTAL', context)! + " " + widget.totalOrderAmount.toString() + " \$",
+                    getTranslated('TOTAL', context)+ " " + widget.totalOrderAmount.toString() + " \$",
                     style: cairoSemiBold.copyWith(
                         color: Theme.of(context).highlightColor),
                   ),
@@ -352,11 +350,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     onPressed: () async {
                       if (Provider.of<ProfileProvider>(context,
                           listen: false).addressIndex == null) {
-                        showCustomSnackBar(getTranslated('select_a_shipping_address', context)!, context);
+                        showCustomSnackBar(getTranslated('select_a_shipping_address', context), context);
                       }
                       else if (Provider.of<CartProvider>(context,
                           listen: false).shippingPlacesIndex == null) {
-                        showCustomSnackBar(getTranslated('select_a_shipping_address', context)!, context);
+                        showCustomSnackBar(getTranslated('select_a_shipping_address', context), context);
                       }
                       else {
 
@@ -373,7 +371,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
                     ),
-                    child: Text(getTranslated('proceed', context)!,
+                    child: Text(getTranslated('proceed', context),
                         style: cairoSemiBold.copyWith(
                           fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL,
                           color: ColorResources.getPrimary(context),
