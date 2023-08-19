@@ -59,7 +59,8 @@ class DioClient {
 
 
   Future<Response> post(String uri, {
-    data,
+    dynamic data,
+    bool convertDataToFormData = false,
     Map<String, dynamic>? queryParameters,
     Options? options,
     CancelToken? cancelToken,
@@ -69,7 +70,7 @@ class DioClient {
     try {
       var response = await dio!.post(
         uri,
-        data: data,
+        data: convertDataToFormData && data is Map<String, dynamic> ? FormData.fromMap(data): data,
         queryParameters: queryParameters,
         options: options,
         cancelToken: cancelToken,
