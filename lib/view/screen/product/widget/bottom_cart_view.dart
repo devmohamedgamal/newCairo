@@ -70,7 +70,9 @@ class BottomCartView extends StatelessWidget {
                 .setQuantity(1);
             showModalBottomSheet(context: context,
                 isScrollControlled: true, backgroundColor: Colors.transparent,
-                builder: (con) => CartBottomSheet(product: product));
+                builder: (con) => CartBottomSheet(product: product),
+              useSafeArea: true,
+            );
           },
               child: Container(
             height: 50,
