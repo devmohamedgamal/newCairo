@@ -36,7 +36,8 @@ class ProductRepo {
         data: {
           'product_id': productID,
           'customer_id': customerID,
-        }
+        },
+        convertDataToFormData: true,
       );
       return ApiResponse.withSuccess(response);
     } on DioException catch (e) {
