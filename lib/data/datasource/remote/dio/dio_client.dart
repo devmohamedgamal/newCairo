@@ -12,8 +12,7 @@ class DioClient {
   String? token;
   String? key;
 
-
-  DioClient(this.baseUrl,Dio dioC, {this.loggingInterceptor, this.sharedPreferences}) {
+  DioClient(this.baseUrl, Dio dioC, {this.loggingInterceptor, this.sharedPreferences}) {
     dio = dioC;
 
     dio!
@@ -33,7 +32,8 @@ class DioClient {
   //   };
   // }
 
-  Future<Response> get(String uri, {
+  Future<Response> get(
+    String uri, {
     Map<String, dynamic>? queryParameters,
     Options? options,
     CancelToken? cancelToken,
@@ -57,8 +57,8 @@ class DioClient {
     }
   }
 
-
-  Future<Response> post(String uri, {
+  Future<Response> post(
+    String uri, {
     dynamic data,
     bool convertDataToFormData = false,
     Map<String, dynamic>? queryParameters,
@@ -70,7 +70,7 @@ class DioClient {
     try {
       var response = await dio!.post(
         uri,
-        data: convertDataToFormData && data is Map<String, dynamic> ? FormData.fromMap(data): data,
+        data: convertDataToFormData && data is Map<String, dynamic> ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
         options: options,
         cancelToken: cancelToken,
@@ -85,7 +85,8 @@ class DioClient {
     }
   }
 
-  Future<Response> put(String uri, {
+  Future<Response> put(
+    String uri, {
     data,
     Map<String, dynamic>? queryParameters,
     Options? options,
@@ -111,7 +112,8 @@ class DioClient {
     }
   }
 
-  Future<Response> delete(String uri, {
+  Future<Response> delete(
+    String uri, {
     Map<String, dynamic>? queryParameters,
     Options? options,
     CancelToken? cancelToken,
