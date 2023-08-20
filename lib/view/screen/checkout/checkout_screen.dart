@@ -282,7 +282,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                       CustomCheckBox(
                               title: getTranslated('digital_payment', context),
-                              index: 0)
+                              index: 0,
+                      ),
+                      CustomCheckBox(
+                        title: getTranslated('cash_on_delivery', context),
+                        index: 1,
+                      ),
                     ]),
                   ),
 
@@ -357,7 +362,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         showCustomSnackBar(getTranslated('select_a_shipping_address', context), context);
                       }
                       else {
-
                           Navigator.push(
                               context,
                               MaterialPageRoute(
