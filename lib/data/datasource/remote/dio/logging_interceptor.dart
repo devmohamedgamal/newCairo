@@ -9,7 +9,7 @@ class LoggingInterceptor extends InterceptorsWrapper {
     print("Headers: ${options.headers}");
     print("Body: ${options.data}");
     print("Params: ${options.queryParameters}");
-    print("<-- END HTTP");
+    print("---");
     return super.onRequest(options, handler);
   }
 
@@ -36,7 +36,9 @@ class LoggingInterceptor extends InterceptorsWrapper {
 
   @override
   Future onError(DioError err, ErrorInterceptorHandler handler) async {
-    print("ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path} ${err.error} | ${err.response?.statusMessage}");
+    print("ERROR[${err.response?.statusCode}] ${err.requestOptions.path} ${err.error} | ${err.response?.statusMessage}");
+    print("${err.response?.data}");
+    print("-------");
     return super.onError(err, handler);
   }
 }

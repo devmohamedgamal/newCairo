@@ -36,6 +36,15 @@ class AppConstants {
   static const String UPDATE_PROFILE_URI = 'update_profile';
   static const String CANCEL_ORDER_URI = 'cancel_order?id=';
 
+  // Payment gateway
+  static const String PAYMOB_BASE_URL = 'https://accept.paymob.com/api';
+  static const String PAYMOB_API_KEY = 'ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2TlRRME9EQTBMQ0p1WVcxbElqb2lNVFk1TWpVeE1qSTFOQzR6TXpJM05qY2lmUS53d1RtVmZaa2xQWFVQanJNd1ljZlhGX3dvTEdYYllwSkNJaTduV0l6aTZMTGl2TC1wTUJKVmVtc1RiVEZlR2NvY0dVSWFDWGU5OHFmSUhBTVhGZ0VfUQ==';
+
+
+  static const String PAYMOB_AUTH_REQUEST_URI = '/auth/tokens'; // 1st step
+  static const String PAYMOB_MAKE_ORDER_URI = '/ecommerce/orders'; // 2nd step
+  static const String PAYMOB_GET_PAYMENT_TOKEN_URI = '/acceptance/payment_keys'; // 3rd step
+
   // sharePreference
   static const String COUNTRY_CODE = 'country_code';
   static const String LANGUAGE_CODE = 'language_code';

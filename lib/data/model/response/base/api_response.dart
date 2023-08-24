@@ -12,4 +12,8 @@ class ApiResponse {
   ApiResponse.withSuccess(Response responseValue)
       : response = responseValue,
         error = null;
+
+  bool isSuccess([int statusCode = 200]){
+    return response != null && response!.statusCode == statusCode;
+  }
 }
