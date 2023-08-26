@@ -70,4 +70,9 @@ class Images {
   static const String paypal = 'assets/images/paypal.png';
   static const String cashApp = 'assets/images/cashApp.png';
   static const String city = 'assets/images/city.png';
+
+  static const String paymobCreditCard = 'assets/images/paymob_credit_card.png';
+  static const String paymobWallet = 'assets/images/paymob_wallet.png';
+  static const String paymobValu = 'assets/images/paymob_valu.png';
+  static const String paymobKiosk = 'assets/images/paymob_kiosk.png';
 }
