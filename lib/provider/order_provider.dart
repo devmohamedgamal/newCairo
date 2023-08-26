@@ -63,16 +63,22 @@ class OrderProvider with ChangeNotifier {
   }
 
   Future<void> placeOrder(CartModel cartModel, Function callback, {
-    String PaymentMethod = 'card_pay_mob',
+    dynamic PaymentMethod = 'card_pay_mob',
   }) async {
     _isLoading = true;
     notifyListeners();
     ApiResponse apiResponse = await orderRepo.placeOrder(cartModel, PaymentMethod);
     _isLoading = false;
     if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
-      StatusModel statusModel;
-      statusModel = StatusModel.fromJson(apiResponse.response!.data);
-      callback(statusModel.status, statusModel.refId ?? statusModel.url, statusModel.massage.toString());
+      try{
+        StatusModel statusModel;
+        statusModel = StatusModel.fromJson(apiResponse.response!.data);
+        callback(statusModel.status, statusModel.refId ?? statusModel.url, statusModel.massage.toString());
+      } catch (_){
+        callback(true, '', 'The order placed successfully');
+      }
+
+      _selectedPaymentModel = null;
     } else {
       String errorMessage;
       if (apiResponse.error is String) {

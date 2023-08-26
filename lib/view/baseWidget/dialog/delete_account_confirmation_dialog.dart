@@ -46,7 +46,7 @@ class DeleteAccountConfirmationDialog extends StatelessWidget {
               // }
               Provider.of<AuthProvider>(context, listen: false).clearUser().then((condition) {
                 Navigator.pop(context);
-                Provider.of<CartProvider>(context,listen: false).removeCart();
+                Provider.of<CartProvider>(context,listen: false).clearCart();
                 Provider.of<ProfileProvider>(context,listen: false).clearHomeAddress();
                 Provider.of<ProfileProvider>(context,listen: false).clearOfficeAddress();
                 Provider.of<AuthProvider>(context,listen: false).clearUser();

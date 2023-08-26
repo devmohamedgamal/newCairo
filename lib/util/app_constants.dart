@@ -72,7 +72,7 @@ class AppConstants {
     PaymentModel(nameTrKey: 'Credit Card', assetImagePath: Images.paymobCreditCard, shortcutName: 'card_pay_mob'),
     PaymentModel(nameTrKey: 'Paymob Wallet', assetImagePath: Images.paymobWallet, shortcutName: 'wallet_paymob'),
     PaymentModel(nameTrKey: 'Kiosk paymob', assetImagePath: Images.paymobKiosk, shortcutName: 'kiosk_paymob'),
-    PaymentModel(nameTrKey: 'valU', assetImagePath: Images.paymobValu, shortcutName: 'valU_paymob'),
+    PaymentModel(nameTrKey: 'ValU', assetImagePath: Images.paymobValu, shortcutName: 'valU_paymob'),
   ];
 
   // ALL LANGUAGE

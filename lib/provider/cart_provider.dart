@@ -83,7 +83,7 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeCart() {
+  void clearCart() {
     _amount = 0.0;
     _cartList.clear();
     cartRepo.addToCartList(_cartList);

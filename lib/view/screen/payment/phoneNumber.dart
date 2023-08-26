@@ -472,7 +472,7 @@ class _PhoneNumberState extends State<PhoneNumber> {
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (_) => DashBoardScreen()),
                   (route) => false);
-          Provider.of<CartProvider>(context,listen: false).removeCart();
+          Provider.of<CartProvider>(context,listen: false).clearCart();
           showAnimatedDialog(
               context,MyDialog(
             icon: Icons.check,

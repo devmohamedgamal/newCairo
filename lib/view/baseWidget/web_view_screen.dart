@@ -53,7 +53,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
                     print('Page finished loading: $url');
                     print("url ========>>>> $url");
                     if (url.startsWith("https://www.gddeaf.net/true")) {
-                      Provider.of<CartProvider>(context,listen: false).removeCart();
+                      Provider.of<CartProvider>(context,listen: false).clearCart();
                         Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: (context) => DashBoardScreen()));
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lemirageelevators/data/model/response/cart_model.dart';
 import 'package:lemirageelevators/data/model/response/items_cart_model.dart';
 import 'package:lemirageelevators/helper/price_converter.dart';
 import 'package:lemirageelevators/provider/cart_provider.dart';
@@ -7,6 +8,7 @@ import 'package:lemirageelevators/util/textStyle.dart';
 import 'package:lemirageelevators/view/screen/checkout/widget/address_bottom_sheet.dart';
 import 'package:lemirageelevators/view/screen/checkout/widget/custom_check_box.dart';
 import 'package:lemirageelevators/view/screen/checkout/widget/shipping_method_bottom_sheet.dart';
+import 'package:lemirageelevators/view/screen/dashboard/dashboard_screen.dart';
 import 'package:provider/provider.dart';
 import '../../../localization/language_constrants.dart';
 import '../../../provider/localization_provider.dart';
@@ -22,6 +24,8 @@ import '../../baseWidget/textfield/custom_textfield.dart';
 import '../../baseWidget/title_row.dart';
 import '../cart/cart_screen.dart';
 import '../payment/choose_payment_screen.dart';
+import 'dart:io';
+import '../../../provider/auth_provider.dart';
 
 class CheckoutScreen extends StatefulWidget {
   final List<ItemsCartModel> cartList;
@@ -49,6 +53,92 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     super.initState();
     Provider.of<ProfileProvider>(context, listen: false).initAddressTypeList(context);
     Provider.of<ProfileProvider>(context, listen: false).getAddress();
+  }
+
+  Future<void> _paymentOnCashPlaceOrder({
+    required String note,
+  }) async {
+    // items
+    List<CartItem>? _items = [];
+    Provider.of<CartProvider>(context, listen: false).cartList.forEach((item) {
+      _items.add(CartItem(
+        int.parse(item.variantId!),
+        int.parse(item.id!),
+        int.parse(item.quantity.toString()),
+      ));
+    });
+
+    // client Id
+    String clientId = await Provider.of<AuthProvider>(context, listen: false).user!.userId!;
+
+    // mobile
+    String mobile = await Provider.of<AuthProvider>(context, listen: false).user!.mobile!;
+
+    // address City
+    String addressCity = await Provider.of<ProfileProvider>(context, listen: false)
+        .addressList[Provider.of<ProfileProvider>(context, listen: false).addressIndex!]
+        .city!;
+
+    // full Address
+    String fullAddress = Provider.of<ProfileProvider>(context, listen: false)
+        .addressList[Provider.of<ProfileProvider>(context, listen: false).addressIndex!]
+        .address
+        .toString();
+
+    // type Address is home || office
+    String typeAddress = await Provider.of<ProfileProvider>(context, listen: false)
+        .addressList[Provider.of<ProfileProvider>(context, listen: false).addressIndex!]
+        .addressType!;
+
+    // shipping id
+    String shipping = await Provider.of<CartProvider>(context, listen: false)
+        .shippingPlacesList[Provider.of<CartProvider>(context, listen: false).shippingPlacesIndex ?? 0]
+        .id
+        .toString();
+
+    String amount = Provider.of<CartProvider>(context, listen: false).amount.toString();
+
+    int? indexTypeCashApp = Provider.of<CartProvider>(context, listen: false).indexType;
+
+    Provider.of<OrderProvider>(context, listen: false).placeOrder(
+      CartModel(
+          int.parse(clientId),
+          note,
+          mobile,
+          addressCity,
+          null,
+          indexTypeCashApp, //1 google pay 2 apple pay 3 credit card
+          fullAddress,
+          typeAddress,
+          int.parse(shipping),
+          _items,
+          amount,
+          Platform.isAndroid ? "Android" : "Iphone",
+          null,
+          null,
+          null,
+          null,
+          null),
+      _route,
+      PaymentMethod: 3,
+    );
+  }
+
+  _route(bool status, String? _, String message) {
+    showCustomSnackBar(message, context, isError: !status);
+
+    if (status) {
+      // todo: navigate to success order screen
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (_) => DashBoardScreen()),
+        (route) => true,
+      );
+      // init order list
+      Provider.of<OrderProvider>(context, listen: false).initOrderList(context, Provider.of<AuthProvider>(context, listen: false).user!.userId!);
+      // clear cart items
+      Provider.of<CartProvider>(context, listen: false).clearCart();
+    }
   }
 
   @override
@@ -267,6 +357,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           showCustomSnackBar(getTranslated('select_a_shipping_address', context), context);
                         } else if (Provider.of<CartProvider>(context, listen: false).shippingPlacesIndex == null) {
                           showCustomSnackBar(getTranslated('select_a_shipping_address', context), context);
+                        } else if (Provider.of<OrderProvider>(context, listen: false).paymentMethodIndex == 1) {
+                          _paymentOnCashPlaceOrder(note: _noteController?.text??'');
                         } else {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => ChoosePaymentScreen(note: _noteController!.text.toString())));
                         }
