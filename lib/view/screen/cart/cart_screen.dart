@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lemirageelevators/util/responsive.dart';
 import 'package:lemirageelevators/util/textStyle.dart';
+import 'package:lemirageelevators/view/baseWidget/no_items_cart_widget.dart';
 import 'package:lemirageelevators/view/baseWidget/spacer.dart';
 import 'package:lemirageelevators/view/screen/cart/widget/cart_widget.dart';
 import 'package:provider/provider.dart';
@@ -36,25 +37,13 @@ class _CartScreenState extends State<CartScreen> {
       return Scaffold(
         body: Column(children: [
           CustomAppBar(
-              title: getTranslated('CART', context)!,
+              title: getTranslated('CART', context),
           isBackButtonExist: widget.isBacButtonExist),
 
           cart.cartList.length == 0
               ? Expanded(
-                  child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset(Images.cart_image,
-                        width: width(context) * 0.5,
-                        height: height(context) * 0.1),
-                    HSpacer(15),
-                    Text(
-                      getTranslated("no_products_cart", context)!,
-                      style: cairoSemiBold,
-                    ),
-                  ],
-                ))
+                  child: NoItemsCartWidget(),
+          )
               : Expanded(
             child: Container(
               child: Column(
@@ -186,7 +175,7 @@ class _CartScreenState extends State<CartScreen> {
                                         builder: (_) => CheckoutScreen(
                                   cartList: cart.cartList,
                                   shippingIndex: Provider.of<CartProvider>(context,
-                                      listen: false).shippingPlacesIndex ?? 0,
+                                      listen: false).shippingPlacesIndex ?? -1,
                                   totalOrderAmount: cart.amount,
                                   shippingCost: double.parse(
                                       cart.shippingPlacesList[cart.shippingPlacesIndex ?? 0].price ?? "0.0"),

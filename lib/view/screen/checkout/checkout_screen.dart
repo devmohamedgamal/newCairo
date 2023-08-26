@@ -5,6 +5,7 @@ import 'package:lemirageelevators/helper/price_converter.dart';
 import 'package:lemirageelevators/provider/cart_provider.dart';
 import 'package:lemirageelevators/util/app_constants.dart';
 import 'package:lemirageelevators/util/textStyle.dart';
+import 'package:lemirageelevators/view/baseWidget/no_items_cart_widget.dart';
 import 'package:lemirageelevators/view/screen/checkout/widget/address_bottom_sheet.dart';
 import 'package:lemirageelevators/view/screen/checkout/widget/custom_check_box.dart';
 import 'package:lemirageelevators/view/screen/checkout/widget/shipping_method_bottom_sheet.dart';
@@ -124,20 +125,19 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     );
   }
 
-  _route(bool status, String? _, String message) {
+  _route(bool status, String? _, String message) async {
     showCustomSnackBar(message, context, isError: !status);
 
     if (status) {
+      // Navigator.pop(context);
+      // clear cart items
+      Provider.of<CartProvider>(context, listen: false).clearCart();
       // todo: navigate to success order screen
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (_) => DashBoardScreen()),
         (route) => true,
       );
-      // init order list
-      Provider.of<OrderProvider>(context, listen: false).initOrderList(context, Provider.of<AuthProvider>(context, listen: false).user!.userId!);
-      // clear cart items
-      Provider.of<CartProvider>(context, listen: false).clearCart();
     }
   }
 
@@ -150,7 +150,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         children: [
           CustomAppBar(title: getTranslated('checkout', context)),
           Expanded(
-            child: ListView(physics: BouncingScrollPhysics(), padding: EdgeInsets.all(0), children: [
+            child: Provider.of<CartProvider>(context).cartList.isEmpty ? NoItemsCartWidget() : ListView(physics: BouncingScrollPhysics(), padding: EdgeInsets.all(0), children: [
               // Shipping Details
               Container(
                 padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
@@ -302,12 +302,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   TitleRow(title: getTranslated('payment_method', context)),
                   SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                   CustomCheckBox(
-                    title: getTranslated('digital_payment', context),
-                    index: 0,
-                  ),
-                  CustomCheckBox(
                     title: getTranslated('cash_on_delivery', context),
                     index: 1,
+                  ),
+                  CustomCheckBox(
+                    title: getTranslated('digital_payment', context),
+                    index: 0,
                   ),
                 ]),
               ),

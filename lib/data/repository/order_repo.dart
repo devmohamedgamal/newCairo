@@ -21,7 +21,7 @@ class OrderRepo {
     }
   }
 
-  Future<ApiResponse> placeOrder(CartModel cartModel, String PaymentMethod) async {
+  Future<ApiResponse> placeOrder(CartModel cartModel, dynamic PaymentMethod) async {
     try {
       final response = await dioClient.post(
         AppConstants.ORDER_PLACE_URI,

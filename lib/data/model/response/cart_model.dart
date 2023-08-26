@@ -114,7 +114,7 @@ class CartModel {
   }
 
   //2- mastercard
-  Map<String, dynamic> toJsonMasterCard(String PaymentMethod) {
+  Map<String, dynamic> toJsonMasterCard(dynamic PaymentMethod) {
     // "clientid":1237,
     //    "note":"test",
     //    "customer_mobile":"01501733013",

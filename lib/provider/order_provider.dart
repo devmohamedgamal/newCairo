@@ -17,7 +17,7 @@ class OrderProvider with ChangeNotifier {
   List<Order>? _deliveredList;
   List<Order>? _canceledList;
   bool _isLoading = false;
-  int _paymentMethodIndex = 0;
+  int _paymentMethodIndex = 1;
   int _orderTypeIndex = 0;
   Order? _trackingModel;
   PaymentModel? _selectedPaymentModel;
