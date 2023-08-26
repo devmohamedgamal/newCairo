@@ -65,54 +65,55 @@ class BannersView extends StatelessWidget {
                                 );
                               },
                             ),
-                            Positioned(
-                              top: 5,
-                              left: 0,
-                              right: 0,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: homeProvider.sliders.map((banner) {
-                                  int index =
-                                      homeProvider.sliders.indexOf(banner);
-                                  return TabPageSelectorIndicator(
-                                    backgroundColor:
-                                        index == homeProvider.currentIndex
-                                            ? Theme.of(context).primaryColor
-                                            : Colors.grey,
-                                    borderColor:
-                                        index == homeProvider.currentIndex
-                                            ? Theme.of(context).primaryColor
-                                            : Colors.grey,
-                                    size: 10,
-                                  );
-                                }).toList(),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              left: 0,
-                              right: 0,
-                              child: Container(
-                                color: ColorResources.GREY.withOpacity(0.4),
-                                width: width(context),
-                                child: Center(
-                                  child: Text(
-                                      Provider.of<LocalizationProvider>(context).locale!.languageCode == "en"
-                                          ? homeProvider
-                                          .sliders[
-                                      homeProvider.currentIndex!]
-                                          .descriptionEn ?? ""
-                                          :
-                                      homeProvider
-                                              .sliders[
-                                                  homeProvider.currentIndex!]
-                                              .description ?? "",
-                                      style: cairoMedium,
-                                      maxLines: null,
-                                      textAlign: TextAlign.center),
-                                ),
-                              ),
-                            ),
+                            // Positioned(
+                            //   top: 5,
+                            //   left: 0,
+                            //   right: 0,
+                            //   child: Row(
+                            //     mainAxisAlignment: MainAxisAlignment.center,
+                            //     children: homeProvider.sliders.map((banner) {
+                            //       int index =
+                            //           homeProvider.sliders.indexOf(banner);
+                            //       return TabPageSelectorIndicator(
+                            //         backgroundColor:
+                            //             index == homeProvider.currentIndex
+                            //                 ? Theme.of(context).primaryColor
+                            //                 : Colors.grey,
+                            //         borderColor:
+                            //             index == homeProvider.currentIndex
+                            //                 ? Theme.of(context).primaryColor
+                            //                 : Colors.grey,
+                            //         size: 10,
+                            //       );
+                            //     }).toList(),
+                            //   ),
+                            // ),
+                            ///
+                            // Positioned(
+                            //   bottom: 0,
+                            //   left: 0,
+                            //   right: 0,
+                            //   child: Container(
+                            //     color: ColorResources.GREY.withOpacity(0.4),
+                            //     width: width(context),
+                            //     child: Center(
+                            //       child: Text(
+                            //           Provider.of<LocalizationProvider>(context).locale!.languageCode == "en"
+                            //               ? homeProvider
+                            //               .sliders[
+                            //           homeProvider.currentIndex!]
+                            //               .descriptionEn ?? ""
+                            //               :
+                            //           homeProvider
+                            //                   .sliders[
+                            //                       homeProvider.currentIndex!]
+                            //                   .description ?? "",
+                            //           style: cairoMedium,
+                            //           maxLines: null,
+                            //           textAlign: TextAlign.center),
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       )
