@@ -1,6 +1,11 @@
+import 'package:badges/badges.dart' as badge;
 import 'package:flutter/material.dart';
+import 'package:lemirageelevators/provider/cart_provider.dart';
+import 'package:lemirageelevators/util/color_resources.dart';
+import 'package:lemirageelevators/util/textStyle.dart';
 import 'package:lemirageelevators/view/screen/cart/cart_screen.dart';
 import 'package:lemirageelevators/view/screen/order/order_screen.dart';
+import 'package:provider/provider.dart';
 import '../../../helper/network_info.dart';
 import '../../../localization/language_constrants.dart';
 import '../../../util/images.dart';
@@ -73,6 +78,34 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   }
 
   BottomNavigationBarItem _barItem(String icon,String label,int index) {
+    if(index == 1){
+      return BottomNavigationBarItem(
+        icon: badge.Badge(
+          badgeContent: Text(
+              Provider.of<CartProvider>(context).cartList.length.toString(),
+              style: cairoRegular.copyWith(
+                  fontSize: 10,
+                  color: ColorResources.WHITE
+              )
+          ),
+          showBadge: Provider.of<CartProvider>(context).cartList.length > 0,
+          shape: badge.BadgeShape.circle,
+          badgeColor: Colors.red,
+          elevation: 4,
+          padding: EdgeInsets.all(4),
+          position: badge.BadgePosition.topStart(top: -10),
+          animationType: badge.BadgeAnimationType.scale,
+          toAnimate: true,
+          child: Image.asset(
+            icon, color: index == _pageIndex
+              ? Theme.of(context).primaryColor
+              : Theme.of(context).textTheme.bodyText1!.color!.withOpacity(0.5),
+            height: 25, width: 25,
+          ),
+        ),
+        label: label,
+      );
+    }
     return BottomNavigationBarItem(
       icon: Image.asset(
         icon, color: index == _pageIndex

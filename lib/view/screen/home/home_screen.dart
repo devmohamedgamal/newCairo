@@ -59,12 +59,12 @@ class _HomePageState extends State<HomePage> {
                           color: ColorResources.WHITE
                         )
                       ),
-                      showBadge: true,
+                      showBadge: Provider.of<CartProvider>(context).cartList.length > 0,
                       shape: badge.BadgeShape.circle,
                       badgeColor: Colors.red,
                       elevation: 4,
                       padding: EdgeInsets.all(4),
-                      position: badge.BadgePosition.topStart(top: -9, start : -12),
+                      position: badge.BadgePosition.topStart(top: -10, start: -5),
                       animationType: badge.BadgeAnimationType.scale,
                       toAnimate: true,
                       child: Icon(
