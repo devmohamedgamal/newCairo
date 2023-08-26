@@ -23,32 +23,59 @@ class CartModel {
   String? _month;
   String? _pass;
 
-  CartModel(this._clientId,this._note,this._orderMobile,
-      this._orderAddress, this._paymentMethod,this._m_pay,this._address,
-      this._arriveWay,this._shipping,this._cart,this._totalAmount,
-      this._mobileType,this._customerMobile,
-      this._cardNumber,this._pass,this._year,this._month
-      );
+  CartModel(
+    this._clientId,
+    this._note,
+    this._orderMobile,
+    this._orderAddress,
+    this._paymentMethod,
+    this._m_pay,
+    this._address,
+    this._arriveWay,
+    this._shipping,
+    this._cart,
+    this._totalAmount,
+    this._mobileType,
+    this._customerMobile,
+    this._cardNumber,
+    this._pass,
+    this._year,
+    this._month,
+  );
 
   int? get clientId => _clientId;
+
   String? get note => _note;
+
   String? get orderMobile => _orderMobile;
+
   String? get orderAddress => _orderAddress;
+
   int? get paymentMethod => _paymentMethod;
+
   int? get m_pay => _m_pay;
+
   String? get address => _address;
+
   String? get arriveWay => _arriveWay;
+
   int? get shipping => _shipping;
+
   List<CartItem>? get cart => _cart;
 
   String? get totalAmount => _totalAmount;
-  String? get mobileType => _mobileType;
-  String? get customerMobile => _customerMobile;
-  String? get cardNumber => _cardNumber;
-  String? get pass => _pass;
-  String? get year => _year;
-  String? get month => _month;
 
+  String? get mobileType => _mobileType;
+
+  String? get customerMobile => _customerMobile;
+
+  String? get cardNumber => _cardNumber;
+
+  String? get pass => _pass;
+
+  String? get year => _year;
+
+  String? get month => _month;
 
   CartModel.fromJson(Map<String, dynamic> json) {
     _clientId = json['clientid'];
@@ -71,7 +98,7 @@ class CartModel {
   }
 
   //1- cash
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toJsonCash() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['clientid'] = this._clientId;
     data['note'] = this._note;
@@ -87,32 +114,49 @@ class CartModel {
   }
 
   //2- mastercard
-  Map<String, dynamic> toJsonMaster() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['clientid'] = this._clientId;
-    data['note'] = this._note;
-    data['order_mobile'] = this._orderMobile;
-    data['order_address'] = this._orderAddress;
-    data['payment_method'] = this._paymentMethod;
-    data['addr'] = this._address;
-    data['arrive_way'] = this._arriveWay;
-    data['shipping'] = this._shipping;
-    data['total_amount'] = this._totalAmount;
-    data['mobile_type'] = this._mobileType;
-    data['customer_mobile'] = this._customerMobile;
-    data['card_number'] = this._cardNumber;
-    data['month'] = this._month;
-    data['year'] = this._year;
-    data['pass'] = this._pass;
-    data['cart'] = List<dynamic>.from(_cart!.map((x) => x.toJson()));
-    return data;
+  Map<String, dynamic> toJsonMasterCard(String PaymentMethod) {
+    // "clientid":1237,
+    //    "note":"test",
+    //    "customer_mobile":"01501733013",
+    //    "order_mobile":"01013688983",
+    //    "order_address":"kljjh",
+    //    "payment_method":"card_pay_mob",
+    //    "addr":"London",
+    //    "arrive_way":"Home",
+    //    "shipping":1,
+    //    "total_amount":1535.0,
+    //    "mobile_type":"android",
+
+    //    "cart":[
+    //       {"id_kind": 19951, "product_id": 794, "qty": 1}
+    //    ]
+    // }
+    return {
+      'clientid': _clientId,
+      'note': _note,
+      'customer_mobile': _orderMobile,
+      'order_mobile': _orderMobile,
+      'order_address': _orderAddress,
+      'payment_method': PaymentMethod,
+      'addr': _address,
+      'arrive_way': _arriveWay,
+      'shipping': _shipping,
+      'total_amount': _totalAmount,
+      'mobile_type': _mobileType,
+      // 'customer_mobile']:=._customerMobile,
+      // 'card_number']:=._cardNumber,
+      // 'month']:=._month,
+      // 'year']:=._year,
+      // 'pass']:=._pass,
+      'cart': List<dynamic>.from(_cart!.map((x) => x.toJson())),
+    };
   }
 
   //3- fawry
   Map<String, dynamic> toJsonFawry() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['clientid'] = this._clientId;
-    data['note'] = this._note;
+    data['clientid'] = _clientId;
+    data['note'] = _note;
     data['order_mobile'] = this._orderMobile;
     data['order_address'] = this._orderAddress;
     data['payment_method'] = this._paymentMethod;
@@ -146,15 +190,17 @@ class CartModel {
   }
 }
 
-
 class CartItem {
   int? _idKind;
   int? _productId;
   int? _qty;
-  CartItem(this._idKind,this._productId,this._qty);
+
+  CartItem(this._idKind, this._productId, this._qty);
 
   int? get idKind => _idKind;
+
   int? get productId => _productId;
+
   int? get qty => _qty;
 
   CartItem.fromJson(Map<String, dynamic> json) {

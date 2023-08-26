@@ -21,7 +21,7 @@ import '../../baseWidget/show_custom_snakbar.dart';
 import '../../baseWidget/textfield/custom_textfield.dart';
 import '../../baseWidget/title_row.dart';
 import '../cart/cart_screen.dart';
-import '../payment/payment_screen.dart';
+import '../payment/choose_payment_screen.dart';
 
 class CheckoutScreen extends StatefulWidget {
   final List<ItemsCartModel> cartList;
@@ -268,7 +268,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         } else if (Provider.of<CartProvider>(context, listen: false).shippingPlacesIndex == null) {
                           showCustomSnackBar(getTranslated('select_a_shipping_address', context), context);
                         } else {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => ChoicePayment(note: _noteController!.text.toString())));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ChoosePaymentScreen(note: _noteController!.text.toString())));
                         }
                       },
                       style: TextButton.styleFrom(

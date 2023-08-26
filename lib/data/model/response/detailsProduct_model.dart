@@ -33,9 +33,9 @@ class DetailsProductModel {
   Map<String, dynamic> toJson() => {
     "product": product!.toJson(),
     "fetched_product_size": Map.from(fetchedProductSize!).map((k, v) => MapEntry<String, dynamic>(k,
-        List<dynamic>.from(v.map((x) => x.toJson())))),
+        List<dynamic>.from(v.map((x) => x.toJsonCash())))),
     "fetched_product_sizeEN": Map.from(fetchedProductSizeEN!).map((k, v) => MapEntry<String, dynamic>(k,
-        List<dynamic>.from(v.map((x) => x.toJson())))),
+        List<dynamic>.from(v.map((x) => x.toJsonCash())))),
     "fetched_photo_data": fetchedPhotoData == null ? [] : List<dynamic>.from(fetchedPhotoData!.map((x) => x)),
     "fetched_comments_data": List<dynamic>.from(fetchedCommentsData!.map((x) => x)),
   };

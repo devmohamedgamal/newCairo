@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
 
   @override
   void initState() {
-    print("url 00==============>>>>>>> ${widget.url}");
+    log('open webView url: "${widget.url}"');
     super.initState();
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
   }

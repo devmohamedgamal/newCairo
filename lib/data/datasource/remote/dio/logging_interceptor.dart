@@ -1,44 +1,36 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 class LoggingInterceptor extends InterceptorsWrapper {
-  int maxCharactersPerLine = 200;
+  final int maxCharactersPerLine = 200;
+
 
   @override
-  Future onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
-    print("--> ${options.method} ${options.path}");
-    print("Headers: ${options.headers}");
-    print("Body: ${options.data}");
-    print("Params: ${options.queryParameters}");
-    print("---");
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    debugPrint("--> ${options.method} ${options.baseUrl}${options.path}");
+    debugPrint("Headers: ${options.headers}");
+    debugPrint("parameters: ${options.queryParameters}");
+    if(options.data != null){
+      debugPrint("body data: ${json.encode(options.data)}");
+    }
     return super.onRequest(options, handler);
   }
 
   @override
-  Future onResponse(Response response, ResponseInterceptorHandler handler) async {
-    print("<-- ${response.statusMessage} ${response.statusCode} ${response.requestOptions.method} ${response.requestOptions.path}");
-    String responseAsString = response.data.toString();
-    if (responseAsString.length > maxCharactersPerLine) {
-      int iterations = (responseAsString.length / maxCharactersPerLine).floor();
-      for (int i = 0; i <= iterations; i++) {
-        int endingIndex = i * maxCharactersPerLine + maxCharactersPerLine;
-        if (endingIndex > responseAsString.length) {
-          endingIndex = responseAsString.length;
-        }
-        print(responseAsString.substring(i * maxCharactersPerLine, endingIndex));
-      }
-    } else {
-      print(response.data);
-    }
-
-    print("<-- END HTTP");
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    debugPrint("<-- [${response.statusCode}] ${response.requestOptions.path}");
+    debugPrint("${response.data}".replaceAll('\n', ' '));
+    debugPrint("-----");
     return super.onResponse(response, handler);
   }
 
   @override
-  Future onError(DioError err, ErrorInterceptorHandler handler) async {
-    print("ERROR[${err.response?.statusCode}] ${err.requestOptions.path} ${err.error} | ${err.response?.statusMessage}");
-    print("${err.response?.data}");
-    print("-------");
+  void onError(DioError err, ErrorInterceptorHandler handler) {
+    log("!!! API ERROR [${err.response?.statusCode}] => path: ${err.requestOptions.path}");
+    debugPrint("error message: ${err.message}\nresponse: ${err.response}");
     return super.onError(err, handler);
   }
 }

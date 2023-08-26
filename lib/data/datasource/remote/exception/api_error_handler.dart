@@ -137,13 +137,13 @@ class ApiErrorHandler {
                   errorDescription = error.response!.statusMessage;
                   break;
                 default:
-                  ErrorResponse errorResponse =
-                  ErrorResponse.fromJson(error.response!.data);
-                  if (errorResponse.errors != null )
+                  ErrorResponse? errorResponse =
+                  error.response!.data is Map<String, dynamic> ? ErrorResponse.fromJson(error.response!.data) : null;
+                  if (errorResponse?.errors != null )
                     errorDescription = errorResponse;
-                  // else
-                  //   errorDescription =
-                  //   "Failed to load data - status code: ${error.response!.statusCode}";
+                  else
+                    errorDescription =
+                    "Failed to load data - status code: ${error.response!.statusCode}";
               }
               break;
             case DioErrorType.sendTimeout:

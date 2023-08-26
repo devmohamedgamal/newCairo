@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:lemirageelevators/data/model/response/payment_model.dart';
 import '../data/model/response/base/api_response.dart';
 import '../data/model/response/base/error_response.dart';
 import '../data/model/response/cart_model.dart';
@@ -19,6 +20,7 @@ class OrderProvider with ChangeNotifier {
   int _paymentMethodIndex = 0;
   int _orderTypeIndex = 0;
   Order? _trackingModel;
+  PaymentModel? _selectedPaymentModel;
 
   Order? get trackingModel => _trackingModel;
   int get orderTypeIndex => _orderTypeIndex;
@@ -27,6 +29,8 @@ class OrderProvider with ChangeNotifier {
   List<Order>? get canceledList => _canceledList != null ? _canceledList!.reversed.toList() : _canceledList;
   bool get isLoading => _isLoading;
   int get paymentMethodIndex => _paymentMethodIndex;
+  PaymentModel? get selectedPaymentModel => _selectedPaymentModel;
+  bool get isPaymentMethodSelected => _selectedPaymentModel != null;
 
   Future<void> initOrderList(BuildContext context,String clientId) async {
     ApiResponse apiResponse = await orderRepo.getOrderList(clientId);
@@ -53,28 +57,33 @@ class OrderProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> placeOrder(CartModel cartModel,Function callback) async {
+  void selectPaymentMethod(PaymentModel paymentModel){
+    _selectedPaymentModel = paymentModel;
+    notifyListeners();
+  }
+
+  Future<void> placeOrder(CartModel cartModel, Function callback, {
+    String PaymentMethod = 'card_pay_mob',
+  }) async {
     _isLoading = true;
     notifyListeners();
-    ApiResponse apiResponse = await orderRepo.placeOrder(cartModel);
+    ApiResponse apiResponse = await orderRepo.placeOrder(cartModel, PaymentMethod);
     _isLoading = false;
     if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
       StatusModel statusModel;
       statusModel = StatusModel.fromJson(apiResponse.response!.data);
-      callback(statusModel.status,statusModel.refId ?? statusModel.url,statusModel.massage.toString());
-    }
-    else {
+      callback(statusModel.status, statusModel.refId ?? statusModel.url, statusModel.massage.toString());
+    } else {
       String errorMessage;
       if (apiResponse.error is String) {
         print(apiResponse.error.toString());
         errorMessage = apiResponse.error.toString();
+      } else {
+        ErrorResponse? errorResponse = apiResponse.error;
+        print(errorResponse?.errors?.message);
+        errorMessage = errorResponse?.errors?.message ?? 'Unknown Error occurred';
       }
-      else {
-        ErrorResponse errorResponse = apiResponse.error;
-        print(errorResponse.errors!.message);
-        errorMessage = errorResponse.errors!.message!;
-      }
-      callback(false,null,errorMessage);
+      callback(false, null, errorMessage);
     }
     notifyListeners();
   }

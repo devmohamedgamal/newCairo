@@ -46,15 +46,15 @@ Future<void> init() async {
   final sharedPreferences = await SharedPreferences.getInstance();
   locator.registerLazySingleton(() => NavigationServices());
 
-  const paymentDioInstanceName = "payment_dio";
+  // const paymentDioInstanceName = "payment_dio";
 
   // Core
   sl.registerLazySingleton(() => NetworkInfo(sl()));
   sl.registerLazySingleton(() => DioClient(AppConstants.BASE_URL,sl(), loggingInterceptor: sl(),sharedPreferences: sl()));
-  sl.registerLazySingleton(
-    () => DioClient(AppConstants.PAYMOB_BASE_URL, sl(), loggingInterceptor: sl(), sharedPreferences: sl()),
-    instanceName: paymentDioInstanceName,
-  );
+  // sl.registerLazySingleton(
+  //   () => DioClient(AppConstants.PAYMOB_BASE_URL, sl(),sharedPreferences: sl()),
+  //   instanceName: paymentDioInstanceName,
+  // );
 
   // Repository
   sl.registerLazySingleton(() => SplashRepo(sharedPreferences: sl(), dioClient: sl()));
@@ -69,7 +69,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => NotificationRepo(dioClient: sl()));
   sl.registerLazySingleton(() => OrderRepo(dioClient: sl()));
   sl.registerLazySingleton(() => GalleryRepo(dioClient: sl()));
-  sl.registerLazySingleton(() => PaymentRepo(dioClient: sl(instanceName: paymentDioInstanceName)));
+  // sl.registerLazySingleton(() => PaymentRepo(dioClient: sl(instanceName: paymentDioInstanceName)));
 
   // Provider
   sl.registerFactory(() => ThemeProvider(sharedPreferences: sl()));
@@ -88,7 +88,7 @@ Future<void> init() async {
   sl.registerFactory(() => NotificationProvider(notificationRepo: sl()));
   sl.registerFactory(() => OrderProvider(orderRepo: sl()));
   sl.registerFactory(() => GalleryProvider(galleryRepo: sl()));
-  sl.registerFactory(() => PaymentProvider(paymentRepo: sl()));
+  // sl.registerFactory(() => PaymentProvider(paymentRepo: sl()));
 
   // External
   sl.registerLazySingleton(() => sharedPreferences);

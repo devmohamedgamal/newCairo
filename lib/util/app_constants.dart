@@ -1,4 +1,7 @@
 // ignore_for_file: constant_identifier_names
+import 'package:lemirageelevators/data/model/response/payment_model.dart';
+import 'package:lemirageelevators/util/images.dart';
+
 import '../data/model/response/language_model.dart';
 
 class AppConstants {
@@ -63,6 +66,14 @@ class AppConstants {
   static const String TO_DELIVER = 'to_deliver';
   static const String DELIVERED = 'order_delivered';
   static const String CANCELLED = 'cancel';
+
+  // All Payment methods
+  static List<PaymentModel> paymentMethods = [
+    PaymentModel(nameTrKey: 'Credit Card', assetImagePath: Images.paymobCreditCard, shortcutName: 'card_pay_mob'),
+    PaymentModel(nameTrKey: 'Paymob Wallet', assetImagePath: Images.paymobWallet, shortcutName: 'wallet_paymob'),
+    PaymentModel(nameTrKey: 'Kiosk paymob', assetImagePath: Images.paymobKiosk, shortcutName: 'kiosk_paymob'),
+    PaymentModel(nameTrKey: 'valU', assetImagePath: Images.paymobValu, shortcutName: 'valU_paymob'),
+  ];
 
   // ALL LANGUAGE
   static List<LanguageModel>? languages = [

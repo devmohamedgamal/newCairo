@@ -20,9 +20,15 @@ class DioClient {
       ..options.connectTimeout = const Duration(seconds: 30)
       ..options.receiveTimeout = const Duration(seconds: 30)
       ..httpClientAdapter
-      ..options.followRedirects = false;
+      ..options.followRedirects = false
+      ..options.headers.addAll({
+        'Accept': 'application/json',
+        'content-type': 'application/json',
+      });
 
-    dio!.interceptors.add(loggingInterceptor!);
+    if(loggingInterceptor != null){
+      dio!.interceptors.add(loggingInterceptor!);
+    }
   }
 
   // void updateHeaderWithKeyLink(String? key,String? link) {
@@ -121,6 +127,30 @@ class DioClient {
     try {
       var response = await dio!.delete(
         uri,
+        queryParameters: queryParameters,
+        options: options,
+        cancelToken: cancelToken,
+      );
+      return response;
+    } on FormatException catch (_) {
+      throw FormatException("Unable to process the data");
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<Response> head(
+      String uri, {
+        dynamic data,
+        bool convertDataToFormData = false,
+        Map<String, dynamic>? queryParameters,
+        Options? options,
+        CancelToken? cancelToken,
+      }) async {
+    try {
+      var response = await dio!.head(
+        uri,
+        data: convertDataToFormData && data is Map<String, dynamic> ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
         options: options,
         cancelToken: cancelToken,
