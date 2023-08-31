@@ -27,7 +27,7 @@ class _SuggestedProductsWidgetState extends State<SuggestedProductsWidget> {
 
   Future<void> _getSuggestions() async {
     final clientId = await Provider.of<AuthProvider>(context, listen: false).user!.userId!;
-    Provider.of<CartProvider>(context, listen: false).getSuggestedProductsIfNotExists(clientId);
+    Provider.of<CartProvider>(context, listen: false).getSuggestedProducts(clientId);
   }
 
   @override

@@ -65,4 +65,21 @@ class CartRepo{
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
+
+  Future<ApiResponse> addSuggestedProducts(String clientId, String? productId) async {
+    try {
+      final response = await dioClient.post(
+        AppConstants.ADD_SUGGESTED_PRODUCTS_URI,
+        data: {
+          'client_id': clientId,
+          'product_id': productId,
+        },
+        convertDataToFormData: true,
+      );
+
+      return ApiResponse.withSuccess(response);
+    } on DioException catch (e) {
+      return ApiResponse.withError(ApiErrorHandler.getMessage(e));
+    }
+  }
 }

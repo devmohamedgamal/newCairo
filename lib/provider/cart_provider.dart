@@ -57,6 +57,33 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> addSuggestedProduct({
+    required String clientId,
+    required String? productId,
+  }) async {
+    debugPrint('addSuggestedProduct');
+    // check if product is not in the cart to add as suggested product
+    bool productInCart = false;
+
+    for (var cartI in _cartList) {
+      if (cartI.id == productId) {
+        productInCart = true;
+        break;
+      }
+    }
+    debugPrint('- product $productId ${productInCart ? 'IS ALREADY IN THE CART' : 'is not in the cart'}');
+    if (!productInCart) {
+      return _addSuggestedProduct(clientId, productId);
+    }
+  }
+
+  Future<void> _addSuggestedProduct(String clientId, String? productId) async {
+    final apiResponse = await cartRepo.addSuggestedProducts(clientId, productId);
+    if (apiResponse.response?.statusCode == 200) {
+      // You could do something here!
+    }
+  }
+
   void getCartData() {
     _cartList = [];
     _amount = 0.00;
