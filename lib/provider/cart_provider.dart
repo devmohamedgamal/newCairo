@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lemirageelevators/data/model/response/home_model.dart';
 import '../data/model/response/base/api_response.dart';
 import '../data/model/response/items_cart_model.dart';
 import '../data/model/response/shipping_places_model.dart';
@@ -19,6 +20,8 @@ class CartProvider extends ChangeNotifier {
   int? _paymentIndex = 0;
   double _amount = 0.0;
   bool _isLoading = false;
+  bool _isLoadingSuggestions = false;
+  List<Product> _suggestedProducts = [];
 
   List<String> get paymentTypeList => _paymentTypeList;
   List<ItemsCartModel> get cartList => _cartList;
@@ -30,6 +33,29 @@ class CartProvider extends ChangeNotifier {
   int? get shippingPlacesIndex => _shippingPlacesIndex;
   double get amount => _amount;
   bool get isLoading => _isLoading;
+  bool get isLoadingSuggestions => _isLoadingSuggestions;
+  List<Product> get suggestedProducts => _suggestedProducts;
+
+  Future<void> getSuggestedProductsIfNotExists(String clientId) async {
+    if(_suggestedProducts.isEmpty){
+      return getSuggestedProducts(clientId);
+    }
+  }
+
+  Future<void> getSuggestedProducts(String clientId) async {
+    _isLoadingSuggestions = true;
+    notifyListeners();
+
+    final apiResponse = await cartRepo.getSuggestedProducts(clientId);
+    if (apiResponse.response?.statusCode == 200) {
+      _suggestedProducts = [];
+      _suggestedProducts = List.from(
+        apiResponse.response!.data.map((e) => Product.fromJson(e)),
+      );
+    }
+    _isLoadingSuggestions = false;
+    notifyListeners();
+  }
 
   void getCartData() {
     _cartList = [];

@@ -39,12 +39,27 @@ class CartRepo{
   Future<ApiResponse> getPaymentTypeList(BuildContext context) async {
     try {
       List<String> addressTypeList = [
-        getTranslated("SELECT_payment_TYPE", context)!,
+        getTranslated("SELECT_payment_TYPE", context),
         "Google Pay",
         "Apple Pay",
         "Credit Card",
       ];
       Response response = Response(requestOptions: RequestOptions(path: ''), data: addressTypeList, statusCode: 200);
+      return ApiResponse.withSuccess(response);
+    } on DioException catch (e) {
+      return ApiResponse.withError(ApiErrorHandler.getMessage(e));
+    }
+  }
+
+  Future<ApiResponse> getSuggestedProducts(String clientId) async {
+    try {
+      final response = await dioClient.post(
+        AppConstants.GET_SUGGESTED_PRODUCTS_URI,
+        data: {
+          'client_id': clientId,
+        },
+        convertDataToFormData: true,
+      );
       return ApiResponse.withSuccess(response);
     } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));

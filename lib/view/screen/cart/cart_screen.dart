@@ -4,6 +4,7 @@ import 'package:lemirageelevators/util/textStyle.dart';
 import 'package:lemirageelevators/view/baseWidget/no_items_cart_widget.dart';
 import 'package:lemirageelevators/view/baseWidget/spacer.dart';
 import 'package:lemirageelevators/view/screen/cart/widget/cart_widget.dart';
+import 'package:lemirageelevators/view/screen/cart/widget/suggested_products_widget.dart';
 import 'package:provider/provider.dart';
 import '../../../localization/language_constrants.dart';
 import '../../../provider/auth_provider.dart';
@@ -75,6 +76,9 @@ class _CartScreenState extends State<CartScreen> {
                       },
                     ),
                   ),
+
+                  // suggested products
+                  SuggestedProductsWidget(),
 
                   Provider.of<CartProvider>(context,
                       listen: false).shippingPlacesList.isNotEmpty

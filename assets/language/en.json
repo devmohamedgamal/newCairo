@@ -310,5 +310,6 @@
   "Photo_album": "Photo album",
   "Video_Gallery": "Video Gallery",
   "Review_submitted_successfully": "Review submitted successfully",
-  "delete_account": "Are you sure to delete the account?\nWith the deletion of the account, all data will be deleted and the application will be logged out."
+  "delete_account": "Are you sure to delete the account?\nWith the deletion of the account, all data will be deleted and the application will be logged out.",
+  "suggested_products": "Suggested products"
 }
