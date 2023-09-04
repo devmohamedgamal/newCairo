@@ -196,8 +196,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           Provider.of<CartProvider>(context).shippingPlacesIndex == null
                               ? getTranslated('select_shipping_method', context)
                               : Provider.of<LocalizationProvider>(context).locale!.languageCode == "en"
-                                  ? Provider.of<CartProvider>(context, listen: false).shippingPlacesList[widget.shippingIndex].english!
-                                  : Provider.of<CartProvider>(context, listen: false).shippingPlacesList[widget.shippingIndex].arabic!,
+                                  ? Provider.of<CartProvider>(context, listen: false).shippingPlacesList[widget.shippingIndex].english ?? ''
+                                  : Provider.of<CartProvider>(context, listen: false).shippingPlacesList[widget.shippingIndex].arabic ?? '',
                           style: cairoSemiBold.copyWith(color: ColorResources.getPrimary(context)),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
