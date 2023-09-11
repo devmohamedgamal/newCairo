@@ -19,9 +19,13 @@ class LocalizationProvider extends ChangeNotifier {
   bool get isLtr => _isLtr;
   int? get languageIndex => _languageIndex;
 
+  void _setIsLtr(){
+    _isLtr = _locale?.languageCode != 'ar';
+  }
+
   Future<void> setLanguage(Locale locale) async {
     _locale = locale;
-    _isLtr = _locale!.languageCode != 'en';
+    _setIsLtr();
     for(int index = 0; index<AppConstants.languages!.length; index++) {
       if(AppConstants.languages![index].languageCode == locale.languageCode) {
         _languageIndex = index;
@@ -35,7 +39,7 @@ class LocalizationProvider extends ChangeNotifier {
   _loadCurrentLanguage() async {
     _locale = Locale(sharedPreferences.getString(AppConstants.LANGUAGE_CODE) ??  AppConstants.languages![0].languageCode,
         sharedPreferences.getString(AppConstants.COUNTRY_CODE) ?? AppConstants.languages![0].countryCode);
-    _isLtr = _locale!.languageCode != 'en';
+    _setIsLtr();
     for(int index = 0; index<AppConstants.languages!.length; index++) {
       if(AppConstants.languages![index].languageCode == locale!.languageCode) {
         _languageIndex = index;
