@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lemirageelevators/helper/price_converter.dart';
+import 'package:lemirageelevators/provider/coupon_provider.dart';
 import 'package:lemirageelevators/util/responsive.dart';
 import 'package:lemirageelevators/util/textStyle.dart';
 import 'package:provider/provider.dart';
@@ -350,7 +352,10 @@ class _PhoneNumberState extends State<PhoneNumber> {
                                     typeAddress,
                                     int.parse(shipping),
                                     _items,
-                                    amount,
+                                    PriceConverter.convertWithDiscount(
+                                      discount: Provider.of<CouponProvider>(context, listen: false).discountPercentage,
+                                      price: Provider.of<CartProvider>(context, listen: false).amount,
+                                    ).toString(),
                                     widget.type,
                                     number!.text.trim().toString(),
                                     null,null,null,null

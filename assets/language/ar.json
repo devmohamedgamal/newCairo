@@ -122,8 +122,7 @@
   "specification": "تخصيص",
   "variants": "متغيرات :  ",
   "must_choose_variants": "يجب اختيار متغير للصنف",
-  "color_variants": "متغيرات هذا اللون :  ",
-  "product_variants": "متغيرات المنتج",
+  "color_variants": "متغيرات هذا اللون :  ",  "product_variants": "متغيرات المنتج",
   "FORGET_PASSWORD": "نسيت كلمة المرور",
   "RE_ENTER_PASSWORD": "إعادة إدخال كلمة المرور",
   "details": "تفاصيل",
@@ -309,5 +308,8 @@
   "Video_Gallery": "جاليرى الفيديو",
   "Review_submitted_successfully": "تم إرسال المراجعة بنجاح",
   "delete_account": "هل انت متاكد من حذف الحساب ؟\nمع حذف الحساب سوف يتم حذف جميع البيانات وتسجيل الخروج من التطبيق.",
-  "suggested_products": "منتجات مقترحة"
+  "suggested_products": "منتجات مقترحة",
+  "promo_code": "كوبون الخصم",
+  "enter_promo_code": "اكتب كود الخصم",
+  "you_got_discount_of": "لقد حصلت على خصم"
 }

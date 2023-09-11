@@ -1,6 +1,7 @@
 import 'package:lemirageelevators/data/datasource/remote/dio/dio_client.dart';
 import 'package:lemirageelevators/data/datasource/remote/dio/logging_interceptor.dart';
 import 'package:lemirageelevators/data/repository/auth_repo.dart';
+import 'package:lemirageelevators/data/repository/coupon_respo.dart';
 import 'package:lemirageelevators/data/repository/gallery_repo.dart';
 import 'package:lemirageelevators/data/repository/home_repo.dart';
 import 'package:lemirageelevators/data/repository/notification_repo.dart';
@@ -14,6 +15,7 @@ import 'package:lemirageelevators/data/repository/wish_repo.dart';
 import 'package:lemirageelevators/helper/network_info.dart';
 import 'package:lemirageelevators/provider/auth_provider.dart';
 import 'package:lemirageelevators/provider/cart_provider.dart';
+import 'package:lemirageelevators/provider/coupon_provider.dart';
 import 'package:lemirageelevators/provider/facebook_login_provider.dart';
 import 'package:lemirageelevators/provider/gallery_provider.dart';
 import 'package:lemirageelevators/provider/google_sign_in_provider.dart';
@@ -69,6 +71,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => NotificationRepo(dioClient: sl()));
   sl.registerLazySingleton(() => OrderRepo(dioClient: sl()));
   sl.registerLazySingleton(() => GalleryRepo(dioClient: sl()));
+  sl.registerLazySingleton(() => CouponRepo(dioClient: sl()));
   // sl.registerLazySingleton(() => PaymentRepo(dioClient: sl(instanceName: paymentDioInstanceName)));
 
   // Provider
@@ -88,6 +91,7 @@ Future<void> init() async {
   sl.registerFactory(() => NotificationProvider(notificationRepo: sl()));
   sl.registerFactory(() => OrderProvider(orderRepo: sl()));
   sl.registerFactory(() => GalleryProvider(galleryRepo: sl()));
+  sl.registerFactory(() => CouponProvider(couponRepo: sl()));
   // sl.registerFactory(() => PaymentProvider(paymentRepo: sl()));
 
   // External

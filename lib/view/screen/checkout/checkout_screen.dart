@@ -3,9 +3,11 @@ import 'package:lemirageelevators/data/model/response/cart_model.dart';
 import 'package:lemirageelevators/data/model/response/items_cart_model.dart';
 import 'package:lemirageelevators/helper/price_converter.dart';
 import 'package:lemirageelevators/provider/cart_provider.dart';
+import 'package:lemirageelevators/provider/coupon_provider.dart';
 import 'package:lemirageelevators/util/app_constants.dart';
 import 'package:lemirageelevators/util/textStyle.dart';
 import 'package:lemirageelevators/view/baseWidget/no_items_cart_widget.dart';
+import 'package:lemirageelevators/view/baseWidget/spacer.dart';
 import 'package:lemirageelevators/view/screen/checkout/widget/address_bottom_sheet.dart';
 import 'package:lemirageelevators/view/screen/checkout/widget/custom_check_box.dart';
 import 'package:lemirageelevators/view/screen/checkout/widget/shipping_method_bottom_sheet.dart';
@@ -48,6 +50,14 @@ class CheckoutScreen extends StatefulWidget {
 class _CheckoutScreenState extends State<CheckoutScreen> {
   final GlobalKey<ScaffoldMessengerState> _scaffoldKey = GlobalKey<ScaffoldMessengerState>();
   TextEditingController? _noteController = TextEditingController();
+  TextEditingController _couponController = TextEditingController();
+
+  double _getTotalAmount(BuildContext context) {
+    return PriceConverter.convertWithDiscount(
+      discount: Provider.of<CouponProvider>(context, listen: true).discountPercentage,
+      price: widget.totalOrderAmount,
+    );
+  }
 
   @override
   void initState() {
@@ -111,9 +121,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           indexTypeCashApp, //1 google pay 2 apple pay 3 credit card
           fullAddress,
           typeAddress,
-          int.parse(shipping),
+          int.tryParse(shipping)??-1,
           _items,
-          amount,
+          PriceConverter.convertWithDiscount(
+            discount: Provider.of<CouponProvider>(context, listen: false).discountPercentage,
+            price: Provider.of<CartProvider>(context, listen: false).amount,
+          ).toString(),
           Platform.isAndroid ? "Android" : "Iphone",
           null,
           null,
@@ -286,9 +299,102 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       AmountWidget(
                           title: getTranslated('ORDER', context), amount: (widget.totalOrderAmount - widget.shippingCost).toString() + " \$"),
                       AmountWidget(title: getTranslated('SHIPPING_FEE', context), amount: widget.shippingCost.toString() + " \$"),
+                      AmountWidget(title: getTranslated('promo_code', context), amount: '(-) ${PriceConverter.getDiscountPercentageAmount(discount: Provider.of<CouponProvider>(context).discountPercentage, price: widget.totalOrderAmount)}' " \$"),
                       Divider(height: 5, color: Theme.of(context).hintColor),
-                      AmountWidget(title: getTranslated('TOTAL_PAYABLE', context), amount: widget.totalOrderAmount.toString() + " \$"),
+                      AmountWidget(title: getTranslated('TOTAL_PAYABLE', context), amount: _getTotalAmount(context).toString() + " \$"),
                     ]);
+                  },
+                ),
+              ),
+
+              Container(
+                margin: EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
+                padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                color: Theme.of(context).highlightColor,
+                child: Consumer<CouponProvider>(
+                  builder: (context, couponProvider, _) {
+                    return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                      TitleRow(title: getTranslated('promo_code', context)),
+                        HSpacer(Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(Dimensions.RADIUS_DEFAULT),
+                            border: Border.all(color: Theme.of(context).primaryColor),
+                          ),
+                          child: Row(children: [
+                            Expanded(
+                              child: SizedBox(
+                                height: 50,
+                                child: TextField(
+                                  controller: _couponController,
+                                  decoration: InputDecoration(
+                                    hintText: getTranslated('enter_promo_code', context),
+                                    hintStyle: cairoRegular.copyWith(color: Theme.of(context).hintColor),
+                                    isDense: true,
+                                    filled: true,
+                                    enabled: couponProvider.coupon == null,
+                                    fillColor: Theme.of(context).cardColor,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.horizontal(
+                                        left: Radius.circular(Provider.of<LocalizationProvider>(context, listen: false).isLtr ? 10 : 0),
+                                        right: Radius.circular(Provider.of<LocalizationProvider>(context, listen: false).isLtr ? 0 : 10),
+                                      ),
+                                      borderSide: BorderSide.none,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            // apply coupon button
+                            InkWell(
+                              onTap: () async {
+                                final _couponCode = _couponController.text.trim();
+                                if(couponProvider.coupon != null){
+                                  couponProvider.removeCouponData(true);
+                                  _couponController.clear();
+                                } else if(_couponCode.isEmpty) {
+                                  showCustomSnackBar('enter_promo_code'.tr(context), context);
+                                } else if(!couponProvider.isLoading) {
+                                  // implement appling code
+                                  await couponProvider.checkCoupon(_couponCode, context);
+                                  if(couponProvider.coupon != null){
+                                    showCustomSnackBar(
+                                              '${'you_got_discount_of'.tr(context)} ${couponProvider.discountPercentage}%',
+                                              context,
+                                      isError: false,
+                                    );
+                                  }
+                                }
+                              },
+                              child: Container(
+                                height: 50, width: 100,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).primaryColor,
+                                  // boxShadow: [BoxShadow(color: Colors.grey[Get.isDarkMode ? 800 : 200], spreadRadius: 1, blurRadius: 5)],
+                                  borderRadius: BorderRadius.horizontal(
+                                    left: Radius.circular(Provider.of<LocalizationProvider>(context, listen: false).isLtr ? 0 : 10),
+                                    right: Radius.circular(Provider.of<LocalizationProvider>(context, listen: false).isLtr ? 10 : 0),
+                                  ),
+                                ),
+                                child: couponProvider.isLoading
+                                            ? CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.white))
+                                            : (couponProvider.coupon != null)
+                                                ? Icon(Icons.clear, color: Colors.white)
+                                                : Text(
+                                                    'APPLY'.tr(context),
+                                                    style: cairoMedium.copyWith(color: Theme.of(context).cardColor),
+                                                  ),
+                                      ),
+                            ),
+                          ],
+                          ),
+                        ),
+                    ],
+                    );
                   },
                 ),
               ),
@@ -347,7 +453,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           builder: (context, order, child) {
             return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Text(
-                getTranslated('TOTAL', context) + " " + widget.totalOrderAmount.toString() + " \$",
+                getTranslated('TOTAL', context) + " " + _getTotalAmount(context).toString() + " \$",
                 style: cairoSemiBold.copyWith(color: Theme.of(context).highlightColor),
               ),
               !Provider.of<OrderProvider>(context).isLoading

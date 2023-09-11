@@ -8,14 +8,24 @@ class PriceConverter {
     return total.toString();
   }
 
-  static double convertWithDiscount(BuildContext context, double price, double discount, String discountType) {
+  static double convertWithDiscount({
+    required double discount,
+    required double price,
+    String discountType = 'percent',
+  }) {
     if (discountType == 'amount' || discountType == 'flat') {
       price = price - discount;
-    } else if (discountType == 'percent' || discountType == 'percentage') {
-      price = price - ((discount / 100) * price);
+    // } else if (discountType == 'percent' || discountType == 'percentage') {
+    } else {
+      return price - getDiscountPercentageAmount(price: price, discount: discount);
     }
     return price;
   }
+
+  static double getDiscountPercentageAmount({
+    required double discount,
+    required double price,
+  }) => (discount / 100) * price;
 
   static double calculation(double amount, double discount, String type, int quantity) {
     double calculatedAmount = 0;

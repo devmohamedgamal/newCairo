@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lemirageelevators/data/model/response/home_model.dart';
+import 'package:lemirageelevators/helper/price_converter.dart';
 import '../data/model/response/base/api_response.dart';
 import '../data/model/response/items_cart_model.dart';
 import '../data/model/response/shipping_places_model.dart';
@@ -19,6 +20,7 @@ class CartProvider extends ChangeNotifier {
   int? _shippingPlacesIndex = 0;
   int? _paymentIndex = 0;
   double _amount = 0.0;
+  // double _discount = 0.0;
   bool _isLoading = false;
   bool _isLoadingSuggestions = false;
   List<Product> _suggestedProducts = [];
@@ -32,6 +34,7 @@ class CartProvider extends ChangeNotifier {
   int? get indexType => _indexType;
   int? get shippingPlacesIndex => _shippingPlacesIndex;
   double get amount => _amount;
+  // double totalAmount(double discount) => _amount - discount;
   bool get isLoading => _isLoading;
   bool get isLoadingSuggestions => _isLoadingSuggestions;
   List<Product> get suggestedProducts => _suggestedProducts;

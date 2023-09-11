@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lemirageelevators/provider/coupon_provider.dart';
 import 'package:lemirageelevators/util/responsive.dart';
 import 'package:lemirageelevators/util/textStyle.dart';
 import 'package:lemirageelevators/view/baseWidget/no_items_cart_widget.dart';
@@ -31,6 +32,7 @@ class _CartScreenState extends State<CartScreen> {
   void initState() {
     super.initState();
     Provider.of<CartProvider>(context, listen: false).getCartData();
+    Provider.of<CouponProvider>(context, listen: false).removeCouponData(true);
   }
   @override
   Widget build(BuildContext context) {
@@ -150,7 +152,7 @@ class _CartScreenState extends State<CartScreen> {
                       Row(
                           children: [
                             Text(
-                              getTranslated("TOTAL", context)!,
+                              getTranslated("TOTAL", context),
                               style: cairoSemiBold.copyWith(
                                   color: Theme.of(context).highlightColor),
                             ),
@@ -170,7 +172,7 @@ class _CartScreenState extends State<CartScreen> {
                             if (Provider.of<AuthProvider>(context,listen: false).isLoggedIn()) {
                               if (cart.cartList.length == 0) {
                                 showCustomSnackBar(
-                                    getTranslated('select_at_least_one_product', context)!,
+                                    getTranslated('select_at_least_one_product', context),
                                     context, isError: false);
                               }
                               else {

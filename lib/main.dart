@@ -8,6 +8,7 @@ import 'package:lemirageelevators/helper/custom_delegate.dart';
 import 'package:lemirageelevators/localization/app_localization.dart';
 import 'package:lemirageelevators/provider/auth_provider.dart';
 import 'package:lemirageelevators/provider/cart_provider.dart';
+import 'package:lemirageelevators/provider/coupon_provider.dart';
 import 'package:lemirageelevators/provider/facebook_login_provider.dart';
 import 'package:lemirageelevators/provider/gallery_provider.dart';
 import 'package:lemirageelevators/provider/google_sign_in_provider.dart';
@@ -79,6 +80,7 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (context) => di.sl<NotificationProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<OrderProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<GalleryProvider>()),
+      ChangeNotifierProvider(create: (context) => di.sl<CouponProvider>()),
     ],
     child: MyApp(),
   ));

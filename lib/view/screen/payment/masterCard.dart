@@ -1,6 +1,8 @@
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lemirageelevators/helper/price_converter.dart';
+import 'package:lemirageelevators/provider/coupon_provider.dart';
 import 'package:lemirageelevators/util/color_resources.dart';
 import 'package:lemirageelevators/util/textStyle.dart';
 import 'package:lemirageelevators/view/baseWidget/button/custom_button.dart';
@@ -677,7 +679,10 @@ class _MasterCardState extends State<MasterCard> {
                                               typeAddress,
                                               int.parse(shipping),
                                               _items,
-                                              amount,
+                                              PriceConverter.convertWithDiscount(
+                                                discount: Provider.of<CouponProvider>(context, listen: false).discountPercentage,
+                                                price: Provider.of<CartProvider>(context, listen: false).amount,
+                                              ).toString(),
                                               widget.type,phone!.text.toString(),
                                               number!.text,cvv!.text,y,mo
                                           ),

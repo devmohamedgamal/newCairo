@@ -40,6 +40,7 @@ class AppConstants {
   static const String CANCEL_ORDER_URI = 'cancel_order?id=';
   static const String GET_SUGGESTED_PRODUCTS_URI = 'get_suggest_product';
   static const String ADD_SUGGESTED_PRODUCTS_URI = 'add_suggest_product';
+  static const String CHECK_COUPON_URI = 'check_copon';
 
   // Payment gateway
   static const String PAYMOB_BASE_URL = 'https://accept.paymob.com/api';
