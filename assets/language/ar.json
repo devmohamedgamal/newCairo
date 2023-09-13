@@ -60,7 +60,8 @@
   "E_MAIL": "البريد الالكتروني",
   "City": "المدينة",
   "Governorate": "المحافظة",
-  "Country": "البلد",
+  "Country": "الدولة",
+  "area": "المنطقة",
   "First_Address": "العنوان الأول",
   "must_enter_title": "يجب ادخل مسمى العنوان",
   "must_enter_address_first": "يجب ادخل العنوان الأول",
@@ -290,6 +291,7 @@
   "enter_phone_number" : "أدخل رقم الهاتف",
   "select_at_least_one_product": "حدد منتجًا واحدًا على الأقل.",
   "select_a_shipping_address": "اختر عنوان الشحن",
+  "shipping_address": "عنوان الشحن",
   "not_logged_in": "لم يتم دخولك",
   "first_name_field_is_required": "حقل الاسم الأول مطلوب",
   "last_name_field_is_required": "حقل الاسم الأخير مطلوب",
@@ -311,5 +313,6 @@
   "suggested_products": "منتجات مقترحة",
   "promo_code": "كوبون الخصم",
   "enter_promo_code": "اكتب كود الخصم",
-  "you_got_discount_of": "لقد حصلت على خصم"
+  "you_got_discount_of": "لقد حصلت على خصم",
+  "choose": "اختر"
 }

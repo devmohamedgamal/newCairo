@@ -32,15 +32,15 @@ import '../../../provider/auth_provider.dart';
 
 class CheckoutScreen extends StatefulWidget {
   final List<ItemsCartModel> cartList;
-  final double totalOrderAmount;
-  final double shippingCost;
-  final int shippingIndex;
+  // final double totalOrderAmount;
+  // final double shippingCost;
+  // final int shippingIndex;
 
   CheckoutScreen({
     required this.cartList,
-    required this.totalOrderAmount,
-    required this.shippingIndex,
-    required this.shippingCost,
+    // required this.totalOrderAmount,
+    // required this.shippingIndex,
+    // required this.shippingCost,
   });
 
   @override
@@ -55,7 +55,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   double _getTotalAmount(BuildContext context) {
     return PriceConverter.convertWithDiscount(
       discount: Provider.of<CouponProvider>(context, listen: true).discountPercentage,
-      price: widget.totalOrderAmount,
+      price: Provider.of<CartProvider>(context).amount,
     );
   }
 
@@ -203,15 +203,17 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           ShippingMethodBottomSheet(index: Provider.of<CartProvider>(context, listen: false).shippingPlacesIndex ?? 0),
                     ),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                      Text(getTranslated('SHIPPING_PARTNER', context), style: cairoRegular),
+                      Text('shipping_address'.tr(context), style: cairoRegular),
                       Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                         Text(
-                          Provider.of<CartProvider>(context).shippingPlacesIndex == null
-                              ? getTranslated('select_shipping_method', context)
+                          Provider.of<CartProvider>(context).selectedShippingArea == null
+                              ? 'select_a_shipping_address'.tr(context)
                               : Provider.of<LocalizationProvider>(context).locale!.languageCode == "en"
-                                  ? Provider.of<CartProvider>(context, listen: false).shippingPlacesList[widget.shippingIndex].english ?? ''
-                                  : Provider.of<CartProvider>(context, listen: false).shippingPlacesList[widget.shippingIndex].arabic ?? '',
-                          style: cairoSemiBold.copyWith(color: ColorResources.getPrimary(context)),
+                              ? '${Provider.of<CartProvider>(context, listen: false).selectedShippingArea?.nameEn}'
+                              : '${Provider.of<CartProvider>(context, listen: false).selectedShippingArea?.nameAr}',
+                          style: cairoSemiBold.copyWith(
+                            color: ColorResources.getPrimary(context),
+                          ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -297,9 +299,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                       TitleRow(title: getTranslated('TOTAL', context)),
                       AmountWidget(
-                          title: getTranslated('ORDER', context), amount: (widget.totalOrderAmount - widget.shippingCost).toString() + " \$"),
-                      AmountWidget(title: getTranslated('SHIPPING_FEE', context), amount: widget.shippingCost.toString() + " \$"),
-                      AmountWidget(title: getTranslated('promo_code', context), amount: '(-) ${PriceConverter.getDiscountPercentageAmount(discount: Provider.of<CouponProvider>(context).discountPercentage, price: widget.totalOrderAmount)}' " \$"),
+                          title: getTranslated('ORDER', context), amount: (Provider.of<CartProvider>(context).amount - Provider.of<CartProvider>(context).shippingPrice).toString() + " \$"),
+                      AmountWidget(title: getTranslated('SHIPPING_FEE', context), amount: Provider.of<CartProvider>(context).shippingPrice.toString() + " \$"),
+                      AmountWidget(title: getTranslated('promo_code', context), amount: '(-) ${PriceConverter.getDiscountPercentageAmount(discount: Provider.of<CouponProvider>(context).discountPercentage, price: Provider.of<CartProvider>(context).shippingPrice)}' " \$"),
                       Divider(height: 5, color: Theme.of(context).hintColor),
                       AmountWidget(title: getTranslated('TOTAL_PAYABLE', context), amount: _getTotalAmount(context).toString() + " \$"),
                     ]);

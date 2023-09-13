@@ -31,8 +31,11 @@ class _CartScreenState extends State<CartScreen> {
   @override
   void initState() {
     super.initState();
+
     Provider.of<CartProvider>(context, listen: false).getCartData();
-    Provider.of<CouponProvider>(context, listen: false).removeCouponData(true);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<CouponProvider>(context, listen: false).removeCouponData(true);
+    });
   }
   @override
   Widget build(BuildContext context) {
@@ -106,22 +109,25 @@ class _CartScreenState extends State<CartScreen> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                          Text(getTranslated('SHIPPING_PARTNER', context)!, style: cairoRegular),
+                          Text('shipping_address'.tr(context), style: cairoRegular),
                           Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                             Text(
-                              cart.shippingPlacesList.length == 0 || cart.shippingPlacesList.isEmpty
-                                  ? ''
+                              cart.selectedShippingArea == null
+                                  ? 'select_a_shipping_address'.tr(context)
                                   : Provider.of<LocalizationProvider>(context).locale!.languageCode == "en"
-                                    ? '${cart.shippingPlacesList[cart.shippingPlacesIndex ?? 0].english.toString()}'
-                                    : '${cart.shippingPlacesList[cart.shippingPlacesIndex ?? 0].arabic.toString()}',
+                                    ? '${cart.selectedShippingArea?.nameEn}'
+                                    : '${cart.selectedShippingArea?.nameAr}',
                               style: cairoSemiBold.copyWith(
-                                  color: ColorResources.getPrimary(context)),
+                                  color: ColorResources.getPrimary(context),
+                              ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
                             SizedBox(width: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                            Icon(Icons.keyboard_arrow_down,
-                                color: Theme.of(context).primaryColor),
+                            Icon(
+                              Icons.keyboard_arrow_down,
+                              color: Theme.of(context).primaryColor,
+                            ),
                           ]),
                         ]),
                       ),
@@ -180,11 +186,10 @@ class _CartScreenState extends State<CartScreen> {
                                     MaterialPageRoute(
                                         builder: (_) => CheckoutScreen(
                                   cartList: cart.cartList,
-                                  shippingIndex: Provider.of<CartProvider>(context,
-                                      listen: false).shippingPlacesIndex ?? -1,
-                                  totalOrderAmount: cart.amount,
-                                  shippingCost: double.parse(
-                                      cart.shippingPlacesList[cart.shippingPlacesIndex ?? 0].price ?? "0.0"),
+                                  // shippingIndex: Provider.of<CartProvider>(context,
+                                  //     listen: false).shippingPlacesIndex ?? -1,
+                                  // totalOrderAmount: cart.amount,
+                                  // shippingCost: cart.shippingPrice,
                                 )));
                               }
                             }

@@ -27,6 +27,8 @@ class AppConstants {
   static const String CLIENT_PROFILE_URL = 'client_profile?client_id=';
   static const String VIDEO_URL = 'video';
   static const String SHIPPING_URL = 'shipping';
+  static const String GET_CITY_URL = 'get_city';
+  static const String GET_AREA_URL = 'get_area';
   static const String ORDER_PLACE_URI = 'placeorder';
   static const String ORDER_URI = 'last_order?client_id=';
   static const String GET_WISH_URL = 'get_wish?client_id=';

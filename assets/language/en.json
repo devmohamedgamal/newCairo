@@ -67,6 +67,7 @@
   "City": "City",
   "Country": "Country",
   "Governorate": "Governorate",
+  "area": "Area",
   "read_more": "Read More...",
   "read_less": "Read Less...",
   "First_Address": "First Address",
@@ -293,6 +294,7 @@
   "enter_phone_number" : "Enter phone number",
   "select_at_least_one_product": "Select at least one product.",
   "select_a_shipping_address": "Select a shipping address",
+  "shipping_address": "Shipping address",
   "not_logged_in": "You are not logged in",
   "first_name_field_is_required": "First name field is required",
   "last_name_field_is_required": "Last name field is required",
@@ -314,5 +316,6 @@
   "suggested_products": "Suggested products",
   "promo_code": "Promo Code",
   "enter_promo_code": "Enter promo code",
-  "you_got_discount_of": "You got discount of"
+  "you_got_discount_of": "You got discount of",
+  "choose": "Choose"
 }

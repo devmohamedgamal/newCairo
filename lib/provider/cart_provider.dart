@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:lemirageelevators/data/model/response/area_model.dart';
+import 'package:lemirageelevators/data/model/response/city_model.dart';
 import 'package:lemirageelevators/data/model/response/home_model.dart';
 import 'package:lemirageelevators/helper/price_converter.dart';
 import '../data/model/response/base/api_response.dart';
 import '../data/model/response/items_cart_model.dart';
-import '../data/model/response/shipping_places_model.dart';
+import '../data/model/response/governorate_model.dart';
 import '../data/repository/cart_repo.dart';
 import '../helper/api_checker.dart';
 
@@ -13,22 +15,27 @@ class CartProvider extends ChangeNotifier {
 
   List<String> _paymentTypeList = [];
   List<ItemsCartModel> _cartList = [];
-  List<Places> _shippingPlacesList = [];
+  List<GovernorateModel> _shippingPlacesList = [];
+  int? _shippingPlacesIndex;
+  List<ShippingCityModel> _shippingCitiesList = [];
+  int? _shippingCitiesIndex;
+  bool _isLoadingCities = false;
+  List<ShippingAreaModel> _shippingAreasList = [];
+  int? _shippingAreasIndex;
+  bool _isLoadingAreas = false;
   String _paymentType = '';
   int? _indexType;
-  String? _shippingPlacesId;
-  int? _shippingPlacesIndex = 0;
   int? _paymentIndex = 0;
   double _amount = 0.0;
   // double _discount = 0.0;
   bool _isLoading = false;
   bool _isLoadingSuggestions = false;
   List<Product> _suggestedProducts = [];
+  double _shippingPrice = 0;
 
   List<String> get paymentTypeList => _paymentTypeList;
   List<ItemsCartModel> get cartList => _cartList;
-  List<Places> get shippingPlacesList => _shippingPlacesList;
-  String? get shippingPlacesId => _shippingPlacesId;
+  List<GovernorateModel> get shippingPlacesList => _shippingPlacesList;
   String? get paymentType => _paymentType;
   int? get paymentIndex => _paymentIndex;
   int? get indexType => _indexType;
@@ -38,6 +45,17 @@ class CartProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get isLoadingSuggestions => _isLoadingSuggestions;
   List<Product> get suggestedProducts => _suggestedProducts;
+  int? get shippingCitiesIndex => _shippingCitiesIndex;
+  bool get isLoadingCities => _isLoadingCities;
+  List<ShippingAreaModel> get shippingAreasList => _shippingAreasList;
+  int? get shippingAreasIndex => _shippingAreasIndex;
+  bool get isLoadingAreas => _isLoadingAreas;
+  // double get shippingPrice => _shippingAreasIndex == null ? 0 : _shippingAreasList[_shippingAreasIndex!].price;
+  ShippingAreaModel? get selectedShippingArea => _shippingAreasIndex == null || _shippingAreasList.isEmpty ? null : _shippingAreasList[_shippingAreasIndex!];
+  double _getShippingPrice(int? index) => index == null ? 0 : _shippingAreasList[index].price;
+  double get shippingPrice => _shippingPrice;
+
+  List<ShippingCityModel> get shippingCitiesList => _shippingCitiesList;
 
   Future<void> getSuggestedProductsIfNotExists(String clientId) async {
     if(_suggestedProducts.isEmpty){
@@ -89,17 +107,13 @@ class CartProvider extends ChangeNotifier {
 
   void getCartData() {
     _cartList = [];
-    _amount = 0.00;
+    _amount = 0;
     _cartList.addAll(cartRepo.getCartList());
     _cartList.forEach((cart) {
-      if(_shippingPlacesList.isNotEmpty){
-        _amount = _amount + (cart.price! * cart.quantity!) +
-            double.parse(_shippingPlacesList[_shippingPlacesIndex ?? 0].price ?? "0.0");
-      }
-      else{
-        _amount = _amount + (cart.price! * cart.quantity!);
-      }
+      _amount += (cart.price! * cart.quantity!);
     });
+    _shippingPrice = _getShippingPrice(_shippingAreasIndex);
+    _amount += _shippingPrice;
   }
 
 
@@ -173,23 +187,64 @@ class CartProvider extends ChangeNotifier {
   }
 
   Future<void> getShippingPlaces(BuildContext context) async {
-    ApiResponse apiResponse = await cartRepo.getShippingPlaces();
+    final apiResponse = await cartRepo.getShippingPlaces();
     if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
       _shippingPlacesList = [];
-      ShippingPlacesModel placesModel;
-      placesModel = ShippingPlacesModel.fromJson(apiResponse.response!.data);
-      _shippingPlacesList = placesModel.shipping ?? [];
+      _shippingPlacesList = List.from(apiResponse.response!.data['shipping']).map((e) => GovernorateModel.fromJson(e)).toList();
     } else {
       ApiChecker.checkApi(context, apiResponse);
     }
     notifyListeners();
   }
 
-  void setSelectedShippingPlacesId(index,oldIndex) {
-    _shippingPlacesId = _shippingPlacesList[index].id;
-    _shippingPlacesIndex = index;
-    _amount = (_amount - double.parse(_shippingPlacesList[oldIndex].price ?? "0.0"))
-        + double.parse(_shippingPlacesList[index].price ?? "0.0");
+  Future<void> getShippingCities(BuildContext context, {required int govIndex}) async {
+    _shippingCitiesIndex = null;
+    _shippingCitiesList = [];
+    _shippingAreasIndex = null;
+    _shippingAreasList = [];
+    _isLoadingCities = true;
+    notifyListeners();
+
+    final apiResponse = await cartRepo.getShippingCities(_shippingPlacesList[govIndex].govId);
+    if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
+      _shippingPlacesIndex = govIndex;
+      _shippingCitiesList = List.from(apiResponse.response!.data).map((e) => ShippingCityModel.fromJson(e)).toList();
+    } else {
+      ApiChecker.checkApi(context, apiResponse);
+    }
+    _isLoadingCities = false;
+    notifyListeners();
+  }
+
+  Future<void> getShippingAreas(BuildContext context, {required int cityIndex}) async {
+    _shippingAreasIndex = null;
+    _shippingAreasList = [];
+    _isLoadingAreas = true;
+    notifyListeners();
+
+    final apiResponse = await cartRepo.getShippingAreas(_shippingCitiesList[cityIndex].zoneId);
+    if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
+      _shippingCitiesIndex = cityIndex;
+      _shippingAreasList = List.from(apiResponse.response!.data).map((e) => ShippingAreaModel.fromJson(e)).toList();
+    } else {
+      ApiChecker.checkApi(context, apiResponse);
+    }
+
+    _isLoadingAreas = false;
+    notifyListeners();
+  }
+
+
+  void setSelectedShippingAreaId(int index) {
+    debugPrint('setSelectedShippingAreaId');
+    debugPrint('index = $index');
+    debugPrint('amount was: $_amount');
+    debugPrint('shippingPrice was: $_shippingPrice');
+    _shippingAreasIndex = index;
+    _amount = _amount - _shippingPrice + _getShippingPrice(index);
+    _shippingPrice = _getShippingPrice(index);
+    debugPrint('shippingPrice now: $_shippingPrice');
+    debugPrint('amount now: $_amount');
     notifyListeners();
   }
 }

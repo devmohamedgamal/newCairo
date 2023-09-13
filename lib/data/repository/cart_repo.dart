@@ -36,6 +36,35 @@ class CartRepo{
     }
   }
 
+  Future<ApiResponse> getShippingCities(String govId) async {
+    try {
+      final response = await dioClient.post(
+        AppConstants.GET_CITY_URL,
+        data: {
+          'government_id': govId,
+        },
+        convertDataToFormData: true,
+      );
+      return ApiResponse.withSuccess(response);
+    } on DioException catch (e) {
+      return ApiResponse.withError(ApiErrorHandler.getMessage(e));
+    }
+  }
+
+  Future<ApiResponse> getShippingAreas(String zoneId) async {
+    try {
+      final response = await dioClient.post(
+        AppConstants.GET_AREA_URL,
+        data: {
+          'city_id': zoneId,
+        },
+        convertDataToFormData: true,
+      );      return ApiResponse.withSuccess(response);
+    } on DioException catch (e) {
+      return ApiResponse.withError(ApiErrorHandler.getMessage(e));
+    }
+  }
+
   Future<ApiResponse> getPaymentTypeList(BuildContext context) async {
     try {
       List<String> addressTypeList = [
