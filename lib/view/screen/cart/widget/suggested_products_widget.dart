@@ -34,12 +34,7 @@ class _SuggestedProductsWidgetState extends State<SuggestedProductsWidget> {
   Widget build(BuildContext context) {
     return Consumer<CartProvider>(
       builder: (context, cartProvider, child) {
-        if (cartProvider.isLoadingSuggestions) {
-          return Container(
-            alignment: Alignment.center,
-            child: CircularProgressIndicator.adaptive(),
-          );
-        } else if(cartProvider.suggestedProducts.isEmpty){
+        if(cartProvider.suggestedProducts.isEmpty){
           return SizedBox.shrink();
         }
 

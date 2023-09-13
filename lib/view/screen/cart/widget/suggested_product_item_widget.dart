@@ -19,7 +19,7 @@ class SuggestedProductItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<CartProvider>(
       builder: (context, cartProvider, child) {
-        return cartProvider.suggestedProducts.length != 0
+        return !cartProvider.isLoadingSuggestions
             ? ListView.builder(
                 padding: EdgeInsets.all(0),
                 scrollDirection: Axis.horizontal,
