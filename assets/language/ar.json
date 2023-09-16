@@ -97,9 +97,9 @@
   "PHONE_NO": "رقم الهاتف",
   "TOTAL_PAYABLE": "إجمالي المدفوعات:",
   "PAYMENT": "دفع",
-  "sign_out": "خروج",
+  "sign_out": "تسجيل خروج",
   "sorry": "آسف !",
-  "ok": "حسنا",
+  "ok": "حسنًا",
   "payment_done": "تم الدفع",
   "payment_failed": "عملية الدفع فشلت",
   "payment_cancelled": "تم إلغاء الدفع",
@@ -314,5 +314,6 @@
   "promo_code": "كوبون الخصم",
   "enter_promo_code": "اكتب كود الخصم",
   "you_got_discount_of": "لقد حصلت على خصم",
-  "choose": "اختر"
+  "choose": "اختر",
+  "error_occurred": "حدث خطأ"
 }

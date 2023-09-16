@@ -317,5 +317,6 @@
   "promo_code": "Promo Code",
   "enter_promo_code": "Enter promo code",
   "you_got_discount_of": "You got discount of",
-  "choose": "Choose"
+  "choose": "Choose",
+  "error_occurred": "Error Occurred!"
 }
