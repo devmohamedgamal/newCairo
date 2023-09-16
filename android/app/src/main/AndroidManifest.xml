@@ -23,7 +23,7 @@
    <application
         android:label="MORC"
         android:name="${applicationName}"
-        android:icon="@mipmap/launcher_icon">
+        android:icon="@mipmap/ic_launcher">
 
        <meta-data
            android:name="com.facebook.sdk.ApplicationId"
