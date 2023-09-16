@@ -101,7 +101,7 @@ class WishListWidget extends StatelessWidget {
                   SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                   Row(
                     children: [
-                      Text(wish.price! + " \$",
+                      Text(wish.price! + " ${getTranslated('currency', context)}",
                         style: cairoSemiBold.copyWith(
                             color: ColorResources.getPrimary(context)),
                       ),
@@ -120,7 +120,7 @@ class WishListWidget extends StatelessWidget {
                         padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                         alignment: Alignment.center,
                         decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), border: Border.all(color: ColorResources.getPrimary(context))),
-                        child: Text(wish.priceBefore! + " \$",
+                        child: Text(wish.priceBefore! + " ${getTranslated('currency', context)}",
                           style: cairoRegular.copyWith(
                               decoration: TextDecoration.lineThrough,
                               fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL,

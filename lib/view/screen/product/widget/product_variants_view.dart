@@ -95,7 +95,7 @@ class ProductVariants extends StatelessWidget {
                                       Text(getTranslated("product_price", context)! + " :  ",
                                           style: cairoBold),
 
-                                      Text(item.price! + " \$",
+                                      Text(item.price! + " ${getTranslated('currency', context)}",
                                           textAlign: TextAlign.right,
                                           style: cairoBold.copyWith(color: Colors.black)),
                                     ],

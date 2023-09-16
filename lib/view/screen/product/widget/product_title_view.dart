@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lemirageelevators/localization/language_constrants.dart';
 import 'package:lemirageelevators/provider/product_provider.dart';
 import 'package:lemirageelevators/util/textStyle.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,7 @@ class ProductTitleView extends StatelessWidget {
         builder: (context, details, child) {
           return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Row(children: [
-              Text(product.price! + " \$",
+              Text(product.price! + " ${getTranslated('currency', context)}",
                 style: cairoBold.copyWith(
                     color: ColorResources.getPrimary(context), fontSize: Dimensions.FONT_SIZE_LARGE),
               ),
@@ -52,7 +53,7 @@ class ProductTitleView extends StatelessWidget {
             ]),
 
             double.parse(product.priceBefore?.replaceAll(",","")??'0') > 0
-                ? Text(product.priceBefore! + " \$",
+                ? Text(product.priceBefore! + " ${getTranslated('currency', context)}",
               style: cairoRegular.copyWith(color: Theme.of(context).hintColor, decoration: TextDecoration.lineThrough),
             )
                 : SizedBox(),

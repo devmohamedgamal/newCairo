@@ -96,11 +96,11 @@ class _WishBottomSheetState extends State<WishBottomSheet> {
                           style: cairoSemiBold.copyWith(
                           fontSize: Dimensions.FONT_SIZE_LARGE), maxLines: 2,
                           overflow: TextOverflow.ellipsis),
-                      Text(widget.wish.price! + " \$",
+                      Text(widget.wish.price! + " ${getTranslated('currency', context)}",
                         style: cairoBold.copyWith(color: ColorResources.getPrimary(context), fontSize: 16),
                       ),
                       double.parse(widget.wish.priceBefore!) > 0
-                          ? Text(widget.wish.price! + " \$",
+                          ? Text(widget.wish.price! + " ${getTranslated('currency', context)}",
                         style: cairoRegular.copyWith(
                             color: Theme.of(context).hintColor,
                             decoration: TextDecoration.lineThrough),
@@ -205,7 +205,7 @@ class _WishBottomSheetState extends State<WishBottomSheet> {
                                                   Text(getTranslated("product_price", context)! + " :  ",
                                                       style: cairoBold),
 
-                                                  Text(item.price! + " \$",
+                                                  Text(item.price! + " ${getTranslated('currency', context)}",
                                                       style: cairoBold.copyWith(color: Colors.black)),
                                                 ],
                                               ),
@@ -238,7 +238,7 @@ class _WishBottomSheetState extends State<WishBottomSheet> {
                         details.selectVariant != null
                             ? (details.selectVariant!.price ?? "0.0").replaceAll(",","")
                             : (widget.wish.price ?? "0.0").replaceAll(",",""),
-                        details.quantity) + " \$",
+                        details.quantity) + " ${getTranslated('currency', context)}",
                     style: cairoBold.copyWith(
                         color: ColorResources.getPrimary(context),
                         fontSize: 16),

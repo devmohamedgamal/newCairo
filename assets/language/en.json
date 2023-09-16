@@ -318,5 +318,6 @@
   "enter_promo_code": "Enter promo code",
   "you_got_discount_of": "You got discount of",
   "choose": "Choose",
-  "error_occurred": "Error Occurred!"
+  "error_occurred": "Error Occurred!",
+  "currency": "EGP"
 }

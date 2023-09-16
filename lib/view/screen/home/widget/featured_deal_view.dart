@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lemirageelevators/localization/language_constrants.dart';
 import 'package:lemirageelevators/provider/home_provider.dart';
 import 'package:lemirageelevators/util/app_constants.dart';
 import 'package:lemirageelevators/util/responsive.dart';
@@ -103,7 +104,7 @@ class FeaturedDealsView extends StatelessWidget {
 
                                       Text(
                                         homeProvider
-                                            .specialOffers[index].price! + " \$",
+                                            .specialOffers[index].price! + " ${getTranslated('currency', context)}",
                                         style: cairoBold.copyWith(
                                             color: ColorResources.getPrimary(
                                                 context)),
@@ -121,7 +122,7 @@ class FeaturedDealsView extends StatelessWidget {
                                                     null
                                                 ? homeProvider
                                                     .specialOffers[index]
-                                                    .priceBefore! + " \$"
+                                                    .priceBefore! + " ${getTranslated('currency', context)}"
                                                 : "",
                                             style: cairoBold.copyWith(
                                               color: ColorResources

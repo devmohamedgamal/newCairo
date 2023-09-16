@@ -167,15 +167,15 @@ class OrderDetailsScreen extends StatelessWidget {
 
                               AmountWidget(
                                   title: getTranslated('ORDER', context)!,
-                                  amount: "${order.orderPrice ?? "0.0"}" + " \$"
+                                  amount: "${order.orderPrice ?? "0.0"}" + " ${getTranslated('currency', context)}"
                               ),
 
                               AmountWidget(
                                   title: getTranslated(
                                       'SHIPPING_FEE', context)!,
                                   amount: order.shippingCost!.isEmpty || order.shippingCost == null
-                                      ? "0.0" + " \$"
-                                      : "${order.shippingCost ?? "0.0"}" + " \$",
+                                      ? "0.0" + " ${getTranslated('currency', context)}"
+                                      : "${order.shippingCost ?? "0.0"}" + " ${getTranslated('currency', context)}",
                               ),
 
                               Padding(
@@ -193,7 +193,7 @@ class OrderDetailsScreen extends StatelessWidget {
                                 amount: (double.parse(order.orderPrice ?? "0.0") +
                                     double.parse(order.shippingCost!.isEmpty
                                         ? "0.0"
-                                        : order.shippingCost ?? "0.0")).toString() + " \$"
+                                        : order.shippingCost ?? "0.0")).toString() + " ${getTranslated('currency', context)}"
                               ),
                             ]),
                       ),

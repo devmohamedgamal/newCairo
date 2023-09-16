@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lemirageelevators/data/model/response/order_model.dart';
 import 'package:lemirageelevators/helper/price_converter.dart';
+import 'package:lemirageelevators/localization/language_constrants.dart';
 import 'package:lemirageelevators/util/app_constants.dart';
 import 'package:lemirageelevators/util/textStyle.dart';
 import 'package:provider/provider.dart';
@@ -70,7 +71,7 @@ class OrderDetailsWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "${orderItem!.price ?? "0.0"}" + " \$",
+                            "${orderItem!.price ?? "0.0"}" + " ${getTranslated('currency', context)}",
                             style: cairoSemiBold.copyWith(
                                 color: ColorResources.getPrimary(context)),
                           ),
@@ -92,7 +93,7 @@ class OrderDetailsWidget extends StatelessWidget {
                               PriceConverter.calculateTotal(
                                   context,
                                   orderItem!.price!,
-                                  int.parse(orderItem!.qty!)) + " \$",
+                                  int.parse(orderItem!.qty!)) + " ${getTranslated('currency', context)}",
                               style: cairoRegular.copyWith(
                                   fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL,
                                   color: ColorResources.getPrimary(context)),

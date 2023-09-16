@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lemirageelevators/localization/language_constrants.dart';
 import 'package:lemirageelevators/provider/cart_provider.dart';
 import 'package:lemirageelevators/util/app_constants.dart';
 import 'package:lemirageelevators/util/responsive.dart';
@@ -102,7 +103,7 @@ class SuggestedProductItemWidget extends StatelessWidget {
 
                                       Text(
                                         cartProvider
-                                            .suggestedProducts[index].price! + " \$",
+                                            .suggestedProducts[index].price! + " ${getTranslated('currency', context)}",
                                         style: cairoBold.copyWith(
                                             color: ColorResources.getPrimary(
                                                 context)),
@@ -120,7 +121,7 @@ class SuggestedProductItemWidget extends StatelessWidget {
                                                     null
                                                 ? cartProvider
                                                     .suggestedProducts[index]
-                                                    .priceBefore! + " \$"
+                                                    .priceBefore! + " ${getTranslated('currency', context)}"
                                                 : "",
                                             style: cairoBold.copyWith(
                                               color: ColorResources

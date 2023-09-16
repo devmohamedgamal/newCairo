@@ -46,7 +46,7 @@ class CartWidget extends StatelessWidget {
                     color: ColorResources.getHint(context),
                   )),
                   Text(
-                    itemsCartModel!.price.toString() + " \$",
+                    itemsCartModel!.price.toString() + " ${getTranslated('currency', context)}",
                     textDirection: TextDirection.ltr,
                     style: cairoSemiBold.copyWith(color: ColorResources.getPrimary(context)),
                   ),

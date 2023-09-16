@@ -87,12 +87,12 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis),
                         Text(
-                          widget.product.price.toString() + " \$",
+                          widget.product.price.toString() + " ${getTranslated('currency', context)}",
                           style: cairoBold.copyWith(color: ColorResources.getPrimary(context), fontSize: 16),
                         ),
                         double.parse((widget.product.priceBefore ?? "0.0").replaceAll(",", "")) > 0
                             ? Text(
-                                widget.product.priceBefore.toString() + " \$",
+                                widget.product.priceBefore.toString() + " ${getTranslated('currency', context)}",
                                 style: cairoRegular.copyWith(color: Theme.of(context).hintColor, decoration: TextDecoration.lineThrough),
                               )
                             : SizedBox(),
@@ -174,7 +174,7 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
                                                             subtitle: Row(
                                                               children: [
                                                                 Text(getTranslated("product_price", context)! + " :  ", style: cairoBold),
-                                                                Text(item.price! + " \$", style: cairoBold.copyWith(color: Colors.black)),
+                                                                Text(item.price! + " ${getTranslated('currency', context)}", style: cairoBold.copyWith(color: Colors.black)),
                                                               ],
                                                             ),
                                                             activeColor: ColorResources.DEFAULT_COLOR,
@@ -210,7 +210,7 @@ class _CartBottomSheetState extends State<CartBottomSheet> {
                                   ? (details.selectVariant!.price ?? "0.0").replaceAll(",", "")
                                   : (widget.product.price ?? "0.0").replaceAll(",", ""),
                               details.quantity) +
-                          " \$",
+                          " ${getTranslated('currency', context)}",
                       style: cairoBold.copyWith(color: ColorResources.getPrimary(context), fontSize: 16),
                     ),
                   ]),

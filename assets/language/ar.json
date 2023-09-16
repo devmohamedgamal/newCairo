@@ -315,5 +315,6 @@
   "enter_promo_code": "اكتب كود الخصم",
   "you_got_discount_of": "لقد حصلت على خصم",
   "choose": "اختر",
-  "error_occurred": "حدث خطأ"
+  "error_occurred": "حدث خطأ",
+  "currency": "جنيه"
 }

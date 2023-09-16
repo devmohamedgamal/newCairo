@@ -165,7 +165,7 @@ class _CartScreenState extends State<CartScreen> {
 
                             WSpacer(5),
                             Text(
-                              cart.amount.toString() + " \$",
+                              cart.amount.toString() + " ${getTranslated('currency', context)}",
                               textDirection: TextDirection.ltr,
                               style: cairoSemiBold.copyWith(
                                   color: Theme.of(context).highlightColor),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lemirageelevators/localization/language_constrants.dart';
 import 'package:lemirageelevators/util/app_constants.dart';
 import 'package:lemirageelevators/util/responsive.dart';
 import 'package:lemirageelevators/util/textStyle.dart';
@@ -73,7 +74,7 @@ class ProductWidget extends StatelessWidget {
                     SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
 
                     Row(children: [
-                      Text(product.price.toString() + " \$",
+                      Text(product.price.toString() + " ${getTranslated('currency', context)}",
                         style: cairoBold.copyWith(
                             color: ColorResources.getPrimary(context)),
                       ),
@@ -100,7 +101,7 @@ class ProductWidget extends StatelessWidget {
 
                     product.priceBefore != null
                         ? Text(
-                      product.priceBefore! + " \$",
+                      product.priceBefore! + " ${getTranslated('currency', context)}",
                       style: cairoBold.copyWith(
                         color: Theme.of(context).hintColor,
                         decoration: TextDecoration.lineThrough,

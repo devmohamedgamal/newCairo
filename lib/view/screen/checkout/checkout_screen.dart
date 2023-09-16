@@ -262,7 +262,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           SizedBox(height: Dimensions.MARGIN_SIZE_EXTRA_SMALL),
                           Row(children: [
                             Text(
-                              widget.cartList[0].price.toString() + " \$",
+                              widget.cartList[0].price.toString() + " ${getTranslated('currency', context)}",
                               style: cairoSemiBold.copyWith(color: ColorResources.getPrimary(context)),
                             ),
                             SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
@@ -277,7 +277,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(16), border: Border.all(color: ColorResources.getPrimary(context))),
                               child: Text(
-                                PriceConverter.calculateTotal(context, widget.cartList[0].price.toString(), widget.cartList[0].quantity!) + " \$",
+                                PriceConverter.calculateTotal(context, widget.cartList[0].price.toString(), widget.cartList[0].quantity!) + " ${getTranslated('currency', context)}",
                                 style: cairoRegular.copyWith(fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL, color: ColorResources.getPrimary(context)),
                               ),
                             ),
@@ -299,11 +299,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                       TitleRow(title: getTranslated('TOTAL', context)),
                       AmountWidget(
-                          title: getTranslated('ORDER', context), amount: (Provider.of<CartProvider>(context).amount - Provider.of<CartProvider>(context).shippingPrice).toString() + " \$"),
-                      AmountWidget(title: getTranslated('SHIPPING_FEE', context), amount: Provider.of<CartProvider>(context).shippingPrice.toString() + " \$"),
-                      AmountWidget(title: getTranslated('promo_code', context), amount: '(-) ${PriceConverter.getDiscountPercentageAmount(discount: Provider.of<CouponProvider>(context).discountPercentage, price: Provider.of<CartProvider>(context).shippingPrice)}' " \$"),
+                          title: getTranslated('ORDER', context), amount: (Provider.of<CartProvider>(context).amount - Provider.of<CartProvider>(context).shippingPrice).toString() + " ${getTranslated('currency', context)}"),
+                      AmountWidget(title: getTranslated('SHIPPING_FEE', context), amount: Provider.of<CartProvider>(context).shippingPrice.toString() + " ${getTranslated('currency', context)}"),
+                      AmountWidget(title: getTranslated('promo_code', context), amount: '(-) ${PriceConverter.getDiscountPercentageAmount(discount: Provider.of<CouponProvider>(context).discountPercentage, price: Provider.of<CartProvider>(context).shippingPrice)}' " ${getTranslated('currency', context)}"),
                       Divider(height: 5, color: Theme.of(context).hintColor),
-                      AmountWidget(title: getTranslated('TOTAL_PAYABLE', context), amount: _getTotalAmount(context).toString() + " \$"),
+                      AmountWidget(title: getTranslated('TOTAL_PAYABLE', context), amount: _getTotalAmount(context).toString() + " ${getTranslated('currency', context)}"),
                     ]);
                   },
                 ),
@@ -455,7 +455,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           builder: (context, order, child) {
             return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Text(
-                getTranslated('TOTAL', context) + " " + _getTotalAmount(context).toString() + " \$",
+                getTranslated('TOTAL', context) + " " + _getTotalAmount(context).toString() + " ${getTranslated('currency', context)}",
                 style: cairoSemiBold.copyWith(color: Theme.of(context).highlightColor),
               ),
               !Provider.of<OrderProvider>(context).isLoading
