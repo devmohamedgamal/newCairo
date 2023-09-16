@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -9,9 +8,7 @@ import 'package:lemirageelevators/localization/app_localization.dart';
 import 'package:lemirageelevators/provider/auth_provider.dart';
 import 'package:lemirageelevators/provider/cart_provider.dart';
 import 'package:lemirageelevators/provider/coupon_provider.dart';
-import 'package:lemirageelevators/provider/facebook_login_provider.dart';
 import 'package:lemirageelevators/provider/gallery_provider.dart';
-import 'package:lemirageelevators/provider/google_sign_in_provider.dart';
 import 'package:lemirageelevators/provider/home_provider.dart';
 import 'package:lemirageelevators/provider/localization_provider.dart';
 import 'package:lemirageelevators/provider/notification_provider.dart';
@@ -68,8 +65,8 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (context) => di.sl<ThemeProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<OnBoardingProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<AuthProvider>()),
-      ChangeNotifierProvider(create: (context) => di.sl<FacebookLoginProvider>()),
-      ChangeNotifierProvider(create: (context) => di.sl<GoogleSignInProvider>()),
+      // ChangeNotifierProvider(create: (context) => di.sl<FacebookLoginProvider>()),
+      // ChangeNotifierProvider(create: (context) => di.sl<GoogleSignInProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<ProfileProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<SplashProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<HomeProvider>()),

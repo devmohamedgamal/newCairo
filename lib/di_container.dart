@@ -53,10 +53,6 @@ Future<void> init() async {
   // Core
   sl.registerLazySingleton(() => NetworkInfo(sl()));
   sl.registerLazySingleton(() => DioClient(AppConstants.BASE_URL,sl(), loggingInterceptor: sl(),sharedPreferences: sl()));
-  // sl.registerLazySingleton(
-  //   () => DioClient(AppConstants.PAYMOB_BASE_URL, sl(),sharedPreferences: sl()),
-  //   instanceName: paymentDioInstanceName,
-  // );
 
   // Repository
   sl.registerLazySingleton(() => SplashRepo(sharedPreferences: sl(), dioClient: sl()));
@@ -80,8 +76,8 @@ Future<void> init() async {
   sl.registerFactory(() => OnBoardingProvider(onboardingRepo: sl()));
   sl.registerFactory(() => SplashProvider(splashRepo: sl()));
   sl.registerFactory(() => AuthProvider(authRepo: sl()));
-  sl.registerFactory(() => FacebookLoginProvider());
-  sl.registerFactory(() => GoogleSignInProvider());
+  // sl.registerFactory(() => FacebookLoginProvider());
+  // sl.registerFactory(() => GoogleSignInProvider());
   sl.registerFactory(() => HomeProvider(homeRepo: sl()));
   sl.registerFactory(() => ProductProvider(productRepo: sl()));
   sl.registerFactory(() => SearchProvider(searchRepo: sl()));
