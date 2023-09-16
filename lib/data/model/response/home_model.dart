@@ -17,15 +17,17 @@ class HomeModel {
     this.products,
   });
 
-  factory HomeModel.fromJson(Map<String, dynamic> json) => HomeModel(
+  factory HomeModel.fromJson(Map<String, dynamic> json) {
+    return HomeModel(
     sliders: List<Sliders>.from(json["fetched_slider_data"].map((x) => Sliders.fromJson(x))),
-    specialOffers: List<Product>.from(json["spcial_offers"].map((x) => Product.fromJson(x))),
+    specialOffers: List<Product>.from(json["spcial_offers"].where((e) => e['offer_end']?.isNotEmpty == true).map((x) => Product.fromJson(x))),
     category: List<Category>.from(json["fetched_category_data"].map((x) => Category.fromJson(x))),
     postColor: Post.fromJson(json["post_color"]),
     postSize: Post.fromJson(json["post_size"]),
     postKind: Post.fromJson(json["post_kind"]),
     products: List<Product>.from(json["fetched_home_products"].map((x) => Product.fromJson(x))),
   );
+  }
 
   Map<String, dynamic> toJson() => {
     "fetched_slider_data": List<dynamic>.from(sliders!.map((x) => x.toJson())),
