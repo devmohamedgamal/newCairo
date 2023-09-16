@@ -166,15 +166,16 @@ class OrderTypeButton extends StatelessWidget {
         onPressed: () => Provider.of<OrderProvider>(context, listen: false).setIndex(index),
         style: TextButton.styleFrom(padding: EdgeInsets.all(0)),
         child: Container(
-          height: 40,
+          height: 70,
           alignment: Alignment.center,
+            padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
           decoration: BoxDecoration(
             color: Provider.of<OrderProvider>(context,listen: false).orderTypeIndex == index
                 ? ColorResources.getPrimary(context)
                 : Theme.of(context).highlightColor,
             borderRadius: BorderRadius.circular(6),
           ),
-          child: Text(text + '(${orderList.length})',
+          child: Text(text + ' (${orderList.length})',
               style: cairoBold.copyWith(color: Provider.of<OrderProvider>(context,
                   listen: false).orderTypeIndex == index
                   ? Theme.of(context).highlightColor
