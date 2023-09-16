@@ -4,21 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ColorResources {
-  static const Color DEFAULT_COLOR = Color(0xff548E7F);
+  static const Color DEFAULT_COLOR = Color(0xff112c49);
   static const Color BLACK = Color(0xff000000);
   static const Color WHITE = Color(0xffFFFFFF);
   static const Color GREY = Color(0xffF1F1F1);
   static const Color GREEN = Color(0xff0CC579);
   static const Color RED = Color(0xffDB0000);
-  static const Color ORANGE = Color(0xffEF812D);
+  // static const Color ORANGE = Color(0xffEF812D);
+  static const Color ORANGE = Color(0xffce921f);
   static const Color BLUE = Colors.blue;
   static const Color switch_button = Color(0xff7BA43E);
   static const Color HINT_TEXT_COLOR = Color(0xff9e9e9e);
   static const Color ICON_BG = Color(0xffF9F9F9);
   static const Color IMAGE_BG = Color(0xffE2F0FF);
-  static const Color SELLER_TXT = Color(0xff92C6FF);
+  static const Color SELLER_TXT = Color(0xff7a93ac);
   static const Color LOW_GREEN = Color(0xffEFF6FE);
-  static const Color LIGHT_SKY_BLUE = Color(0xff8DBFF6);
+  static const Color LIGHT_SKY_BLUE = Color(0xff7a93ac);
   static var themeColor = hexToColor("#ffffff");
 
   static Color getSellerTxt(BuildContext context) {

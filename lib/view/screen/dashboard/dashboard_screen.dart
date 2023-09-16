@@ -50,7 +50,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           key: _scaffoldKey,
           bottomNavigationBar: BottomNavigationBar(
             selectedItemColor: Theme.of(context).primaryColor,
-            unselectedItemColor: Theme.of(context).textTheme.bodyText1!.color,
+            // unselectedItemColor: Theme.of(context).textTheme.bodyText1!.color,
+            unselectedItemColor: ColorResources.LIGHT_SKY_BLUE,
             showUnselectedLabels: true,
             currentIndex: _pageIndex,
             type: BottomNavigationBarType.fixed,
@@ -97,9 +98,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           animationType: badge.BadgeAnimationType.scale,
           toAnimate: true,
           child: Image.asset(
-            icon, color: index == _pageIndex
+            icon,
+            color: index == _pageIndex
               ? Theme.of(context).primaryColor
-              : Theme.of(context).textTheme.bodyText1!.color!.withOpacity(0.5),
+              : ColorResources.LIGHT_SKY_BLUE,
             height: 25, width: 25,
           ),
         ),
@@ -110,7 +112,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       icon: Image.asset(
         icon, color: index == _pageIndex
           ? Theme.of(context).primaryColor
-          : Theme.of(context).textTheme.bodyText1!.color!.withOpacity(0.5),
+          : ColorResources.LIGHT_SKY_BLUE,
         height: 25, width: 25,
       ),
       label: label,

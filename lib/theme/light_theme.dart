@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lemirageelevators/util/color_resources.dart';
 
 ThemeData light = ThemeData(
   fontFamily: 'TitilliumWeb',
-  primaryColor: Color(0xff548E7F),
+  primaryColor: ColorResources.DEFAULT_COLOR,
   brightness: Brightness.light,
   highlightColor: Colors.white,
   hintColor: Color(0xFF9E9E9E),
