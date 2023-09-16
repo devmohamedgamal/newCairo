@@ -136,11 +136,11 @@ class _SignInWidgetState extends State<SignInWidget> {
                   buttonText: getTranslated('SIGN_IN', context)!),
           ),
 
-          WSpacer(25),
-
-          SocialLoginWidget(),
-
-          HSpacer(10),
+          // HSpacer(25),
+          //
+          // SocialLoginWidget(),
+          //
+          // HSpacer(10),
 
           Provider.of<AuthProvider>(context).isLoading
               ? SizedBox()
