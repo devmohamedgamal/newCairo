@@ -6,6 +6,8 @@ import 'package:lemirageelevators/util/color_resources.dart';
 import 'package:lemirageelevators/util/dimensions.dart';
 import 'package:lemirageelevators/util/textStyle.dart';
 import 'package:lemirageelevators/view/baseWidget/button/custom_button.dart';
+import 'package:lemirageelevators/view/baseWidget/dialog/animated_custom_dialog.dart';
+import 'package:lemirageelevators/view/baseWidget/dialog/error_alert_dialog.dart';
 import 'package:lemirageelevators/view/baseWidget/spacer.dart';
 import 'package:lemirageelevators/view/baseWidget/textfield/custom_password_textfield.dart';
 import 'package:lemirageelevators/view/baseWidget/textfield/custom_textfield.dart';
@@ -186,7 +188,14 @@ class _SignInWidgetState extends State<SignInWidget> {
           MaterialPageRoute(builder: (_) => DashBoardScreen()), (route) => false);
     }
     else {
-      showCustomSnackBar(errorMessage,context);
+      // showCustomSnackBar(errorMessage,context);
+      showAnimatedDialog(
+        context,
+        ErrorAlertDialog(
+          errorText: errorMessage,
+        ),
+        isFlip: true,
+      );
     }
   }
 }
