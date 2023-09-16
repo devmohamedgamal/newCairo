@@ -9,6 +9,7 @@ import '../home/widget/products_view.dart';
 
 class AllProductScreen extends StatelessWidget {
   final ScrollController _scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

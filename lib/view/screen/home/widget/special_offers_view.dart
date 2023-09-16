@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison
 import 'package:flutter/material.dart';
 import 'package:lemirageelevators/provider/home_provider.dart';
+import 'package:lemirageelevators/view/screen/home/widget/featured_deal_view_screen.dart';
 import 'package:provider/provider.dart';
 import '../../../../localization/language_constrants.dart';
 import '../../../../util/dimensions.dart';
@@ -12,9 +13,8 @@ class SpecialOffersView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeProvider>(
-      builder: (context, homeProvider, child) {
-        return homeProvider.specialOffers != null ||
-                homeProvider.specialOffers.isNotEmpty
+      builder: (context, homeProvider, _) {
+        return homeProvider.specialOffers.isNotEmpty == true
             ? Column(
                 children: [
                   Padding(
@@ -41,7 +41,7 @@ class SpecialOffersView extends StatelessWidget {
                   )
                 ],
               )
-            : Container();
+            : SizedBox.shrink();
       },
     );
   }
