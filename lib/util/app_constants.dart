@@ -5,7 +5,7 @@ import 'package:lemirageelevators/util/images.dart';
 import '../data/model/response/language_model.dart';
 
 class AppConstants {
-  static const String APP_NAME = 'GDDeaf';  //NAME APP
+  static const String APP_NAME = 'MORC';  // NAME APP
 
   // ALL URLs
   // static const String BASE_URL = 'https://www.gddeaf.net/App_api/';
