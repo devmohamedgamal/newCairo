@@ -1,18 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:lemirageelevators/data/model/body/payment_order_model.dart';
-import 'package:lemirageelevators/data/model/body/payment_shipping_data_model.dart';
 import 'package:lemirageelevators/data/model/response/payment_model.dart';
-import 'package:lemirageelevators/di_container.dart';
-import 'package:lemirageelevators/helper/api_data_helper.dart';
 import 'package:lemirageelevators/helper/price_converter.dart';
 import 'package:lemirageelevators/provider/coupon_provider.dart';
-import 'package:lemirageelevators/provider/payment_provider.dart';
 import 'package:lemirageelevators/util/app_constants.dart';
 import 'package:lemirageelevators/util/color_resources.dart';
 import 'package:lemirageelevators/view/baseWidget/button/custom_button.dart';
 import 'package:lemirageelevators/view/baseWidget/spacer.dart';
-import 'package:lemirageelevators/view/screen/payment/phoneNumber.dart';
 import 'package:provider/provider.dart';
 import '../../../data/model/response/cart_model.dart';
 import '../../../localization/language_constrants.dart';
@@ -20,14 +14,12 @@ import '../../../provider/auth_provider.dart';
 import '../../../provider/cart_provider.dart';
 import '../../../provider/order_provider.dart';
 import '../../../provider/profile_provider.dart';
-import '../../../provider/splash_provider.dart';
 import '../../../util/dimensions.dart';
 import '../../../util/images.dart';
 import '../../../util/textStyle.dart';
 import '../../baseWidget/custom_app_bar.dart';
 import '../../baseWidget/show_custom_snakbar.dart';
 import '../../baseWidget/web_view_screen.dart';
-import 'masterCard.dart';
 
 class ChoosePaymentScreen extends StatefulWidget {
   final String note;
