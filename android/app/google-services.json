@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:113641272178:android:1c664a258680e3e97423eb",
         "android_client_info": {
-          "package_name": "com.pixel.gddeaf"
+          "package_name": "com.pixel.morc"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "113641272178-gvm476g8qjfrf9ks6j6m3koqv6shb9ar.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.pixel.gddeaf",
+            "package_name": "com.pixel.morc",
             "certificate_hash": "f034947a2973317a927ed1fd1a9f0526de8e4779"
           }
         }
@@ -34,7 +34,7 @@
               "client_id": "113641272178-0m0m1mblj2cg4g1u8fb4b10qf1hokimi.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.pixel.gddeaf"
+                "bundle_id": "com.pixel.morc"
               }
             }
           ]

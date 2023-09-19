@@ -49,7 +49,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.pixel.gddeaf"
+        applicationId "com.pixel.morc"
         minSdkVersion 21
         targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
