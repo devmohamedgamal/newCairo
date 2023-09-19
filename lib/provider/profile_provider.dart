@@ -38,6 +38,7 @@ class ProfileProvider extends ChangeNotifier {
   String? get addAddressErrorText => _addAddressErrorText;
   bool get checkHomeAddress=>_checkHomeAddress;
   bool get checkOfficeAddress=>_checkOfficeAddress;
+  AddressModel? get getSelectedAddress => (_addressList.isNotEmpty && _addressIndex != null) ? _addressList[_addressIndex!] : null;
 
   Future<void> getUserInfo(BuildContext context,String clientId) async {
     ApiResponse apiResponse = await profileRepo.getUserInfo(clientId);

@@ -86,20 +86,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     String mobile = await Provider.of<AuthProvider>(context, listen: false).user!.mobile!;
 
     // address City
-    String addressCity = await Provider.of<ProfileProvider>(context, listen: false)
-        .addressList[Provider.of<ProfileProvider>(context, listen: false).addressIndex!]
-        .city!;
+    String addressCity = await Provider.of<ProfileProvider>(context, listen: false).getSelectedAddress?.city ?? '';
 
     // full Address
-    String fullAddress = Provider.of<ProfileProvider>(context, listen: false)
-        .addressList[Provider.of<ProfileProvider>(context, listen: false).addressIndex!]
-        .address
-        .toString();
+    String fullAddress = Provider.of<ProfileProvider>(context, listen: false).getSelectedAddress?.address?.toString() ?? '';
 
     // type Address is home || office
-    String typeAddress = await Provider.of<ProfileProvider>(context, listen: false)
-        .addressList[Provider.of<ProfileProvider>(context, listen: false).addressIndex!]
-        .addressType!;
+    String typeAddress = await Provider.of<ProfileProvider>(context, listen: false).getSelectedAddress?.addressType ?? '';
 
     // shipping id
     String shipping = await Provider.of<CartProvider>(context, listen: false)
@@ -178,9 +171,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         Text(
                           Provider.of<ProfileProvider>(context).addressIndex == null
                               ? getTranslated('add_your_address', context)
-                              : Provider.of<ProfileProvider>(context, listen: false)
-                                  .addressList[Provider.of<ProfileProvider>(context, listen: false).addressIndex!]
-                                  .address!,
+                              : Provider.of<ProfileProvider>(context, listen: false).getSelectedAddress?.address ?? '',
                           style: cairoRegular.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,

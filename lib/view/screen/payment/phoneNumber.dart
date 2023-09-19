@@ -309,27 +309,20 @@ class _PhoneNumberState extends State<PhoneNumber> {
                                 listen: false).user!.mobile!;
 
                             // address City
-                            String addressCity = await Provider.of<ProfileProvider>(context,
-                                listen: false).addressList[
-                            Provider.of<ProfileProvider>(context,
-                                listen: false).addressIndex!
-                            ].city!;
+                            String addressCity = await Provider.of<ProfileProvider>(context, listen: false).getSelectedAddress?.city ?? '';
 
                             // full Address
-                            String fullAddress = Provider.of<ProfileProvider>(context,
-                                listen: false).addressList[
-                            Provider.of<ProfileProvider>(context,
-                                listen: false).addressIndex!
-                            ].address.toString();
+                            String fullAddress = Provider.of<ProfileProvider>(context, listen: false)
+                                    .getSelectedAddress
+                                    ?.address
+                                    ?.toString() ?? '';
 
-                            // type Address is home || office
-                            String typeAddress = await Provider.of<ProfileProvider>(context,
-                                listen: false).addressList[
-                            Provider.of<ProfileProvider>(context,
-                                listen: false).addressIndex!
-                            ].addressType!;
+                                // type Address is home || office
+                            String typeAddress = await Provider.of<ProfileProvider>(context, listen: false)
+                                    .getSelectedAddress
+                                    ?.addressType ?? '';
 
-                            // shipping id
+                                // shipping id
                             String shipping = await Provider.of<CartProvider>(context,
                                 listen: false).shippingPlacesList[
                             Provider.of<CartProvider>(context,

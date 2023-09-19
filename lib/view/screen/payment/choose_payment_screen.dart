@@ -188,20 +188,13 @@ class _ChoosePaymentScreenState extends State<ChoosePaymentScreen> {
     String mobile = await Provider.of<AuthProvider>(context, listen: false).user!.mobile!;
 
     // address City
-    String addressCity = await Provider.of<ProfileProvider>(context, listen: false)
-        .addressList[Provider.of<ProfileProvider>(context, listen: false).addressIndex!]
-        .city!;
+    String addressCity = await Provider.of<ProfileProvider>(context, listen: false).getSelectedAddress?.city ?? '';
 
     // full Address
-    String fullAddress = Provider.of<ProfileProvider>(context, listen: false)
-        .addressList[Provider.of<ProfileProvider>(context, listen: false).addressIndex!]
-        .address
-        .toString();
+    String fullAddress = Provider.of<ProfileProvider>(context, listen: false).getSelectedAddress?.address?.toString()??'';
 
     // type Address is home || office
-    String typeAddress = await Provider.of<ProfileProvider>(context, listen: false)
-        .addressList[Provider.of<ProfileProvider>(context, listen: false).addressIndex!]
-        .addressType!;
+    String typeAddress = await Provider.of<ProfileProvider>(context, listen: false).getSelectedAddress?.addressType ?? '';
 
     // shipping id
     String shipping = await Provider.of<CartProvider>(context, listen: false)
