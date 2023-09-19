@@ -669,7 +669,7 @@ class _MasterCardState extends State<MasterCard> {
                                               null,
                                               fullAddress,
                                               typeAddress,
-                                              int.parse(shipping),
+                                              int.tryParse(shipping),
                                               _items,
                                               PriceConverter.convertWithDiscount(
                                                 discount: Provider.of<CouponProvider>(context, listen: false).discountPercentage,

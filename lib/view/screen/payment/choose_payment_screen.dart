@@ -4,6 +4,7 @@ import 'package:lemirageelevators/data/model/body/payment_order_model.dart';
 import 'package:lemirageelevators/data/model/body/payment_shipping_data_model.dart';
 import 'package:lemirageelevators/data/model/response/payment_model.dart';
 import 'package:lemirageelevators/di_container.dart';
+import 'package:lemirageelevators/helper/api_data_helper.dart';
 import 'package:lemirageelevators/helper/price_converter.dart';
 import 'package:lemirageelevators/provider/coupon_provider.dart';
 import 'package:lemirageelevators/provider/payment_provider.dart';
@@ -216,7 +217,7 @@ class _ChoosePaymentScreenState extends State<ChoosePaymentScreen> {
             indexTypeCashApp, //1 google pay 2 apple pay 3 credit card
             fullAddress,
             typeAddress,
-            int.parse(shipping),
+            int.tryParse(shipping),
             _items,
             PriceConverter.convertWithDiscount(
               discount: Provider.of<CouponProvider>(context, listen: false).discountPercentage,
