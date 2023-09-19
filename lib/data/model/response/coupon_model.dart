@@ -1,3 +1,5 @@
+import 'package:lemirageelevators/helper/api_data_helper.dart';
+
 class CouponModel {
   late final String? message;
   late final num discountPercentage;
@@ -9,6 +11,6 @@ class CouponModel {
 
   CouponModel.fromJson(Map<String, dynamic> json) {
     message = json['massage'];
-    discountPercentage = json['discount_percentage'] ?? 0;
+    discountPercentage = ApiDataHelper.getNum(json['discount_percentage']) ?? 0;
   }
 }

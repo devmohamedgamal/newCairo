@@ -23,16 +23,18 @@ class CouponProvider extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    final apiResponse = await couponRepo.checkCoupon(code);
-    if (apiResponse.isSuccess()) {
-      _code = code;
-      _coupon = CouponModel.fromJson(apiResponse.response!.data);
-    } else {
-      showCustomSnackBar('Invalid coupon', context, isError: true);
+    try{
+      final apiResponse = await couponRepo.checkCoupon(code);
+      if (apiResponse.isSuccess()) {
+        _code = code;
+        _coupon = CouponModel.fromJson(apiResponse.response!.data);
+      } else {
+        showCustomSnackBar('Invalid coupon', context, isError: true);
+      }
+    } finally {
+      _isLoading = false;
+      notifyListeners();
     }
-
-    _isLoading = false;
-    notifyListeners();
   }
 
   void removeCouponData(bool notify) {

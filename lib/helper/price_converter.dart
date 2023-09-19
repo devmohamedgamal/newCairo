@@ -25,7 +25,14 @@ class PriceConverter {
   static double getDiscountPercentageAmount({
     required double discount,
     required double price,
-  }) => (discount / 100) * price;
+  }) {
+    debugPrint('- getDiscountPercentageAmount');
+    debugPrint('discount: $discount');
+    debugPrint('price: $price');
+    debugPrint('equation: ($discount / 100) * $price = ${(discount / 100) * price}');
+    debugPrint('-------');
+    return (discount / 100) * price;
+  }
 
   static double calculation(double amount, double discount, String type, int quantity) {
     double calculatedAmount = 0;
