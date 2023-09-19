@@ -28,6 +28,7 @@ class ProfileScreen extends StatefulWidget {
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
+
 class _ProfileScreenState extends State<ProfileScreen> {
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _userNameController = TextEditingController();
@@ -35,8 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final TextEditingController _mobileController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
   final FocusNode _fNameFocus = FocusNode();
   final FocusNode _uNameFocus = FocusNode();
   final FocusNode _emailFocus = FocusNode();
@@ -49,15 +49,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final picker = ImagePicker();
 
   @override
+  void initState() {
+    final profile = Provider.of<AuthProvider>(context, listen: false);
+
+    _fullNameController.text = profile.user!.fullName ?? "";
+    _userNameController.text = profile.user!.clientName ?? "";
+    _emailController.text = profile.user!.email ?? "";
+    _mobileController.text = profile.user!.mobile ?? "";
+    _addressController.text = profile.user!.address ?? "";
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Consumer<AuthProvider>(
         builder: (context, profile, child) {
-          _fullNameController.text = profile.user!.fullName ?? "";
-          _userNameController.text = profile.user!.clientName ?? "";
-          _emailController.text = profile.user!.email ?? "";
-          _mobileController.text = profile.user!.mobile ?? "";
-          _addressController.text = profile.user!.address ?? "";
           return Stack(
             clipBehavior: Clip.none,
             children: [
@@ -65,39 +72,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Images.toolbar_background,
                 fit: BoxFit.fill,
                 height: 500,
-                color: Provider.of<ThemeProvider>(context).darkTheme
-                    ? Colors.black
-                    : null,
+                color: Provider.of<ThemeProvider>(context).darkTheme ? Colors.black : null,
               ),
-
               Container(
-                padding: EdgeInsets.only(top: 40, left: 15,right: 15),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(children: [
-                        CupertinoNavigationBarBackButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          color: Colors.white,
-                        ),
-                        SizedBox(width: 10),
-                        Text(getTranslated('PROFILE', context)!,
-                            style: cairoRegular.copyWith(
-                                fontSize: 20, color: Colors.white),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis),
-                      ]),
-
-                      CircleAvatar(
-                        backgroundColor: ColorResources.BLACK.withOpacity(0.2),
-                        radius: 20,
-                        child: IconButton(
-                            onPressed: () => showAnimatedDialog(
-                                context, DeleteAccountConfirmationDialog(), isFlip: true),
-                            icon: Icon(Icons.delete_forever,
-                                color: ColorResources.RED))
-                      )
-                    ]),
+                padding: EdgeInsets.only(top: 40, left: 15, right: 15),
+                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                  Row(children: [
+                    CupertinoNavigationBarBackButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      color: Colors.white,
+                    ),
+                    SizedBox(width: 10),
+                    Text(getTranslated('PROFILE', context),
+                        style: cairoRegular.copyWith(fontSize: 20, color: Colors.white), maxLines: 1, overflow: TextOverflow.ellipsis),
+                  ]),
+                  CircleAvatar(
+                      backgroundColor: ColorResources.BLACK.withOpacity(0.2),
+                      radius: 20,
+                      child: IconButton(
+                          onPressed: () => showAnimatedDialog(context, DeleteAccountConfirmationDialog(), isFlip: true),
+                          icon: Icon(Icons.delete_forever, color: ColorResources.RED)))
+                ]),
               ),
               Container(
                 padding: EdgeInsets.only(top: 55),
@@ -106,8 +101,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Column(
                       children: [
                         Container(
-                          margin: EdgeInsets.only(
-                              top: Dimensions.MARGIN_SIZE_EXTRA_LARGE),
+                          margin: EdgeInsets.only(top: Dimensions.MARGIN_SIZE_EXTRA_LARGE),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             color: Theme.of(context).cardColor,
@@ -125,31 +119,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         width: 100,
                                         height: 100,
                                         fit: BoxFit.cover,
-                                        image:
-                                            '${AppConstants.BASE_URL_IMAGE}${profile.user!.avatar}',
-                                        imageErrorBuilder: (c, o, s) =>
-                                            Image.asset(Images.placeholder,
-                                                width: 100,
-                                                height: 100,
-                                                fit: BoxFit.cover),
+                                        image: '${AppConstants.BASE_URL_IMAGE}${profile.user!.avatar}',
+                                        imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder, width: 100, height: 100, fit: BoxFit.cover),
                                       )
-                                    : Image.file(file!,
-                                        width: 100,
-                                        height: 100,
-                                        fit: BoxFit.fill),
+                                    : Image.file(file!, width: 100, height: 100, fit: BoxFit.fill),
                               ),
                               Positioned(
                                 bottom: 0,
                                 right: -10,
                                 child: CircleAvatar(
-                                  backgroundColor:
-                                      ColorResources.LIGHT_SKY_BLUE,
+                                  backgroundColor: ColorResources.LIGHT_SKY_BLUE,
                                   radius: 14,
                                   child: IconButton(
                                     onPressed: _choose,
                                     padding: EdgeInsets.all(0),
-                                    icon: Icon(Icons.edit,
-                                        color: ColorResources.WHITE, size: 18),
+                                    icon: Icon(Icons.edit, color: ColorResources.WHITE, size: 18),
                                   ),
                                 ),
                               ),
@@ -158,8 +142,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         Text(
                           profile.user!.fullName ?? "",
-                          style: cairoSemiBold.copyWith(
-                              color: ColorResources.WHITE, fontSize: 20.0),
+                          style: cairoSemiBold.copyWith(color: ColorResources.WHITE, fontSize: 20.0),
                         )
                       ],
                     ),
@@ -169,19 +152,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         decoration: BoxDecoration(
                             color: ColorResources.getIconBg(context),
                             borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(
-                                  Dimensions.MARGIN_SIZE_DEFAULT),
-                              topRight: Radius.circular(
-                                  Dimensions.MARGIN_SIZE_DEFAULT),
+                              topLeft: Radius.circular(Dimensions.MARGIN_SIZE_DEFAULT),
+                              topRight: Radius.circular(Dimensions.MARGIN_SIZE_DEFAULT),
                             )),
                         child: ListView(
                           physics: BouncingScrollPhysics(),
                           children: [
                             // user name && full name
                             Container(
-                              margin: EdgeInsets.only(
-                                  left: Dimensions.MARGIN_SIZE_DEFAULT,
-                                  right: Dimensions.MARGIN_SIZE_DEFAULT),
+                              margin: EdgeInsets.only(left: Dimensions.MARGIN_SIZE_DEFAULT, right: Dimensions.MARGIN_SIZE_DEFAULT),
                               child: Row(
                                 children: [
                                   Expanded(
@@ -189,27 +168,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     children: [
                                       Row(
                                         children: [
-                                          Icon(Icons.person,
-                                              color: ColorResources
-                                                  .getLightSkyBlue(context),
-                                              size: 20),
-                                          SizedBox(
-                                              width: Dimensions
-                                                  .MARGIN_SIZE_EXTRA_SMALL),
-                                          Text(
-                                              getTranslated(
-                                                  'FULL_NAME', context)!,
-                                              style: cairoRegular)
+                                          Icon(Icons.person, color: ColorResources.getLightSkyBlue(context), size: 20),
+                                          SizedBox(width: Dimensions.MARGIN_SIZE_EXTRA_SMALL),
+                                          Text(getTranslated('FULL_NAME', context), style: cairoRegular)
                                         ],
                                       ),
-                                      SizedBox(
-                                          height: Dimensions.MARGIN_SIZE_SMALL),
+                                      SizedBox(height: Dimensions.MARGIN_SIZE_SMALL),
                                       CustomTextField(
                                         textInputType: TextInputType.name,
                                         focusNode: _fNameFocus,
                                         nextNode: _uNameFocus,
-                                        hintText: getTranslated(
-                                            'FULL_NAME', context)!,
+                                        hintText: getTranslated('FULL_NAME', context),
                                         controller: _fullNameController,
                                       ),
                                     ],
@@ -220,27 +189,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     children: [
                                       Row(
                                         children: [
-                                          Icon(Icons.person,
-                                              color: ColorResources
-                                                  .getLightSkyBlue(context),
-                                              size: 20),
-                                          SizedBox(
-                                              width: Dimensions
-                                                  .MARGIN_SIZE_EXTRA_SMALL),
-                                          Text(
-                                              getTranslated(
-                                                  'USER_NAME', context)!,
-                                              style: cairoRegular)
+                                          Icon(Icons.person, color: ColorResources.getLightSkyBlue(context), size: 20),
+                                          SizedBox(width: Dimensions.MARGIN_SIZE_EXTRA_SMALL),
+                                          Text(getTranslated('USER_NAME', context), style: cairoRegular)
                                         ],
                                       ),
-                                      SizedBox(
-                                          height: Dimensions.MARGIN_SIZE_SMALL),
+                                      SizedBox(height: Dimensions.MARGIN_SIZE_SMALL),
                                       CustomTextField(
                                         textInputType: TextInputType.name,
                                         focusNode: _uNameFocus,
                                         nextNode: _emailFocus,
-                                        hintText: getTranslated(
-                                            'USER_NAME', context)!,
+                                        hintText: getTranslated('USER_NAME', context),
                                         controller: _userNameController,
                                       ),
                                     ],
@@ -252,32 +211,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             // for Email
                             Container(
                               margin: EdgeInsets.only(
-                                  top: Dimensions.MARGIN_SIZE_DEFAULT,
-                                  left: Dimensions.MARGIN_SIZE_DEFAULT,
-                                  right: Dimensions.MARGIN_SIZE_DEFAULT),
+                                  top: Dimensions.MARGIN_SIZE_DEFAULT, left: Dimensions.MARGIN_SIZE_DEFAULT, right: Dimensions.MARGIN_SIZE_DEFAULT),
                               child: Column(
                                 children: [
                                   Row(
                                     children: [
-                                      Icon(Icons.alternate_email,
-                                          color: ColorResources.getLightSkyBlue(
-                                              context),
-                                          size: 20),
+                                      Icon(Icons.alternate_email, color: ColorResources.getLightSkyBlue(context), size: 20),
                                       SizedBox(
-                                        width:
-                                            Dimensions.MARGIN_SIZE_EXTRA_SMALL,
+                                        width: Dimensions.MARGIN_SIZE_EXTRA_SMALL,
                                       ),
-                                      Text(getTranslated('EMAIL', context)!,
-                                          style: cairoRegular)
+                                      Text(getTranslated('EMAIL', context), style: cairoRegular)
                                     ],
                                   ),
-                                  SizedBox(
-                                      height: Dimensions.MARGIN_SIZE_SMALL),
+                                  SizedBox(height: Dimensions.MARGIN_SIZE_SMALL),
                                   CustomTextField(
                                     textInputType: TextInputType.emailAddress,
                                     focusNode: _emailFocus,
                                     nextNode: _mobileFocus,
-                                    hintText: getTranslated('EMAIL', context)!,
+                                    hintText: getTranslated('EMAIL', context),
                                     controller: _emailController,
                                   ),
                                 ],
@@ -287,32 +238,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             // for Phone No
                             Container(
                               margin: EdgeInsets.only(
-                                  top: Dimensions.MARGIN_SIZE_DEFAULT,
-                                  left: Dimensions.MARGIN_SIZE_DEFAULT,
-                                  right: Dimensions.MARGIN_SIZE_DEFAULT),
+                                  top: Dimensions.MARGIN_SIZE_DEFAULT, left: Dimensions.MARGIN_SIZE_DEFAULT, right: Dimensions.MARGIN_SIZE_DEFAULT),
                               child: Column(
                                 children: [
                                   Row(
                                     children: [
-                                      Icon(Icons.dialpad,
-                                          color: ColorResources.getLightSkyBlue(
-                                              context),
-                                          size: 20),
-                                      SizedBox(
-                                          width: Dimensions
-                                              .MARGIN_SIZE_EXTRA_SMALL),
-                                      Text(getTranslated('PHONE_NO', context)!,
-                                          style: cairoRegular)
+                                      Icon(Icons.dialpad, color: ColorResources.getLightSkyBlue(context), size: 20),
+                                      SizedBox(width: Dimensions.MARGIN_SIZE_EXTRA_SMALL),
+                                      Text(getTranslated('PHONE_NO', context), style: cairoRegular)
                                     ],
                                   ),
-                                  SizedBox(
-                                      height: Dimensions.MARGIN_SIZE_SMALL),
+                                  SizedBox(height: Dimensions.MARGIN_SIZE_SMALL),
                                   CustomTextField(
                                     textInputType: TextInputType.number,
                                     focusNode: _mobileFocus,
                                     nextNode: _addressFocus,
-                                    hintText:
-                                        getTranslated('PHONE_NO', context)!,
+                                    hintText: getTranslated('PHONE_NO', context),
                                     controller: _mobileController,
                                     isPhoneNumber: true,
                                   ),
@@ -323,32 +264,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             // for address
                             Container(
                               margin: EdgeInsets.only(
-                                  top: Dimensions.MARGIN_SIZE_DEFAULT,
-                                  left: Dimensions.MARGIN_SIZE_DEFAULT,
-                                  right: Dimensions.MARGIN_SIZE_DEFAULT),
+                                  top: Dimensions.MARGIN_SIZE_DEFAULT, left: Dimensions.MARGIN_SIZE_DEFAULT, right: Dimensions.MARGIN_SIZE_DEFAULT),
                               child: Column(
                                 children: [
                                   Row(
                                     children: [
-                                      Icon(Icons.location_city,
-                                          color: ColorResources.getLightSkyBlue(
-                                              context),
-                                          size: 20),
-                                      SizedBox(
-                                          width: Dimensions
-                                              .MARGIN_SIZE_EXTRA_SMALL),
-                                      Text(getTranslated('address', context)!,
-                                          style: cairoRegular)
+                                      Icon(Icons.location_city, color: ColorResources.getLightSkyBlue(context), size: 20),
+                                      SizedBox(width: Dimensions.MARGIN_SIZE_EXTRA_SMALL),
+                                      Text(getTranslated('address', context), style: cairoRegular)
                                     ],
                                   ),
-                                  SizedBox(
-                                      height: Dimensions.MARGIN_SIZE_SMALL),
+                                  SizedBox(height: Dimensions.MARGIN_SIZE_SMALL),
                                   CustomTextField(
                                     textInputType: TextInputType.streetAddress,
                                     focusNode: _addressFocus,
                                     nextNode: _passwordFocus,
-                                    hintText:
-                                        getTranslated('address', context)!,
+                                    hintText: getTranslated('address', context),
                                     controller: _addressController,
                                   ),
                                 ],
@@ -358,32 +289,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             // for Password
                             Container(
                               margin: EdgeInsets.only(
-                                  top: Dimensions.MARGIN_SIZE_DEFAULT,
-                                  left: Dimensions.MARGIN_SIZE_DEFAULT,
-                                  right: Dimensions.MARGIN_SIZE_DEFAULT),
+                                  top: Dimensions.MARGIN_SIZE_DEFAULT, left: Dimensions.MARGIN_SIZE_DEFAULT, right: Dimensions.MARGIN_SIZE_DEFAULT),
                               child: Column(
                                 children: [
                                   Row(
                                     children: [
-                                      Icon(Icons.lock_open,
-                                          color: ColorResources.getPrimary(
-                                              context),
-                                          size: 20),
-                                      SizedBox(
-                                          width: Dimensions
-                                              .MARGIN_SIZE_EXTRA_SMALL),
-                                      Text(getTranslated('PASSWORD', context)!,
-                                          style: cairoRegular)
+                                      Icon(Icons.lock_open, color: ColorResources.getPrimary(context), size: 20),
+                                      SizedBox(width: Dimensions.MARGIN_SIZE_EXTRA_SMALL),
+                                      Text(getTranslated('PASSWORD', context), style: cairoRegular)
                                     ],
                                   ),
-                                  SizedBox(
-                                      height: Dimensions.MARGIN_SIZE_SMALL),
+                                  SizedBox(height: Dimensions.MARGIN_SIZE_SMALL),
                                   CustomPasswordTextField(
                                     controller: _passwordController,
                                     focusNode: _passwordFocus,
                                     nextNode: _confirmPasswordFocus,
-                                    hintTxt:
-                                        getTranslated('PASSWORD', context)!,
+                                    hintTxt: getTranslated('PASSWORD', context),
                                     textInputAction: TextInputAction.next,
                                   ),
                                 ],
@@ -393,34 +314,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             // for re-enter Password
                             Container(
                               margin: EdgeInsets.only(
-                                  top: Dimensions.MARGIN_SIZE_DEFAULT,
-                                  left: Dimensions.MARGIN_SIZE_DEFAULT,
-                                  right: Dimensions.MARGIN_SIZE_DEFAULT),
+                                  top: Dimensions.MARGIN_SIZE_DEFAULT, left: Dimensions.MARGIN_SIZE_DEFAULT, right: Dimensions.MARGIN_SIZE_DEFAULT),
                               child: Column(
                                 children: [
                                   Row(
                                     children: [
-                                      Icon(Icons.lock_open,
-                                          color: ColorResources.getPrimary(
-                                              context),
-                                          size: 20),
-                                      SizedBox(
-                                          width: Dimensions
-                                              .MARGIN_SIZE_EXTRA_SMALL),
-                                      Text(
-                                          getTranslated(
-                                              'RE_ENTER_PASSWORD', context)!,
-                                          style: cairoRegular)
+                                      Icon(Icons.lock_open, color: ColorResources.getPrimary(context), size: 20),
+                                      SizedBox(width: Dimensions.MARGIN_SIZE_EXTRA_SMALL),
+                                      Text(getTranslated('RE_ENTER_PASSWORD', context), style: cairoRegular)
                                     ],
                                   ),
-                                  SizedBox(
-                                      height: Dimensions.MARGIN_SIZE_SMALL),
+                                  SizedBox(height: Dimensions.MARGIN_SIZE_SMALL),
                                   CustomPasswordTextField(
                                     controller: _confirmPasswordController,
                                     focusNode: _confirmPasswordFocus,
                                     textInputAction: TextInputAction.done,
-                                    hintTxt: getTranslated(
-                                        'RE_ENTER_PASSWORD', context)!,
+                                    hintTxt: getTranslated('RE_ENTER_PASSWORD', context),
                                   ),
                                 ],
                               ),
@@ -430,18 +339,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.symmetric(
-                          horizontal: Dimensions.MARGIN_SIZE_LARGE,
-                          vertical: Dimensions.MARGIN_SIZE_SMALL),
+                      margin: EdgeInsets.symmetric(horizontal: Dimensions.MARGIN_SIZE_LARGE, vertical: Dimensions.MARGIN_SIZE_SMALL),
                       child: !Provider.of<ProfileProvider>(context).isLoading
-                          ? CustomButton(
-                              onTap: _updateUserAccount,
-                              buttonText:
-                                  getTranslated('UPDATE_ACCOUNT', context)!)
-                          : Center(
-                              child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                      Theme.of(context).primaryColor))),
+                          ? CustomButton(onTap: _updateUserAccount, buttonText: getTranslated('UPDATE_ACCOUNT', context))
+                          : Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor))),
                     ),
                   ],
                 ),
@@ -455,11 +356,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   // choose picture
   void _choose() async {
-    final pickedFile = await picker.getImage(
-        source: ImageSource.gallery,
-        imageQuality: 50,
-        maxHeight: 500,
-        maxWidth: 500);
+    final pickedFile = await picker.getImage(source: ImageSource.gallery, imageQuality: 50, maxHeight: 500, maxWidth: 500);
     setState(() {
       if (pickedFile != null) {
         file = File(pickedFile.path);
@@ -479,31 +376,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
     String _confirmPassword = _confirmPasswordController.text.trim();
 
     if (_firstName.isEmpty || _userName.isEmpty) {
-      showCustomSnackBar(
-          getTranslated('NAME_FIELD_MUST_BE_REQUIRED', context)!, context);
+      showCustomSnackBar(getTranslated('NAME_FIELD_MUST_BE_REQUIRED', context), context);
     } else if (_email.isEmpty) {
-      showCustomSnackBar(
-          getTranslated('EMAIL_MUST_BE_REQUIRED', context)!, context);
+      showCustomSnackBar(getTranslated('EMAIL_MUST_BE_REQUIRED', context), context);
     } else if (_phoneNumber.isEmpty) {
-      showCustomSnackBar(
-          getTranslated('PHONE_MUST_BE_REQUIRED', context)!, context);
+      showCustomSnackBar(getTranslated('PHONE_MUST_BE_REQUIRED', context), context);
     } else if (_password.isEmpty) {
-      showCustomSnackBar(
-          getTranslated('PASSWORD_MUST_BE_REQUIRED', context)!, context);
+      showCustomSnackBar(getTranslated('PASSWORD_MUST_BE_REQUIRED', context), context);
     } else if (_confirmPassword.isEmpty) {
-      showCustomSnackBar(
-          getTranslated('CONFIRM_PASSWORD_MUST_BE_REQUIRED', context)!,
-          context);
-    } else if ((_password.isNotEmpty && _password.length < 6) ||
-        (_confirmPassword.isNotEmpty && _confirmPassword.length < 6)) {
-      showCustomSnackBar(
-          getTranslated("Password_character", context)!, context);
+      showCustomSnackBar(getTranslated('CONFIRM_PASSWORD_MUST_BE_REQUIRED', context), context);
+    } else if ((_password.isNotEmpty && _password.length < 6) || (_confirmPassword.isNotEmpty && _confirmPassword.length < 6)) {
+      showCustomSnackBar(getTranslated("Password_character", context), context);
     } else if (_password != _confirmPassword) {
-      showCustomSnackBar(
-          getTranslated('PASSWORD_DID_NOT_MATCH', context)!, context);
+      showCustomSnackBar(getTranslated('PASSWORD_DID_NOT_MATCH', context), context);
     } else {
-      updateUserInfoModel.clientId =
-          Provider.of<AuthProvider>(context, listen: false).user!.userId!;
+      updateUserInfoModel.clientId = Provider.of<AuthProvider>(context, listen: false).user!.userId!;
       updateUserInfoModel.clientName = _userNameController.text;
       updateUserInfoModel.fullName = _fullNameController.text;
       updateUserInfoModel.email = _emailController.text;
@@ -515,51 +402,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
         updateUserInfoModel.avatar = await MultipartFile.fromFile(
           file!.path,
           filename: file!.path.split('/').last,
-          contentType: MediaType("${mimeType!.split('/').first}",
-              "${file!.path.split(".").last}"), //important
+          contentType: MediaType("${mimeType!.split('/').first}", "${file!.path.split(".").last}"), //important
         );
       }
 
-      await Provider.of<ProfileProvider>(context, listen: false)
-          .updateUserInfo(updateUserInfoModel, context, _route);
+      await Provider.of<ProfileProvider>(context, listen: false).updateUserInfo(updateUserInfoModel, context, _route);
     }
   }
 
   _route(bool status, String message) async {
     if (status) {
-      await Provider.of<ProfileProvider>(context, listen: false).getUserInfo(
-          context,
-          Provider.of<AuthProvider>(context, listen: false).user!.userId!);
+      await Provider.of<ProfileProvider>(context, listen: false)
+          .getUserInfo(context, Provider.of<AuthProvider>(context, listen: false).user!.userId!);
       showCustomSnackBar(message, context, isError: false);
       Provider.of<AuthProvider>(context, listen: false).saveUser(User(
-        userId: Provider.of<ProfileProvider>(context, listen: false)
-            .clientProfileModel!
-            .clientData!
-            .clientId,
-        fullName: Provider.of<ProfileProvider>(context, listen: false)
-            .clientProfileModel!
-            .clientData!
-            .fullName,
-        clientName: Provider.of<ProfileProvider>(context, listen: false)
-            .clientProfileModel!
-            .clientData!
-            .clientName,
-        email: Provider.of<ProfileProvider>(context, listen: false)
-            .clientProfileModel!
-            .clientData!
-            .email,
-        mobile: Provider.of<ProfileProvider>(context, listen: false)
-            .clientProfileModel!
-            .clientData!
-            .mobile,
-        address: Provider.of<ProfileProvider>(context, listen: false)
-            .clientProfileModel!
-            .clientData!
-            .address,
-        avatar: Provider.of<ProfileProvider>(context, listen: false)
-            .clientProfileModel!
-            .clientData!
-            .avatar,
+        userId: Provider.of<ProfileProvider>(context, listen: false).clientProfileModel!.clientData!.clientId,
+        fullName: Provider.of<ProfileProvider>(context, listen: false).clientProfileModel!.clientData!.fullName,
+        clientName: Provider.of<ProfileProvider>(context, listen: false).clientProfileModel!.clientData!.clientName,
+        email: Provider.of<ProfileProvider>(context, listen: false).clientProfileModel!.clientData!.email,
+        mobile: Provider.of<ProfileProvider>(context, listen: false).clientProfileModel!.clientData!.mobile,
+        address: Provider.of<ProfileProvider>(context, listen: false).clientProfileModel!.clientData!.address,
+        avatar: Provider.of<ProfileProvider>(context, listen: false).clientProfileModel!.clientData!.avatar,
         password: _passwordController.text.trim(),
       ));
       _passwordController.clear();
