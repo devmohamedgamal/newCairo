@@ -98,7 +98,11 @@ class _CartScreenState extends State<CartScreen> {
                         );
                       }
                       else {
-                        showCustomSnackBar('not_logged_in', context);
+                        showAnimatedDialog(
+                          context,
+                          GuestDialog(),
+                          isFlip: true,
+                        );
                       }
                     },
                     child: Container(
@@ -194,8 +198,11 @@ class _CartScreenState extends State<CartScreen> {
                               }
                             }
                             else {
-                              showAnimatedDialog(context, GuestDialog(),
-                                  isFlip: true);
+                              showAnimatedDialog(
+                                context,
+                                GuestDialog(),
+                                  isFlip: true,
+                              );
                             }
                           },
                           style: TextButton.styleFrom(
