@@ -313,6 +313,7 @@
   "Video_Gallery": "Video Gallery",
   "Review_submitted_successfully": "Review submitted successfully",
   "delete_account": "Are you sure to delete the account?\nWith the deletion of the account, all data will be deleted and the application will be logged out.",
+  "account_deletion_request": "Account deletion request",
   "suggested_products": "Suggested products",
   "promo_code": "Promo Code",
   "enter_promo_code": "Enter promo code",

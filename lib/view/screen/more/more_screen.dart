@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:lemirageelevators/util/app_constants.dart';
 import 'package:lemirageelevators/util/textStyle.dart';
+import 'package:lemirageelevators/view/baseWidget/dialog/delete_account_confirmation_dialog.dart';
 import 'package:lemirageelevators/view/screen/featureddeal/featured_deal_screen.dart';
 import 'package:lemirageelevators/view/screen/more/widget/app_info_dialog.dart';
 import 'package:lemirageelevators/view/screen/order/order_screen.dart';
@@ -34,6 +37,7 @@ class MoreScreen extends StatefulWidget {
 }
 class _MoreScreenState extends State<MoreScreen> {
   bool? isGuestMode;
+
   @override
   void initState() {
     super.initState();
@@ -99,7 +103,7 @@ class _MoreScreenState extends State<MoreScreen> {
                     child: Row(children: [
                       Text(!isGuestMode! && profile.user != null
                             ? '${profile.user!.fullName}'
-                            : getTranslated("GUEST", context)!,
+                            : getTranslated("GUEST", context),
                           style: cairoRegular.copyWith(color: ColorResources.WHITE)),
                       SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
                       isGuestMode!
@@ -142,66 +146,76 @@ class _MoreScreenState extends State<MoreScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         SquareButton(image: Images.shopping_image,
-                          title: getTranslated('orders', context)!,
+                          title: getTranslated('orders', context),
                       navigateTo: OrderScreen(),
                       count: 1,hasCount: false,),
 
                         SquareButton(image: Images.cart_image,
-                          title: getTranslated('CART', context)!,
+                          title: getTranslated('CART', context),
                       navigateTo: CartScreen(),
                       count: Provider.of<CartProvider>(context).cartList.length, hasCount: true,),
                         SquareButton(image: Images.offers,
-                      title: getTranslated('offers', context)!,
+                      title: getTranslated('offers', context),
                       navigateTo: FeaturedDealScreen(),
                       count: 0,hasCount: false,),
                         SquareButton(image: Images.wishlist,
-                          title: getTranslated('wishlist', context)!,
+                          title: getTranslated('wishlist', context),
                       navigateTo: WishScreen(),
                       count: 0, hasCount: false,),
                       ]),
                   SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
 
                   TitleButton(image: Images.more_filled_image,
-                      title: getTranslated('all_category', context)!,
+                      title: getTranslated('all_category', context),
                       navigateTo: AllCategoryScreen()
                   ),
                   TitleButton(image: Images.fast_delivery,
-                    title: getTranslated('address', context)!,
+                    title: getTranslated('address', context),
                       navigateTo: AddressScreen()
                   ),
                   TitleButton(image: Images.image_gallery,
-                    title: getTranslated('Photo_album', context)!,
+                    title: getTranslated('Photo_album', context),
                       navigateTo: AlbumsScreen()
                   ),
                   TitleButton(image: Images.video_player,
-                    title: getTranslated('Video_Gallery', context)!,
+                    title: getTranslated('Video_Gallery', context),
                       navigateTo: VideosScreen()
                   ),
-                  TitleButton(image: Images.notification_filled, title: getTranslated('notification', context)!,
+                  TitleButton(image: Images.notification_filled, title: getTranslated('notification', context),
                       navigateTo: NotificationScreen()
                   ),
                   TitleButton(
                     image: Images.settings,
-                    title: getTranslated('settings', context)!,
+                    title: getTranslated('settings', context),
                       navigateTo: SettingsScreen()
                   ),
-                  TitleButton(image: Images.about_us, title: getTranslated('about_us', context)!,
+                  TitleButton(image: Images.about_us, title: getTranslated('about_us', context),
                       navigateTo: AboutScreen()
                   ),
 
                   ListTile(
                     leading: Image.asset(Images.logo, width: 25, height: 25,
                         fit: BoxFit.fill, color: ColorResources.getPrimary(context)),
-                    title: Text(getTranslated('app_info', context)!,
+                    title: Text(getTranslated('app_info', context),
                         style: cairoRegular.copyWith(fontSize: Dimensions.FONT_SIZE_LARGE)),
                     onTap: () => showAnimatedDialog(context, AppInfoDialog(), isFlip: true),
+                  ),
+
+                  // Account deletion request
+                  if(!isGuestMode! && Platform.isIOS)
+                      ListTile(
+                    leading: Icon(Icons.delete_outline, color: ColorResources.getPrimary(context), size: 25),
+                    title: Text(getTranslated('account_deletion_request', context),
+                        style: cairoRegular.copyWith(fontSize: Dimensions.FONT_SIZE_LARGE)),
+                    onTap: () => showAnimatedDialog(
+                        context, DeleteAccountConfirmationDialog(), isFlip: true),
                   ),
 
                   isGuestMode!
                       ? SizedBox()
                       : ListTile(
                     leading: Icon(Icons.exit_to_app, color: ColorResources.getPrimary(context), size: 25),
-                    title: Text(getTranslated('sign_out', context)!,
+                    title: Text(getTranslated('sign_out', context),
                         style: cairoRegular.copyWith(fontSize: Dimensions.FONT_SIZE_LARGE)),
                     onTap: () => showAnimatedDialog(
                         context, SignOutConfirmationDialog(), isFlip: true),
