@@ -318,6 +318,8 @@ class Product {
   bool? productinwish;
   List<FetchedProductKind>? fetchedProductKinds;
 
+  String get getPrice => price??'';
+
   Product({
     this.id,
     this.categoryId,

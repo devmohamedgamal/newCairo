@@ -37,114 +37,117 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
         Divider(),
         SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
 
-        Consumer<SearchProvider>(
-          builder: (context, search, child) => Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
+        Padding(
+          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: Consumer<SearchProvider>(
+            builder: (context, search, _) => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
 
-              SizedBox(
-                height: 35,
-                child: Row(
-                  children: [
-                    Expanded(child: Text(getTranslated('PRICE_RANGE', context)!,
-                        style: cairoSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL))),
-                    SizedBox(
-                      width: 100,
-                      child: TextField(
-                        keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.next,
-                        onSubmitted: (_) => FocusScope.of(context).requestFocus(_lastFocus),
-                        textAlign: TextAlign.center,
-                        maxLines: 1,
-                        focusNode: _firstFocus,
-                        controller: _firstPriceController,
-                        style: cairoBold.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL),
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: ColorResources.getImageBg(context),
-                          contentPadding: EdgeInsets.only(left: 5.0, bottom: 17),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                            borderRadius: BorderRadius.circular(5.7),
-                          ),
+                SizedBox(
+                  height: 35,
+                  child: Row(
+                    children: [
+                      Expanded(child: Text(getTranslated('PRICE_RANGE', context)!,
+                          style: cairoSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL))),
+                      SizedBox(
+                        width: 100,
+                        child: TextField(
+                          keyboardType: TextInputType.number,
+                          textInputAction: TextInputAction.next,
+                          onSubmitted: (_) => FocusScope.of(context).requestFocus(_lastFocus),
+                          textAlign: TextAlign.center,
+                          maxLines: 1,
+                          focusNode: _firstFocus,
+                          controller: _firstPriceController,
+                          style: cairoBold.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL),
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: ColorResources.getImageBg(context),
+                            contentPadding: EdgeInsets.only(left: 5.0, bottom: 17),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.circular(5.7),
+                            ),
 
+                          ),
                         ),
                       ),
-                    ),
-                    Text(' - '),
-                    SizedBox(
-                      width: 100,
-                      child: TextField(
-                        keyboardType: TextInputType.number,
-                        textAlign: TextAlign.center,
-                        controller: _lastPriceController,
-                        maxLines: 1,
-                        focusNode: _lastFocus,
-                        textInputAction: TextInputAction.done,
-                        style: cairoBold.copyWith(
-                          fontSize: Dimensions.FONT_SIZE_SMALL,
-                        ),
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: ColorResources.getImageBg(context),
-                          contentPadding: EdgeInsets.only(left: 5.0, bottom: 17),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                            borderRadius: BorderRadius.circular(5),
+                      Text(' - '),
+                      SizedBox(
+                        width: 100,
+                        child: TextField(
+                          keyboardType: TextInputType.number,
+                          textAlign: TextAlign.center,
+                          controller: _lastPriceController,
+                          maxLines: 1,
+                          focusNode: _lastFocus,
+                          textInputAction: TextInputAction.done,
+                          style: cairoBold.copyWith(
+                            fontSize: Dimensions.FONT_SIZE_SMALL,
                           ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                            borderRadius: BorderRadius.circular(5.7),
-                          ),
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: ColorResources.getImageBg(context),
+                            contentPadding: EdgeInsets.only(left: 5.0, bottom: 17),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.circular(5.7),
+                            ),
 
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(height: Dimensions.PADDING_SIZE_LARGE),
+                SizedBox(height: Dimensions.PADDING_SIZE_LARGE),
 
-              Text(
-                getTranslated('SORT_BY', context)!,
-                style: cairoSemiBold.copyWith(
-                    fontSize: Dimensions.FONT_SIZE_SMALL, color: Theme.of(context).hintColor),
-              ),
-
-              MyCheckBox(title: getTranslated('latest_products', context)!, index: 0),
-
-              Row(children: [
-                Expanded(child: MyCheckBox(title: getTranslated('alphabetically_az', context)!, index: 1)),
-                Expanded(child: MyCheckBox(title: getTranslated('alphabetically_za', context)!, index: 2)),
-              ]),
-
-              Row(children: [
-                Expanded(child: MyCheckBox(title: getTranslated('low_to_high_price', context)!, index: 3)),
-                Expanded(child: MyCheckBox(title: getTranslated('high_to_low_price', context)!, index: 4)),
-              ]),
-
-              Padding(
-                padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                child: CustomButton(
-                  buttonText: getTranslated('APPLY', context)!,
-                  onTap: () {
-                    double minPrice = 0.0;
-                    double maxPrice = 0.0;
-                    if(_firstPriceController.text.isNotEmpty && _lastPriceController.text.isNotEmpty) {
-                      minPrice = double.parse(_firstPriceController.text);
-                      maxPrice = double.parse(_lastPriceController.text);
-                    }
-                    Provider.of<SearchProvider>(context, listen: false).sortSearchList(minPrice, maxPrice);
-                    Navigator.pop(context);
-                  },
+                Text(
+                  getTranslated('SORT_BY', context)!,
+                  style: cairoSemiBold.copyWith(
+                      fontSize: Dimensions.FONT_SIZE_SMALL, color: Theme.of(context).hintColor),
                 ),
-              ),
-            ],
+
+                MyCheckBox(title: getTranslated('latest_products', context)!, index: 0),
+
+                Row(children: [
+                  Expanded(child: MyCheckBox(title: getTranslated('alphabetically_az', context)!, index: 1)),
+                  Expanded(child: MyCheckBox(title: getTranslated('alphabetically_za', context)!, index: 2)),
+                ]),
+
+                Row(children: [
+                  Expanded(child: MyCheckBox(title: getTranslated('low_to_high_price', context)!, index: 3)),
+                  Expanded(child: MyCheckBox(title: getTranslated('high_to_low_price', context)!, index: 4)),
+                ]),
+
+                Padding(
+                  padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                  child: CustomButton(
+                    buttonText: getTranslated('APPLY', context)!,
+                    onTap: () {
+                      double minPrice = 0.0;
+                      double maxPrice = 0.0;
+                      if(_firstPriceController.text.isNotEmpty && _lastPriceController.text.isNotEmpty) {
+                        minPrice = double.parse(_firstPriceController.text);
+                        maxPrice = double.parse(_lastPriceController.text);
+                      }
+                      Provider.of<SearchProvider>(context, listen: false).sortSearchList(minPrice, maxPrice);
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ]),

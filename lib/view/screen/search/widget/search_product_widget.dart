@@ -33,8 +33,14 @@ class SearchProductWidget extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () => showModalBottomSheet(context: context, isScrollControlled: true,
-                    backgroundColor: Colors.transparent, builder: (c) => SearchFilterBottomSheet()),
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    builder: (c) => SearchFilterBottomSheet(),
+                  );
+                },
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL, horizontal: Dimensions.PADDING_SIZE_SMALL),
                   decoration: BoxDecoration(

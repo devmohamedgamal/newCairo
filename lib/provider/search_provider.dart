@@ -46,9 +46,9 @@ class SearchProvider with ChangeNotifier {
       Iterable iterable = _searchProductList!.reversed;
       _searchProductList = iterable.toList().cast<Product>();
     } else if (_filterIndex == 3) {
-      _searchProductList!.sort((a, b) => a.price!.compareTo(b.price!));
+      _searchProductList!.sort((a, b) => (a.price??'').compareTo(b.price??''));
     } else if (_filterIndex == 4) {
-      _searchProductList!.sort((a, b) => a.price!.compareTo(b.price!));
+      _searchProductList!.sort((a, b) => (a.price??'').compareTo(b.price??''));
       Iterable iterable = _searchProductList!.reversed;
       _searchProductList = iterable.cast<Product>().toList();
     }
@@ -86,8 +86,7 @@ class SearchProvider with ChangeNotifier {
         _searchProductList = [];
         apiResponse.response!.data.forEach((product){
           _searchProductList!.add(Product.fromJson(product));
-          _filterProductList = [];
-          _filterProductList!.add(Product.fromJson(product));
+          _filterProductList = _searchProductList!;
         });
       }
     } else {
