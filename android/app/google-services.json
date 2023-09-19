@@ -1,43 +1,26 @@
 {
   "project_info": {
-    "project_number": "113641272178",
-    "project_id": "gddeaf-75e3a",
-    "storage_bucket": "gddeaf-75e3a.appspot.com"
+    "project_number": "719221669445",
+    "project_id": "morc-e16cf",
+    "storage_bucket": "morc-e16cf.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:113641272178:android:1c664a258680e3e97423eb",
+        "mobilesdk_app_id": "1:719221669445:android:6070f607d75b34ecc36d2c",
         "android_client_info": {
           "package_name": "com.pixel.morc"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "113641272178-gvm476g8qjfrf9ks6j6m3koqv6shb9ar.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.pixel.morc",
-            "certificate_hash": "f034947a2973317a927ed1fd1a9f0526de8e4779"
-          }
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD8ttz4rwfsMLUcoccqK8Dv4GXXgLCgJ44"
+          "current_key": "AIzaSyC_DhPxXXJvioc3HFqJ0Ppv2mFXwL5mHNk"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "113641272178-0m0m1mblj2cg4g1u8fb4b10qf1hokimi.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.pixel.morc"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
