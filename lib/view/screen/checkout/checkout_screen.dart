@@ -301,7 +301,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       AmountWidget(
                           title: getTranslated('ORDER', context), amount: (Provider.of<CartProvider>(context).amount - Provider.of<CartProvider>(context).shippingPrice).toString() + " ${getTranslated('currency', context)}"),
                       AmountWidget(title: getTranslated('SHIPPING_FEE', context), amount: Provider.of<CartProvider>(context).shippingPrice.toString() + " ${getTranslated('currency', context)}"),
-                      AmountWidget(title: getTranslated('promo_code', context), amount: '(-) ${PriceConverter.getDiscountPercentageAmount(discount: Provider.of<CouponProvider>(context).discountPercentage, price: Provider.of<CartProvider>(context).shippingPrice)}' " ${getTranslated('currency', context)}"),
+                      // promo code
+                      AmountWidget(title: getTranslated('promo_code', context), amount: "(-) ${PriceConverter.getDiscountPercentageAmount(discount: Provider.of<CouponProvider>(context).discountPercentage, price: Provider.of<CartProvider>(context).amount)} ${getTranslated('currency', context)}"),
                       Divider(height: 5, color: Theme.of(context).hintColor),
                       AmountWidget(title: getTranslated('TOTAL_PAYABLE', context), amount: _getTotalAmount(context).toString() + " ${getTranslated('currency', context)}"),
                     ]);
@@ -315,6 +316,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 color: Theme.of(context).highlightColor,
                 child: Consumer<CouponProvider>(
                   builder: (context, couponProvider, _) {
+                    debugPrint('coupon: "${_couponController.text}"');
+                    debugPrint('coupon discount percentage: "${couponProvider.coupon?.discountPercentage}%"');
+                    debugPrint('coupon discount amount: "${PriceConverter.getDiscountPercentageAmount(
+                      discount: Provider.of<CouponProvider>(context).discountPercentage,
+                      price: Provider.of<CartProvider>(context).amount,
+                    )}%"');
+                    debugPrint('----------');
                     return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
