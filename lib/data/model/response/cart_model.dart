@@ -120,6 +120,7 @@ class CartModel {
       'arrive_way': _arriveWay,
       'shipping': _shipping,
       'total_amount': _totalAmount,
+      'total': _totalAmount,
       'mobile_type': _mobileType,
       'gov_id': govId,
       'city_id': cityId,
