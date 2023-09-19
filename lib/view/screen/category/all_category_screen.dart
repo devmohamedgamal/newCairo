@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lemirageelevators/helper/get_translated_name.dart';
 import 'package:lemirageelevators/provider/home_provider.dart';
 import 'package:lemirageelevators/util/app_constants.dart';
 import 'package:lemirageelevators/view/screen/category/widgets/view_category_product.dart';
@@ -92,7 +93,10 @@ class _AllCategoryScreenState extends State<AllCategoryScreen> {
                                           context);
                                 },
                                 child: CategoryItem(
-                                  title: _category.catTitle!,
+                                  title: context.getLocalizedName(
+                                    ar: _category.catTitle!,
+                                    en: _category.titleEN!,
+                                  ),
                                   icon: _category.avatar!,
                                   isSelected:
                                       categoryProvider.categorySelectedIndex ==
