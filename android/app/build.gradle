@@ -88,7 +88,6 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:26.7.0')
     implementation 'com.google.firebase:firebase-messaging:23.2.1'
     implementation 'com.google.android.gms:play-services-auth:20.7.0'
-//    implementation "com.google.firebase:firebase-messaging:21.0.1"
 }
 
 apply plugin: 'com.google.gms.google-services'
