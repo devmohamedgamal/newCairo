@@ -108,14 +108,14 @@ class CartModel {
     _cart = List<CartItem>.from(json["cart"].map((x) => CartItem.fromJson(x)));
   }
 
-  Map<String, dynamic> toJson(dynamic PaymentMethod) {
+  Map<String, dynamic> toJson(dynamic paymentMethod) {
     return {
       'clientid': _clientId,
       'note': _note,
       'customer_mobile': _orderMobile,
       'order_mobile': _orderMobile,
       'order_address': _orderAddress,
-      'payment_method': PaymentMethod,
+      'payment_method': paymentMethod,
       'addr': _address,
       'arrive_way': _arriveWay,
       'shipping': _shipping,
