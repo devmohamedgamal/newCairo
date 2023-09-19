@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lemirageelevators/helper/get_translated_name.dart';
 import 'package:lemirageelevators/provider/home_provider.dart';
 import 'package:lemirageelevators/util/app_constants.dart';
 import 'package:lemirageelevators/util/textStyle.dart';
@@ -39,7 +40,10 @@ class CategoryView extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => BrandAndCategoryProductScreen(
                                     id: categoryProvider.categories[index].categoryId.toString(),
-                                    name: categoryProvider.categories[index].catTitle.toString(),
+                                    name: context.getLocalizedName(
+                                      ar: categoryProvider.categories[index].catTitle!,
+                                      en: categoryProvider.categories[index].titleEN!,
+                                    ),
                                   )));
                     },
                     child: Container(
@@ -89,9 +93,10 @@ class CategoryView extends StatelessWidget {
                                   ),
                                   child: Center(
                                     child: Text(
-                                      Provider.of<LocalizationProvider>(context).locale!.languageCode == "en"
-                                          ? categoryProvider.categories[index].titleEN!
-                                          : categoryProvider.categories[index].catTitle! ,
+                                      context.getLocalizedName(
+                                        ar: categoryProvider.categories[index].catTitle!,
+                                        en: categoryProvider.categories[index].titleEN!,
+                                      ),
                                       textAlign: TextAlign.center,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
