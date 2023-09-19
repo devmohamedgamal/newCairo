@@ -125,7 +125,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           null,
           null,
           null,
-          null),
+          null,
+        govId: Provider.of<CartProvider>(context, listen: false).selectedShippingArea?.govId,
+        cityId: Provider.of<CartProvider>(context, listen: false).selectedShippingArea?.zoneId,
+        zoneId: Provider.of<CartProvider>(context, listen: false).selectedShippingArea?.id,
+      ),
       _route,
       PaymentMethod: 3,
     );

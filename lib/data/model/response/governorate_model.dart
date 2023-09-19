@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:lemirageelevators/helper/get_translated_name.dart';
 
 class GovernorateModel {
+  /// returns id (etc: "7mDPAohM3ArSZmWTm")
   late final String id;
+  /// returns number (etc: 1)
   late final String govId;
   late final String nameAr;
   late final String nameEn;

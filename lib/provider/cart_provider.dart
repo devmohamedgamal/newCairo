@@ -50,7 +50,9 @@ class CartProvider extends ChangeNotifier {
   List<ShippingAreaModel> get shippingAreasList => _shippingAreasList;
   int? get shippingAreasIndex => _shippingAreasIndex;
   bool get isLoadingAreas => _isLoadingAreas;
-  // double get shippingPrice => _shippingAreasIndex == null ? 0 : _shippingAreasList[_shippingAreasIndex!].price;
+  /* double get shippingPrice => _shippingAreasIndex == null ? 0 : _shippingAreasList[_shippingAreasIndex!].price; */
+  // GovernorateModel? get selectedGov => _shippingPlacesIndex == null || _shippingPlacesList.isEmpty ? null : _shippingPlacesList[_shippingPlacesIndex!];
+  // ShippingCityModel? get selectedCity => _shippingCitiesIndex == null || _shippingCitiesList.isEmpty ? null : _shippingCitiesList[_shippingCitiesIndex!];
   ShippingAreaModel? get selectedShippingArea => _shippingAreasIndex == null || _shippingAreasList.isEmpty ? null : _shippingAreasList[_shippingAreasIndex!];
   double _getShippingPrice(int? index) => index == null ? 0 : _shippingAreasList[index].price;
   double get shippingPrice => _shippingPrice;

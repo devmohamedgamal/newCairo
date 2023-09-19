@@ -220,7 +220,11 @@ class _ChoosePaymentScreenState extends State<ChoosePaymentScreen> {
             null,
             null,
             null,
-            null),
+            null,
+          govId: Provider.of<CartProvider>(context, listen: false).selectedShippingArea?.govId,
+          cityId: Provider.of<CartProvider>(context, listen: false).selectedShippingArea?.zoneId,
+          zoneId: Provider.of<CartProvider>(context, listen: false).selectedShippingArea?.id,
+        ),
         _route,
       PaymentMethod: paymentModel.shortcutName,
     );

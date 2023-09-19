@@ -25,7 +25,7 @@ class OrderRepo {
     try {
       final response = await dioClient.post(
         AppConstants.ORDER_PLACE_URI,
-        data: cartModel.toJsonMasterCard(PaymentMethod),
+        data: cartModel.toJson(PaymentMethod),
         options: Options(
           followRedirects: false,
           maxRedirects: 0,
