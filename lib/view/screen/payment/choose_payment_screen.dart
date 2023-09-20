@@ -224,6 +224,7 @@ class _ChoosePaymentScreenState extends State<ChoosePaymentScreen> {
           govId: Provider.of<CartProvider>(context, listen: false).selectedShippingArea?.govId,
           cityId: Provider.of<CartProvider>(context, listen: false).selectedShippingArea?.zoneId,
           zoneId: Provider.of<CartProvider>(context, listen: false).selectedShippingArea?.id,
+          couponCode: Provider.of<CouponProvider>(context, listen: false).couponCode,
         ),
         _route,
       PaymentMethod: paymentModel.shortcutName,

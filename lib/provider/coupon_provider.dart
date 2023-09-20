@@ -18,6 +18,8 @@ class CouponProvider extends ChangeNotifier {
 
   bool get isLoading => _isLoading;
 
+  String get couponCode => _code ?? '';
+
   Future<void> checkCoupon(String code, BuildContext context) async {
     removeCouponData(false);
     _isLoading = true;

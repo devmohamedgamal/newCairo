@@ -64,6 +64,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     super.initState();
     Provider.of<ProfileProvider>(context, listen: false).initAddressTypeList(context);
     Provider.of<ProfileProvider>(context, listen: false).getAddress();
+    _couponController.text = Provider.of<CouponProvider>(context, listen: false).couponCode;
   }
 
   Future<void> _paymentOnCashPlaceOrder({
@@ -129,6 +130,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         govId: Provider.of<CartProvider>(context, listen: false).selectedShippingArea?.govId,
         cityId: Provider.of<CartProvider>(context, listen: false).selectedShippingArea?.zoneId,
         zoneId: Provider.of<CartProvider>(context, listen: false).selectedShippingArea?.id,
+        couponCode: Provider.of<CouponProvider>(context, listen: false).couponCode,
       ),
       _route,
       PaymentMethod: 3,

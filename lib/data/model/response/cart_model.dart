@@ -28,6 +28,9 @@ class CartModel {
   late final String? cityId;
   late final String? zoneId;
 
+  // coupon
+  late final String? couponCode;
+
   CartModel(
     this._clientId,
     this._note,
@@ -49,6 +52,7 @@ class CartModel {
     required this.govId,
     required this.cityId,
     required this.zoneId,
+    required this.couponCode,
   });
 
   int? get clientId => _clientId;
@@ -105,6 +109,7 @@ class CartModel {
     govId = json['gov_id'];
     cityId = json['city_id'];
     zoneId = json['zone_id'];
+    couponCode = json['copon'];
     _cart = List<CartItem>.from(json["cart"].map((x) => CartItem.fromJson(x)));
   }
 
@@ -125,6 +130,7 @@ class CartModel {
       'gov_id': govId,
       'city_id': cityId,
       'zone_id': zoneId,
+      'copon': couponCode,
       'cart': List<dynamic>.from(_cart!.map((x) => x.toJson())),
     };
   }
