@@ -41,6 +41,7 @@ class CartProvider extends ChangeNotifier {
   int? get indexType => _indexType;
   int? get shippingPlacesIndex => _shippingPlacesIndex;
   double get amount => _amount;
+  double get amountWithoutShipping => _amount - _shippingPrice;
   // double totalAmount(double discount) => _amount - discount;
   bool get isLoading => _isLoading;
   bool get isLoadingSuggestions => _isLoadingSuggestions;

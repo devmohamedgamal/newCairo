@@ -55,7 +55,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   double _getTotalAmount(BuildContext context) {
     return PriceConverter.convertWithDiscount(
       discount: Provider.of<CouponProvider>(context, listen: true).discountPercentage,
-      price: Provider.of<CartProvider>(context).amount,
+      price: Provider.of<CartProvider>(context).amountWithoutShipping,
     );
   }
 
@@ -118,7 +118,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           _items,
           PriceConverter.convertWithDiscount(
             discount: Provider.of<CouponProvider>(context, listen: false).discountPercentage,
-            price: Provider.of<CartProvider>(context, listen: false).amount,
+            price: Provider.of<CartProvider>(context, listen: false).amountWithoutShipping,
           ).toString(),
           Platform.isAndroid ? "Android" : "Iphone",
           null,
@@ -294,10 +294,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                       TitleRow(title: getTranslated('TOTAL', context)),
                       AmountWidget(
-                          title: getTranslated('ORDER', context), amount: (Provider.of<CartProvider>(context).amount - Provider.of<CartProvider>(context).shippingPrice).toString() + " ${getTranslated('currency', context)}"),
+                          title: getTranslated('ORDER', context), amount: (Provider.of<CartProvider>(context).amountWithoutShipping).toString() + " ${getTranslated('currency', context)}"),
                       AmountWidget(title: getTranslated('SHIPPING_FEE', context), amount: Provider.of<CartProvider>(context).shippingPrice.toString() + " ${getTranslated('currency', context)}"),
                       // promo code
-                      AmountWidget(title: getTranslated('promo_code', context), amount: "(-) ${PriceConverter.getDiscountPercentageAmount(discount: Provider.of<CouponProvider>(context).discountPercentage, price: Provider.of<CartProvider>(context).amount)} ${getTranslated('currency', context)}"),
+                      AmountWidget(title: getTranslated('promo_code', context), amount: "(-) ${PriceConverter.getDiscountPercentageAmount(discount: Provider.of<CouponProvider>(context).discountPercentage, price: Provider.of<CartProvider>(context).amountWithoutShipping)} ${getTranslated('currency', context)}"),
                       Divider(height: 5, color: Theme.of(context).hintColor),
                       AmountWidget(title: getTranslated('TOTAL_PAYABLE', context), amount: _getTotalAmount(context).toString() + " ${getTranslated('currency', context)}"),
                     ]);
@@ -315,7 +315,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     debugPrint('coupon discount percentage: "${couponProvider.coupon?.discountPercentage}%"');
                     debugPrint('coupon discount amount: "${PriceConverter.getDiscountPercentageAmount(
                       discount: Provider.of<CouponProvider>(context).discountPercentage,
-                      price: Provider.of<CartProvider>(context).amount,
+                      price: Provider.of<CartProvider>(context).amountWithoutShipping,
                     )}%"');
                     debugPrint('----------');
                     return Column(
