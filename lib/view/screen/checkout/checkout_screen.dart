@@ -115,7 +115,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           indexTypeCashApp, //1 google pay 2 apple pay 3 credit card
           fullAddress,
           typeAddress,
-          int.tryParse(shipping)??-1,
+          Provider.of<CartProvider>(context, listen: false).shippingPrice.toInt(), // shipping
           _items,
           PriceConverter.convertWithDiscount(
             discount: Provider.of<CouponProvider>(context, listen: false).discountPercentage,
