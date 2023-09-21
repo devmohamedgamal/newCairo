@@ -15,7 +15,8 @@ class OrderWidget extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => OrderDetailsScreen(order: order)));
+            builder: (context) => OrderDetailsScreen(order: order),
+        ));
       },
       child: Container(
         margin: EdgeInsets.only(
@@ -47,7 +48,7 @@ class OrderWidget extends StatelessWidget {
               SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
               Text(
                   DateConverter.isoStringToLocalDateOnly(
-                      order.adate.toString()),
+                      order.date.toString()),
                   style: cairoRegular.copyWith(
                     fontSize: Dimensions.FONT_SIZE_SMALL,
                     color: Theme.of(context).hintColor,
@@ -62,11 +63,10 @@ class OrderWidget extends StatelessWidget {
                 Text(getTranslated('total_price', context)!,
                 style: cairoRegular.copyWith(
                     fontSize: Dimensions.FONT_SIZE_SMALL)),
-                Text((double.parse(order.orderPrice ?? "0.0") +
-                    double.parse(order.shippingCost!.isEmpty
-                        ? "0.0"
-                        : order.shippingCost ?? "0.0")).toString(),
-                    style: cairoSemiBold),
+                Text(
+                  order.getTotalPrice(),
+                    style: cairoSemiBold,
+                ),
                 SizedBox(width: Dimensions.PADDING_SIZE_LARGE),
                 Container(
               alignment: Alignment.center,

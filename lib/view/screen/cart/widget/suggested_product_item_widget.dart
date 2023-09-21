@@ -36,7 +36,8 @@ class SuggestedProductItemWidget extends StatelessWidget {
                             transitionDuration: Duration(milliseconds: 1000),
                             pageBuilder: (context, anim1, anim2) =>
                                 ProductDetails(
-                                    product: cartProvider.suggestedProducts[index]),
+                                    product: cartProvider.suggestedProducts[index],
+                                ),
                           ));
                     },
                     child: Container(
