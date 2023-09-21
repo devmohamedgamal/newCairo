@@ -212,7 +212,7 @@ class _ChoosePaymentScreenState extends State<ChoosePaymentScreen> {
             Provider.of<CartProvider>(context, listen: false).shippingPrice.toInt(),
             _items,
           (PriceConverter.convertWithDiscount(
-            discount: Provider.of<CouponProvider>(context, listen: true).discountPercentage,
+            discount: Provider.of<CouponProvider>(context, listen: false).discountPercentage,
             price: Provider.of<CartProvider>(context, listen: false).amountWithoutShipping,
           ) + Provider.of<CartProvider>(context, listen: false).shippingPrice).toString(),
             Platform.isAndroid ? "Android" : "Iphone",

@@ -118,7 +118,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           Provider.of<CartProvider>(context, listen: false).shippingPrice.toInt(), // shipping
           _items,
         (PriceConverter.convertWithDiscount(
-          discount: Provider.of<CouponProvider>(context, listen: true).discountPercentage,
+          discount: Provider.of<CouponProvider>(context, listen: false).discountPercentage,
           price: Provider.of<CartProvider>(context, listen: false).amountWithoutShipping,
         ) + Provider.of<CartProvider>(context, listen: false).shippingPrice).toString(),
           Platform.isAndroid ? "Android" : "Iphone",
