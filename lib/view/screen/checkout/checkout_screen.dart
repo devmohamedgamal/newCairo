@@ -55,8 +55,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   double _getTotalAmount(BuildContext context) {
     return PriceConverter.convertWithDiscount(
       discount: Provider.of<CouponProvider>(context, listen: true).discountPercentage,
-      price: Provider.of<CartProvider>(context).amountWithoutShipping,
-    );
+      price: Provider.of<CartProvider>(context, listen: false).amountWithoutShipping,
+    ) + Provider.of<CartProvider>(context, listen: false).shippingPrice;
   }
 
   @override
