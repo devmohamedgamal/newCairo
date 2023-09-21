@@ -162,7 +162,7 @@ class _CartScreenState extends State<CartScreen> {
                       Row(
                           children: [
                             Text(
-                              getTranslated("TOTAL", context),
+                              getTranslated("ORDER", context),
                               style: cairoSemiBold.copyWith(
                                   color: Theme.of(context).highlightColor),
                             ),

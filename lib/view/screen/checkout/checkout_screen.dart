@@ -117,10 +117,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           typeAddress,
           Provider.of<CartProvider>(context, listen: false).shippingPrice.toInt(), // shipping
           _items,
-          PriceConverter.convertWithDiscount(
-            discount: Provider.of<CouponProvider>(context, listen: false).discountPercentage,
-            price: Provider.of<CartProvider>(context, listen: false).amountWithoutShipping,
-          ).toString(),
+        (PriceConverter.convertWithDiscount(
+          discount: Provider.of<CouponProvider>(context, listen: true).discountPercentage,
+          price: Provider.of<CartProvider>(context, listen: false).amountWithoutShipping,
+        ) + Provider.of<CartProvider>(context, listen: false).shippingPrice).toString(),
           Platform.isAndroid ? "Android" : "Iphone",
           null,
           null,
