@@ -29,8 +29,10 @@ class ApiDataHelper {
   static num? getNum(i) {
     switch (i.runtimeType) {
       case String:
-        return double.parse('$i').toInt();
+        return double.parse('$i');
 
+      case int:
+      case double:
       case num:
         return i;
     }
