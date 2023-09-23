@@ -35,10 +35,8 @@ import 'notification/my_notification.dart';
 
 final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
-  DateTime start = DateTime.now();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  debugPrint('-- main started $start');
 
   await Firebase.initializeApp();
   SystemChrome.setPreferredOrientations([
@@ -62,7 +60,6 @@ Future<void> main() async {
     debugPrint('token: $token');
   // }
 
-  debugPrint('-- main finished ${start.difference(DateTime.now())}');
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => di.sl<LocalizationProvider>()),
@@ -83,17 +80,18 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (context) => di.sl<GalleryProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<CouponProvider>()),
     ],
-    child: MyApp(),
+    child: const MyApp(),
   ));
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    debugPrint('-- MyApp started ${start.difference(DateTime.now())}');
-    List<Locale> _locals = [];
+    List<Locale> locals = [];
     for (var language in AppConstants.languages!) {
-      _locals.add(Locale(language.languageCode, language.countryCode));
+      locals.add(Locale(language.languageCode, language.countryCode));
     }
     return MaterialApp(
       title: AppConstants.APP_NAME,
@@ -109,7 +107,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
         FallbackLocalizationDelegate()
       ],
-      supportedLocales: _locals,
+      supportedLocales: locals,
       home: SplashScreen(),
     );
   }
