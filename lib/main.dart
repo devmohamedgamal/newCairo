@@ -33,24 +33,27 @@ import 'di_container.dart' as di;
 import './util/router.dart' as router;
 import 'notification/my_notification.dart';
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
+  DateTime start = DateTime.now();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  debugPrint('-- main started $start');
+
   await Firebase.initializeApp();
-  await SystemChrome.setPreferredOrientations([
+  SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
   await di.init();
-  final NotificationAppLaunchDetails? notificationAppLaunchDetails = await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
-  int? _orderID;
-  if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
-    _orderID = (notificationAppLaunchDetails!.payload != null && notificationAppLaunchDetails.payload!.isNotEmpty)
-        ? int.parse(notificationAppLaunchDetails.payload!)
-        : null;
-  }
+  // final notificationAppLaunchDetails = await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+  // int? _orderID;
+  // if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
+  //   _orderID = (notificationAppLaunchDetails!.payload != null && notificationAppLaunchDetails.payload!.isNotEmpty)
+  //       ? int.parse(notificationAppLaunchDetails.payload!)
+  //       : null;
+  // }
   await MyNotification.initialize(flutterLocalNotificationsPlugin);
   FirebaseMessaging.onBackgroundMessage(myBackgroundMessageHandler);
 
@@ -59,6 +62,7 @@ Future<void> main() async {
     debugPrint('token: $token');
   // }
 
+  debugPrint('-- main finished ${start.difference(DateTime.now())}');
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => di.sl<LocalizationProvider>()),
@@ -86,6 +90,7 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    debugPrint('-- MyApp started ${start.difference(DateTime.now())}');
     List<Locale> _locals = [];
     for (var language in AppConstants.languages!) {
       _locals.add(Locale(language.languageCode, language.countryCode));
