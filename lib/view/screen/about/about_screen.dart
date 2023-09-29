@@ -62,7 +62,7 @@ class AboutScreen extends StatelessWidget {
                               style: {
                                 'h1': Style(color: Colors.red),
                                 'p': Style(color: Colors.black87, fontSize: FontSize.medium),
-                                'ul': Style(margin: const EdgeInsets.symmetric(vertical: 20))
+                                'ul': Style(margin: Margins.symmetric(vertical: 20))
                               },
                             ),
                           )

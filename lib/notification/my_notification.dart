@@ -9,24 +9,13 @@ class MyNotification {
 
   static Future<void> initialize(FlutterLocalNotificationsPlugin
   flutterLocalNotificationsPlugin) async {
-    var androidInitialize = new
-    AndroidInitializationSettings('notification_icon');
-    var iOSInitialize = new IOSInitializationSettings();
-    var initializationsSettings = new InitializationSettings(
+    var androidInitialize = const AndroidInitializationSettings('notification_icon');
+    var iOSInitialize = const DarwinInitializationSettings();
+    var initializationsSettings = InitializationSettings(
         android: androidInitialize, iOS: iOSInitialize);
     flutterLocalNotificationsPlugin.initialize(
         initializationsSettings,
-        onSelectNotification: (String? payload) async {
-      try{
-        // if(payload != null && payload.isNotEmpty) {
-        //   MyApp.navigatorKey.currentState.push(
-        //       MaterialPageRoute(builder: (context) =>
-        //           OrderDetailsScreen(orderModel: null,
-        //               orderId: int.parse(payload))));
-        // }
-      }catch (e) {}
-      return;
-    });
+    );
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print("onMessage: ${message.notification!.title}/"
@@ -117,7 +106,7 @@ class MyNotification {
       'your channel id', 'your channel name', importance: Importance.max,
       styleInformation: bigTextStyleInformation, priority: Priority.max,
       playSound: true,
-      sound: RawResourceAndroidNotificationSound('notification'),
+      sound: const RawResourceAndroidNotificationSound('notification'),
     );
     NotificationDetails platformChannelSpecifics =
     NotificationDetails(android: androidPlatformChannelSpecifics);
@@ -147,7 +136,7 @@ class MyNotification {
       priority: Priority.max, playSound: true,
       styleInformation: bigPictureStyleInformation,
       importance: Importance.max,
-      sound: RawResourceAndroidNotificationSound('notification'),
+      sound: const RawResourceAndroidNotificationSound('notification'),
     );
     final NotificationDetails platformChannelSpecifics =
     NotificationDetails(android: androidPlatformChannelSpecifics);

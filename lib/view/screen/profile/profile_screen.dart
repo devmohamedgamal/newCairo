@@ -356,7 +356,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   // choose picture
   void _choose() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery, imageQuality: 50, maxHeight: 500, maxWidth: 500);
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery, imageQuality: 50, maxHeight: 500, maxWidth: 500);
     setState(() {
       if (pickedFile != null) {
         file = File(pickedFile.path);
