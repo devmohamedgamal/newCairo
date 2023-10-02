@@ -37,23 +37,26 @@ final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  try{
+    await Firebase.initializeApp();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
 
-  await Firebase.initializeApp();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
+    await di.init();
+    // final notificationAppLaunchDetails = await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+    // int? _orderID;
+    // if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
+    //   _orderID = (notificationAppLaunchDetails!.payload != null && notificationAppLaunchDetails.payload!.isNotEmpty)
+    //       ? int.parse(notificationAppLaunchDetails.payload!)
+    //       : null;
+    // }
+    await MyNotification.initialize(flutterLocalNotificationsPlugin);
+    FirebaseMessaging.onBackgroundMessage(myBackgroundMessageHandler);
+  } catch(_){}
 
-  await di.init();
-  // final notificationAppLaunchDetails = await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
-  // int? _orderID;
-  // if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
-  //   _orderID = (notificationAppLaunchDetails!.payload != null && notificationAppLaunchDetails.payload!.isNotEmpty)
-  //       ? int.parse(notificationAppLaunchDetails.payload!)
-  //       : null;
-  // }
-  await MyNotification.initialize(flutterLocalNotificationsPlugin);
-  FirebaseMessaging.onBackgroundMessage(myBackgroundMessageHandler);
+
 
   // if(Platform.isAndroid){
     final token = await FirebaseMessaging.instance.getToken();
