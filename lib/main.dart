@@ -89,10 +89,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Locale> locals = [];
-    for (var language in AppConstants.languages!) {
-      locals.add(Locale(language.languageCode, language.countryCode));
-    }
+    final List<Locale> locals = AppConstants.languages.map((e) => Locale(e.languageCode, e.countryCode)).toList();
+
     return MaterialApp(
       title: AppConstants.APP_NAME,
       navigatorKey: locator<NavigationServices>().navigatorKey,
