@@ -1,4 +1,3 @@
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -33,35 +32,22 @@ import 'di_container.dart' as di;
 import './util/router.dart' as router;
 import 'notification/my_notification.dart';
 
-final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  try{
-    await Firebase.initializeApp();
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
 
-    await di.init();
-    // final notificationAppLaunchDetails = await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
-    // int? _orderID;
-    // if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
-    //   _orderID = (notificationAppLaunchDetails!.payload != null && notificationAppLaunchDetails.payload!.isNotEmpty)
-    //       ? int.parse(notificationAppLaunchDetails.payload!)
-    //       : null;
-    // }
-    await MyNotification.initialize(flutterLocalNotificationsPlugin);
-    FirebaseMessaging.onBackgroundMessage(myBackgroundMessageHandler);
-  } catch(_){}
+  await Firebase.initializeApp();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
+  await di.init();
+  final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  await MyNotification.initialize(flutterLocalNotificationsPlugin);
+  FirebaseMessaging.onBackgroundMessage(myBackgroundMessageHandler);
 
-
-  // if(Platform.isAndroid){
-    final token = await FirebaseMessaging.instance.getToken();
-    debugPrint('token: $token');
-  // }
+  final token = await FirebaseMessaging.instance.getToken();
+  debugPrint('token: $token');
 
   runApp(MultiProvider(
     providers: [
