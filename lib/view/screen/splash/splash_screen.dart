@@ -8,6 +8,7 @@ import 'package:lemirageelevators/util/color_resources.dart';
 import 'package:lemirageelevators/util/images.dart';
 import 'package:lemirageelevators/util/responsive.dart';
 import 'package:lemirageelevators/view/screen/auth/auth_screen.dart';
+import 'package:lemirageelevators/view/screen/home/home_screen.dart';
 import 'package:lemirageelevators/view/screen/onboarding/onboarding_screen.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
@@ -30,9 +31,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    bool _firstTime = true;
+    bool firstTime = true;
     _onConnectivityChanged = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      if(!_firstTime) {
+      if(!firstTime) {
         bool isNotConnected = result != ConnectivityResult.wifi && result != ConnectivityResult.mobile;
         isNotConnected ? SizedBox() : ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -40,8 +41,8 @@ class _SplashScreenState extends State<SplashScreen> {
           duration: Duration(seconds: isNotConnected ? 6000 : 3),
           content: Text(
             isNotConnected
-                ? getTranslated('no_connection', context)!
-                : getTranslated('connected', context)!,
+                ? getTranslated('no_connection', context)
+                : getTranslated('connected', context),
             textAlign: TextAlign.center,
           ),
         ));
@@ -49,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
           _route();
         }
       }
-      _firstTime = false;
+      firstTime = false;
     });
 
     _route();
@@ -108,7 +109,7 @@ class _SplashScreenState extends State<SplashScreen> {
           if (Provider.of<AuthProvider>(context, listen: false).isLoggedIn()) {
             await Provider.of<AuthProvider>(context,listen: false).getUser();
             Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (BuildContext context) => DashBoardScreen()));
+                builder: (BuildContext context) => HomeView()));
           }
           else {
             if(Provider.of<SplashProvider>(context, listen: false).showIntro()!) {

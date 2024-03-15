@@ -4,31 +4,34 @@ import 'package:lemirageelevators/provider/cart_provider.dart';
 import 'package:lemirageelevators/util/color_resources.dart';
 import 'package:lemirageelevators/util/textStyle.dart';
 import 'package:lemirageelevators/view/screen/cart/cart_screen.dart';
+import 'package:lemirageelevators/view/screen/home/home_screen.dart';
 import 'package:lemirageelevators/view/screen/order/order_screen.dart';
 import 'package:provider/provider.dart';
 import '../../../helper/network_info.dart';
 import '../../../localization/language_constrants.dart';
 import '../../../util/images.dart';
 import '../../baseWidget/dialog/exit_app_dialog.dart';
-import '../home/home_screen.dart';
 import '../more/more_screen.dart';
 import '../notification/notification_screen.dart';
 
 class DashBoardScreen extends StatefulWidget {
+  const DashBoardScreen({Key? key}) : super(key: key);
+
   @override
+  // ignore: library_private_types_in_public_api
   _DashBoardScreenState createState() => _DashBoardScreenState();
 }
 class _DashBoardScreenState extends State<DashBoardScreen> {
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
   int _pageIndex = 0;
   late List<Widget> _screens ;
-  GlobalKey<ScaffoldMessengerState> _scaffoldKey = GlobalKey();
+  final GlobalKey<ScaffoldMessengerState> _scaffoldKey = GlobalKey();
 
   @override
   void initState() {
     super.initState();
     _screens = [
-      HomePage(),
+      const HomeView(),
       CartScreen(isBacButtonExist: false),
       OrderScreen(isBacButtonExist: false),
       NotificationScreen(isBacButtonExist: false),
@@ -56,11 +59,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             currentIndex: _pageIndex,
             type: BottomNavigationBarType.fixed,
             items: [
-              _barItem(Images.home_image, getTranslated('home', context)!, 0),
-              _barItem(Images.cart_image, getTranslated('CART', context)!, 1),
-              _barItem(Images.shopping_image, getTranslated('orders', context)!, 2),
-              _barItem(Images.notification, getTranslated('notification', context)!, 3),
-              _barItem(Images.more_image, getTranslated('more', context)!, 4),
+              _barItem(Images.home_image, getTranslated('home', context), 0),
+              _barItem(Images.cart_image, getTranslated('CART', context), 1),
+              _barItem(Images.shopping_image, getTranslated('orders', context), 2),
+              _barItem(Images.notification, getTranslated('notification', context), 3),
+              _barItem(Images.more_image, getTranslated('more', context), 4),
             ],
             onTap: (int index) {
               _setPage(index);
@@ -69,7 +72,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           body: PageView.builder(
             controller: _pageController,
             itemCount: _screens.length,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index){
               return _screens[index];
             },
@@ -93,7 +96,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           shape: badge.BadgeShape.circle,
           badgeColor: Colors.red,
           elevation: 4,
-          padding: EdgeInsets.all(4),
+          padding: const EdgeInsets.all(4),
           position: badge.BadgePosition.topStart(top: -10),
           animationType: badge.BadgeAnimationType.scale,
           toAnimate: true,

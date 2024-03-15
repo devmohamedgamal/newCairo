@@ -8,9 +8,12 @@ class Images {
   static const String background = 'assets/images/background.png';
   static const String background_1 = 'assets/images/background_1.png';
   static const String background_auth = 'assets/images/background_auth.jpg';
-  static const String onboarding_image_one = 'assets/images/onboarding_image_one.png';
-  static const String onboarding_image_two = 'assets/images/onboarding_image_two.png';
-  static const String onboarding_image_three = 'assets/images/onboarding_image_three.png';
+  static const String onboarding_image_one =
+      'assets/images/onboarding_image_one.png';
+  static const String onboarding_image_two =
+      'assets/images/onboarding_image_two.png';
+  static const String onboarding_image_three =
+      'assets/images/onboarding_image_three.png';
   static const String secrecy = 'assets/images/secrecy.png';
   static const String google = 'assets/images/google.png';
   static const String facebook = 'assets/images/facebook.png';
@@ -29,7 +32,8 @@ class Images {
   static const String home_image = 'assets/images/home.png';
   static const String placeholder = 'assets/images/placeholder.jpg';
   static const String filter_image = 'assets/images/filter.svg';
-  static const String toolbar_background = 'assets/images/toolbar_background.jpg';
+  static const String toolbar_background =
+      'assets/images/toolbar_background.jpg';
   static const String cart_image = 'assets/images/cart.png';
   static const String login = 'assets/images/login.png';
   static const String wish_image = 'assets/images/wish.png';
@@ -38,7 +42,8 @@ class Images {
   static const String offers = 'assets/images/offers.png';
   static const String fast_delivery = 'assets/images/fast_delivery.png';
   static const String more_filled_image = 'assets/images/more_filled.png';
-  static const String notification_filled = 'assets/images/notification_filled.png';
+  static const String notification_filled =
+      'assets/images/notification_filled.png';
   static const String chats = 'assets/images/chats.png';
   static const String settings = 'assets/images/settings.png';
   static const String preference = 'assets/images/preference.png';
@@ -75,4 +80,15 @@ class Images {
   static const String paymobWallet = 'assets/images/paymob_wallet.png';
   static const String paymobValu = 'assets/images/paymob_valu.png';
   static const String paymobKiosk = 'assets/images/paymob_kiosk.png';
+
+  // home images
+  static const String ServicesIcon = 'assets/images/services.png';
+  static const String shipingIcon = 'assets/images/market.png';
+  static const String specialOfferIcon = 'assets/images/specialOffers.png';
+  static const String jopsIcon = 'assets/images/jops.png';
+  static const String carServicesIcon = 'assets/images/carpool.png';
+  static const String otlopIcon = 'assets/images/otlop.png';
+  static const String eventIcon = 'assets/images/events.png';
+  static const String newsIcon = 'assets/images/news.png';
+  static const String backgeoundHome = 'assets/images/main3.png';
 }

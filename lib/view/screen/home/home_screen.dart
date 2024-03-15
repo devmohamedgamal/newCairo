@@ -1,159 +1,62 @@
-import 'package:badges/badges.dart' as badge;
 import 'package:flutter/material.dart';
-import 'package:lemirageelevators/provider/cart_provider.dart';
-import 'package:lemirageelevators/provider/home_provider.dart';
-import 'package:lemirageelevators/view/screen/home/widget/banners_view.dart';
-import 'package:lemirageelevators/view/screen/home/widget/category_view.dart';
-import 'package:lemirageelevators/view/screen/home/widget/products_view.dart';
-import 'package:lemirageelevators/view/screen/home/widget/special_offers_view.dart';
-import 'package:provider/provider.dart';
-import '../../../localization/language_constrants.dart';
-import '../../../provider/search_provider.dart';
-import '../../../util/color_resources.dart';
-import '../../../util/dimensions.dart';
+
 import '../../../util/images.dart';
-import '../../../util/textStyle.dart';
-import '../../baseWidget/title_row.dart';
-import '../cart/cart_screen.dart';
-import '../category/all_category_screen.dart';
-import '../search/search_screen.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomeView extends StatelessWidget {
+  const HomeView({Key? key}) : super(key: key);
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-class _HomePageState extends State<HomePage> {
-  final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorResources.getHomeBg(context),
-      resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child: RefreshIndicator(
-          backgroundColor: Theme.of(context).primaryColor,
-          onRefresh: () async {
-            await Provider.of<HomeProvider>(context, listen: false).getHomeData(true, context);
-          },
-          child: CustomScrollView(
-            controller: _scrollController,
-            slivers: [
-              // App Bar
-              SliverAppBar(
-                floating: true,
-                elevation: 0,
-                centerTitle: false,
-                automaticallyImplyLeading: false,
-                backgroundColor: Theme.of(context).highlightColor,
-                title: Image.asset(Images.logo, height: 40),
-                actions: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) => CartScreen()));
-                    },
-                    icon: badge.Badge(
-                      badgeContent: Text(
-                          Provider.of<CartProvider>(context).cartList.length.toString(),
-                        style: cairoRegular.copyWith(
-                          fontSize: 10,
-                          color: ColorResources.WHITE
-                        )
-                      ),
-                      showBadge: Provider.of<CartProvider>(context).cartList.isNotEmpty,
-                      shape: badge.BadgeShape.circle,
-                      badgeColor: Colors.red,
-                      elevation: 4,
-                      padding: const EdgeInsets.all(4),
-                      position: badge.BadgePosition.topStart(top: -10, start: -5),
-                      animationType: badge.BadgeAnimationType.scale,
-                      toAnimate: true,
-                      child: const Icon(
-                        Icons.shopping_cart,
-                        color: Color(0xff666666),
-                        size: 25,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-
-              // Search Button
-              SliverPersistentHeader(
-                  pinned: true,
-                  delegate: SliverDelegate(
-                      child: InkWell(
-                        onTap: () {
-                          Provider.of<SearchProvider>(context, listen: false).cleanSearchProduct();
-                          Provider.of<SearchProvider>(context, listen: false).initHistoryList();
-                          Navigator.push(context, MaterialPageRoute(builder: (_) => SearchScreen()));
-                          },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL, vertical: 2),
-                          color: Theme.of(context).highlightColor,
-                          alignment: Alignment.center,
-                          child: Container(
-                            padding: const EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                            height: 50,
-                            alignment: Alignment.centerLeft,
-                            decoration: BoxDecoration(
-                              color: ColorResources.getGrey(context),
-                              borderRadius: BorderRadius.circular(
-                              Dimensions.PADDING_SIZE_SMALL),),
-                            child: Row(
-                                children: [
-                                  Icon(
-                                      Icons.search,
-                                      color: ColorResources.getPrimary(context),
-                                      size: Dimensions.ICON_SIZE_LARGE),
-                                  const SizedBox(width: 5),
-                                  Text(getTranslated('SEARCH_HINT', context)!, style:
-                                  cairoRegular.copyWith(color: Theme.of(context).hintColor)),
-                                ]),
-                          ),
-                        ),
-                      ),
-                  ),
-              ),
-
-              SliverToBoxAdapter(
-                child: Column(
-                  children: [
-                    /// sliders
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
-                      child: BannersView(),
-                    ),
-
-                    /// Category
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(
-                          Dimensions.PADDING_SIZE_SMALL,
-                          Dimensions.PADDING_SIZE_DEFAULT,
-                          Dimensions.PADDING_SIZE_SMALL,
-                          Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                      child: TitleRow(
-                          title: getTranslated('CATEGORY', context),
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (_) => AllCategoryScreen()));
-                          }),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL),
-                      child: CategoryView(isHomePage: true),
-                    ),
-
-                    /// Featured Deal
-                    SpecialOffersView(),
-
-                    // all product home
-                    ProductView(isHomePage: true),
-                  ],
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(Images.backgeoundHome),
+          ),
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+            child: GridView.count(
+              crossAxisCount: 2,
+              mainAxisSpacing: 30,
+              crossAxisSpacing: 30,
+              childAspectRatio: 0.9,
+              children: const [
+                CustomCategoryItem(
+                  imageUrl: Images.ServicesIcon,
+                  name: 'دليل الخدمات',
                 ),
-              ),
-            ],
+                CustomCategoryItem(
+                  imageUrl: Images.shipingIcon,
+                  name: 'بيع و أشتري',
+                ),
+                CustomCategoryItem(
+                  imageUrl: Images.specialOfferIcon,
+                  name: 'عروض',
+                ),
+                CustomCategoryItem(
+                  imageUrl: Images.jopsIcon,
+                  name: 'وظائف',
+                ),
+                CustomCategoryItem(
+                  imageUrl: Images.carServicesIcon,
+                  name: 'توصيلة',
+                ),
+                CustomCategoryItem(
+                  imageUrl: Images.otlopIcon,
+                  name: 'أطلب',
+                ),
+                CustomCategoryItem(
+                  imageUrl: Images.eventIcon,
+                  name: 'ايفنتات',
+                ),
+                CustomCategoryItem(
+                  imageUrl: Images.newsIcon,
+                  name: 'أخبار',
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -161,23 +64,43 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class SliverDelegate extends SliverPersistentHeaderDelegate {
-  Widget child;
-  SliverDelegate({required this.child});
+class CustomCategoryItem extends StatelessWidget {
+  const CustomCategoryItem(
+      {Key? key, required this.name, required this.imageUrl})
+      : super(key: key);
+  final String name, imageUrl;
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return child;
-  }
-
-  @override
-  double get maxExtent => 50;
-
-  @override
-  double get minExtent => 50;
-
-  @override
-  bool shouldRebuild(SliverDelegate oldDelegate) {
-    return oldDelegate.maxExtent != 50 || oldDelegate.minExtent != 50 || child != oldDelegate.child;
+  Widget build(BuildContext context) {
+    return Container(
+      height: 180,
+      width: 150,
+      decoration: const BoxDecoration(
+        color: Color(0xff8FC3FD),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(1),
+          topRight: Radius.circular(100),
+          bottomLeft: Radius.circular(100),
+          bottomRight: Radius.circular(100),
+        ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            imageUrl,
+            height: 100,
+          ),
+          Text(
+            name,
+            style: const TextStyle(
+              fontFamily: 'Cairo',
+              color: Colors.white,
+              fontSize: 20,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
