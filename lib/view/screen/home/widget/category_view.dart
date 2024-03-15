@@ -5,7 +5,6 @@ import 'package:lemirageelevators/util/app_constants.dart';
 import 'package:lemirageelevators/util/textStyle.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
-import '../../../../provider/localization_provider.dart';
 import '../../../../provider/theme_provider.dart';
 import '../../../../util/color_resources.dart';
 import '../../../../util/dimensions.dart';
@@ -14,15 +13,15 @@ import '../../product/brand_and_category_product_screen.dart';
 
 class CategoryView extends StatelessWidget {
   final bool isHomePage;
-  CategoryView({required this.isHomePage});
+  const CategoryView({Key? key, required this.isHomePage}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeProvider>(
       builder: (context, categoryProvider, child) {
-        return categoryProvider.categories.length != 0
+        return categoryProvider.categories.isNotEmpty
             ? GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
                   childAspectRatio: (1 / 1),
                 ),
@@ -32,7 +31,7 @@ class CategoryView extends StatelessWidget {
                         : categoryProvider.categories.length
                     : categoryProvider.categories.length,
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
                   return InkWell(
                     onTap: () {
@@ -47,7 +46,7 @@ class CategoryView extends StatelessWidget {
                                   )));
                     },
                     child: Container(
-                      margin: EdgeInsets.all(3),
+                      margin: const EdgeInsets.all(3),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(
                             Dimensions.PADDING_SIZE_SMALL),
@@ -57,7 +56,7 @@ class CategoryView extends StatelessWidget {
                             color: Colors.grey.withOpacity(0.3),
                             spreadRadius: 1,
                             blurRadius: 3,
-                            offset: Offset(0, 3), // changes position of shadow
+                            offset: const Offset(0, 3), // changes position of shadow
                           )
                         ],
                       ),
@@ -67,10 +66,10 @@ class CategoryView extends StatelessWidget {
                             Expanded(
                               flex: 7,
                               child: Padding(
-                                padding: EdgeInsets.all(
+                                padding: const EdgeInsets.all(
                                     Dimensions.PADDING_SIZE_EXTRA_SMALL),
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.vertical(
+                                  borderRadius: const BorderRadius.vertical(
                                       top: Radius.circular(10)),
                                   child: FadeInImage.assetNetwork(
                                     placeholder: Images.placeholder,fit: BoxFit.cover,
@@ -87,7 +86,7 @@ class CategoryView extends StatelessWidget {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: ColorResources.getTextBg(context),
-                                    borderRadius: BorderRadius.only(
+                                    borderRadius: const BorderRadius.only(
                                         bottomLeft: Radius.circular(10),
                                         bottomRight: Radius.circular(10)),
                                   ),
@@ -121,13 +120,13 @@ class CategoryShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 4,
         childAspectRatio: (1 / 1),
       ),
       itemCount: 8,
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (BuildContext context, int index) {
         return Container(
           decoration: BoxDecoration(boxShadow: [
@@ -137,7 +136,7 @@ class CategoryShimmer extends StatelessWidget {
                 spreadRadius: 2,
                 blurRadius: 5)
           ]),
-          margin: EdgeInsets.all(3),
+          margin: const EdgeInsets.all(3),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
             Expanded(
@@ -146,9 +145,9 @@ class CategoryShimmer extends StatelessWidget {
                 baseColor: Colors.grey[300]!,
                 highlightColor: Colors.grey[100]!,
                 enabled:
-                    Provider.of<HomeProvider>(context).categories.length == 0,
+                    Provider.of<HomeProvider>(context).categories.isEmpty,
                 child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
@@ -162,7 +161,7 @@ class CategoryShimmer extends StatelessWidget {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: ColorResources.getTextBg(context),
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(10),
                       bottomRight: Radius.circular(10)),
                 ),
@@ -170,11 +169,11 @@ class CategoryShimmer extends StatelessWidget {
                   baseColor: Colors.grey[300]!,
                   highlightColor: Colors.grey[100]!,
                   enabled:
-                      Provider.of<HomeProvider>(context).categories.length == 0,
+                      Provider.of<HomeProvider>(context).categories.isEmpty,
                   child: Container(
                       height: 10,
                       color: Colors.white,
-                      margin: EdgeInsets.only(left: 15, right: 15)),
+                      margin: const EdgeInsets.only(left: 15, right: 15)),
                 ),
               ),
             ),

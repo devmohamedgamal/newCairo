@@ -14,6 +14,8 @@ import '../../../util/images.dart';
 import '../../baseWidget/custom_app_bar.dart';
 
 class AboutScreen extends StatelessWidget {
+  const AboutScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,8 +26,8 @@ class AboutScreen extends StatelessWidget {
           Consumer<SplashProvider>(builder: (context, appInfo, child) {
             return Expanded(
               child: SingleChildScrollView(
-                  padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                  physics: BouncingScrollPhysics(),
+                  padding: const EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                  physics: const BouncingScrollPhysics(),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +54,7 @@ class AboutScreen extends StatelessWidget {
                             style: cairoSemiBold.copyWith(color: ColorResources.ORANGE),
                           ),
 
-                          SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                          const SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                           SizedBox(
                             // height: 100,
                             child: Html(data:
@@ -70,7 +72,7 @@ class AboutScreen extends StatelessWidget {
                       ),
 
                       richText(getTranslated('services_provided_company', context)!, appInfo.appInfo!.tags!),
-                      SizedBox(height: Dimensions.PADDING_SIZE_DEFAULT),
+                      const SizedBox(height: Dimensions.PADDING_SIZE_DEFAULT),
 
                       // addresses
                       lineText(getTranslated('company_addresses', context)!,context),
@@ -84,7 +86,7 @@ class AboutScreen extends StatelessWidget {
                         style: cairoSemiBold,
                       ),
 
-                      SizedBox(height: Dimensions.PADDING_SIZE_DEFAULT),
+                      const SizedBox(height: Dimensions.PADDING_SIZE_DEFAULT),
 
                       // contact
                       lineText(getTranslated('contact_company', context)!,context),
@@ -140,13 +142,13 @@ class AboutScreen extends StatelessWidget {
                         children: [
                           IconButton(
                               onPressed: () => _launchUrl(appInfo.appInfo!.facebook!),
-                              icon: Icon(Icons.facebook,size: 40,color: ColorResources.BLUE)
+                              icon: const Icon(Icons.facebook,size: 40,color: ColorResources.BLUE)
                           ),
 
                           // todo: handle whatsapp icon instead of facebook
                           IconButton(
                               onPressed: () => _launchUrl(appInfo.appInfo!.whatsapp!),
-                              icon: Icon(Icons.facebook,size: 40,color: ColorResources.GREEN)
+                              icon: const Icon(Icons.facebook,size: 40,color: ColorResources.GREEN)
                           ),
 
                           IconButton(
@@ -155,7 +157,7 @@ class AboutScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: Dimensions.PADDING_SIZE_DEFAULT),
+                      const SizedBox(height: Dimensions.PADDING_SIZE_DEFAULT),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -166,7 +168,7 @@ class AboutScreen extends StatelessWidget {
 
                           IconButton(
                               onPressed: () => _launchUrl(appInfo.appInfo!.telegram!),
-                              icon: Icon(Icons.telegram_outlined,size: 40,color: ColorResources.BLUE)
+                              icon: const Icon(Icons.telegram_outlined,size: 40,color: ColorResources.BLUE)
                           ),
 
 

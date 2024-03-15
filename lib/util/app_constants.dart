@@ -5,11 +5,11 @@ import 'package:lemirageelevators/util/images.dart';
 import '../data/model/response/language_model.dart';
 
 class AppConstants {
-  static const String APP_NAME = 'MORC';  // NAME APP
+  static const String APP_NAME = 'Newcairo';  // NAME APP
 
   // ALL URLs
   // static const String BASE_URL = 'https://www.gddeaf.net/App_api/';
-  static const String _DOMAIN = 'http://213.136.84.116/~souq/mr_test';
+  static const String _DOMAIN = 'https://www.elbascet.com/newcairo';
   static const String BASE_URL = '$_DOMAIN/App_api/';
   static const String BASE_URL_IMAGE = "$_DOMAIN/uploads/";
 

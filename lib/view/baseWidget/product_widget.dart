@@ -21,13 +21,13 @@ class ProductWidget extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.push(context, PageRouteBuilder(
-          transitionDuration: Duration(milliseconds: 1000),
+          transitionDuration: const Duration(milliseconds: 1000),
           pageBuilder: (context, anim1, anim2) => 
               ProductDetails(product: product),
         ));
       },
       child: Container(
-        margin: EdgeInsets.all(5),
+        margin: const EdgeInsets.all(5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Theme.of(context).highlightColor,
@@ -42,7 +42,7 @@ class ProductWidget extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 color: ColorResources.getIconBg(context),
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(10), topRight: Radius.circular(10)),
               ),
               child: FadeInImage.assetNetwork(
@@ -54,7 +54,7 @@ class ProductWidget extends StatelessWidget {
 
             // Product Details
             Padding(
-              padding: EdgeInsets.fromLTRB(
+              padding: const EdgeInsets.fromLTRB(
                   Dimensions.PADDING_SIZE_SMALL,
                   Dimensions.PADDING_SIZE_EXTRA_SMALL,
                   Dimensions.PADDING_SIZE_SMALL,
@@ -71,7 +71,7 @@ class ProductWidget extends StatelessWidget {
                             : product.title ?? "",
                         style: cairoMedium.copyWith(fontSize: 12),
                         maxLines: 2, overflow: TextOverflow.ellipsis),
-                    SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                    const SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
 
                     Row(children: [
                       Text(product.price.toString() + " ${getTranslated('currency', context)}",
@@ -79,7 +79,7 @@ class ProductWidget extends StatelessWidget {
                             color: ColorResources.getPrimary(context)),
                       ),
 
-                      Expanded(child: SizedBox.shrink()),
+                      const Expanded(child: SizedBox.shrink()),
 
                       Text(product.rate != null
                           ? product.rate!.length != 0 
@@ -97,7 +97,7 @@ class ProductWidget extends StatelessWidget {
                           color: Provider.of<ThemeProvider>(context).darkTheme
                               ? Colors.white : Colors.orange, size: 15),
                     ]),
-                    SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                    const SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
 
                     product.priceBefore != null
                         ? Text(
@@ -108,7 +108,7 @@ class ProductWidget extends StatelessWidget {
                         fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL,
                       ),
                     )
-                        : SizedBox.shrink(),
+                        : const SizedBox.shrink(),
                   ],
                 ),
               ),

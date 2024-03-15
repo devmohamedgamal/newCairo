@@ -23,7 +23,7 @@ class HomeProvider extends ChangeNotifier {
   int? get categorySelectedIndex => _categorySelectedIndex;
 
   Future<void> getHomeData(bool reload,BuildContext context) async {
-    if (_sliders.length == 0 || reload) {
+    if (_sliders.isEmpty || reload) {
       ApiResponse apiResponse = await homeRepo.getHomeData();
       if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
         _sliders = [];

@@ -19,6 +19,8 @@ import '../category/all_category_screen.dart';
 import '../search/search_screen.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -59,15 +61,15 @@ class _HomePageState extends State<HomePage> {
                           color: ColorResources.WHITE
                         )
                       ),
-                      showBadge: Provider.of<CartProvider>(context).cartList.length > 0,
+                      showBadge: Provider.of<CartProvider>(context).cartList.isNotEmpty,
                       shape: badge.BadgeShape.circle,
                       badgeColor: Colors.red,
                       elevation: 4,
-                      padding: EdgeInsets.all(4),
+                      padding: const EdgeInsets.all(4),
                       position: badge.BadgePosition.topStart(top: -10, start: -5),
                       animationType: badge.BadgeAnimationType.scale,
                       toAnimate: true,
-                      child: Icon(
+                      child: const Icon(
                         Icons.shopping_cart,
                         color: Color(0xff666666),
                         size: 25,
@@ -88,11 +90,11 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(context, MaterialPageRoute(builder: (_) => SearchScreen()));
                           },
                         child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL, vertical: 2),
+                          padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL, vertical: 2),
                           color: Theme.of(context).highlightColor,
                           alignment: Alignment.center,
                           child: Container(
-                            padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                            padding: const EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
                             height: 50,
                             alignment: Alignment.centerLeft,
                             decoration: BoxDecoration(
@@ -105,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                                       Icons.search,
                                       color: ColorResources.getPrimary(context),
                                       size: Dimensions.ICON_SIZE_LARGE),
-                                  SizedBox(width: 5),
+                                  const SizedBox(width: 5),
                                   Text(getTranslated('SEARCH_HINT', context)!, style:
                                   cairoRegular.copyWith(color: Theme.of(context).hintColor)),
                                 ]),
@@ -121,25 +123,25 @@ class _HomePageState extends State<HomePage> {
                     /// sliders
                     Padding(
                       padding:
-                          EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
+                          const EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
                       child: BannersView(),
                     ),
 
                     /// Category
                     Padding(
-                      padding: EdgeInsets.fromLTRB(
+                      padding: const EdgeInsets.fromLTRB(
                           Dimensions.PADDING_SIZE_SMALL,
                           Dimensions.PADDING_SIZE_DEFAULT,
                           Dimensions.PADDING_SIZE_SMALL,
                           Dimensions.PADDING_SIZE_EXTRA_SMALL),
                       child: TitleRow(
-                          title: getTranslated('CATEGORY', context)!,
+                          title: getTranslated('CATEGORY', context),
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(builder: (_) => AllCategoryScreen()));
                           }),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL),
+                      padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL),
                       child: CategoryView(isHomePage: true),
                     ),
 

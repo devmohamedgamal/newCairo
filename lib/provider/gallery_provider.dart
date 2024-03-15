@@ -41,6 +41,7 @@ class GalleryProvider extends ChangeNotifier {
      _albums = albumsModel.albums;
       }
     else {
+        // ignore: use_build_context_synchronously
         ApiChecker.checkApi(context, apiResponse);
       }
     notifyListeners();
