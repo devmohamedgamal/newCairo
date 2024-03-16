@@ -6,12 +6,14 @@ class VideosModel {
   List<Video>? videos;
 
   factory VideosModel.fromJson(Map<String, dynamic> json) => VideosModel(
-    videos: List<Video>.from(json["fetched_video_data"].map((x) => Video.fromJson(x))),
-  );
+        videos: List<Video>.from(
+            json["fetched_video_data"].map((x) => Video.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "fetched_video_data": List<dynamic>.from(videos!.map((x) => x.toJson())),
-  };
+        "fetched_video_data":
+            List<dynamic>.from(videos!.map((x) => x.toJson())),
+      };
 }
 
 class Video {
@@ -36,24 +38,24 @@ class Video {
   String? status;
 
   factory Video.fromJson(Map<String, dynamic> json) => Video(
-    id: json["id"],
-    title: json["title"],
-    description: json["description"],
-    youtube: json["youtube"],
-    titleEn: json["titleEN"],
-    updatedAt: DateTime.parse(json["updated_at"]),
-    descriptionEn: json["descriptionEN"],
-    status: json["status"],
-  );
+        id: json["id"],
+        title: json["title"],
+        description: json["description"],
+        youtube: json["youtube"],
+        titleEn: json["titleEN"],
+        updatedAt: DateTime.parse(json["updated_at"]),
+        descriptionEn: json["descriptionEN"],
+        status: json["status"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "title": title,
-    "description": description,
-    "youtube": youtube,
-    "titleEN": titleEn,
-    "updated_at": updatedAt!.toIso8601String(),
-    "descriptionEN": descriptionEn,
-    "status": status,
-  };
+        "id": id,
+        "title": title,
+        "description": description,
+        "youtube": youtube,
+        "titleEN": titleEn,
+        "updated_at": updatedAt!.toIso8601String(),
+        "descriptionEN": descriptionEn,
+        "status": status,
+      };
 }

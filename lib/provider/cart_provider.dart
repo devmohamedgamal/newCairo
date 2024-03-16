@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lemirageelevators/data/model/response/area_model.dart';
 import 'package:lemirageelevators/data/model/response/city_model.dart';
-import 'package:lemirageelevators/data/model/response/home_model.dart';
-import 'package:lemirageelevators/helper/price_converter.dart';
+import '../data/model/response/Product/product.dart';
 import '../data/model/response/base/api_response.dart';
 import '../data/model/response/items_cart_model.dart';
 import '../data/model/response/governorate_model.dart';
@@ -54,14 +53,18 @@ class CartProvider extends ChangeNotifier {
   /* double get shippingPrice => _shippingAreasIndex == null ? 0 : _shippingAreasList[_shippingAreasIndex!].price; */
   // GovernorateModel? get selectedGov => _shippingPlacesIndex == null || _shippingPlacesList.isEmpty ? null : _shippingPlacesList[_shippingPlacesIndex!];
   // ShippingCityModel? get selectedCity => _shippingCitiesIndex == null || _shippingCitiesList.isEmpty ? null : _shippingCitiesList[_shippingCitiesIndex!];
-  ShippingAreaModel? get selectedShippingArea => _shippingAreasIndex == null || _shippingAreasList.isEmpty ? null : _shippingAreasList[_shippingAreasIndex!];
-  double _getShippingPrice(int? index) => index == null ? 0 : _shippingAreasList[index].price;
+  ShippingAreaModel? get selectedShippingArea =>
+      _shippingAreasIndex == null || _shippingAreasList.isEmpty
+          ? null
+          : _shippingAreasList[_shippingAreasIndex!];
+  double _getShippingPrice(int? index) =>
+      index == null ? 0 : _shippingAreasList[index].price;
   double get shippingPrice => _shippingPrice;
 
   List<ShippingCityModel> get shippingCitiesList => _shippingCitiesList;
 
   Future<void> getSuggestedProductsIfNotExists(String clientId) async {
-    if(_suggestedProducts.isEmpty){
+    if (_suggestedProducts.isEmpty) {
       return getSuggestedProducts(clientId);
     }
   }
@@ -95,14 +98,16 @@ class CartProvider extends ChangeNotifier {
         break;
       }
     }
-    debugPrint('- product $productId ${productInCart ? 'IS ALREADY IN THE CART' : 'is not in the cart'}');
+    debugPrint(
+        '- product $productId ${productInCart ? 'IS ALREADY IN THE CART' : 'is not in the cart'}');
     if (!productInCart) {
       return _addSuggestedProduct(clientId, productId);
     }
   }
 
   Future<void> _addSuggestedProduct(String clientId, String? productId) async {
-    final apiResponse = await cartRepo.addSuggestedProducts(clientId, productId);
+    final apiResponse =
+        await cartRepo.addSuggestedProducts(clientId, productId);
     if (apiResponse.response?.statusCode == 200) {
       // You could do something here!
     }
@@ -119,16 +124,15 @@ class CartProvider extends ChangeNotifier {
     _amount += _shippingPrice;
   }
 
-
   void initPaymentTypeList(BuildContext context) async {
     if (_paymentTypeList.length == 0) {
       ApiResponse apiResponse = await cartRepo.getPaymentTypeList(context);
-      if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
+      if (apiResponse.response != null &&
+          apiResponse.response!.statusCode == 200) {
         _paymentTypeList.clear();
         _paymentTypeList.addAll(apiResponse.response!.data);
         _paymentType = apiResponse.response!.data[0];
-      }
-      else {
+      } else {
         ApiChecker.checkApi(context, apiResponse);
       }
       notifyListeners();
@@ -137,13 +141,11 @@ class CartProvider extends ChangeNotifier {
 
   updatePaymentType(String? value) {
     _paymentType = value!;
-    if(value.contains("Google")){
+    if (value.contains("Google")) {
       _indexType = 1;
-    }
-    else if(value.contains("Apple")){
+    } else if (value.contains("Apple")) {
       _indexType = 2;
-    }
-    else if(value.contains("Credit")){
+    } else if (value.contains("Credit")) {
       _indexType = 3;
     }
     notifyListeners();
@@ -170,10 +172,10 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<int?> isAddedInCart(String? productId, String? variantId)async{
+  Future<int?> isAddedInCart(String? productId, String? variantId) async {
     int? index = -1;
-    index = _cartList.indexWhere((element) => (element.id == productId &&
-        element.variantId == variantId));
+    index = _cartList.indexWhere((element) =>
+        (element.id == productId && element.variantId == variantId));
     return index;
   }
 
@@ -191,16 +193,20 @@ class CartProvider extends ChangeNotifier {
 
   Future<void> getShippingPlaces(BuildContext context) async {
     final apiResponse = await cartRepo.getShippingPlaces();
-    if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
+    if (apiResponse.response != null &&
+        apiResponse.response!.statusCode == 200) {
       _shippingPlacesList = [];
-      _shippingPlacesList = List.from(apiResponse.response!.data['shipping']).map((e) => GovernorateModel.fromJson(e)).toList();
+      _shippingPlacesList = List.from(apiResponse.response!.data['shipping'])
+          .map((e) => GovernorateModel.fromJson(e))
+          .toList();
     } else {
       ApiChecker.checkApi(context, apiResponse);
     }
     notifyListeners();
   }
 
-  Future<void> getShippingCities(BuildContext context, {required int govIndex}) async {
+  Future<void> getShippingCities(BuildContext context,
+      {required int govIndex}) async {
     _shippingCitiesIndex = null;
     _shippingCitiesList = [];
     _shippingAreasIndex = null;
@@ -208,10 +214,14 @@ class CartProvider extends ChangeNotifier {
     _isLoadingCities = true;
     notifyListeners();
 
-    final apiResponse = await cartRepo.getShippingCities(_shippingPlacesList[govIndex].govId);
-    if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
+    final apiResponse =
+        await cartRepo.getShippingCities(_shippingPlacesList[govIndex].govId);
+    if (apiResponse.response != null &&
+        apiResponse.response!.statusCode == 200) {
       _shippingPlacesIndex = govIndex;
-      _shippingCitiesList = List.from(apiResponse.response!.data).map((e) => ShippingCityModel.fromJson(e)).toList();
+      _shippingCitiesList = List.from(apiResponse.response!.data)
+          .map((e) => ShippingCityModel.fromJson(e))
+          .toList();
     } else {
       ApiChecker.checkApi(context, apiResponse);
     }
@@ -219,16 +229,21 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getShippingAreas(BuildContext context, {required int cityIndex}) async {
+  Future<void> getShippingAreas(BuildContext context,
+      {required int cityIndex}) async {
     _shippingAreasIndex = null;
     _shippingAreasList = [];
     _isLoadingAreas = true;
     notifyListeners();
 
-    final apiResponse = await cartRepo.getShippingAreas(_shippingCitiesList[cityIndex].zoneId);
-    if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
+    final apiResponse =
+        await cartRepo.getShippingAreas(_shippingCitiesList[cityIndex].zoneId);
+    if (apiResponse.response != null &&
+        apiResponse.response!.statusCode == 200) {
       _shippingCitiesIndex = cityIndex;
-      _shippingAreasList = List.from(apiResponse.response!.data).map((e) => ShippingAreaModel.fromJson(e)).toList();
+      _shippingAreasList = List.from(apiResponse.response!.data)
+          .map((e) => ShippingAreaModel.fromJson(e))
+          .toList();
     } else {
       ApiChecker.checkApi(context, apiResponse);
     }
@@ -236,7 +251,6 @@ class CartProvider extends ChangeNotifier {
     _isLoadingAreas = false;
     notifyListeners();
   }
-
 
   void setSelectedShippingAreaId(int index) {
     debugPrint('setSelectedShippingAreaId');

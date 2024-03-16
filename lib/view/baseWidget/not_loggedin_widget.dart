@@ -17,15 +17,17 @@ class NotLoggedInWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(Images.login, height: height(context) * 0.2,
-                width: width(context)),
+            Image.asset(Images.login,
+                height: height(context) * 0.2, width: width(context)),
             SizedBox(height: height(context) * 0.05),
             Text(getTranslated('PLEASE_LOGIN_FIRST', context)!,
                 textAlign: TextAlign.center,
-                style: cairoSemiBold.copyWith(fontSize: height(context) * 0.017)),
+                style:
+                    cairoSemiBold.copyWith(fontSize: height(context) * 0.017)),
             SizedBox(height: height(context) * 0.05),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_LARGE),
+              padding: EdgeInsets.symmetric(
+                  horizontal: Dimensions.PADDING_SIZE_LARGE),
               child: CustomButton(
                 buttonText: getTranslated('LOGIN', context)!,
                 onTap: () => Navigator.push(context,
@@ -34,17 +36,20 @@ class NotLoggedInWidget extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Provider.of<AuthProvider>(context, listen: false).updateSelectedIndex(1);
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AuthScreen(initialPage: 1)));
+                Provider.of<AuthProvider>(context, listen: false)
+                    .updateSelectedIndex(1);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AuthScreen(initialPage: 1)));
               },
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: height(context) * 0.02),
                 child: Text(getTranslated('create_new_account', context)!,
                     style: cairoRegular.copyWith(
-                  color: Theme.of(context).primaryColor,
-                  fontSize: Dimensions.FONT_SIZE_SMALL,
-                )),
+                      color: Theme.of(context).primaryColor,
+                      fontSize: Dimensions.FONT_SIZE_SMALL,
+                    )),
               ),
             ),
           ],

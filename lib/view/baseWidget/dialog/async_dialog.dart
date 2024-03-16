@@ -19,22 +19,17 @@ class AsyncDialog extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20),
               child: SizedBox(
-                  child: LoadingAnimationWidget.fourRotatingDots(
-                    color: ColorResources.GREY,
-                    size: 60,
-                  ),
+                child: LoadingAnimationWidget.fourRotatingDots(
+                  color: ColorResources.GREY,
+                  size: 60,
+                ),
               ),
             ),
-
             HSpacer(10),
-
             Text(getTranslated("async", context)!,
                 style: cairoRegular.copyWith(
-                    color: ColorResources.WHITE,
-                  fontSize: 18
-                )),
-
-      ]),
+                    color: ColorResources.WHITE, fontSize: 18)),
+          ]),
     );
   }
 }

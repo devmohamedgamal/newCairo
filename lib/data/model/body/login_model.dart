@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_collection_literals, unnecessary_this
 import 'package:dio/dio.dart';
+
 class LoginModel {
   String? email;
   String? password;
@@ -17,11 +18,11 @@ class LoginModel {
     token = json['token'];
   }
 
-  Map<String, dynamic> toJson() =>{
-    "email": email,
-    "password": password,
-    "token": token,
-  };
+  Map<String, dynamic> toJson() => {
+        "email": email,
+        "password": password,
+        "token": token,
+      };
 
   FormData toJsonApi() {
     return FormData.fromMap({

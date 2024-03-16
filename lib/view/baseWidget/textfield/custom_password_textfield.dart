@@ -9,10 +9,18 @@ class CustomPasswordTextField extends StatefulWidget {
   final FocusNode? focusNode;
   final FocusNode? nextNode;
   final TextInputAction? textInputAction;
-  CustomPasswordTextField({this.controller, this.hintTxt,this.image, this.focusNode, this.nextNode, this.textInputAction});
+  CustomPasswordTextField(
+      {this.controller,
+      this.hintTxt,
+      this.image,
+      this.focusNode,
+      this.nextNode,
+      this.textInputAction});
   @override
-  _CustomPasswordTextFieldState createState() => _CustomPasswordTextFieldState();
+  _CustomPasswordTextFieldState createState() =>
+      _CustomPasswordTextFieldState();
 }
+
 class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
   bool _obscureText = true;
 
@@ -31,7 +39,11 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
         color: Theme.of(context).highlightColor,
         borderRadius: BorderRadius.circular(6),
         boxShadow: [
-          BoxShadow(color: Colors.grey.withOpacity(0.2), spreadRadius: 1, blurRadius: 7, offset: Offset(0, 1)) // changes position of shadow
+          BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: 1,
+              blurRadius: 7,
+              offset: Offset(0, 1)) // changes position of shadow
         ],
       ),
       child: TextFormField(
@@ -51,15 +63,21 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
           return null;
         },
         decoration: InputDecoration(
-            suffixIcon: IconButton(icon: Icon(_obscureText ? Icons.visibility_off : Icons.visibility), onPressed: _toggle),
+            suffixIcon: IconButton(
+                icon: Icon(
+                    _obscureText ? Icons.visibility_off : Icons.visibility),
+                onPressed: _toggle),
             // prefixIcon: Padding(padding: EdgeInsets.all(10), child: SvgPicture.asset(widget.image!)),
             hintText: widget.hintTxt ?? '',
-            contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 15),
+            contentPadding:
+                EdgeInsets.symmetric(vertical: 12.0, horizontal: 15),
             isDense: true,
             filled: true,
             fillColor: Theme.of(context).highlightColor,
-            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor)),
-            hintStyle: cairoRegular.copyWith(color: Theme.of(context).hintColor),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Theme.of(context).primaryColor)),
+            hintStyle:
+                cairoRegular.copyWith(color: Theme.of(context).hintColor),
             border: InputBorder.none),
       ),
     );

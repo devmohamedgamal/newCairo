@@ -9,17 +9,17 @@ class ReviewModel {
   String? _createdAt;
   String? _updatedAt;
 
-  ReviewModel(
-      {int? id,
-        int? productId,
-        int? customerId,
-        String? comment,
-        List<String>? attachment,
-        int? rating,
-        int? status,
-        String? createdAt,
-        String? updatedAt,
-        }) {
+  ReviewModel({
+    int? id,
+    int? productId,
+    int? customerId,
+    String? comment,
+    List<String>? attachment,
+    int? rating,
+    int? status,
+    String? createdAt,
+    String? updatedAt,
+  }) {
     this._id = id;
     this._productId = productId;
     this._customerId = customerId;

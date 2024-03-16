@@ -9,8 +9,14 @@ class SocialLoginModel {
   String? address;
   String? tokenId;
 
-  SocialLoginModel({this.uuiId,this.fullName,this.clientName,
-    this.mobile,this.email,this.address,this.tokenId});
+  SocialLoginModel(
+      {this.uuiId,
+      this.fullName,
+      this.clientName,
+      this.mobile,
+      this.email,
+      this.address,
+      this.tokenId});
 
   SocialLoginModel.fromJson(Map<String, dynamic> json) {
     uuiId = json['uuiid'];

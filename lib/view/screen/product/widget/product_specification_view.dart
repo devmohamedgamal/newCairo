@@ -16,18 +16,22 @@ class ProductSpecification extends StatelessWidget {
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
     return Column(
       children: [
-        TitleRow(title: getTranslated('specification', context)!,
-            isDetailsPage: true, onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (_) => SpecificationScreen(
-                  details: details)));
-        }),
-
+        TitleRow(
+            title: getTranslated('specification', context)!,
+            isDetailsPage: true,
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => SpecificationScreen(details: details)));
+            }),
         SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-        details.isNotEmpty ? SizedBox(
-          height: 100,
-          child: Html(data: details),
-        ) : Center(child: Text('No specification')),
+        details.isNotEmpty
+            ? SizedBox(
+                height: 100,
+                child: Html(data: details),
+              )
+            : Center(child: Text('No specification')),
       ],
     );
   }

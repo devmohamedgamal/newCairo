@@ -57,7 +57,11 @@ class CustomTextField extends StatelessWidget {
         color: Theme.of(context).highlightColor,
         borderRadius: BorderRadius.circular(6),
         boxShadow: [
-          BoxShadow(color: Colors.grey.withOpacity(0.1), spreadRadius: 1, blurRadius: 3, offset: Offset(0, 1)) // changes position of shadow
+          BoxShadow(
+              color: Colors.grey.withOpacity(0.1),
+              spreadRadius: 1,
+              blurRadius: 3,
+              offset: Offset(0, 1)) // changes position of shadow
         ],
       ),
       child: TextFormField(
@@ -73,36 +77,40 @@ class CustomTextField extends StatelessWidget {
         onFieldSubmitted: (v) {
           FocusScope.of(context).requestFocus(nextNode);
         },
-        inputFormatters: [isPhoneNumber ? FilteringTextInputFormatter.digitsOnly : FilteringTextInputFormatter.singleLineFormatter],
-        validator: (input){
-          if(input!.isEmpty){
-            if(isValidator){
-              return validatorMessage??"";
+        inputFormatters: [
+          isPhoneNumber
+              ? FilteringTextInputFormatter.digitsOnly
+              : FilteringTextInputFormatter.singleLineFormatter
+        ],
+        validator: (input) {
+          if (input!.isEmpty) {
+            if (isValidator) {
+              return validatorMessage ?? "";
             }
           }
           return null;
         },
         decoration: InputDecoration(
-          hintText: hintText ?? '',
-          filled: fillColor != null,
-          fillColor: fillColor,
-          contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 15),
-          isDense: true,
-          counterText: '',
-          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor)),
-          hintStyle: cairoRegular.copyWith(color: Theme.of(context).hintColor),
-          errorStyle: TextStyle(height: 1.5),
-          border: InputBorder.none,
-          suffixIcon: suffixUse
-              ? suffixIcon
-              : null,
-          prefixIcon: image == null
-              ? null
-              : Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: SvgPicture.asset(image!,width: 35),
-          )
-        ),
+            hintText: hintText ?? '',
+            filled: fillColor != null,
+            fillColor: fillColor,
+            contentPadding:
+                EdgeInsets.symmetric(vertical: 12.0, horizontal: 15),
+            isDense: true,
+            counterText: '',
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Theme.of(context).primaryColor)),
+            hintStyle:
+                cairoRegular.copyWith(color: Theme.of(context).hintColor),
+            errorStyle: TextStyle(height: 1.5),
+            border: InputBorder.none,
+            suffixIcon: suffixUse ? suffixIcon : null,
+            prefixIcon: image == null
+                ? null
+                : Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: SvgPicture.asset(image!, width: 35),
+                  )),
       ),
     );
   }

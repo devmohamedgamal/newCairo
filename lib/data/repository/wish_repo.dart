@@ -10,26 +10,29 @@ class WishRepo {
 
   Future<ApiResponse> getWishList(String clientId) async {
     try {
-      final response = await dioClient.get(AppConstants.GET_WISH_URL + clientId);
+      final response =
+          await dioClient.get(AppConstants.GET_WISH_URL + clientId);
       return ApiResponse.withSuccess(response);
     } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
 
-  Future<ApiResponse> addWishList(String customerID,String productID) async {
+  Future<ApiResponse> addWishList(String customerID, String productID) async {
     try {
-      final response = await dioClient.post(AppConstants.ADD_WISH_URL +
-          customerID + "&product_id=" + productID);
+      final response = await dioClient.post(
+          AppConstants.ADD_WISH_URL + customerID + "&product_id=" + productID);
       return ApiResponse.withSuccess(response);
     } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
 
-  Future<ApiResponse> removeWishList(String customerID,String productID) async {
+  Future<ApiResponse> removeWishList(
+      String customerID, String productID) async {
     try {
-      final response = await dioClient.delete(AppConstants.ADD_WISH_URL + customerID + "&product_id=" + productID);
+      final response = await dioClient.delete(
+          AppConstants.ADD_WISH_URL + customerID + "&product_id=" + productID);
       return ApiResponse.withSuccess(response);
     } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));

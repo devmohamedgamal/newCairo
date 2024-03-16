@@ -8,14 +8,16 @@ class AlbumsModel {
   List<Photos>? photos;
 
   factory AlbumsModel.fromJson(Map<String, dynamic> json) => AlbumsModel(
-    album: Album.fromJson(json["album"]),
-    photos: List<Photos>.from(json["fetched_photo_data"].map((x) => Photos.fromJson(x))),
-  );
+        album: Album.fromJson(json["album"]),
+        photos: List<Photos>.from(
+            json["fetched_photo_data"].map((x) => Photos.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "album": album!.toJson(),
-    "fetched_photo_data": List<dynamic>.from(photos!.map((x) => x.toJson())),
-  };
+        "album": album!.toJson(),
+        "fetched_photo_data":
+            List<dynamic>.from(photos!.map((x) => x.toJson())),
+      };
 }
 
 class Album {
@@ -42,28 +44,28 @@ class Album {
   String? status;
 
   factory Album.fromJson(Map<String, dynamic> json) => Album(
-    albumId: json["album_id"],
-    title: json["title"],
-    avatar: json["avatar"],
-    description: json["description"],
-    titleEn: json["titleEN"],
-    updatedAt: DateTime.parse(json["updated_at"]),
-    descriptionEn: json["descriptionEN"],
-    detailsEn: json["detailsEN"],
-    status: json["status"],
-  );
+        albumId: json["album_id"],
+        title: json["title"],
+        avatar: json["avatar"],
+        description: json["description"],
+        titleEn: json["titleEN"],
+        updatedAt: DateTime.parse(json["updated_at"]),
+        descriptionEn: json["descriptionEN"],
+        detailsEn: json["detailsEN"],
+        status: json["status"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "album_id": albumId,
-    "title": title,
-    "avatar": avatar,
-    "description": description,
-    "titleEN": titleEn,
-    "updated_at": updatedAt!.toIso8601String(),
-    "descriptionEN": descriptionEn,
-    "detailsEN": detailsEn,
-    "status": status,
-  };
+        "album_id": albumId,
+        "title": title,
+        "avatar": avatar,
+        "description": description,
+        "titleEN": titleEn,
+        "updated_at": updatedAt!.toIso8601String(),
+        "descriptionEN": descriptionEn,
+        "detailsEN": detailsEn,
+        "status": status,
+      };
 }
 
 class Photos {
@@ -80,16 +82,16 @@ class Photos {
   String? avatar;
 
   factory Photos.fromJson(Map<String, dynamic> json) => Photos(
-    id: json["id"],
-    title: json["title"],
-    albumId: json["album_id"],
-    avatar: json["avatar"],
-  );
+        id: json["id"],
+        title: json["title"],
+        albumId: json["album_id"],
+        avatar: json["avatar"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "title": title,
-    "album_id": albumId,
-    "avatar": avatar,
-  };
+        "id": id,
+        "title": title,
+        "album_id": albumId,
+        "avatar": avatar,
+      };
 }

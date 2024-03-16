@@ -9,15 +9,15 @@ class ItemsCartModel {
   String? _variantId;
   String? _variantName;
 
-  ItemsCartModel(
-      this._id, this._image, this._title,this._titleEn,this._price,
-      this._quantity,this._maxQty,this._variantId,this._variantName);
+  ItemsCartModel(this._id, this._image, this._title, this._titleEn, this._price,
+      this._quantity, this._maxQty, this._variantId, this._variantName);
 
   int? get quantity => _quantity;
   int? get maxQty => _maxQty;
   set quantity(int? value) {
     _quantity = value;
   }
+
   set maxQty(int? value) {
     _maxQty = value;
   }

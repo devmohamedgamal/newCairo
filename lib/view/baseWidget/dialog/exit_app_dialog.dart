@@ -8,79 +8,80 @@ import 'package:flutter/material.dart';
 class ExitPopUp extends StatelessWidget {
   final Widget child;
   final Function() setPage;
-  ExitPopUp({required this.child,required this.setPage});
+  ExitPopUp({required this.child, required this.setPage});
   @override
   Widget build(BuildContext context) {
     Future<bool> showExitPopUp() async {
       setPage();
       return await showDialog(
         context: context,
-        builder: (BuildContext context) =>
-            AlertDialog(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
-              title: Row(
-                children: [
-                  Icon(
-                    Icons.exit_to_app,
-                    color: Colors.red,
-                  ),
-                  WSpacer(5),
-                  Text(
-                    getTranslated("exit1", context)!,
-                    style: TextStyle(
-                        color: ColorResources.GREEN,
-                        fontSize: 16,
-                        fontFamily: "Cairo_Black"),
-                  ),
-                ],
+        builder: (BuildContext context) => AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
+          title: Row(
+            children: [
+              Icon(
+                Icons.exit_to_app,
+                color: Colors.red,
               ),
-              content: Text(
-                getTranslated("exit", context)!,
+              WSpacer(5),
+              Text(
+                getTranslated("exit1", context)!,
                 style: TextStyle(
-                    color: ColorResources.BLACK,
-                    fontSize: 14,
+                    color: ColorResources.GREEN,
+                    fontSize: 16,
                     fontFamily: "Cairo_Black"),
               ),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () {
-                    exit(0);
-                  },
-                  child: Text(
-                    getTranslated("ok1", context)!,
-                    style: TextStyle(
-                        color: ColorResources.BLACK,
-                        fontSize: 15,
-                        fontFamily: "Cairo_Black"),
-                  ),
-                ),
-
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text(
-                    getTranslated("no", context)!,
-                    style: TextStyle(
-                        color: ColorResources.RED,
-                        fontSize: 15,
-                        fontFamily: "Cairo_Black"),
-                  ),
-                ),
-
-                // FlatButton(
-                //   shape: StadiumBorder(),
-                //   color: Colors.black12,
-                // ),
-                // FlatButton(
-                //   shape: StadiumBorder(),
-                //   color: Colors.black12,
-                // ),
-              ],
+            ],
+          ),
+          content: Text(
+            getTranslated("exit", context)!,
+            style: TextStyle(
+                color: ColorResources.BLACK,
+                fontSize: 14,
+                fontFamily: "Cairo_Black"),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                exit(0);
+              },
+              child: Text(
+                getTranslated("ok1", context)!,
+                style: TextStyle(
+                    color: ColorResources.BLACK,
+                    fontSize: 15,
+                    fontFamily: "Cairo_Black"),
+              ),
             ),
+
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                getTranslated("no", context)!,
+                style: TextStyle(
+                    color: ColorResources.RED,
+                    fontSize: 15,
+                    fontFamily: "Cairo_Black"),
+              ),
+            ),
+
+            // FlatButton(
+            //   shape: StadiumBorder(),
+            //   color: Colors.black12,
+            // ),
+            // FlatButton(
+            //   shape: StadiumBorder(),
+            //   color: Colors.black12,
+            // ),
+          ],
+        ),
       );
     }
+
     return WillPopScope(child: child, onWillPop: showExitPopUp);
   }
 }

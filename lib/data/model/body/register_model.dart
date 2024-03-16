@@ -9,8 +9,14 @@ class RegisterModel {
   String? address;
   String? tokenId;
 
-  RegisterModel({this.fullName,this.clientName,this.email,
-    this.password,this.mobile,this.address,this.tokenId});
+  RegisterModel(
+      {this.fullName,
+      this.clientName,
+      this.email,
+      this.password,
+      this.mobile,
+      this.address,
+      this.tokenId});
 
   RegisterModel.fromJson(Map<String, dynamic> json) {
     fullName = json['fullname'];
@@ -22,16 +28,15 @@ class RegisterModel {
     password = json['password'];
   }
 
-
-  Map<String, dynamic> toJson() =>{
-    'fullname': fullName,
-    'clientname': clientName,
-    'email': email,
-    'mobile': mobile,
-    'address': address,
-    'token_id': tokenId,
-    'password': password,
-  };
+  Map<String, dynamic> toJson() => {
+        'fullname': fullName,
+        'clientname': clientName,
+        'email': email,
+        'mobile': mobile,
+        'address': address,
+        'token_id': tokenId,
+        'password': password,
+      };
 
   FormData toJsonApi() {
     return FormData.fromMap({

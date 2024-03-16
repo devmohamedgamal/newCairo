@@ -16,6 +16,7 @@ class DateConverter {
   static DateTime isoStringToLocalDate(String dateTime) {
     return DateFormat('yyyy-MM-dd HH:mm:ss').parse(dateTime).toLocal();
   }
+
   static String localDateToIsoStringAMPM(DateTime dateTime) {
     return DateFormat('h:mm a | d-MMM-yyyy ').format(dateTime.toLocal());
   }
@@ -33,6 +34,7 @@ class DateConverter {
   }
 
   static String isoStringToLocalDateAndTime(String dateTime) {
-    return DateFormat('dd-MMM-yyyy hh:mm a').format(isoStringToLocalDate(dateTime));
+    return DateFormat('dd-MMM-yyyy hh:mm a')
+        .format(isoStringToLocalDate(dateTime));
   }
 }

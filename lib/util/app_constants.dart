@@ -5,7 +5,7 @@ import 'package:lemirageelevators/util/images.dart';
 import '../data/model/response/language_model.dart';
 
 class AppConstants {
-  static const String APP_NAME = 'Newcairo';  // NAME APP
+  static const String APP_NAME = 'Newcairo'; // NAME APP
 
   // ALL URLs
   // static const String BASE_URL = 'https://www.gddeaf.net/App_api/';
@@ -48,10 +48,10 @@ class AppConstants {
   static const String PAYMOB_BASE_URL = 'https://accept.paymob.com/api';
   static const String PAYMOB_API_KEY = '';
 
-
   static const String PAYMOB_AUTH_REQUEST_URI = '/auth/tokens'; // 1st step
   static const String PAYMOB_MAKE_ORDER_URI = '/ecommerce/orders'; // 2nd step
-  static const String PAYMOB_GET_PAYMENT_TOKEN_URI = '/acceptance/payment_keys'; // 3rd step
+  static const String PAYMOB_GET_PAYMENT_TOKEN_URI =
+      '/acceptance/payment_keys'; // 3rd step
 
   // sharePreference
   static const String COUNTRY_CODE = 'country_code';
@@ -74,15 +74,35 @@ class AppConstants {
 
   // All Payment methods
   static List<PaymentModel> paymentMethods = [
-    PaymentModel(nameTrKey: 'Credit Card', assetImagePath: Images.paymobCreditCard, shortcutName: 'card_pay_mob'),
-    PaymentModel(nameTrKey: 'Paymob Wallet', assetImagePath: Images.paymobWallet, shortcutName: 'wallet_paymob'),
-    PaymentModel(nameTrKey: 'Kiosk paymob', assetImagePath: Images.paymobKiosk, shortcutName: 'kiosk_paymob'),
-    PaymentModel(nameTrKey: 'ValU', assetImagePath: Images.paymobValu, shortcutName: 'valU_paymob'),
+    PaymentModel(
+        nameTrKey: 'Credit Card',
+        assetImagePath: Images.paymobCreditCard,
+        shortcutName: 'card_pay_mob'),
+    PaymentModel(
+        nameTrKey: 'Paymob Wallet',
+        assetImagePath: Images.paymobWallet,
+        shortcutName: 'wallet_paymob'),
+    PaymentModel(
+        nameTrKey: 'Kiosk paymob',
+        assetImagePath: Images.paymobKiosk,
+        shortcutName: 'kiosk_paymob'),
+    PaymentModel(
+        nameTrKey: 'ValU',
+        assetImagePath: Images.paymobValu,
+        shortcutName: 'valU_paymob'),
   ];
 
   // ALL LANGUAGE
   static List<LanguageModel> languages = [
-    LanguageModel(imageUrl: '', languageName: 'English', countryCode: 'US', languageCode: 'en'),
-    LanguageModel(imageUrl: '', languageName: 'Arabic', countryCode: 'SA', languageCode: 'ar'),
+    LanguageModel(
+        imageUrl: '',
+        languageName: 'English',
+        countryCode: 'US',
+        languageCode: 'en'),
+    LanguageModel(
+        imageUrl: '',
+        languageName: 'Arabic',
+        countryCode: 'SA',
+        languageCode: 'ar'),
   ];
 }

@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 
 class PriceConverter {
-  static String calculateTotal(BuildContext context, String price, int quantity) {
+  static String calculateTotal(
+      BuildContext context, String price, int quantity) {
     double total = 0.0;
     total = double.parse(price) * quantity;
     return total.toString();
@@ -15,9 +16,10 @@ class PriceConverter {
   }) {
     if (discountType == 'amount' || discountType == 'flat') {
       price = price - discount;
-    // } else if (discountType == 'percent' || discountType == 'percentage') {
+      // } else if (discountType == 'percent' || discountType == 'percentage') {
     } else {
-      return price - getDiscountPercentageAmount(price: price, discount: discount);
+      return price -
+          getDiscountPercentageAmount(price: price, discount: discount);
     }
     return price;
   }
@@ -29,12 +31,14 @@ class PriceConverter {
     debugPrint('- getDiscountPercentageAmount');
     debugPrint('discount: $discount');
     debugPrint('price: $price');
-    debugPrint('equation: ($discount / 100) * $price = ${(discount / 100) * price}');
+    debugPrint(
+        'equation: ($discount / 100) * $price = ${(discount / 100) * price}');
     debugPrint('-------');
     return (discount / 100) * price;
   }
 
-  static double calculation(double amount, double discount, String type, int quantity) {
+  static double calculation(
+      double amount, double discount, String type, int quantity) {
     double calculatedAmount = 0;
     if (type == 'amount' || type == 'flat') {
       calculatedAmount = discount * quantity;

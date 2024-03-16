@@ -12,7 +12,8 @@ class DioClient {
   String? token;
   String? key;
 
-  DioClient(this.baseUrl, Dio dioC, {this.loggingInterceptor, this.sharedPreferences}) {
+  DioClient(this.baseUrl, Dio dioC,
+      {this.loggingInterceptor, this.sharedPreferences}) {
     dio = dioC;
 
     dio!
@@ -26,7 +27,7 @@ class DioClient {
         'content-type': 'application/json',
       });
 
-    if(loggingInterceptor != null){
+    if (loggingInterceptor != null) {
       dio!.interceptors.add(loggingInterceptor!);
     }
   }
@@ -76,7 +77,9 @@ class DioClient {
     try {
       var response = await dio!.post(
         uri,
-        data: convertDataToFormData && data is Map<String, dynamic> ? FormData.fromMap(data) : data,
+        data: convertDataToFormData && data is Map<String, dynamic>
+            ? FormData.fromMap(data)
+            : data,
         queryParameters: queryParameters,
         options: options,
         cancelToken: cancelToken,
@@ -140,17 +143,19 @@ class DioClient {
   }
 
   Future<Response> head(
-      String uri, {
-        dynamic data,
-        bool convertDataToFormData = false,
-        Map<String, dynamic>? queryParameters,
-        Options? options,
-        CancelToken? cancelToken,
-      }) async {
+    String uri, {
+    dynamic data,
+    bool convertDataToFormData = false,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+  }) async {
     try {
       var response = await dio!.head(
         uri,
-        data: convertDataToFormData && data is Map<String, dynamic> ? FormData.fromMap(data) : data,
+        data: convertDataToFormData && data is Map<String, dynamic>
+            ? FormData.fromMap(data)
+            : data,
         queryParameters: queryParameters,
         options: options,
         cancelToken: cancelToken,

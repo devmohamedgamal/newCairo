@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lemirageelevators/provider/product_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../util/images.dart';
+import '../category/widgets/view_category_product.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -22,36 +25,44 @@ class HomeView extends StatelessWidget {
               mainAxisSpacing: 30,
               crossAxisSpacing: 30,
               childAspectRatio: 0.9,
-              children: const [
+              children: [
                 CustomCategoryItem(
                   imageUrl: Images.ServicesIcon,
                   name: 'دليل الخدمات',
+                  onTap: () {
+                    Provider.of<ProductProvider>(context, listen: false)
+                        .getAllProductList(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const ViewCategoryProduct()));
+                  },
                 ),
-                CustomCategoryItem(
+                const CustomCategoryItem(
                   imageUrl: Images.shipingIcon,
                   name: 'بيع و أشتري',
                 ),
-                CustomCategoryItem(
+                const CustomCategoryItem(
                   imageUrl: Images.specialOfferIcon,
                   name: 'عروض',
                 ),
-                CustomCategoryItem(
+                const CustomCategoryItem(
                   imageUrl: Images.jopsIcon,
                   name: 'وظائف',
                 ),
-                CustomCategoryItem(
+                const CustomCategoryItem(
                   imageUrl: Images.carServicesIcon,
                   name: 'توصيلة',
                 ),
-                CustomCategoryItem(
+                const CustomCategoryItem(
                   imageUrl: Images.otlopIcon,
                   name: 'أطلب',
                 ),
-                CustomCategoryItem(
+                const CustomCategoryItem(
                   imageUrl: Images.eventIcon,
                   name: 'ايفنتات',
                 ),
-                CustomCategoryItem(
+                const CustomCategoryItem(
                   imageUrl: Images.newsIcon,
                   name: 'أخبار',
                 ),
@@ -66,40 +77,44 @@ class HomeView extends StatelessWidget {
 
 class CustomCategoryItem extends StatelessWidget {
   const CustomCategoryItem(
-      {Key? key, required this.name, required this.imageUrl})
+      {Key? key, required this.name, required this.imageUrl, this.onTap})
       : super(key: key);
   final String name, imageUrl;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 180,
-      width: 150,
-      decoration: const BoxDecoration(
-        color: Color(0xff8FC3FD),
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(1),
-          topRight: Radius.circular(100),
-          bottomLeft: Radius.circular(100),
-          bottomRight: Radius.circular(100),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 180,
+        width: 150,
+        decoration: const BoxDecoration(
+          color: Color(0xff8FC3FD),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(1),
+            topRight: Radius.circular(100),
+            bottomLeft: Radius.circular(100),
+            bottomRight: Radius.circular(100),
+          ),
         ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            imageUrl,
-            height: 100,
-          ),
-          Text(
-            name,
-            style: const TextStyle(
-              fontFamily: 'Cairo',
-              color: Colors.white,
-              fontSize: 20,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              imageUrl,
+              height: 100,
             ),
-          ),
-        ],
+            Text(
+              name,
+              style: const TextStyle(
+                fontFamily: 'Cairo',
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

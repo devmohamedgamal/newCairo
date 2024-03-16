@@ -17,16 +17,17 @@ class SplashProvider extends ChangeNotifier {
     _hasConnection = true;
     ApiResponse apiResponse = await splashRepo.getAppInfo();
     bool isSuccess;
-    if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
+    if (apiResponse.response != null &&
+        apiResponse.response!.statusCode == 200) {
       AboutUsModel aboutUsModel;
       aboutUsModel = AboutUsModel.fromJson(apiResponse.response!.data);
       _appInfo = aboutUsModel.fetchedAboutData;
       isSuccess = true;
-    }
-    else {
+    } else {
       isSuccess = false;
       ApiChecker.checkApi(context, apiResponse);
-      if(apiResponse.error.toString() == 'Connection to API server failed due to internet connection') {
+      if (apiResponse.error.toString() ==
+          'Connection to API server failed due to internet connection') {
         _hasConnection = false;
       }
     }

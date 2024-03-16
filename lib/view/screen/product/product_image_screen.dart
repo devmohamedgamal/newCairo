@@ -9,10 +9,11 @@ import '../../baseWidget/custom_app_bar.dart';
 class ProductImageScreen extends StatefulWidget {
   final String title;
   final List<String> imageList;
-  ProductImageScreen({required this.title,required this.imageList});
+  ProductImageScreen({required this.title, required this.imageList});
   @override
   _ProductImageScreenState createState() => _ProductImageScreenState();
 }
+
 class _ProductImageScreenState extends State<ProductImageScreen> {
   int? pageIndex;
   PageController? _pageController;
@@ -20,8 +21,8 @@ class _ProductImageScreenState extends State<ProductImageScreen> {
   @override
   void initState() {
     super.initState();
-    pageIndex = Provider.of<ProductProvider>(context,
-        listen: false).imageSliderIndex;
+    pageIndex =
+        Provider.of<ProductProvider>(context, listen: false).imageSliderIndex;
     _pageController = PageController(initialPage: pageIndex ?? 0);
   }
 
@@ -30,7 +31,6 @@ class _ProductImageScreenState extends State<ProductImageScreen> {
     return Scaffold(
       body: Column(children: [
         CustomAppBar(title: widget.title),
-
         Expanded(
           child: Stack(
             children: [
@@ -38,12 +38,15 @@ class _ProductImageScreenState extends State<ProductImageScreen> {
                 scrollPhysics: const BouncingScrollPhysics(),
                 builder: (BuildContext context, int index) {
                   return PhotoViewGalleryPageOptions(
-                    imageProvider: NetworkImage('${AppConstants.BASE_URL_IMAGE}${widget.imageList[index]}'),
+                    imageProvider: NetworkImage(
+                        '${AppConstants.BASE_URL_IMAGE}${widget.imageList[index]}'),
                     initialScale: PhotoViewComputedScale.contained,
-                    heroAttributes: PhotoViewHeroAttributes(tag: index.toString()),
+                    heroAttributes:
+                        PhotoViewHeroAttributes(tag: index.toString()),
                   );
                 },
-                backgroundDecoration: BoxDecoration(color: Theme.of(context).highlightColor),
+                backgroundDecoration:
+                    BoxDecoration(color: Theme.of(context).highlightColor),
                 itemCount: widget.imageList.length,
                 loadingBuilder: (context, event) => Center(
                   child: Container(
@@ -52,8 +55,10 @@ class _ProductImageScreenState extends State<ProductImageScreen> {
                     child: CircularProgressIndicator(
                       value: event == null
                           ? 0
-                          : event.cumulativeBytesLoaded / event.expectedTotalBytes!,
-                        valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
+                          : event.cumulativeBytesLoaded /
+                              event.expectedTotalBytes!,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                          Theme.of(context).primaryColor),
                     ),
                   ),
                 ),
@@ -64,48 +69,54 @@ class _ProductImageScreenState extends State<ProductImageScreen> {
                   });
                 },
               ),
-
-              pageIndex != 0 ? Positioned(
-                left: 5, top: 0, bottom: 0,
-                child: Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    shape: BoxShape.circle,
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      if(pageIndex! > 0) {
-                        _pageController!.animateToPage(pageIndex! - 1,
-                            duration: Duration(milliseconds: 500),
-                            curve: Curves.easeInOut);
-                      }
-                    },
-                    child: Icon(Icons.chevron_left_outlined, size: 40),
-                  ),
-                ),
-              ) : SizedBox.shrink(),
-
-              pageIndex != widget.imageList.length-1 ? Positioned(
-                right: 5, top: 0, bottom: 0,
-                child: Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    shape: BoxShape.circle,
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      if(pageIndex! < widget.imageList.length) {
-                        _pageController!.animateToPage(pageIndex! + 1,
-                            duration: Duration(milliseconds: 500),
-                            curve: Curves.easeInOut);
-                      }
-                    },
-                    child: Icon(Icons.chevron_right_outlined, size: 40),
-                  ),
-                ),
-              ) : SizedBox.shrink(),
+              pageIndex != 0
+                  ? Positioned(
+                      left: 5,
+                      top: 0,
+                      bottom: 0,
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          shape: BoxShape.circle,
+                        ),
+                        child: InkWell(
+                          onTap: () {
+                            if (pageIndex! > 0) {
+                              _pageController!.animateToPage(pageIndex! - 1,
+                                  duration: Duration(milliseconds: 500),
+                                  curve: Curves.easeInOut);
+                            }
+                          },
+                          child: Icon(Icons.chevron_left_outlined, size: 40),
+                        ),
+                      ),
+                    )
+                  : SizedBox.shrink(),
+              pageIndex != widget.imageList.length - 1
+                  ? Positioned(
+                      right: 5,
+                      top: 0,
+                      bottom: 0,
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          shape: BoxShape.circle,
+                        ),
+                        child: InkWell(
+                          onTap: () {
+                            if (pageIndex! < widget.imageList.length) {
+                              _pageController!.animateToPage(pageIndex! + 1,
+                                  duration: Duration(milliseconds: 500),
+                                  curve: Curves.easeInOut);
+                            }
+                          },
+                          child: Icon(Icons.chevron_right_outlined, size: 40),
+                        ),
+                      ),
+                    )
+                  : SizedBox.shrink(),
             ],
           ),
         ),

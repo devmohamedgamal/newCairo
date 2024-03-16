@@ -24,30 +24,34 @@ class OrderProvider with ChangeNotifier {
 
   Order? get trackingModel => _trackingModel;
   int get orderTypeIndex => _orderTypeIndex;
-  List<Order>? get pendingList => _pendingList != null ? _pendingList!.reversed.toList() : _pendingList;
-  List<Order>? get deliveredList => _deliveredList != null ? _deliveredList!.reversed.toList() : _deliveredList;
-  List<Order>? get canceledList => _canceledList != null ? _canceledList!.reversed.toList() : _canceledList;
+  List<Order>? get pendingList =>
+      _pendingList != null ? _pendingList!.reversed.toList() : _pendingList;
+  List<Order>? get deliveredList => _deliveredList != null
+      ? _deliveredList!.reversed.toList()
+      : _deliveredList;
+  List<Order>? get canceledList =>
+      _canceledList != null ? _canceledList!.reversed.toList() : _canceledList;
   bool get isLoading => _isLoading;
   int get paymentMethodIndex => _paymentMethodIndex;
   PaymentModel? get selectedPaymentModel => _selectedPaymentModel;
   bool get isPaymentMethodSelected => _selectedPaymentModel != null;
 
-  Future<void> initOrderList(BuildContext context,String clientId) async {
+  Future<void> initOrderList(BuildContext context, String clientId) async {
     ApiResponse apiResponse = await orderRepo.getOrderList(clientId);
-    if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
+    if (apiResponse.response != null &&
+        apiResponse.response!.statusCode == 200) {
       _pendingList = [];
       _deliveredList = [];
       _canceledList = [];
       OrderModel orderModel;
       orderModel = OrderModel.fromJson(apiResponse.response!.data);
       orderModel.fetchedOrders!.forEach((order) {
-        if (order.status == AppConstants.PENDING || order.status == AppConstants.TO_DELIVER) {
+        if (order.status == AppConstants.PENDING ||
+            order.status == AppConstants.TO_DELIVER) {
           _pendingList!.add(order);
-        }
-        else if (order.status == AppConstants.DELIVERED) {
+        } else if (order.status == AppConstants.DELIVERED) {
           _deliveredList!.add(order);
-        }
-        else if (order.status == AppConstants.CANCELLED) {
+        } else if (order.status == AppConstants.CANCELLED) {
           _canceledList!.add(order);
         }
       });
@@ -57,24 +61,29 @@ class OrderProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void selectPaymentMethod(PaymentModel paymentModel){
+  void selectPaymentMethod(PaymentModel paymentModel) {
     _selectedPaymentModel = paymentModel;
     notifyListeners();
   }
 
-  Future<void> placeOrder(CartModel cartModel, Function callback, {
+  Future<void> placeOrder(
+    CartModel cartModel,
+    Function callback, {
     dynamic PaymentMethod = 'card_pay_mob',
   }) async {
     _isLoading = true;
     notifyListeners();
-    ApiResponse apiResponse = await orderRepo.placeOrder(cartModel, PaymentMethod);
+    ApiResponse apiResponse =
+        await orderRepo.placeOrder(cartModel, PaymentMethod);
     _isLoading = false;
-    if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
-      try{
+    if (apiResponse.response != null &&
+        apiResponse.response!.statusCode == 200) {
+      try {
         StatusModel statusModel;
         statusModel = StatusModel.fromJson(apiResponse.response!.data);
-        callback(statusModel.status, statusModel.refId ?? statusModel.url, statusModel.massage.toString());
-      } catch (_){
+        callback(statusModel.status, statusModel.refId ?? statusModel.url,
+            statusModel.massage.toString());
+      } catch (_) {
         callback(true, '', 'The order placed successfully');
       }
 
@@ -87,25 +96,26 @@ class OrderProvider with ChangeNotifier {
       } else {
         ErrorResponse? errorResponse = apiResponse.error;
         print(errorResponse?.errors?.message);
-        errorMessage = errorResponse?.errors?.message ?? 'Unknown Error occurred';
+        errorMessage =
+            errorResponse?.errors?.message ?? 'Unknown Error occurred';
       }
       callback(false, null, errorMessage);
     }
     notifyListeners();
   }
 
-  Future<void> cancelOrder(String orderId,Function callback) async {
+  Future<void> cancelOrder(String orderId, Function callback) async {
     _isLoading = true;
     notifyListeners();
     ApiResponse apiResponse = await orderRepo.cancelOrder(orderId);
     _isLoading = false;
-    if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
+    if (apiResponse.response != null &&
+        apiResponse.response!.statusCode == 200) {
       StatusModel statusModel;
       statusModel = StatusModel.fromJson(apiResponse.response!.data);
-      callback(statusModel.status,statusModel.massage.toString());
-    }
-    else {
-      callback(false,apiResponse.error.toString());
+      callback(statusModel.status, statusModel.massage.toString());
+    } else {
+      callback(false, apiResponse.error.toString());
     }
     notifyListeners();
   }

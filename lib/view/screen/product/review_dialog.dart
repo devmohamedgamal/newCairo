@@ -20,6 +20,7 @@ class ReviewBottomSheet extends StatefulWidget {
   @override
   _ReviewBottomSheetState createState() => _ReviewBottomSheetState();
 }
+
 class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
   final TextEditingController _controller = TextEditingController();
 
@@ -98,21 +99,25 @@ class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
                 ? Text(Provider.of<ProductProvider>(context).errorText!,
                     style: cairoRegular.copyWith(color: ColorResources.RED))
                 : SizedBox.shrink(),
-
             Builder(
-              builder: (context) => !Provider.of<ProductProvider>(context).isLoading
+              builder: (context) => !Provider.of<ProductProvider>(context)
+                      .isLoading
                   ? Padding(
                       padding: EdgeInsets.all(Dimensions.PADDING_SIZE_LARGE),
                       child: CustomButton(
                         buttonText: getTranslated('submit', context)!,
                         onTap: () async {
                           if (Provider.of<ProductProvider>(context,
-                              listen: false).rating == 0) {
+                                      listen: false)
+                                  .rating ==
+                              0) {
                             Provider.of<ProductProvider>(context, listen: false)
-                                .setErrorText(getTranslated("add_rating", context)!);
+                                .setErrorText(
+                                    getTranslated("add_rating", context)!);
                           } else if (_controller.text.isEmpty) {
                             Provider.of<ProductProvider>(context, listen: false)
-                                .setErrorText(getTranslated("Write_something", context)!);
+                                .setErrorText(
+                                    getTranslated("Write_something", context)!);
                           } else {
                             Provider.of<ProductProvider>(context, listen: false)
                                 .setErrorText('');

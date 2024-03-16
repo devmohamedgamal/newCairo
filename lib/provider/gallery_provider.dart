@@ -21,13 +21,13 @@ class GalleryProvider extends ChangeNotifier {
 
   Future<void> getVideosGallery(BuildContext context) async {
     ApiResponse apiResponse = await galleryRepo.getVideosList();
-    if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
+    if (apiResponse.response != null &&
+        apiResponse.response!.statusCode == 200) {
       VideosModel videosModel;
       videosModel = VideosModel.fromJson(apiResponse.response!.data);
       _videosList.clear();
       _videosList.addAll(videosModel.videos!);
-      }
-    else {
+    } else {
       ApiChecker.checkApi(context, apiResponse);
     }
     notifyListeners();
@@ -35,26 +35,26 @@ class GalleryProvider extends ChangeNotifier {
 
   Future<void> getAlbumsGallery(BuildContext context) async {
     ApiResponse apiResponse = await galleryRepo.getAlbumsList();
-    if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
-      AlbumsModel albumsModel;
-      albumsModel = AlbumsModel.fromJson(apiResponse.response!.data);
-     _albums = albumsModel.albums;
-      }
-    else {
-        // ignore: use_build_context_synchronously
-        ApiChecker.checkApi(context, apiResponse);
-      }
-    notifyListeners();
-  }
-
-  void getDetailsAlbums(BuildContext context,String albumId) async {
-    ApiResponse apiResponse = await galleryRepo.getDetailsAlbum(albumId);
-    if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
+    if (apiResponse.response != null &&
+        apiResponse.response!.statusCode == 200) {
       AlbumsModel albumsModel;
       albumsModel = AlbumsModel.fromJson(apiResponse.response!.data);
       _albums = albumsModel.albums;
+    } else {
+      // ignore: use_build_context_synchronously
+      ApiChecker.checkApi(context, apiResponse);
     }
-    else {
+    notifyListeners();
+  }
+
+  void getDetailsAlbums(BuildContext context, String albumId) async {
+    ApiResponse apiResponse = await galleryRepo.getDetailsAlbum(albumId);
+    if (apiResponse.response != null &&
+        apiResponse.response!.statusCode == 200) {
+      AlbumsModel albumsModel;
+      albumsModel = AlbumsModel.fromJson(apiResponse.response!.data);
+      _albums = albumsModel.albums;
+    } else {
       ApiChecker.checkApi(context, apiResponse);
     }
     notifyListeners();

@@ -9,21 +9,23 @@ import '../datasource/remote/dio/dio_client.dart';
 import '../datasource/remote/exception/api_error_handler.dart';
 import '../model/response/base/api_response.dart';
 
-class CartRepo{
+class CartRepo {
   final DioClient dioClient;
   final SharedPreferences sharedPreferences;
-  CartRepo({required this.dioClient,required this.sharedPreferences});
+  CartRepo({required this.dioClient, required this.sharedPreferences});
 
   List<ItemsCartModel> getCartList() {
-    List<String>? carts = sharedPreferences.getStringList(AppConstants.CART_LIST) ?? [];
+    List<String>? carts =
+        sharedPreferences.getStringList(AppConstants.CART_LIST) ?? [];
     List<ItemsCartModel> cartList = [];
-    carts.forEach((cart) => cartList.add(ItemsCartModel.fromJson(jsonDecode(cart))) );
+    carts.forEach(
+        (cart) => cartList.add(ItemsCartModel.fromJson(jsonDecode(cart))));
     return cartList;
   }
 
   void addToCartList(List<ItemsCartModel> cartProductList) {
     List<String> carts = [];
-    cartProductList.forEach((cartModel) => carts.add(jsonEncode(cartModel)) );
+    cartProductList.forEach((cartModel) => carts.add(jsonEncode(cartModel)));
     sharedPreferences.setStringList(AppConstants.CART_LIST, carts);
   }
 
@@ -59,7 +61,8 @@ class CartRepo{
           'city_id': zoneId,
         },
         convertDataToFormData: true,
-      );      return ApiResponse.withSuccess(response);
+      );
+      return ApiResponse.withSuccess(response);
     } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
@@ -73,7 +76,10 @@ class CartRepo{
         "Apple Pay",
         "Credit Card",
       ];
-      Response response = Response(requestOptions: RequestOptions(path: ''), data: addressTypeList, statusCode: 200);
+      Response response = Response(
+          requestOptions: RequestOptions(path: ''),
+          data: addressTypeList,
+          statusCode: 200);
       return ApiResponse.withSuccess(response);
     } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
@@ -95,7 +101,8 @@ class CartRepo{
     }
   }
 
-  Future<ApiResponse> addSuggestedProducts(String clientId, String? productId) async {
+  Future<ApiResponse> addSuggestedProducts(
+      String clientId, String? productId) async {
     try {
       final response = await dioClient.post(
         AppConstants.ADD_SUGGESTED_PRODUCTS_URI,

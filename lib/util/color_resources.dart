@@ -23,79 +23,117 @@ class ColorResources {
   static var themeColor = hexToColor("#ffffff");
 
   static Color getSellerTxt(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFF517091) : Color(0xFF92C6FF);
+    return Provider.of<ThemeProvider>(context).darkTheme
+        ? Color(0xFF517091)
+        : Color(0xFF92C6FF);
   }
 
   static Color getGreen(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFF167d3c) : Color(0xFF23CB60);
+    return Provider.of<ThemeProvider>(context).darkTheme
+        ? Color(0xFF167d3c)
+        : Color(0xFF23CB60);
   }
 
   static Color getTextTitle(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFFFFFFFF) : Color(0xFF333333);
+    return Provider.of<ThemeProvider>(context).darkTheme
+        ? Color(0xFFFFFFFF)
+        : Color(0xFF333333);
   }
 
   static Color getYellow(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFF916129) : Color(0xFFFFAA47);
+    return Provider.of<ThemeProvider>(context).darkTheme
+        ? Color(0xFF916129)
+        : Color(0xFFFFAA47);
   }
 
   static Color getRed(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFF7a1c1c) : Color(0xFFD32F2F);
+    return Provider.of<ThemeProvider>(context).darkTheme
+        ? Color(0xFF7a1c1c)
+        : Color(0xFFD32F2F);
   }
 
   static Color getImageBg(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFF3f4347) : Color(0xFFE2F0FF);
+    return Provider.of<ThemeProvider>(context).darkTheme
+        ? Color(0xFF3f4347)
+        : Color(0xFFE2F0FF);
   }
 
   static Color getLowGreen(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFF7d8085) : Color(0xFFEFF6FE);
+    return Provider.of<ThemeProvider>(context).darkTheme
+        ? Color(0xFF7d8085)
+        : Color(0xFFEFF6FE);
   }
 
   static Color getTextBg(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFF414345) : Color(0xFFF3F9FF);
+    return Provider.of<ThemeProvider>(context).darkTheme
+        ? Color(0xFF414345)
+        : Color(0xFFF3F9FF);
   }
 
   static Color getIconBg(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFF2e2e2e) : Color(0xFFF9F9F9);
+    return Provider.of<ThemeProvider>(context).darkTheme
+        ? Color(0xFF2e2e2e)
+        : Color(0xFFF9F9F9);
   }
 
   static Color getHomeBg(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFF3d3d3d) : Color(0xFFf7f7f7);
+    return Provider.of<ThemeProvider>(context).darkTheme
+        ? Color(0xFF3d3d3d)
+        : Color(0xFFf7f7f7);
   }
 
   static Color getGrey(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFF808080) : Color(0xFFF1F1F1);
+    return Provider.of<ThemeProvider>(context).darkTheme
+        ? Color(0xFF808080)
+        : Color(0xFFF1F1F1);
   }
 
   static Color getGainsBoro(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFF999999) : Color(0xFFE6E6E6);
+    return Provider.of<ThemeProvider>(context).darkTheme
+        ? Color(0xFF999999)
+        : Color(0xFFE6E6E6);
   }
 
   static Color getLightSkyBlue(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFFc7c7c7) : Color(0xFF8DBFF6);
+    return Provider.of<ThemeProvider>(context).darkTheme
+        ? Color(0xFFc7c7c7)
+        : Color(0xFF8DBFF6);
   }
 
   static Color getHint(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFFc7c7c7) : Color(0xFF9E9E9E);
+    return Provider.of<ThemeProvider>(context).darkTheme
+        ? Color(0xFFc7c7c7)
+        : Color(0xFF9E9E9E);
   }
 
   static Color getPrimary(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFFf0f0f0) : Theme.of(context).primaryColor;
+    return Provider.of<ThemeProvider>(context).darkTheme
+        ? Color(0xFFf0f0f0)
+        : Theme.of(context).primaryColor;
   }
 
   static Color getColombiaBlue(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFF678cb5) : Color(0xFF92C6FF);
+    return Provider.of<ThemeProvider>(context).darkTheme
+        ? Color(0xFF678cb5)
+        : Color(0xFF92C6FF);
   }
 
   static Color getChatIcon(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFFebebeb) : Color(0xFFD4D4D4);
+    return Provider.of<ThemeProvider>(context).darkTheme
+        ? Color(0xFFebebeb)
+        : Color(0xFFD4D4D4);
   }
 
   static Color getHarlequin(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFF257800) : Color(0xFF3FCC01);
+    return Provider.of<ThemeProvider>(context).darkTheme
+        ? Color(0xFF257800)
+        : Color(0xFF3FCC01);
   }
 
   static Color getCheris(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFF941546) : Color(0xFFE2206B);
+    return Provider.of<ThemeProvider>(context).darkTheme
+        ? Color(0xFF941546)
+        : Color(0xFFE2206B);
   }
 
   static const Map<int, Color> colorMap = {

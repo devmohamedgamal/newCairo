@@ -12,7 +12,7 @@ import 'package:lemirageelevators/view/screen/auth/widget/sign_up_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AuthScreen extends StatelessWidget{
+class AuthScreen extends StatelessWidget {
   final int initialPage;
   AuthScreen({this.initialPage = 0});
 
@@ -29,7 +29,9 @@ class AuthScreen extends StatelessWidget{
           Provider.of<ThemeProvider>(context).darkTheme
               ? SizedBox()
               : Image.asset(Images.background_auth,
-              fit: BoxFit.fill, height: height(context), width: width(context)),
+                  fit: BoxFit.fill,
+                  height: height(context),
+                  width: width(context)),
 
           Consumer<AuthProvider>(
             builder: (context, auth, child) => SafeArea(
@@ -44,10 +46,10 @@ class AuthScreen extends StatelessWidget{
                   // for decision making section like signin or register section
                   Padding(
                     padding: EdgeInsets.only(
-                        top: Dimensions.MARGIN_SIZE_LARGE,
-                        left: Dimensions.MARGIN_SIZE_LARGE,
-                        right: Dimensions.MARGIN_SIZE_LARGE,
-                        bottom: Dimensions.MARGIN_SIZE_EXTRA_SMALL,
+                      top: Dimensions.MARGIN_SIZE_LARGE,
+                      left: Dimensions.MARGIN_SIZE_LARGE,
+                      right: Dimensions.MARGIN_SIZE_LARGE,
+                      bottom: Dimensions.MARGIN_SIZE_EXTRA_SMALL,
                     ),
                     child: Stack(
                       clipBehavior: Clip.none,
@@ -58,18 +60,19 @@ class AuthScreen extends StatelessWidget{
                           left: 0,
                           child: Container(
                             width: MediaQuery.of(context).size.width,
-                            margin: EdgeInsets.only(right: Dimensions.FONT_SIZE_LARGE),
+                            margin: EdgeInsets.only(
+                                right: Dimensions.FONT_SIZE_LARGE),
                             height: 1,
                             color: ColorResources.getGainsBoro(context),
                           ),
                         ),
-
                         Consumer<AuthProvider>(
-                          builder: (context,authProvider,child)=>Row(
+                          builder: (context, authProvider, child) => Row(
                             children: [
                               InkWell(
                                 onTap: () => _pageController.animateToPage(0,
-                                    duration: Duration(seconds: 1), curve: Curves.easeInOut),
+                                    duration: Duration(seconds: 1),
+                                    curve: Curves.easeInOut),
                                 child: Column(
                                   children: [
                                     Text(getTranslated('SIGN_IN', context)!,
@@ -87,11 +90,11 @@ class AuthScreen extends StatelessWidget{
                                   ],
                                 ),
                               ),
-
                               WSpacer(30),
-
                               InkWell(
-                                onTap: () => _pageController.animateToPage(1, duration: Duration(seconds: 1), curve: Curves.easeInOut),
+                                onTap: () => _pageController.animateToPage(1,
+                                    duration: Duration(seconds: 1),
+                                    curve: Curves.easeInOut),
                                 child: Column(
                                   children: [
                                     Text(getTranslated('SIGN_UP', context)!,
@@ -104,8 +107,7 @@ class AuthScreen extends StatelessWidget{
                                         margin: EdgeInsets.only(top: 8),
                                         color: authProvider.selectedIndex == 1
                                             ? Theme.of(context).primaryColor
-                                            : Colors.transparent
-                                    ),
+                                            : Colors.transparent),
                                   ],
                                 ),
                               ),
@@ -119,14 +121,14 @@ class AuthScreen extends StatelessWidget{
                   // show login or register widget
                   Expanded(
                     child: Consumer<AuthProvider>(
-                      builder: (context,authProvider,child)=>PageView.builder(
+                      builder: (context, authProvider, child) =>
+                          PageView.builder(
                         itemCount: 2,
                         controller: _pageController,
                         itemBuilder: (context, index) {
-                          if (authProvider.selectedIndex == 0 ) {
+                          if (authProvider.selectedIndex == 0) {
                             return SignInWidget();
-                          }
-                          else {
+                          } else {
                             return SignUpWidget();
                           }
                         },

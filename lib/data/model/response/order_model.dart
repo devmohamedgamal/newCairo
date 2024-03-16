@@ -7,14 +7,14 @@ class OrderModel {
     this.fetchedOrders,
   });
 
-  factory OrderModel.fromJson(Map<String, dynamic> json) =>
-      OrderModel(
-        fetchedOrders: List<Order>.from(json["fetched_orders"].map((x) => Order.fromJson(x))),
+  factory OrderModel.fromJson(Map<String, dynamic> json) => OrderModel(
+        fetchedOrders: List<Order>.from(
+            json["fetched_orders"].map((x) => Order.fromJson(x))),
       );
 
-  Map<String, dynamic> toJson() =>
-      {
-        "fetched_orders": List<dynamic>.from(fetchedOrders!.map((x) => x.toJson())),
+  Map<String, dynamic> toJson() => {
+        "fetched_orders":
+            List<dynamic>.from(fetchedOrders!.map((x) => x.toJson())),
       };
 }
 
@@ -45,7 +45,9 @@ class Order {
   late num discountAmount;
   late num shippingPrice;
 
-  String getTotalPrice() => totalPrice?.toString() ?? (orderPrice - discountAmount + shippingPrice).toString();
+  String getTotalPrice() =>
+      totalPrice?.toString() ??
+      (orderPrice - discountAmount + shippingPrice).toString();
 
   String getOrderPrice() {
     if (orderPrice > 0) {
@@ -66,7 +68,8 @@ class Order {
     paymentStatus = json['payment_status'];
     orderMobile = json['order_mobile'] ?? '';
     fullAddress = json['full_address'] ?? '';
-    orderItems = List<OrderItem>.from(json["order_items"].map((x) => OrderItem.fromJson(x)));
+    orderItems = List<OrderItem>.from(
+        json["order_items"].map((x) => OrderItem.fromJson(x)));
 
     orderPrice = ApiDataHelper.getNum(json['order_price']) ?? 0;
     json['order_price'] ?? '0.00';
@@ -80,8 +83,7 @@ class Order {
     // shippingPrice = json['shipping_cost'] ?? '0.00';
   }
 
-  Map<String, dynamic> toJson() =>
-      {
+  Map<String, dynamic> toJson() => {
         'id': id,
         'adate': date,
         'note': note,
@@ -133,8 +135,7 @@ class OrderItem {
     this.sizeName,
   });
 
-  factory OrderItem.fromJson(Map<String, dynamic> json) =>
-      OrderItem(
+  factory OrderItem.fromJson(Map<String, dynamic> json) => OrderItem(
         id: json["id"],
         orderId: json["orderid"],
         productId: json["productid"],
@@ -152,8 +153,7 @@ class OrderItem {
         sizeName: json["size_name"],
       );
 
-  Map<String, dynamic> toJson() =>
-      {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "orderid": orderId,
         "productid": productId,

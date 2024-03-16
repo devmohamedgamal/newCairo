@@ -13,42 +13,54 @@ class BrandAndCategoryProductScreen extends StatelessWidget {
   final String id;
   final String name;
   final String? image;
-  BrandAndCategoryProductScreen({required this.id,required this.name,this.image});
+  const BrandAndCategoryProductScreen(
+      {Key? key, required this.id, required this.name, this.image})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<ProductProvider>(context,listen: false).initCategoryProductList(id,context);
+    Provider.of<ProductProvider>(context, listen: false)
+        .initCategoryProductList(id, context);
     return Scaffold(
       backgroundColor: ColorResources.getIconBg(context),
       body: Consumer<ProductProvider>(
         builder: (context, productProvider, child) {
-          return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-            CustomAppBar(title: name),
-            SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+          return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                CustomAppBar(title: name),
+                const SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
 
-            // Products
-            productProvider.categoryProductList.length > 0
-                ? Expanded(
-              child: StaggeredGridView.countBuilder(
-                padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL),
-                physics: BouncingScrollPhysics(),
-                crossAxisCount: 2,
-                itemCount: productProvider.categoryProductList.length,
-                shrinkWrap: true,
-                staggeredTileBuilder: (int index) => StaggeredTile.fit(1),
-                itemBuilder: (BuildContext context, int index) {
-                  return ProductWidget(product: productProvider.categoryProductList[index]);
-                },
-              ),
-            )
-                : Expanded(
-                  child: Center(
-                    child: productProvider.hasData
-                       ? ProductShimmer(isHomePage: false,
-                     isEnabled: Provider.of<ProductProvider>(context).categoryProductList.length == 0)
-                       : NoInternetOrDataScreen(isNoInternet: false),
-            )),
-          ]);
+                // Products
+                productProvider.categoryProductList.isNotEmpty
+                    ? Expanded(
+                        child: StaggeredGridView.countBuilder(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: Dimensions.PADDING_SIZE_SMALL),
+                          physics: const BouncingScrollPhysics(),
+                          crossAxisCount: 2,
+                          itemCount: productProvider.categoryProductList.length,
+                          shrinkWrap: true,
+                          staggeredTileBuilder: (int index) =>
+                              const StaggeredTile.fit(1),
+                          itemBuilder: (BuildContext context, int index) {
+                            return ProductWidget(
+                                product:
+                                    productProvider.categoryProductList[index]);
+                          },
+                        ),
+                      )
+                    : Expanded(
+                        child: Center(
+                        child: productProvider.hasData
+                            ? ProductShimmer(
+                                isHomePage: false,
+                                isEnabled: Provider.of<ProductProvider>(context)
+                                    .categoryProductList
+                                    .isEmpty)
+                            : NoInternetOrDataScreen(isNoInternet: false),
+                      )),
+              ]);
         },
       ),
     );

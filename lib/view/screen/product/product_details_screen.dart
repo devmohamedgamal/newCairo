@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:lemirageelevators/data/model/response/Product/product.dart';
 import 'package:lemirageelevators/provider/cart_provider.dart';
 import 'package:lemirageelevators/util/textStyle.dart';
-import 'package:lemirageelevators/view/screen/product/widget/bottom_cart_view.dart';
 import 'package:lemirageelevators/view/screen/product/widget/product_image_view.dart';
 import 'package:lemirageelevators/view/screen/product/widget/product_specification_view.dart';
 import 'package:lemirageelevators/view/screen/product/widget/product_title_view.dart';
-import 'package:lemirageelevators/view/screen/product/widget/product_variants_view.dart';
 import 'package:provider/provider.dart';
-import '../../../data/model/response/home_model.dart';
 import '../../../localization/language_constrants.dart';
 import '../../../provider/auth_provider.dart';
 import '../../../provider/localization_provider.dart';
@@ -18,7 +16,7 @@ import '../../../util/dimensions.dart';
 
 class ProductDetails extends StatelessWidget {
   final Product product;
-  ProductDetails({required this.product});
+  const ProductDetails({Key? key, required this.product}) : super(key: key);
 
   Future<void> _addSuggestedProduct(BuildContext context) async {
     Provider.of<CartProvider>(context, listen: false).addSuggestedProduct(
@@ -29,16 +27,15 @@ class ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<ProductProvider>(context, listen: false)
-        .getDetailsProduct(context,
-        Provider.of<AuthProvider>(context, listen: false).user == null
-            ? ""
-            : Provider.of<AuthProvider>(context, listen: false).user!.userId!,
-        product.id!);
+    Provider.of<AuthProvider>(context, listen: false).user == null
+        ? ""
+        : Provider.of<AuthProvider>(context, listen: false).user!.userId!;
+    product.id;
     if (Provider.of<AuthProvider>(context, listen: false).isLoggedIn()) {
-      Provider.of<WishProvider>(context, listen: false)
-          .checkWishList(product.id.toString(),
-          Provider.of<AuthProvider>(context, listen: false).user!.userId!, context);
+      Provider.of<WishProvider>(context, listen: false).checkWishList(
+          product.id.toString(),
+          Provider.of<AuthProvider>(context, listen: false).user!.userId!,
+          context);
     }
 
     return WillPopScope(
@@ -60,7 +57,7 @@ class ProductDetails extends StatelessWidget {
                     Navigator.pop(context);
                   },
                 ),
-                SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
+                const SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
                 Text(getTranslated('product_details', context),
                     style: cairoRegular.copyWith(
                         fontSize: 20,
@@ -76,10 +73,7 @@ class ProductDetails extends StatelessWidget {
               shrinkWrap: true,
               // physics: BouncingScrollPhysics(),
               children: [
-                // images && favourites
-                details.detailsProduct == null
-                    ? Container()
-                    : ProductImageView(detailsProduct: details.detailsProduct!),
+                 ProductImageView(product: product),
 
                 // Title && price && share && rate
                 ProductTitleView(product: product),
@@ -87,33 +81,34 @@ class ProductDetails extends StatelessWidget {
                 // Specification
                 product.details != null && product.details!.isNotEmpty
                     ? Container(
-                  margin:
-                  EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
-                  padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                  color: Theme.of(context).highlightColor,
-                  child: ProductSpecification(
-                      details: Provider.of<LocalizationProvider>(context).locale!.languageCode == "en"
-                          ? product.detailsEn ?? ''
-                          : product.details ?? ''
-                  ),
-                )
-                    : SizedBox(),
+                        margin:
+                            const EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
+                        padding: const EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                        color: Theme.of(context).highlightColor,
+                        child: ProductSpecification(
+                            details: Provider.of<LocalizationProvider>(context)
+                                        .locale!
+                                        .languageCode ==
+                                    "en"
+                                ? product.detailsEn ?? ''
+                                : product.details ?? ''),
+                      )
+                    : const SizedBox(),
 
-                // Product variant
-                details.detailsProduct == null ||
-                    details.detailsProduct!.fetchedProductSize == null
-                    ? SizedBox()
-                    : Container(
-                  margin: EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
-                  padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                  color: Theme.of(context).highlightColor,
-                  child: ProductVariants(
-                      details: details.detailsProduct!
-                  ),
-                ),
+                // // Product variant
+                // details.detailsProduct == null ||
+                //         details.detailsProduct!.fetchedProductSize == null
+                //     ? const SizedBox()
+                //     : Container(
+                //         margin:
+                //             const EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
+                //         padding: const EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                //         color: Theme.of(context).highlightColor,
+                //         child:
+                //             ProductVariants(details: details.detailsProduct!),
+                //       ),
               ],
             ),
-            bottomNavigationBar: BottomCartView(product: product),
           );
         },
       ),

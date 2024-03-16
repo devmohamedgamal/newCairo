@@ -10,16 +10,17 @@ class AuthModel {
   });
 
   factory AuthModel.fromJson(Map<String, dynamic> json) => AuthModel(
-    status: json["status"],
-    massage: json["massage"],
-    userData: json["user_data"] == null ? null : User.fromJson(json["user_data"]),
-  );
+        status: json["status"],
+        massage: json["massage"],
+        userData:
+            json["user_data"] == null ? null : User.fromJson(json["user_data"]),
+      );
 
   Map<String, dynamic> toJson() => {
-    "status": status,
-    "massage": massage,
-    "user_data": userData!.toJson(),
-  };
+        "status": status,
+        "massage": massage,
+        "user_data": userData!.toJson(),
+      };
 }
 
 class User {
@@ -46,26 +47,26 @@ class User {
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-    userId: json["user_id"],
-    fullName: json["fullname"],
-    clientName: json["clientname"],
-    email: json["email"],
-    mobile: json["mobile"],
-    address: json["address"],
-    avatar: json["avatar"],
-    password: json["password"],
-    signWith: json["signWith"] ?? null,
-  );
+        userId: json["user_id"],
+        fullName: json["fullname"],
+        clientName: json["clientname"],
+        email: json["email"],
+        mobile: json["mobile"],
+        address: json["address"],
+        avatar: json["avatar"],
+        password: json["password"],
+        signWith: json["signWith"] ?? null,
+      );
 
   Map<String, dynamic> toJson() => {
-    "user_id": userId,
-    "fullname": fullName,
-    "clientname": clientName,
-    "email": email,
-    "mobile": mobile,
-    "address": address,
-    "avatar": avatar,
-    "password": password,
-    "signWith": signWith ?? null,
-  };
+        "user_id": userId,
+        "fullname": fullName,
+        "clientname": clientName,
+        "email": email,
+        "mobile": mobile,
+        "address": address,
+        "avatar": avatar,
+        "password": password,
+        "signWith": signWith ?? null,
+      };
 }

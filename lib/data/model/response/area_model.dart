@@ -11,7 +11,8 @@ class ShippingAreaModel {
   late final String districtId;
   late final double price;
 
-  String getLocalizedName(BuildContext context) => context.getLocalizedName(ar: nameAr, en: nameEn);
+  String getLocalizedName(BuildContext context) =>
+      context.getLocalizedName(ar: nameAr, en: nameEn);
 
   ShippingAreaModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

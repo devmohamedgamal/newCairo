@@ -9,8 +9,10 @@ import '../../../baseWidget/button/custom_button.dart';
 
 class SearchFilterBottomSheet extends StatefulWidget {
   @override
-  _SearchFilterBottomSheetState createState() => _SearchFilterBottomSheetState();
+  _SearchFilterBottomSheetState createState() =>
+      _SearchFilterBottomSheetState();
 }
+
 class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
   final TextEditingController _firstPriceController = TextEditingController();
   final FocusNode _firstFocus = FocusNode();
@@ -23,12 +25,14 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
       padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
       decoration: BoxDecoration(
         color: Theme.of(context).highlightColor,
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20), topRight: Radius.circular(20)),
       ),
       child: Column(mainAxisSize: MainAxisSize.min, children: [
-
         Row(children: [
-          Expanded(child: Text(getTranslated('sort_and_filters', context)!, style: cairoBold)),
+          Expanded(
+              child: Text(getTranslated('sort_and_filters', context)!,
+                  style: cairoBold)),
           InkWell(
             onTap: () => Navigator.pop(context),
             child: Icon(Icons.cancel, color: ColorResources.getRed(context)),
@@ -36,36 +40,40 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
         ]),
         Divider(),
         SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
-
         Padding(
-          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Consumer<SearchProvider>(
             builder: (context, search, _) => Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-
                 SizedBox(
                   height: 35,
                   child: Row(
                     children: [
-                      Expanded(child: Text(getTranslated('PRICE_RANGE', context)!,
-                          style: cairoSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL))),
+                      Expanded(
+                          child: Text(getTranslated('PRICE_RANGE', context)!,
+                              style: cairoSemiBold.copyWith(
+                                  fontSize: Dimensions.FONT_SIZE_SMALL))),
                       SizedBox(
                         width: 100,
                         child: TextField(
                           keyboardType: TextInputType.number,
                           textInputAction: TextInputAction.next,
-                          onSubmitted: (_) => FocusScope.of(context).requestFocus(_lastFocus),
+                          onSubmitted: (_) =>
+                              FocusScope.of(context).requestFocus(_lastFocus),
                           textAlign: TextAlign.center,
                           maxLines: 1,
                           focusNode: _firstFocus,
                           controller: _firstPriceController,
-                          style: cairoBold.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL),
+                          style: cairoBold.copyWith(
+                              fontSize: Dimensions.FONT_SIZE_SMALL),
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: ColorResources.getImageBg(context),
-                            contentPadding: EdgeInsets.only(left: 5.0, bottom: 17),
+                            contentPadding:
+                                EdgeInsets.only(left: 5.0, bottom: 17),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.white),
                               borderRadius: BorderRadius.circular(5),
@@ -74,7 +82,6 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
                               borderSide: BorderSide(color: Colors.white),
                               borderRadius: BorderRadius.circular(5.7),
                             ),
-
                           ),
                         ),
                       ),
@@ -94,7 +101,8 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: ColorResources.getImageBg(context),
-                            contentPadding: EdgeInsets.only(left: 5.0, bottom: 17),
+                            contentPadding:
+                                EdgeInsets.only(left: 5.0, bottom: 17),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.white),
                               borderRadius: BorderRadius.circular(5),
@@ -103,7 +111,6 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
                               borderSide: BorderSide(color: Colors.white),
                               borderRadius: BorderRadius.circular(5.7),
                             ),
-
                           ),
                         ),
                       ),
@@ -111,25 +118,35 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
                   ),
                 ),
                 SizedBox(height: Dimensions.PADDING_SIZE_LARGE),
-
                 Text(
                   getTranslated('SORT_BY', context)!,
                   style: cairoSemiBold.copyWith(
-                      fontSize: Dimensions.FONT_SIZE_SMALL, color: Theme.of(context).hintColor),
+                      fontSize: Dimensions.FONT_SIZE_SMALL,
+                      color: Theme.of(context).hintColor),
                 ),
-
-                MyCheckBox(title: getTranslated('latest_products', context)!, index: 0),
-
+                MyCheckBox(
+                    title: getTranslated('latest_products', context)!,
+                    index: 0),
                 Row(children: [
-                  Expanded(child: MyCheckBox(title: getTranslated('alphabetically_az', context)!, index: 1)),
-                  Expanded(child: MyCheckBox(title: getTranslated('alphabetically_za', context)!, index: 2)),
+                  Expanded(
+                      child: MyCheckBox(
+                          title: getTranslated('alphabetically_az', context)!,
+                          index: 1)),
+                  Expanded(
+                      child: MyCheckBox(
+                          title: getTranslated('alphabetically_za', context)!,
+                          index: 2)),
                 ]),
-
                 Row(children: [
-                  Expanded(child: MyCheckBox(title: getTranslated('low_to_high_price', context)!, index: 3)),
-                  Expanded(child: MyCheckBox(title: getTranslated('high_to_low_price', context)!, index: 4)),
+                  Expanded(
+                      child: MyCheckBox(
+                          title: getTranslated('low_to_high_price', context)!,
+                          index: 3)),
+                  Expanded(
+                      child: MyCheckBox(
+                          title: getTranslated('high_to_low_price', context)!,
+                          index: 4)),
                 ]),
-
                 Padding(
                   padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
                   child: CustomButton(
@@ -137,11 +154,13 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
                     onTap: () {
                       double minPrice = 0.0;
                       double maxPrice = 0.0;
-                      if(_firstPriceController.text.isNotEmpty && _lastPriceController.text.isNotEmpty) {
+                      if (_firstPriceController.text.isNotEmpty &&
+                          _lastPriceController.text.isNotEmpty) {
                         minPrice = double.parse(_firstPriceController.text);
                         maxPrice = double.parse(_lastPriceController.text);
                       }
-                      Provider.of<SearchProvider>(context, listen: false).sortSearchList(minPrice, maxPrice);
+                      Provider.of<SearchProvider>(context, listen: false)
+                          .sortSearchList(minPrice, maxPrice);
                       Navigator.pop(context);
                     },
                   ),
@@ -163,13 +182,15 @@ class MyCheckBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CheckboxListTile(
-      title: Text(title, style: cairoSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL)),
+      title: Text(title,
+          style: cairoSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL)),
       checkColor: Theme.of(context).primaryColor,
       activeColor: Colors.transparent,
       value: Provider.of<SearchProvider>(context).filterIndex == index,
       onChanged: (isChecked) {
-        if(isChecked!) {
-          Provider.of<SearchProvider>(context, listen: false).setFilterIndex(index);
+        if (isChecked!) {
+          Provider.of<SearchProvider>(context, listen: false)
+              .setFilterIndex(index);
         }
       },
       controlAffinity: ListTileControlAffinity.leading,

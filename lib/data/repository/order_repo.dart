@@ -21,7 +21,8 @@ class OrderRepo {
     }
   }
 
-  Future<ApiResponse> placeOrder(CartModel cartModel, dynamic PaymentMethod) async {
+  Future<ApiResponse> placeOrder(
+      CartModel cartModel, dynamic PaymentMethod) async {
     try {
       final response = await dioClient.post(
         AppConstants.ORDER_PLACE_URI,
@@ -32,16 +33,16 @@ class OrderRepo {
           validateStatus: (status) => status! < 500,
         ),
         // data: cartModel.paymentMethod == 1
-          //     ? cartModel.toJsonCash()
-          //     : cartModel.paymentMethod == 2
-          //        ? cartModel.toJsonMasterCard(payment)
-          //        : cartModel.paymentMethod == 3 || cartModel.paymentMethod == 4 ||
-          //          cartModel.paymentMethod == 5
-          //           ? cartModel.toJsonFawry()
-          //           : cartModel.toJsonCashApp(),
+        //     ? cartModel.toJsonCash()
+        //     : cartModel.paymentMethod == 2
+        //        ? cartModel.toJsonMasterCard(payment)
+        //        : cartModel.paymentMethod == 3 || cartModel.paymentMethod == 4 ||
+        //          cartModel.paymentMethod == 5
+        //           ? cartModel.toJsonFawry()
+        //           : cartModel.toJsonCashApp(),
       );
       String? redirectUrl;
-      if(response.statusCode == 302){
+      if (response.statusCode == 302) {
         redirectUrl = '${response.headers['location']?.first}';
         debugPrint('is redirect: ${response.isRedirect}');
         log('redirect location: $redirectUrl');
@@ -68,9 +69,8 @@ class OrderRepo {
 
   Future<ApiResponse> cancelOrder(String orderId) async {
     try {
-      final response = await dioClient.get(
-          AppConstants.CANCEL_ORDER_URI + orderId
-      );
+      final response =
+          await dioClient.get(AppConstants.CANCEL_ORDER_URI + orderId);
       return ApiResponse.withSuccess(response);
     } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));

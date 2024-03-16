@@ -7,11 +7,11 @@ class Line extends StatelessWidget {
   final Color color;
   final double top;
   final double bottom;
-  const Line({required this.color,required this.top,required this.bottom});
+  const Line({required this.color, required this.top, required this.bottom});
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(20,top,20,bottom),
+      padding: EdgeInsets.fromLTRB(20, top, 20, bottom),
       child: Container(
         width: width(context),
         height: 1,

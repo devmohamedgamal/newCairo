@@ -16,10 +16,7 @@ import 'package:lemirageelevators/helper/network_info.dart';
 import 'package:lemirageelevators/provider/auth_provider.dart';
 import 'package:lemirageelevators/provider/cart_provider.dart';
 import 'package:lemirageelevators/provider/coupon_provider.dart';
-import 'package:lemirageelevators/provider/facebook_login_provider.dart';
 import 'package:lemirageelevators/provider/gallery_provider.dart';
-import 'package:lemirageelevators/provider/google_sign_in_provider.dart';
-import 'package:lemirageelevators/provider/home_provider.dart';
 import 'package:lemirageelevators/provider/localization_provider.dart';
 import 'package:lemirageelevators/provider/notification_provider.dart';
 import 'package:lemirageelevators/provider/onboarding_provider.dart';
@@ -52,18 +49,24 @@ Future<void> init() async {
 
   // Core
   sl.registerLazySingleton(() => NetworkInfo(sl()));
-  sl.registerLazySingleton(() => DioClient(AppConstants.BASE_URL,sl(), loggingInterceptor: sl(),sharedPreferences: sl()));
+  sl.registerLazySingleton(() => DioClient(AppConstants.BASE_URL, sl(),
+      loggingInterceptor: sl(), sharedPreferences: sl()));
 
   // Repository
-  sl.registerLazySingleton(() => SplashRepo(sharedPreferences: sl(), dioClient: sl()));
+  sl.registerLazySingleton(
+      () => SplashRepo(sharedPreferences: sl(), dioClient: sl()));
   sl.registerLazySingleton(() => OnBoardingRepo(dioClient: sl()));
-  sl.registerLazySingleton(() => AuthRepo(dioClient: sl(), sharedPreferences: sl()));
+  sl.registerLazySingleton(
+      () => AuthRepo(dioClient: sl(), sharedPreferences: sl()));
   sl.registerLazySingleton(() => HomeRepo(dioClient: sl()));
   sl.registerLazySingleton(() => ProductRepo(dioClient: sl()));
-  sl.registerLazySingleton(() => SearchRepo(dioClient: sl(), sharedPreferences: sl()));
+  sl.registerLazySingleton(
+      () => SearchRepo(dioClient: sl(), sharedPreferences: sl()));
   sl.registerLazySingleton(() => WishRepo(dioClient: sl()));
-  sl.registerLazySingleton(() => CartRepo(dioClient: sl(), sharedPreferences: sl()));
-  sl.registerLazySingleton(() => ProfileRepo(dioClient: sl(), sharedPreferences: sl()));
+  sl.registerLazySingleton(
+      () => CartRepo(dioClient: sl(), sharedPreferences: sl()));
+  sl.registerLazySingleton(
+      () => ProfileRepo(dioClient: sl(), sharedPreferences: sl()));
   sl.registerLazySingleton(() => NotificationRepo(dioClient: sl()));
   sl.registerLazySingleton(() => OrderRepo(dioClient: sl()));
   sl.registerLazySingleton(() => GalleryRepo(dioClient: sl()));
@@ -76,12 +79,9 @@ Future<void> init() async {
   sl.registerFactory(() => OnBoardingProvider(onboardingRepo: sl()));
   sl.registerFactory(() => SplashProvider(splashRepo: sl()));
   sl.registerFactory(() => AuthProvider(authRepo: sl()));
-  // sl.registerFactory(() => FacebookLoginProvider());
-  // sl.registerFactory(() => GoogleSignInProvider());
-  sl.registerFactory(() => HomeProvider(homeRepo: sl()));
   sl.registerFactory(() => ProductProvider(productRepo: sl()));
   sl.registerFactory(() => SearchProvider(searchRepo: sl()));
-  sl.registerFactory(() => WishProvider(wishRepo: sl(),productRepo: sl()));
+  sl.registerFactory(() => WishProvider(wishRepo: sl(), productRepo: sl()));
   sl.registerFactory(() => CartProvider(cartRepo: sl()));
   sl.registerFactory(() => ProfileProvider(profileRepo: sl()));
   sl.registerFactory(() => NotificationProvider(notificationRepo: sl()));

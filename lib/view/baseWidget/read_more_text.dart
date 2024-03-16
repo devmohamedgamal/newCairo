@@ -5,6 +5,7 @@ enum TrimMode {
   Length,
   Line,
 }
+
 const String _kEllipsis = '\u2026';
 const String _kLineSeparator = '\u2028';
 
@@ -23,23 +24,24 @@ class ReadMoreText extends StatefulWidget {
   final double? textScaleFactor;
   final String? semanticsLabel;
   const ReadMoreText(
-      this.data, {
-        this.trimExpandedText = ' read less',
-        this.trimCollapsedText = ' ...read more',
-        this.colorClickableText,
-        this.trimLength = 240,
-        this.trimLines = 2,
-        this.trimMode = TrimMode.Length,
-        this.style,
-        this.textAlign,
-        this.textDirection,
-        this.locale,
-        this.textScaleFactor,
-        this.semanticsLabel,
-      })  : assert(data != null);
+    this.data, {
+    this.trimExpandedText = ' read less',
+    this.trimCollapsedText = ' ...read more',
+    this.colorClickableText,
+    this.trimLength = 240,
+    this.trimLines = 2,
+    this.trimMode = TrimMode.Length,
+    this.style,
+    this.textAlign,
+    this.textDirection,
+    this.locale,
+    this.textScaleFactor,
+    this.semanticsLabel,
+  }) : assert(data != null);
   @override
   ReadMoreTextState createState() => ReadMoreTextState();
 }
+
 class ReadMoreTextState extends State<ReadMoreText> {
   bool _readMore = true;
 
@@ -53,7 +55,7 @@ class ReadMoreTextState extends State<ReadMoreText> {
     TextStyle effectiveTextStyle;
     if (widget.style == null || widget.style!.inherit) {
       effectiveTextStyle = defaultTextStyle.style.merge(widget.style);
-    }else{
+    } else {
       effectiveTextStyle = widget.style!;
     }
 
@@ -63,8 +65,7 @@ class ReadMoreTextState extends State<ReadMoreText> {
     final textScaleFactor =
         widget.textScaleFactor ?? MediaQuery.textScaleFactorOf(context);
     final overflow = defaultTextStyle.overflow;
-    final locale =
-        widget.locale ?? Localizations.localeOf(context);
+    final locale = widget.locale ?? Localizations.localeOf(context);
 
     final colorClickableText =
         widget.colorClickableText ?? Theme.of(context).colorScheme.secondary;
@@ -118,8 +119,7 @@ class ReadMoreTextState extends State<ReadMoreText> {
             textSize.height,
           ));
           endIndex = textPainter.getOffsetBefore(pos.offset);
-        }
-        else {
+        } else {
           var pos = textPainter.getPositionForOffset(
             textSize.bottomLeft(Offset.zero),
           );
@@ -151,7 +151,7 @@ class ReadMoreTextState extends State<ReadMoreText> {
                 style: effectiveTextStyle,
                 text: _readMore
                     ? widget.data!.substring(0, endIndex) +
-                    (linkLongerThanLine ? _kLineSeparator : '')
+                        (linkLongerThanLine ? _kLineSeparator : '')
                     : widget.data,
                 children: <TextSpan>[link],
               );

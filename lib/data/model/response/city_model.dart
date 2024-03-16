@@ -8,7 +8,8 @@ class ShippingCityModel {
   late final String nameEn;
   late final String zoneId;
 
-  String getLocalizedName(BuildContext context) => context.getLocalizedName(ar: nameAr, en: nameEn);
+  String getLocalizedName(BuildContext context) =>
+      context.getLocalizedName(ar: nameAr, en: nameEn);
 
   ShippingCityModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

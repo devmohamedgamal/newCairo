@@ -10,8 +10,7 @@ class HomeRepo {
 
   Future<ApiResponse> getHomeData() async {
     try {
-      final response = await dioClient.get(
-        AppConstants.HOME_URI);
+      final response = await dioClient.get(AppConstants.HOME_URI);
       return ApiResponse.withSuccess(response);
     } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));

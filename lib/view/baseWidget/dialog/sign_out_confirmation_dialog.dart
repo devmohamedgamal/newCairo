@@ -16,47 +16,52 @@ class SignOutConfirmationDialog extends StatelessWidget {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Column(mainAxisSize: MainAxisSize.min, children: [
-
         Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: 18,
-              vertical: 30),
+          padding: EdgeInsets.symmetric(horizontal: 18, vertical: 30),
           child: Text(getTranslated('want_to_sign_out', context)!,
               style: cairoBold, textAlign: TextAlign.center),
         ),
-
         Divider(height: 1, color: ColorResources.HINT_TEXT_COLOR),
         Row(children: [
-
-          Expanded(child: InkWell(
+          Expanded(
+              child: InkWell(
             onTap: () {
-              Provider.of<AuthProvider>(context, listen: false).clearUser().then((condition) {
+              Provider.of<AuthProvider>(context, listen: false)
+                  .clearUser()
+                  .then((condition) {
                 Navigator.pop(context);
-                Provider.of<CartProvider>(context,listen: false).clearCart();
-                Provider.of<ProfileProvider>(context,listen: false).clearHomeAddress();
-                Provider.of<ProfileProvider>(context,listen: false).clearOfficeAddress();
-                Provider.of<AuthProvider>(context,listen: false).clearUser();
-                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-                    builder: (context) => AuthScreen()), (route) => false);
+                Provider.of<CartProvider>(context, listen: false).clearCart();
+                Provider.of<ProfileProvider>(context, listen: false)
+                    .clearHomeAddress();
+                Provider.of<ProfileProvider>(context, listen: false)
+                    .clearOfficeAddress();
+                Provider.of<AuthProvider>(context, listen: false).clearUser();
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => AuthScreen()),
+                    (route) => false);
               });
             },
             child: Container(
               padding: EdgeInsets.all(8),
               alignment: Alignment.center,
-              decoration: BoxDecoration(borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(10))),
+              decoration: BoxDecoration(
+                  borderRadius:
+                      BorderRadius.only(bottomLeft: Radius.circular(10))),
               child: Text(getTranslated('YES', context)!,
-                  style: cairoBold.copyWith(color: Theme.of(context).primaryColor)),
+                  style: cairoBold.copyWith(
+                      color: Theme.of(context).primaryColor)),
             ),
           )),
-
-          Expanded(child: InkWell(
+          Expanded(
+              child: InkWell(
             onTap: () => Navigator.pop(context),
             child: Container(
               padding: EdgeInsets.all(8),
               alignment: Alignment.center,
-              decoration: BoxDecoration(color: ColorResources.RED,
-                  borderRadius: BorderRadius.only(bottomRight: Radius.circular(10))),
+              decoration: BoxDecoration(
+                  color: ColorResources.RED,
+                  borderRadius:
+                      BorderRadius.only(bottomRight: Radius.circular(10))),
               child: Text(getTranslated('NO', context)!,
                   style: cairoBold.copyWith(color: ColorResources.WHITE)),
             ),

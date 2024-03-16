@@ -8,7 +8,6 @@ import 'package:lemirageelevators/provider/auth_provider.dart';
 import 'package:lemirageelevators/provider/cart_provider.dart';
 import 'package:lemirageelevators/provider/coupon_provider.dart';
 import 'package:lemirageelevators/provider/gallery_provider.dart';
-import 'package:lemirageelevators/provider/home_provider.dart';
 import 'package:lemirageelevators/provider/localization_provider.dart';
 import 'package:lemirageelevators/provider/notification_provider.dart';
 import 'package:lemirageelevators/provider/onboarding_provider.dart';
@@ -51,7 +50,8 @@ Future<void> main() async {
 
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(create: (context) => di.sl<LocalizationProvider>()),
+      ChangeNotifierProvider(
+          create: (context) => di.sl<LocalizationProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<ThemeProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<OnBoardingProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<AuthProvider>()),
@@ -59,12 +59,12 @@ Future<void> main() async {
       // ChangeNotifierProvider(create: (context) => di.sl<GoogleSignInProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<ProfileProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<SplashProvider>()),
-      ChangeNotifierProvider(create: (context) => di.sl<HomeProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<ProductProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<SearchProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<WishProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<CartProvider>()),
-      ChangeNotifierProvider(create: (context) => di.sl<NotificationProvider>()),
+      ChangeNotifierProvider(
+          create: (context) => di.sl<NotificationProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<OrderProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<GalleryProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<CouponProvider>()),
@@ -78,7 +78,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Locale> locals = AppConstants.languages.map((e) => Locale(e.languageCode, e.countryCode)).toList();
+    final List<Locale> locals = AppConstants.languages
+        .map((e) => Locale(e.languageCode, e.countryCode))
+        .toList();
 
     return MaterialApp(
       title: AppConstants.APP_NAME,

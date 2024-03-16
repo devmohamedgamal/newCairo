@@ -6,10 +6,10 @@ class CircularProgressIndicatorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Padding(
-          padding: EdgeInsets.all(12),
-          child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(
-                  Theme.of(context).primaryColor)),
-        ));
+      padding: EdgeInsets.all(12),
+      child: CircularProgressIndicator(
+          valueColor:
+              AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor)),
+    ));
   }
 }

@@ -25,7 +25,7 @@ class CouponProvider extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    try{
+    try {
       final apiResponse = await couponRepo.checkCoupon(code);
       if (apiResponse.isSuccess()) {
         _code = code;
@@ -43,7 +43,7 @@ class CouponProvider extends ChangeNotifier {
     _coupon = null;
     _code = null;
     _isLoading = false;
-    if(notify) {
+    if (notify) {
       notifyListeners();
     }
   }

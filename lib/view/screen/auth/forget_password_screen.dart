@@ -16,6 +16,7 @@ class ForgetPasswordScreen extends StatefulWidget {
   @override
   State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
 }
+
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final TextEditingController _controller = TextEditingController();
   final GlobalKey<ScaffoldMessengerState> _key = GlobalKey();
@@ -77,7 +78,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       textInputType: TextInputType.emailAddress,
                     ),
                     SizedBox(height: 100),
-
                     Builder(
                       builder: (context) => !Provider.of<AuthProvider>(context)
                               .isLoading
@@ -89,10 +89,11 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                       getTranslated(
                                           'EMAIL_MUST_BE_REQUIRED', context)!,
                                       context);
-                                }
-                                else {
-                                  Provider.of<AuthProvider>(context,listen: false)
-                                      .forgetPassword(_controller.text.trim(),_route);
+                                } else {
+                                  Provider.of<AuthProvider>(context,
+                                          listen: false)
+                                      .forgetPassword(
+                                          _controller.text.trim(), _route);
                                 }
                               },
                             )
@@ -109,7 +110,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
     );
   }
 
-  _route(bool isSuccess,String message){
+  _route(bool isSuccess, String message) {
     if (isSuccess) {
       FocusScopeNode currentFocus = FocusScope.of(context);
       if (!currentFocus.hasPrimaryFocus) {
@@ -121,19 +122,16 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           context,
           MyDialog(
             icon: Icons.send,
-            title:
-            getTranslated('sent', context)!,
-            description: getTranslated(
-                'recovery_link_sent', context)!,
+            title: getTranslated('sent', context)!,
+            description: getTranslated('recovery_link_sent', context)!,
             rotateAngle: 5.5,
-            back: (){
+            back: () {
               Navigator.pop(context);
               Navigator.pop(context);
             },
           ),
           dismissible: false);
-    }
-    else {
+    } else {
       showCustomSnackBar(message, context);
     }
   }

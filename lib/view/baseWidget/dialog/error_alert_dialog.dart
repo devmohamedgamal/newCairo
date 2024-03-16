@@ -27,7 +27,8 @@ class ErrorAlertDialog extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 18, vertical: 30),
-            child: Text(errorText ?? 'error_occurred'.tr(context), style: cairoBold, textAlign: TextAlign.center),
+            child: Text(errorText ?? 'error_occurred'.tr(context),
+                style: cairoBold, textAlign: TextAlign.center),
           ),
           Divider(height: 1, color: ColorResources.HINT_TEXT_COLOR),
           Row(
@@ -40,8 +41,12 @@ class ErrorAlertDialog extends StatelessWidget {
                   child: Container(
                     padding: EdgeInsets.all(8),
                     alignment: Alignment.center,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10))),
-                    child: Text(getTranslated('ok', context), style: cairoBold.copyWith(color: Theme.of(context).primaryColor)),
+                    decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.only(bottomLeft: Radius.circular(10))),
+                    child: Text(getTranslated('ok', context),
+                        style: cairoBold.copyWith(
+                            color: Theme.of(context).primaryColor)),
                   ),
                 ),
               ),

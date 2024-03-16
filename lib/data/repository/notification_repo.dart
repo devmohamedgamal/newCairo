@@ -10,7 +10,8 @@ class NotificationRepo {
 
   Future<ApiResponse> getNotificationList(String clientId) async {
     try {
-      Response response = await dioClient.get(AppConstants.NOTIFICATION_URI + clientId);
+      Response response =
+          await dioClient.get(AppConstants.NOTIFICATION_URI + clientId);
       return ApiResponse.withSuccess(response);
     } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));

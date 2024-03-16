@@ -65,7 +65,7 @@ class AuthRepo {
     _deviceToken = await FirebaseMessaging.instance.getToken();
 
     if (_deviceToken != null) {
-      print('--------Device Token---------- '+_deviceToken);
+      print('--------Device Token---------- ' + _deviceToken);
     }
     return _deviceToken!;
   }
@@ -86,7 +86,7 @@ class AuthRepo {
     }
   }
 
-  Future<User?> getUser() async{
+  Future<User?> getUser() async {
     String? user = await sharedPreferences.getString(AppConstants.USER) ?? null;
     return user == null ? null : User.fromJson(jsonDecode(user));
   }
@@ -94,12 +94,10 @@ class AuthRepo {
   /// forget Password
   Future<ApiResponse> forgetPassword(String email) async {
     try {
-      Response response = await dioClient.post(
-          AppConstants.FORGET_PASSWORD_URI,
+      Response response = await dioClient.post(AppConstants.FORGET_PASSWORD_URI,
           data: FormData.fromMap({
             "email": email,
-          })
-      );
+          }));
       return ApiResponse.withSuccess(response);
     } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));

@@ -9,17 +9,19 @@ class ClientProfileModel {
     this.wish,
   });
 
-  factory ClientProfileModel.fromJson(Map<String, dynamic> json) => ClientProfileModel(
-    orders: List<FetchedOrder>.from(json["fetched_orders"].map((x) => FetchedOrder.fromJson(x))),
-    clientData: ClientData.fromJson(json["clientdata"]),
-    wish: List<Wish>.from(json["wish"].map((x) => Wish.fromJson(x))),
-  );
+  factory ClientProfileModel.fromJson(Map<String, dynamic> json) =>
+      ClientProfileModel(
+        orders: List<FetchedOrder>.from(
+            json["fetched_orders"].map((x) => FetchedOrder.fromJson(x))),
+        clientData: ClientData.fromJson(json["clientdata"]),
+        wish: List<Wish>.from(json["wish"].map((x) => Wish.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "fetched_orders": List<dynamic>.from(orders!.map((x) => x.toJson())),
-    "clientdata": clientData!.toJson(),
-    "wish": List<dynamic>.from(wish!.map((x) => x.toJson())),
-  };
+        "fetched_orders": List<dynamic>.from(orders!.map((x) => x.toJson())),
+        "clientdata": clientData!.toJson(),
+        "wish": List<dynamic>.from(wish!.map((x) => x.toJson())),
+      };
 }
 
 class ClientData {
@@ -57,40 +59,40 @@ class ClientData {
   });
 
   factory ClientData.fromJson(Map<String, dynamic> json) => ClientData(
-    clientId: json["clientid"],
-    clientName: json["clientname"],
-    fullName: json["fullname"],
-    email: json["email"],
-    mobile: json["mobile"],
-    address: json["address"],
-    password: json["password"],
-    clientStatus: json["clientstatus"],
-    addDate: DateTime.parse(json["adddate"]),
-    avatar: json["avatar"],
-    uniId: json["uniid"],
-    updatedAt: DateTime.parse(json["updated_at"]),
-    clientStatus2: json["clientstatus2"],
-    login: json["login"],
-    tokenId: json["token_id"],
-  );
+        clientId: json["clientid"],
+        clientName: json["clientname"],
+        fullName: json["fullname"],
+        email: json["email"],
+        mobile: json["mobile"],
+        address: json["address"],
+        password: json["password"],
+        clientStatus: json["clientstatus"],
+        addDate: DateTime.parse(json["adddate"]),
+        avatar: json["avatar"],
+        uniId: json["uniid"],
+        updatedAt: DateTime.parse(json["updated_at"]),
+        clientStatus2: json["clientstatus2"],
+        login: json["login"],
+        tokenId: json["token_id"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "clientid": clientId,
-    "clientname": clientName,
-    "fullname": fullName,
-    "email": email,
-    "mobile": mobile,
-    "address": address,
-    "password": password,
-    "clientstatus": clientStatus,
-    "adddate": addDate!.toIso8601String(),
-    "avatar": avatar,
-    "uniid": uniId,
-    "updated_at": updatedAt!.toIso8601String(),
-    "clientstatus2": clientStatus2,
-    "login": login,
-    "token_id": tokenId,
-  };
+        "clientid": clientId,
+        "clientname": clientName,
+        "fullname": fullName,
+        "email": email,
+        "mobile": mobile,
+        "address": address,
+        "password": password,
+        "clientstatus": clientStatus,
+        "adddate": addDate!.toIso8601String(),
+        "avatar": avatar,
+        "uniid": uniId,
+        "updated_at": updatedAt!.toIso8601String(),
+        "clientstatus2": clientStatus2,
+        "login": login,
+        "token_id": tokenId,
+      };
 }
 
 class FetchedOrder {
@@ -133,44 +135,45 @@ class FetchedOrder {
   });
 
   factory FetchedOrder.fromJson(Map<String, dynamic> json) => FetchedOrder(
-    id: json["id"],
-    adate: DateTime.parse(json["adate"]),
-    note: json["note"],
-    way: json["way"],
-    shippingId: json["shipping_id"],
-    customerId: json["customer_id"],
-    status: json["status"],
-    paymentStatus: json["payment_status"],
-    paymentMethod: json["payment_method"],
-    orderAddress: json["order_address"],
-    orderMobile: json["order_mobile"],
-    lat: json["lat"],
-    lng: json["lng"],
-    fullAddress: json["full_address"],
-    clientId: json["client_id"],
-    orderPrice: json["order_price"] == null ? null : json["order_price"],
-    orderItems: List<OrderItem>.from(json["order_items"].map((x) => OrderItem.fromJson(x))),
-  );
+        id: json["id"],
+        adate: DateTime.parse(json["adate"]),
+        note: json["note"],
+        way: json["way"],
+        shippingId: json["shipping_id"],
+        customerId: json["customer_id"],
+        status: json["status"],
+        paymentStatus: json["payment_status"],
+        paymentMethod: json["payment_method"],
+        orderAddress: json["order_address"],
+        orderMobile: json["order_mobile"],
+        lat: json["lat"],
+        lng: json["lng"],
+        fullAddress: json["full_address"],
+        clientId: json["client_id"],
+        orderPrice: json["order_price"] == null ? null : json["order_price"],
+        orderItems: List<OrderItem>.from(
+            json["order_items"].map((x) => OrderItem.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "adate": adate!.toIso8601String(),
-    "note": note,
-    "way": way,
-    "shipping_id": shippingId,
-    "customer_id": customerId,
-    "status": status,
-    "payment_status": paymentStatus,
-    "payment_method": paymentMethod,
-    "order_address": orderAddress,
-    "order_mobile": orderMobile,
-    "lat": lat,
-    "lng": lng,
-    "full_address": fullAddress,
-    "client_id": clientId,
-    "order_price": orderPrice == null ? null : orderPrice,
-    "order_items": List<dynamic>.from(orderItems!.map((x) => x.toJson())),
-  };
+        "id": id,
+        "adate": adate!.toIso8601String(),
+        "note": note,
+        "way": way,
+        "shipping_id": shippingId,
+        "customer_id": customerId,
+        "status": status,
+        "payment_status": paymentStatus,
+        "payment_method": paymentMethod,
+        "order_address": orderAddress,
+        "order_mobile": orderMobile,
+        "lat": lat,
+        "lng": lng,
+        "full_address": fullAddress,
+        "client_id": clientId,
+        "order_price": orderPrice == null ? null : orderPrice,
+        "order_items": List<dynamic>.from(orderItems!.map((x) => x.toJson())),
+      };
 }
 
 class OrderItem {
@@ -199,30 +202,30 @@ class OrderItem {
   });
 
   factory OrderItem.fromJson(Map<String, dynamic> json) => OrderItem(
-    id: json["id"],
-    orderId: json["orderid"],
-    productId: json["productid"],
-    qty: json["qty"],
-    price: json["price"],
-    kind: json["kind"],
-    colors: json["colors"],
-    size: json["size"],
-    kindId: json["kind_id"],
-    productName: json["product_name"],
-  );
+        id: json["id"],
+        orderId: json["orderid"],
+        productId: json["productid"],
+        qty: json["qty"],
+        price: json["price"],
+        kind: json["kind"],
+        colors: json["colors"],
+        size: json["size"],
+        kindId: json["kind_id"],
+        productName: json["product_name"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "orderid": orderId,
-    "productid": productId,
-    "qty": qty,
-    "price": price,
-    "kind": kind,
-    "colors": colors,
-    "size": size,
-    "kind_id": kindId,
-    "product_name": productName,
-  };
+        "id": id,
+        "orderid": orderId,
+        "productid": productId,
+        "qty": qty,
+        "price": price,
+        "kind": kind,
+        "colors": colors,
+        "size": size,
+        "kind_id": kindId,
+        "product_name": productName,
+      };
 }
 
 class Wish {
@@ -265,41 +268,41 @@ class Wish {
 
   Wish(
       {this.id,
-        this.categoryId,
-        this.title,
-        this.pavatar,
-        this.pdfFile,
-        this.description,
-        this.details,
-        this.atime,
-        this.adate,
-        this.views,
-        this.pstatus,
-        this.tags,
-        this.url,
-        this.priceBefore,
-        this.price,
-        this.mostSold,
-        this.specialOffer,
-        this.homepage,
-        this.stock,
-        this.kinds,
-        this.quantity,
-        this.colors,
-        this.size,
-        this.shipping,
-        this.offerEnd,
-        this.vendorid,
-        this.addby,
-        this.rate,
-        this.titleEN,
-        this.updatedAt,
-        this.descriptionEN,
-        this.detailsEN,
-        this.wishId,
-        this.productId,
-        this.customerId,
-        this.edate});
+      this.categoryId,
+      this.title,
+      this.pavatar,
+      this.pdfFile,
+      this.description,
+      this.details,
+      this.atime,
+      this.adate,
+      this.views,
+      this.pstatus,
+      this.tags,
+      this.url,
+      this.priceBefore,
+      this.price,
+      this.mostSold,
+      this.specialOffer,
+      this.homepage,
+      this.stock,
+      this.kinds,
+      this.quantity,
+      this.colors,
+      this.size,
+      this.shipping,
+      this.offerEnd,
+      this.vendorid,
+      this.addby,
+      this.rate,
+      this.titleEN,
+      this.updatedAt,
+      this.descriptionEN,
+      this.detailsEN,
+      this.wishId,
+      this.productId,
+      this.customerId,
+      this.edate});
 
   Wish.fromJson(Map<String, dynamic> json) {
     id = json['id'];

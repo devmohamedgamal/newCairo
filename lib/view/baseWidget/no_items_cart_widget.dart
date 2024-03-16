@@ -6,7 +6,6 @@ import 'package:lemirageelevators/util/textStyle.dart';
 import 'package:lemirageelevators/view/baseWidget/spacer.dart';
 
 class NoItemsCartWidget extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -14,8 +13,7 @@ class NoItemsCartWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Image.asset(Images.cart_image,
-            width: width(context) * 0.5,
-            height: height(context) * 0.1),
+            width: width(context) * 0.5, height: height(context) * 0.1),
         HSpacer(15),
         Text(
           getTranslated("no_products_cart", context),

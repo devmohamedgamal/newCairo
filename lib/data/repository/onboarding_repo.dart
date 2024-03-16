@@ -8,7 +8,7 @@ import 'package:lemirageelevators/util/images.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-class OnBoardingRepo{
+class OnBoardingRepo {
   final DioClient dioClient;
   OnBoardingRepo({required this.dioClient});
 
@@ -21,7 +21,7 @@ class OnBoardingRepo{
           getTranslated('on_boarding_description_one', context)!,
         ),
         OnboardingModel(
-        Images.onboarding_image_two,
+          Images.onboarding_image_two,
           getTranslated('on_boarding_title_two', context)!,
           getTranslated('on_boarding_description_two', context)!,
         ),
@@ -32,7 +32,10 @@ class OnBoardingRepo{
         ),
       ];
 
-      Response response = Response(requestOptions: RequestOptions(path: ''), data: onBoardingList,statusCode: 200);
+      Response response = Response(
+          requestOptions: RequestOptions(path: ''),
+          data: onBoardingList,
+          statusCode: 200);
       return ApiResponse.withSuccess(response);
     } catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));

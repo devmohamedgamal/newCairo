@@ -11,15 +11,19 @@ class NotificationProvider extends ChangeNotifier {
   List<Notif>? _notificationList = [];
   List<Notif>? get notificationList => _notificationList;
 
-  Future<void> initNotificationList(BuildContext context,String clientId) async {
-    ApiResponse apiResponse = await notificationRepo.getNotificationList(clientId);
-    if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
+  Future<void> initNotificationList(
+      BuildContext context, String clientId) async {
+    ApiResponse apiResponse =
+        await notificationRepo.getNotificationList(clientId);
+    if (apiResponse.response != null &&
+        apiResponse.response!.statusCode == 200) {
       _notificationList = [];
       NotificationModel notificationModel;
-      notificationModel = NotificationModel.fromJson(apiResponse.response!.data);
-      if(notificationModel.notifications!.length != 0){
-        notificationModel.notifications!.forEach((notification) =>
-            _notificationList!.add(notification));
+      notificationModel =
+          NotificationModel.fromJson(apiResponse.response!.data);
+      if (notificationModel.notifications!.length != 0) {
+        notificationModel.notifications!
+            .forEach((notification) => _notificationList!.add(notification));
       }
     } else {
       ApiChecker.checkApi(context, apiResponse);

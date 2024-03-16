@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import '../../util/app_constants.dart';
 import '../datasource/remote/dio/dio_client.dart';
@@ -13,6 +15,7 @@ class ProductRepo {
   Future<ApiResponse> getAllProductList() async {
     try {
       final response = await dioClient.get(AppConstants.GET_PRODUCT_URL);
+      log(response.data.toString());
       return ApiResponse.withSuccess(response);
     } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
@@ -21,15 +24,16 @@ class ProductRepo {
 
   Future<ApiResponse> getCategoryProductList(String id) async {
     try {
-      final response = await dioClient.get(
-        AppConstants.CATEGORY_PRODUCT_URI + id);
+      final response =
+          await dioClient.get(AppConstants.CATEGORY_PRODUCT_URI + id);
       return ApiResponse.withSuccess(response);
     } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
 
-  Future<ApiResponse> getDetailsProduct(String productID,String customerID) async {
+  Future<ApiResponse> getDetailsProduct(
+      String productID, String customerID) async {
     try {
       final response = await dioClient.post(
         AppConstants.PRODUCT_DETAILS_URL,
@@ -48,7 +52,7 @@ class ProductRepo {
   Future<ApiResponse> submitReview(ReviewBody reviewBody) async {
     try {
       final response = await dioClient.post(
-          AppConstants.RATING_URL,
+        AppConstants.RATING_URL,
         data: reviewBody.toJsonApi(),
       );
       return ApiResponse.withSuccess(response);

@@ -9,7 +9,8 @@ class MyNotification {
   static Future<void> initialize(
     FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
   ) async {
-    var androidInitialize = const AndroidInitializationSettings('notification_icon');
+    var androidInitialize =
+        const AndroidInitializationSettings('notification_icon');
     var iOSInitialize = const DarwinInitializationSettings();
     var initializationsSettings = InitializationSettings(
       android: androidInitialize,
@@ -28,12 +29,14 @@ class MyNotification {
       print("onOpenApp: ${message.notification!.title}/"
           "${message.notification!.body}/${message.notification!.titleLocKey}");
       try {
-        if (message.notification!.titleLocKey != null && message.notification!.titleLocKey!.isNotEmpty) {}
+        if (message.notification!.titleLocKey != null &&
+            message.notification!.titleLocKey!.isNotEmpty) {}
       } catch (e) {}
     });
   }
 
-  static Future<void> showNotification(RemoteMessage message, FlutterLocalNotificationsPlugin fln, bool data) async {
+  static Future<void> showNotification(RemoteMessage message,
+      FlutterLocalNotificationsPlugin fln, bool data) async {
     String? _title;
     String? _body;
     String? _orderID;
@@ -42,7 +45,8 @@ class MyNotification {
       _title = message.data['title'];
       _body = message.data['body'];
       _orderID = message.data['order_id'];
-      _image = (message.data['image'] != null && message.data['image'].isNotEmpty)
+      _image = (message.data['image'] != null &&
+              message.data['image'].isNotEmpty)
           ? message.data['image'].startsWith('http')
               ? message.data['image']
               : '${AppConstants.BASE_URL}/storage/app/public/notification/${message.data['image']}'
@@ -52,13 +56,15 @@ class MyNotification {
       _body = message.notification!.body;
       _orderID = message.notification!.titleLocKey;
       if (Platform.isAndroid) {
-        _image = (message.notification!.android!.imageUrl != null && message.notification!.android!.imageUrl!.isNotEmpty)
+        _image = (message.notification!.android!.imageUrl != null &&
+                message.notification!.android!.imageUrl!.isNotEmpty)
             ? message.notification!.android!.imageUrl!.startsWith('http')
                 ? message.notification!.android!.imageUrl
                 : '${AppConstants.BASE_URL}/storage/app/public/notification/${message.notification!.android!.imageUrl}'
             : null;
       } else if (Platform.isIOS) {
-        _image = (message.notification!.apple!.imageUrl != null && message.notification!.apple!.imageUrl!.isNotEmpty)
+        _image = (message.notification!.apple!.imageUrl != null &&
+                message.notification!.apple!.imageUrl!.isNotEmpty)
             ? message.notification!.apple!.imageUrl!.startsWith('http')
                 ? message.notification!.apple!.imageUrl
                 : '${AppConstants.BASE_URL}/storage/app/public/notification/${message.notification!.apple!.imageUrl}'
@@ -68,7 +74,8 @@ class MyNotification {
 
     if (_image != null && _image.isNotEmpty) {
       try {
-        await showBigPictureNotificationHiddenLargeIcon(_title!, _body!, _orderID!, _image, fln);
+        await showBigPictureNotificationHiddenLargeIcon(
+            _title!, _body!, _orderID!, _image, fln);
       } catch (e) {
         await showBigTextNotification(_title!, _body!, _orderID!, fln);
       }
@@ -77,8 +84,10 @@ class MyNotification {
     }
   }
 
-  static Future<void> showTextNotification(String title, String body, String orderID, FlutterLocalNotificationsPlugin fln) async {
-    const AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
+  static Future<void> showTextNotification(String title, String body,
+      String orderID, FlutterLocalNotificationsPlugin fln) async {
+    const AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
       'your channel id',
       'your channel name',
       playSound: true,
@@ -86,18 +95,21 @@ class MyNotification {
       priority: Priority.max,
       sound: RawResourceAndroidNotificationSound('notification'),
     );
-    const NotificationDetails platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics);
+    const NotificationDetails platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
     await fln.show(0, title, body, platformChannelSpecifics, payload: orderID);
   }
 
-  static Future<void> showBigTextNotification(String title, String body, String orderID, FlutterLocalNotificationsPlugin fln) async {
+  static Future<void> showBigTextNotification(String title, String body,
+      String orderID, FlutterLocalNotificationsPlugin fln) async {
     BigTextStyleInformation bigTextStyleInformation = BigTextStyleInformation(
       body,
       htmlFormatBigText: true,
       contentTitle: title,
       htmlFormatContentTitle: true,
     );
-    AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
+    AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
       'your channel id',
       'your channel name',
       importance: Importance.max,
@@ -106,15 +118,22 @@ class MyNotification {
       playSound: true,
       sound: const RawResourceAndroidNotificationSound('notification'),
     );
-    NotificationDetails platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics);
+    NotificationDetails platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
     await fln.show(0, title, body, platformChannelSpecifics, payload: orderID);
   }
 
   static Future<void> showBigPictureNotificationHiddenLargeIcon(
-      String title, String body, String orderID, String image, FlutterLocalNotificationsPlugin fln) async {
+      String title,
+      String body,
+      String orderID,
+      String image,
+      FlutterLocalNotificationsPlugin fln) async {
     final String largeIconPath = await _downloadAndSaveFile(image, 'largeIcon');
-    final String bigPicturePath = await _downloadAndSaveFile(image, 'bigPicture');
-    final BigPictureStyleInformation bigPictureStyleInformation = BigPictureStyleInformation(
+    final String bigPicturePath =
+        await _downloadAndSaveFile(image, 'bigPicture');
+    final BigPictureStyleInformation bigPictureStyleInformation =
+        BigPictureStyleInformation(
       FilePathAndroidBitmap(bigPicturePath),
       hideExpandedLargeIcon: true,
       contentTitle: title,
@@ -122,7 +141,8 @@ class MyNotification {
       summaryText: body,
       htmlFormatSummaryText: true,
     );
-    final AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
+    final AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
       'your channel id',
       'your channel name',
       largeIcon: FilePathAndroidBitmap(largeIconPath),
@@ -132,14 +152,17 @@ class MyNotification {
       importance: Importance.max,
       sound: const RawResourceAndroidNotificationSound('notification'),
     );
-    final NotificationDetails platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics);
+    final NotificationDetails platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
     await fln.show(0, title, body, platformChannelSpecifics, payload: orderID);
   }
 
-  static Future<String> _downloadAndSaveFile(String url, String fileName) async {
+  static Future<String> _downloadAndSaveFile(
+      String url, String fileName) async {
     final Directory directory = await getApplicationDocumentsDirectory();
     final String filePath = '${directory.path}/$fileName';
-    final Response response = await Dio().get(url, options: Options(responseType: ResponseType.bytes));
+    final Response response = await Dio()
+        .get(url, options: Options(responseType: ResponseType.bytes));
     final File file = File(filePath);
     await file.writeAsBytes(response.data);
     return filePath;

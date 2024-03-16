@@ -17,7 +17,6 @@ class GalleryRepo {
     }
   }
 
-
   Future<ApiResponse> getAlbumsList() async {
     try {
       final response = await dioClient.get(AppConstants.ALL_ALBUMS_URL);
@@ -26,7 +25,6 @@ class GalleryRepo {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
-
 
   Future<ApiResponse> getDetailsAlbum(String albumId) async {
     try {

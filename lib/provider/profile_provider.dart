@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lemirageelevators/data/model/response/client_profile_model.dart';
-import 'package:lemirageelevators/localization/language_constrants.dart';
-import '../data/model/body/address_model.dart';
 import '../data/model/response/AuthModel.dart';
 import '../data/model/response/base/api_response.dart';
 import '../data/model/response/status_model.dart';
@@ -16,7 +14,6 @@ class ProfileProvider extends ChangeNotifier {
   List<String> _addressTypeList = [];
   String _addressType = '';
   bool _isLoading = false;
-  List<AddressModel> _addressList = [];
   User? _user;
   int? _addressIndex;
   ClientProfileModel? _clientProfileModel;
@@ -30,47 +27,23 @@ class ProfileProvider extends ChangeNotifier {
   List<String> get addressTypeList => _addressTypeList;
   String get addressType => _addressType;
   bool get isLoading => _isLoading;
-  List<AddressModel> get addressList => _addressList;
   User? get user => _user;
   ClientProfileModel? get clientProfileModel => _clientProfileModel;
   bool? get hasData => _hasData;
   bool get isHomeAddress => _isHomeAddress;
   String? get addAddressErrorText => _addAddressErrorText;
-  bool get checkHomeAddress=>_checkHomeAddress;
-  bool get checkOfficeAddress=>_checkOfficeAddress;
-  AddressModel? get getSelectedAddress => (_addressList.isNotEmpty && _addressIndex != null) ? _addressList[_addressIndex!] : null;
+  bool get checkHomeAddress => _checkHomeAddress;
+  bool get checkOfficeAddress => _checkOfficeAddress;
 
-  Future<void> getUserInfo(BuildContext context,String clientId) async {
+  Future<void> getUserInfo(BuildContext context, String clientId) async {
     ApiResponse apiResponse = await profileRepo.getUserInfo(clientId);
-    if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
-      _clientProfileModel = ClientProfileModel.fromJson(apiResponse.response!.data);
-    }
-    else {
+    if (apiResponse.response != null &&
+        apiResponse.response!.statusCode == 200) {
+      _clientProfileModel =
+          ClientProfileModel.fromJson(apiResponse.response!.data);
+    } else {
       ApiChecker.checkApi(context, apiResponse);
     }
-    notifyListeners();
-  }
-
-  void getAddress() {
-    _addressList = [];
-    _addressList.addAll(profileRepo.getAllAddress());
-  }
-
-  void addAddress(BuildContext context,AddressModel addressModel,Function callback) {
-    try{
-      _addressList.add(addressModel);
-      profileRepo.addAddress(_addressList);
-      callback(getTranslated("address_add", context));
-      notifyListeners();
-    }
-    catch(e){
-      callback(getTranslated("address_error", context));
-    }
-  }
-
-  void removeAddress(int index) {
-    _addressList.removeAt(index);
-    profileRepo.addAddress(_addressList);
     notifyListeners();
   }
 
@@ -79,9 +52,9 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setAddAddressErrorText(String? errorText,bool init) {
+  void setAddAddressErrorText(String? errorText, bool init) {
     _addAddressErrorText = errorText;
-    if(init) {
+    if (init) {
       notifyListeners();
     }
   }
@@ -109,21 +82,22 @@ class ProfileProvider extends ChangeNotifier {
   }
 
   void initAddressTypeList(BuildContext context) async {
-    if (_addressTypeList.length == 0) {
+    if (_addressTypeList.isEmpty) {
       ApiResponse apiResponse = await profileRepo.getAddressTypeList(context);
-      if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
+      if (apiResponse.response != null &&
+          apiResponse.response!.statusCode == 200) {
         _addressTypeList.clear();
         _addressTypeList.addAll(apiResponse.response!.data);
         _addressType = apiResponse.response!.data[0];
-      }
-      else {
+      } else {
         ApiChecker.checkApi(context, apiResponse);
       }
       notifyListeners();
     }
   }
 
-  Future<void> updateUserInfo(UserInfoModel updateUserModel,BuildContext context,Function callback) async {
+  Future<void> updateUserInfo(UserInfoModel updateUserModel,
+      BuildContext context, Function callback) async {
     _isLoading = true;
     notifyListeners();
     ApiResponse apiResponse = await profileRepo.updateProfile(updateUserModel);
@@ -131,10 +105,9 @@ class ProfileProvider extends ChangeNotifier {
     if (apiResponse.response != null) {
       StatusModel statusModel;
       statusModel = StatusModel.fromJson(apiResponse.response!.data);
-      callback(statusModel.status,statusModel.massage);
-    }
-    else {
-      callback(false,"error");
+      callback(statusModel.status, statusModel.massage);
+    } else {
+      callback(false, "error");
     }
     notifyListeners();
   }

@@ -8,8 +8,7 @@ class CircularButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: CircularProgressIndicator(
-        valueColor: AlwaysStoppedAnimation<Color>(color)
-      ),
+          valueColor: AlwaysStoppedAnimation<Color>(color)),
     );
   }
 }

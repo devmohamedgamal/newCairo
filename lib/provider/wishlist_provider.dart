@@ -9,10 +9,7 @@ import '../helper/api_checker.dart';
 class WishProvider extends ChangeNotifier {
   final WishRepo wishRepo;
   final ProductRepo productRepo;
-  WishProvider({
-    required this.wishRepo,
-    required this.productRepo
-  });
+  WishProvider({required this.wishRepo, required this.productRepo});
 
   bool _wish = false;
   String _searchText = "";
@@ -43,44 +40,46 @@ class WishProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addWishList(BuildContext context,String customerID,String productID,Function callback) async {
-    ApiResponse apiResponse = await wishRepo.addWishList(customerID,productID);
-    if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
+  void addWishList(BuildContext context, String customerID, String productID,
+      Function callback) async {
+    ApiResponse apiResponse = await wishRepo.addWishList(customerID, productID);
+    if (apiResponse.response != null &&
+        apiResponse.response!.statusCode == 200) {
       StatusModel statusModel;
       statusModel = StatusModel.fromJson(apiResponse.response!.data);
-      callback(statusModel.status,statusModel.massage,context);
+      callback(statusModel.status, statusModel.massage, context);
       _wish = statusModel.status!;
-    }
-    else {
+    } else {
       _wish = false;
-      callback(false,"",context);
+      callback(false, "", context);
     }
     notifyListeners();
   }
 
-  void removeWishList(BuildContext context,String customerID,String productID,
-      {int? index,required Function callback}) async {
-    ApiResponse apiResponse = await wishRepo.addWishList(customerID,productID);
-    if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
+  void removeWishList(BuildContext context, String customerID, String productID,
+      {int? index, required Function callback}) async {
+    ApiResponse apiResponse = await wishRepo.addWishList(customerID, productID);
+    if (apiResponse.response != null &&
+        apiResponse.response!.statusCode == 200) {
       StatusModel statusModel;
       statusModel = StatusModel.fromJson(apiResponse.response!.data);
       if (index != null && statusModel.status!) {
         _wishList.removeAt(index);
         _allWishList.removeAt(index);
       }
-      callback(statusModel.status,statusModel.massage,context);
-    }
-    else {
+      callback(statusModel.status, statusModel.massage, context);
+    } else {
       print('===============>>>>>>>> ${apiResponse.error.toString()}');
-      callback(false,'${apiResponse.error.toString()}',context);
+      callback(false, '${apiResponse.error.toString()}', context);
     }
     _wish = false;
     notifyListeners();
   }
 
-  Future<void> initWishList(BuildContext context,String clientId) async {
+  Future<void> initWishList(BuildContext context, String clientId) async {
     ApiResponse apiResponse = await wishRepo.getWishList(clientId);
-    if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
+    if (apiResponse.response != null &&
+        apiResponse.response!.statusCode == 200) {
       _wishList = [];
       _allWishList = [];
       WishModel wishModel;
@@ -93,10 +92,12 @@ class WishProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void checkWishList(String productId,String clientId, BuildContext context) async {
+  void checkWishList(
+      String productId, String clientId, BuildContext context) async {
     ApiResponse apiResponse = await wishRepo.getWishList(clientId);
     List<String> productIdList = [];
-    if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
+    if (apiResponse.response != null &&
+        apiResponse.response!.statusCode == 200) {
       WishModel wishModel;
       wishModel = WishModel.fromJson(apiResponse.response!.data);
       wishModel.wish!.forEach((wish) async {

@@ -8,6 +8,8 @@ extension GetTranslationNameOnLocalization on BuildContext {
     required String ar,
     required String en,
   }) {
-    return Provider.of<LocalizationProvider>(this).locale!.languageCode == "en" ? en : ar;
+    return Provider.of<LocalizationProvider>(this).locale!.languageCode == "en"
+        ? en
+        : ar;
   }
 }

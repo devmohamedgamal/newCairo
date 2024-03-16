@@ -12,7 +12,11 @@ class SearchWidget extends StatelessWidget {
   final Function(String)? onTextChanged;
   final Function() onClearPressed;
   final Function(String)? onSubmit;
-  SearchWidget({required this.hintText,this.onTextChanged,required this.onClearPressed,this.onSubmit});
+  SearchWidget(
+      {required this.hintText,
+      this.onTextChanged,
+      required this.onClearPressed,
+      this.onSubmit});
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +24,16 @@ class SearchWidget extends StatelessWidget {
         text: Provider.of<SearchProvider>(context).searchText);
     return Stack(children: [
       ClipRRect(
-        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5), bottomRight: Radius.circular(5)),
+        borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(5), bottomRight: Radius.circular(5)),
         child: Image.asset(
           Images.toolbar_background,
           fit: BoxFit.fill,
           height: 58 + MediaQuery.of(context).padding.top,
           width: MediaQuery.of(context).size.width,
-          color: Provider.of<ThemeProvider>(context).darkTheme ? Colors.black : null,
+          color: Provider.of<ThemeProvider>(context).darkTheme
+              ? Colors.black
+              : null,
         ),
       ),
       Container(
@@ -41,8 +48,11 @@ class SearchWidget extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              margin: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL),
-              decoration: BoxDecoration(color: ColorResources.getTextBg(context), borderRadius: BorderRadius.circular(8.0)),
+              margin: EdgeInsets.symmetric(
+                  horizontal: Dimensions.PADDING_SIZE_SMALL),
+              decoration: BoxDecoration(
+                  color: ColorResources.getTextBg(context),
+                  borderRadius: BorderRadius.circular(8.0)),
               child: TextFormField(
                 controller: _controller,
                 onFieldSubmitted: (query) {
@@ -57,22 +67,33 @@ class SearchWidget extends StatelessWidget {
                 decoration: InputDecoration(
                   hintText: hintText,
                   isDense: true,
-                  hintStyle: cairoRegular.copyWith(color: Theme.of(context).hintColor),
+                  hintStyle:
+                      cairoRegular.copyWith(color: Theme.of(context).hintColor),
                   border: InputBorder.none,
-                  prefixIcon: Icon(Icons.search, color: ColorResources.getColombiaBlue(context), size: Dimensions.ICON_SIZE_DEFAULT),
-                  suffixIcon: Provider.of<SearchProvider>(context).searchText.isNotEmpty ? IconButton(
-                    icon: Icon(Icons.clear, color: ColorResources.getChatIcon(context)),
-                    onPressed: () {
-                      onClearPressed();
-                      _controller.clear();
-                    },
-                  ) : _controller.text.isNotEmpty ? IconButton(
-                    icon: Icon(Icons.clear, color: ColorResources.getChatIcon(context)),
-                    onPressed: () {
-                      onClearPressed();
-                      _controller.clear();
-                    },
-                  ) : null,
+                  prefixIcon: Icon(Icons.search,
+                      color: ColorResources.getColombiaBlue(context),
+                      size: Dimensions.ICON_SIZE_DEFAULT),
+                  suffixIcon: Provider.of<SearchProvider>(context)
+                          .searchText
+                          .isNotEmpty
+                      ? IconButton(
+                          icon: Icon(Icons.clear,
+                              color: ColorResources.getChatIcon(context)),
+                          onPressed: () {
+                            onClearPressed();
+                            _controller.clear();
+                          },
+                        )
+                      : _controller.text.isNotEmpty
+                          ? IconButton(
+                              icon: Icon(Icons.clear,
+                                  color: ColorResources.getChatIcon(context)),
+                              onPressed: () {
+                                onClearPressed();
+                                _controller.clear();
+                              },
+                            )
+                          : null,
                 ),
               ),
             ),

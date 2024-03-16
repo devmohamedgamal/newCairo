@@ -6,7 +6,8 @@ class ReviewBody {
   String? _rate;
   String? _message;
 
-  ReviewBody({String? clientId,String? productId,String? rate,String? message}) {
+  ReviewBody(
+      {String? clientId, String? productId, String? rate, String? message}) {
     this._clientId = clientId;
     this._productId = productId;
     this._rate = rate;

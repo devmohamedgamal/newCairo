@@ -15,21 +15,32 @@ class CustomExpandedAppBar extends StatelessWidget {
   final Widget child;
   final Widget? bottomChild;
   final bool isGuestCheck;
-  CustomExpandedAppBar({required this.title,required this.child, this.bottomChild, this.isGuestCheck = false});
+  CustomExpandedAppBar(
+      {required this.title,
+      required this.child,
+      this.bottomChild,
+      this.isGuestCheck = false});
 
   @override
   Widget build(BuildContext context) {
-    bool isGuestMode = !Provider.of<AuthProvider>(context, listen: false).isLoggedIn();
+    bool isGuestMode =
+        !Provider.of<AuthProvider>(context, listen: false).isLoggedIn();
     return Scaffold(
-      floatingActionButton: isGuestCheck ? isGuestMode ? null : bottomChild : bottomChild,
+      floatingActionButton: isGuestCheck
+          ? isGuestMode
+              ? null
+              : bottomChild
+          : bottomChild,
       body: Stack(children: [
-
         // Background
         Image.asset(
           Images.more_page_header,
-          height: 110, fit: BoxFit.fill,
+          height: 110,
+          fit: BoxFit.fill,
           width: width(context),
-          color: Provider.of<ThemeProvider>(context).darkTheme ? Colors.black : null,
+          color: Provider.of<ThemeProvider>(context).darkTheme
+              ? Colors.black
+              : null,
         ),
 
         Positioned(
@@ -37,11 +48,13 @@ class CustomExpandedAppBar extends StatelessWidget {
           left: Dimensions.PADDING_SIZE_SMALL,
           right: Dimensions.PADDING_SIZE_SMALL,
           child: Row(children: [
-            CupertinoNavigationBarBackButton(color: Colors.white, onPressed: () {
-              Navigator.pop(context);
-            }),
-            Text(title, style: cairoRegular.copyWith(
-                fontSize: 20, color: Colors.white),
+            CupertinoNavigationBarBackButton(
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.pop(context);
+                }),
+            Text(title,
+                style: cairoRegular.copyWith(fontSize: 20, color: Colors.white),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis),
           ]),
@@ -51,9 +64,14 @@ class CustomExpandedAppBar extends StatelessWidget {
           margin: EdgeInsets.only(top: 95),
           decoration: BoxDecoration(
             color: ColorResources.getHomeBg(context),
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20), topRight: Radius.circular(20)),
           ),
-          child: isGuestCheck ? isGuestMode ? NotLoggedInWidget() : child : child,
+          child: isGuestCheck
+              ? isGuestMode
+                  ? NotLoggedInWidget()
+                  : child
+              : child,
         ),
       ]),
     );
