@@ -320,5 +320,7 @@
   "you_got_discount_of": "You got discount of",
   "choose": "Choose",
   "error_occurred": "Error Occurred!",
-  "currency": "EGP"
+  "currency": "EGP",
+  "description": "Description"
+
 }

@@ -8,8 +8,8 @@ class LocalizationProvider extends ChangeNotifier {
     _loadCurrentLanguage();
   }
 
-  Locale? _locale = Locale(AppConstants.languages![0].languageCode,
-      AppConstants.languages![0].countryCode);
+  Locale? _locale = Locale(AppConstants.languages[0].languageCode,
+      AppConstants.languages[0].countryCode);
 
   bool _isLtr = true;
   int? _languageIndex;
@@ -25,8 +25,8 @@ class LocalizationProvider extends ChangeNotifier {
   Future<void> setLanguage(Locale locale) async {
     _locale = locale;
     _setIsLtr();
-    for (int index = 0; index < AppConstants.languages!.length; index++) {
-      if (AppConstants.languages![index].languageCode == locale.languageCode) {
+    for (int index = 0; index < AppConstants.languages.length; index++) {
+      if (AppConstants.languages[index].languageCode == locale.languageCode) {
         _languageIndex = index;
         break;
       }
@@ -38,12 +38,12 @@ class LocalizationProvider extends ChangeNotifier {
   _loadCurrentLanguage() async {
     _locale = Locale(
         sharedPreferences.getString(AppConstants.LANGUAGE_CODE) ??
-            AppConstants.languages![0].languageCode,
+            AppConstants.languages[0].languageCode,
         sharedPreferences.getString(AppConstants.COUNTRY_CODE) ??
-            AppConstants.languages![0].countryCode);
+            AppConstants.languages[0].countryCode);
     _setIsLtr();
-    for (int index = 0; index < AppConstants.languages!.length; index++) {
-      if (AppConstants.languages![index].languageCode == locale!.languageCode) {
+    for (int index = 0; index < AppConstants.languages.length; index++) {
+      if (AppConstants.languages[index].languageCode == locale!.languageCode) {
         _languageIndex = index;
         break;
       }

@@ -18,12 +18,12 @@ class OnBoardingRepo {
         OnboardingModel(
           Images.onboarding_image_one,
           '${getTranslated('on_boarding_title_one', context)} ${AppConstants.APP_NAME}',
-          getTranslated('on_boarding_description_one', context)!,
+          getTranslated('on_boarding_description_one', context),
         ),
         OnboardingModel(
           Images.onboarding_image_two,
-          getTranslated('on_boarding_title_two', context)!,
-          getTranslated('on_boarding_description_two', context)!,
+          getTranslated('on_boarding_title_two', context),
+          getTranslated('on_boarding_description_two', context),
         ),
         OnboardingModel(
           Images.onboarding_image_three,

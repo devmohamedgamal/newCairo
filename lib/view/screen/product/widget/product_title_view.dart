@@ -24,45 +24,25 @@ class ProductTitleView extends StatelessWidget {
           return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(children: [
-                  Text(
-                    "${product.price!} ${getTranslated('currency', context)}",
-                    style: cairoBold.copyWith(
-                        color: ColorResources.getPrimary(context),
+                Text(
+                    Provider.of<LocalizationProvider>(context)
+                                .locale!
+                                .languageCode ==
+                            "en"
+                        ? product.titleEn ?? 'No Title'
+                        : product.title ?? 'لا يوجد عنوان',
+                    style: cairoSemiBold.copyWith(
                         fontSize: Dimensions.FONT_SIZE_LARGE),
-                  ),
-                  const SizedBox(width: 20),
-
-                  // Expanded(child: SizedBox.shrink()),
-
-                  InkWell(
-                    onTap: () {
-                      if (product.url != null && product.url!.isNotEmpty) {
-                        Share.share(product.url!);
-                      }
-                    },
-                    child: Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).highlightColor,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.grey[
-                                  Provider.of<ThemeProvider>(context).darkTheme
-                                      ? 700
-                                      : 200]!,
-                              spreadRadius: 1,
-                              blurRadius: 5)
-                        ],
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(Icons.share,
-                          color: ColorResources.getPrimary(context),
-                          size: Dimensions.ICON_SIZE_SMALL),
-                    ),
-                  ),
-                ]),
+                    maxLines: 2),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "${product.price!} ${getTranslated('currency', context)}",
+                  style: cairoBold.copyWith(
+                      color: ColorResources.getPrimary(context),
+                      fontSize: Dimensions.FONT_SIZE_LARGE),
+                ),
                 double.parse(product.priceBefore?.replaceAll(",", "") ?? '0') >
                         0
                     ? Text(
@@ -73,38 +53,6 @@ class ProductTitleView extends StatelessWidget {
                             decoration: TextDecoration.lineThrough),
                       )
                     : const SizedBox(),
-                Text(
-                    Provider.of<LocalizationProvider>(context)
-                                .locale!
-                                .languageCode ==
-                            "en"
-                        ? product.titleEn ?? ''
-                        : product.title ?? '',
-                    style: cairoSemiBold.copyWith(
-                        fontSize: Dimensions.FONT_SIZE_LARGE),
-                    maxLines: 2),
-                Row(children: [
-                  Text(
-                      product.rate != null
-                          ? product.rate!.length > 0
-                              ? double.parse(product.rate!).toStringAsFixed(1)
-                              : '0.0'
-                          : '0.0',
-                      style: cairoSemiBold.copyWith(
-                        color: Theme.of(context).hintColor,
-                        fontSize: Dimensions.FONT_SIZE_LARGE,
-                      )),
-                  const SizedBox(width: 5),
-
-                  RatingBar(
-                      rating: product.rate != null
-                          ? product.rate!.length > 0
-                              ? double.parse(product.rate ?? "0.0")
-                              : 0.0
-                          : 0.0),
-
-                  // Expanded(child: SizedBox.shrink()),
-                ]),
               ]);
         },
       ),

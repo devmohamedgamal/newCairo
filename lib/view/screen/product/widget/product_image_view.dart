@@ -23,163 +23,49 @@ class ProductImageView extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        InkWell(
-          onTap: () {
-            List<String> images = [];
-            images.add(product.pavatar!);
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (_) => ProductImageScreen(
-                    imageList: images,
-                    title: Provider.of<LocalizationProvider>(context)
-                                .locale!
-                                .languageCode ==
-                            "en"
-                        ? product.titleEn!
-                        : product.title!)));
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20)),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.grey[
-                        Provider.of<ThemeProvider>(context).darkTheme
-                            ? 700
-                            : 300]!,
-                    spreadRadius: 1,
-                    blurRadius: 5)
-              ],
-              gradient: Provider.of<ThemeProvider>(context).darkTheme
-                  ? null
-                  : const LinearGradient(
-                      colors: [ColorResources.WHITE, ColorResources.IMAGE_BG],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-            ),
-            child: Stack(children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.width - 120,
-                child: PageView.builder(
-                  controller: _controller,
-                  itemCount: product.pavatar!.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 50),
-                      child: FadeInImage.assetNetwork(
-                        placeholder: Images.placeholder,
-                        height: width(context),
-                        width: width(context),
-                        image: '${AppConstants.BASE_URL_IMAGE}'
-                            '${product.pavatar![index]}',
-                        imageErrorBuilder: (c, o, s) => Image.asset(
-                          Images.placeholder,
-                          height: MediaQuery.of(context).size.width,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                      ),
-                    );
-                  },
-                  onPageChanged: (index) {
-                    Provider.of<ProductProvider>(context, listen: false)
-                        .setImageSliderSelectedIndex(index);
-                  },
-                ),
-              ),
-
-              Positioned(
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: _indicators(context),
-                  ),
-                ),
-              ),
-
-              // Favourite Button
-              Positioned(
-                bottom: 20,
-                right: 20,
-                child: FavouriteButton(
-                  backgroundColor: ColorResources.getImageBg(context),
-                  favColor: ColorResources.getPrimary(context),
-                  isSelected:
-                      Provider.of<WishProvider>(context, listen: false).isWish,
-                  productId: product.id,
-                ),
-              ),
-            ]),
-          ),
-        ),
-
-        // Image List
         Container(
-          height: 60,
-          margin: const EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-          alignment: Alignment.center,
-          child: ListView.builder(
-            itemCount: product.pavatar!.length,
-            scrollDirection: Axis.horizontal,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  _controller.animateToPage(index,
-                      duration: const Duration(microseconds: 300),
-                      curve: Curves.easeInOut);
-                },
-                child: Container(
-                  width: 60,
-                  margin: const EdgeInsets.symmetric(horizontal: 5),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: Theme.of(context).highlightColor,
-                    border: Provider.of<ProductProvider>(context)
-                                .imageSliderIndex ==
-                            index
-                        ? Border.all(
-                            color: ColorResources.getPrimary(context), width: 2)
-                        : null,
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20)),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey[
+                      Provider.of<ThemeProvider>(context).darkTheme
+                          ? 700
+                          : 300]!,
+                  spreadRadius: 1,
+                  blurRadius: 5)
+            ],
+            gradient: Provider.of<ThemeProvider>(context).darkTheme
+                ? null
+                : const LinearGradient(
+                    colors: [ColorResources.WHITE, ColorResources.IMAGE_BG],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
                   ),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                    child: FadeInImage.assetNetwork(
-                      placeholder: Images.placeholder,
-                      image: '${AppConstants.BASE_URL_IMAGE}'
-                          '${product.pavatar![index]}',
-                      imageErrorBuilder: (c, o, s) =>
-                          Image.asset(Images.placeholder),
-                    ),
-                  ),
+          ),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.width - 120,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 50),
+              child: FadeInImage.assetNetwork(
+                placeholder: Images.placeholder,
+                height: width(context),
+                width: width(context),
+                image: '${AppConstants.BASE_URL_IMAGE}'
+                    '${product.pavatar}',
+                imageErrorBuilder: (c, o, s) => Image.asset(
+                  Images.placeholder,
+                  height: MediaQuery.of(context).size.width,
+                  width: MediaQuery.of(context).size.width,
                 ),
-              );
-            },
+              ),
+            ),
           ),
         ),
       ],
     );
-  }
-
-  List<Widget> _indicators(BuildContext context) {
-    List<Widget> indicators = [];
-    for (int index = 0; index < product.pavatar!.length; index++) {
-      indicators.add(TabPageSelectorIndicator(
-        backgroundColor:
-            index == Provider.of<ProductProvider>(context).imageSliderIndex
-                ? Theme.of(context).primaryColor
-                : ColorResources.WHITE,
-        borderColor: ColorResources.WHITE,
-        size: 10,
-      ));
-    }
-    return indicators;
   }
 }

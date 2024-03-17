@@ -317,5 +317,6 @@
   "you_got_discount_of": "لقد حصلت على خصم",
   "choose": "اختر",
   "error_occurred": "حدث خطأ",
-  "currency": "جنيه"
+  "currency": "جنيه",
+  "description": "وصف"
 }

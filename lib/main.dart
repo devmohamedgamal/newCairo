@@ -22,7 +22,6 @@ import 'package:lemirageelevators/services/navigation_services.dart';
 import 'package:lemirageelevators/theme/dark_theme.dart';
 import 'package:lemirageelevators/theme/light_theme.dart';
 import 'package:lemirageelevators/util/app_constants.dart';
-import 'package:lemirageelevators/view/screen/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -30,6 +29,7 @@ import 'package:provider/provider.dart';
 import 'di_container.dart' as di;
 import './util/router.dart' as router;
 import 'notification/my_notification.dart';
+import 'view/screen/home/home_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,8 +55,6 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (context) => di.sl<ThemeProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<OnBoardingProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<AuthProvider>()),
-      // ChangeNotifierProvider(create: (context) => di.sl<FacebookLoginProvider>()),
-      // ChangeNotifierProvider(create: (context) => di.sl<GoogleSignInProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<ProfileProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<SplashProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<ProductProvider>()),
@@ -97,7 +95,7 @@ class MyApp extends StatelessWidget {
         FallbackLocalizationDelegate()
       ],
       supportedLocales: locals,
-      home: SplashScreen(),
+      home: HomeView(),
     );
   }
 }
