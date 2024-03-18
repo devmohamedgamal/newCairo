@@ -41,6 +41,17 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future about() async {
+    notifyListeners();
+    ApiResponse apiResponse = await authRepo.about();
+    _isLoading = false;
+    if (apiResponse.response != null &&
+        apiResponse.response!.statusCode == 200) {
+      return apiResponse.response!.data;
+    } else {}
+    notifyListeners();
+  }
+
   /// login with email && password  **
   Future login(LoginModel loginBody, Function callback) async {
     _isLoading = true;

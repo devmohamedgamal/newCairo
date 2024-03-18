@@ -58,13 +58,15 @@ class ProductShimmer extends StatelessWidget {
                   Expanded(
                     flex: 3,
                     child: Padding(
-                      padding: const EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                      padding:
+                          const EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(height: 20, color: Colors.white),
-                          const SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                          const SizedBox(
+                              height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                           Row(children: [
                             Expanded(
                               child: Column(
@@ -78,7 +80,8 @@ class ProductShimmer extends StatelessWidget {
                             ),
                             Container(
                                 height: 10, width: 50, color: Colors.white),
-                            const Icon(Icons.star, color: Colors.orange, size: 15),
+                            const Icon(Icons.star,
+                                color: Colors.orange, size: 15),
                           ]),
                         ],
                       ),

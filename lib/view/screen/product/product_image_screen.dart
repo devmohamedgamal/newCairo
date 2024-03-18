@@ -4,7 +4,6 @@ import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:provider/provider.dart';
 import '../../../provider/product_provider.dart';
-import '../../baseWidget/custom_app_bar.dart';
 
 class ProductImageScreen extends StatefulWidget {
   final String title;
@@ -30,7 +29,6 @@ class _ProductImageScreenState extends State<ProductImageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(children: [
-        CustomAppBar(title: widget.title),
         Expanded(
           child: Stack(
             children: [

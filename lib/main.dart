@@ -5,19 +5,10 @@ import 'package:lemirageelevators/di_container.dart';
 import 'package:lemirageelevators/helper/custom_delegate.dart';
 import 'package:lemirageelevators/localization/app_localization.dart';
 import 'package:lemirageelevators/provider/auth_provider.dart';
-import 'package:lemirageelevators/provider/cart_provider.dart';
-import 'package:lemirageelevators/provider/coupon_provider.dart';
-import 'package:lemirageelevators/provider/gallery_provider.dart';
 import 'package:lemirageelevators/provider/localization_provider.dart';
-import 'package:lemirageelevators/provider/notification_provider.dart';
-import 'package:lemirageelevators/provider/onboarding_provider.dart';
-import 'package:lemirageelevators/provider/order_provider.dart';
 import 'package:lemirageelevators/provider/product_provider.dart';
-import 'package:lemirageelevators/provider/profile_provider.dart';
-import 'package:lemirageelevators/provider/search_provider.dart';
 import 'package:lemirageelevators/provider/splash_provider.dart';
 import 'package:lemirageelevators/provider/theme_provider.dart';
-import 'package:lemirageelevators/provider/wishlist_provider.dart';
 import 'package:lemirageelevators/services/navigation_services.dart';
 import 'package:lemirageelevators/theme/dark_theme.dart';
 import 'package:lemirageelevators/theme/light_theme.dart';
@@ -29,7 +20,7 @@ import 'package:provider/provider.dart';
 import 'di_container.dart' as di;
 import './util/router.dart' as router;
 import 'notification/my_notification.dart';
-import 'view/screen/home/home_screen.dart';
+import 'view/screen/splash/splash_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,19 +44,9 @@ Future<void> main() async {
       ChangeNotifierProvider(
           create: (context) => di.sl<LocalizationProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<ThemeProvider>()),
-      ChangeNotifierProvider(create: (context) => di.sl<OnBoardingProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<AuthProvider>()),
-      ChangeNotifierProvider(create: (context) => di.sl<ProfileProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<SplashProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<ProductProvider>()),
-      ChangeNotifierProvider(create: (context) => di.sl<SearchProvider>()),
-      ChangeNotifierProvider(create: (context) => di.sl<WishProvider>()),
-      ChangeNotifierProvider(create: (context) => di.sl<CartProvider>()),
-      ChangeNotifierProvider(
-          create: (context) => di.sl<NotificationProvider>()),
-      ChangeNotifierProvider(create: (context) => di.sl<OrderProvider>()),
-      ChangeNotifierProvider(create: (context) => di.sl<GalleryProvider>()),
-      ChangeNotifierProvider(create: (context) => di.sl<CouponProvider>()),
     ],
     child: const MyApp(),
   ));
@@ -95,7 +76,7 @@ class MyApp extends StatelessWidget {
         FallbackLocalizationDelegate()
       ],
       supportedLocales: locals,
-      home: HomeView(),
+      home: SplashScreen(),
     );
   }
 }

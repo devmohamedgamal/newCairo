@@ -1,20 +1,17 @@
 import 'package:lemirageelevators/data/model/body/register_model.dart';
 import 'package:lemirageelevators/localization/language_constrants.dart';
 import 'package:lemirageelevators/provider/auth_provider.dart';
-import 'package:lemirageelevators/util/color_resources.dart';
 import 'package:lemirageelevators/util/dimensions.dart';
-import 'package:lemirageelevators/util/textStyle.dart';
 import 'package:lemirageelevators/view/baseWidget/button/custom_button.dart';
 import 'package:lemirageelevators/view/baseWidget/dialog/animated_custom_dialog.dart';
-import 'package:lemirageelevators/view/baseWidget/dialog/error_alert_dialog.dart';
 import 'package:lemirageelevators/view/baseWidget/textfield/custom_password_textfield.dart';
 import 'package:lemirageelevators/view/baseWidget/textfield/custom_textfield.dart';
-import 'package:lemirageelevators/view/screen/auth/widget/social_login_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:lemirageelevators/view/screen/home/home_screen.dart';
 import 'package:provider/provider.dart';
 import '../../../../data/model/body/login_model.dart';
 import '../../../../helper/email_checker.dart';
+import '../../../baseWidget/dialog/error_alert_dialog.dart';
 import '../../../baseWidget/show_custom_snakbar.dart';
 
 class SignUpWidget extends StatefulWidget {

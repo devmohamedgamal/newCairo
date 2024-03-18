@@ -22,24 +22,4 @@ class NavigationServices {
   void goBack() {
     return navigatorKey!.currentState!.pop();
   }
-
-//  Navigator.push(
-//                             context,
-//                             PageRouteBuilder(
-//                               transitionDuration: Duration(seconds: 1),
-//                               pageBuilder:
-//                                   (context, animation, secondaryAnimation) =>
-//                                   PayScreen(),
-//                               transitionsBuilder: (context, animation,
-//                                   secondaryAnimation, child) {
-//                                 animation = CurvedAnimation(
-//                                     parent: animation,
-//                                     curve: Curves.bounceInOut);
-//                                 return ScaleTransition(
-//                                     scale: animation,
-//                                     child: child,
-//                                     alignment: Alignment.center);
-//                               },
-//                             ),
-//                           );
 }

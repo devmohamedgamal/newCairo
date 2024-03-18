@@ -1,5 +1,6 @@
 // ignore_for_file: use_rethrow_when_possible, unnecessary_null_in_if_null_operators, await_only_futures, avoid_function_literals_in_foreach_calls
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:lemirageelevators/data/datasource/remote/dio/dio_client.dart';
 import 'package:lemirageelevators/data/datasource/remote/exception/api_error_handler.dart';
@@ -41,6 +42,16 @@ class AuthRepo {
         data: register.toJson(),
         convertDataToFormData: true,
       );
+      return ApiResponse.withSuccess(response);
+    } on DioException catch (e) {
+      return ApiResponse.withError(ApiErrorHandler.getMessage(e));
+    }
+  }
+
+  ///about
+  Future<ApiResponse> about() async {
+    try {
+      Response response = await dioClient.get(AppConstants.getAbout);
       return ApiResponse.withSuccess(response);
     } on DioException catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));

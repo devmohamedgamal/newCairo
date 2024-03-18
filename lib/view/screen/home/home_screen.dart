@@ -31,40 +31,128 @@ class HomeView extends StatelessWidget {
                   name: 'دليل الخدمات',
                   onTap: () {
                     Provider.of<ProductProvider>(context, listen: false)
-                        .getAllProductList(context);
+                        .getFilterProductList(context, category: 'service');
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => const ViewCategoryProduct()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const ViewCategoryProduct(
+                          category: 'دليل الخدمات',
+                        ),
+                      ),
+                    );
                   },
                 ),
-                const CustomCategoryItem(
+                CustomCategoryItem(
                   imageUrl: Images.shipingIcon,
                   name: 'بيع و أشتري',
+                  onTap: () {
+                    Provider.of<ProductProvider>(context, listen: false)
+                        .getFilterProductList(context, category: 'product');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const ViewCategoryProduct(
+                          category: 'بيع و أشتري',
+                        ),
+                      ),
+                    );
+                  },
                 ),
-                const CustomCategoryItem(
+                CustomCategoryItem(
                   imageUrl: Images.specialOfferIcon,
                   name: 'عروض',
+                  onTap: () {
+                    Provider.of<ProductProvider>(context, listen: false)
+                        .getFilterProductList(context, category: 'offer');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const ViewCategoryProduct(
+                          category: 'عروض',
+                        ),
+                      ),
+                    );
+                  },
                 ),
-                const CustomCategoryItem(
+                CustomCategoryItem(
                   imageUrl: Images.jopsIcon,
                   name: 'وظائف',
+                  onTap: () {
+                    Provider.of<ProductProvider>(context, listen: false)
+                        .getFilterProductList(context, category: 'jop');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const ViewCategoryProduct(
+                          category: 'وظائف',
+                        ),
+                      ),
+                    );
+                  },
                 ),
-                const CustomCategoryItem(
+                CustomCategoryItem(
                   imageUrl: Images.carServicesIcon,
                   name: 'توصيلة',
+                  onTap: () {
+                    Provider.of<ProductProvider>(context, listen: false)
+                        .getFilterProductList(context, category: 'carpool');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const ViewCategoryProduct(
+                          category: 'توصيلة',
+                        ),
+                      ),
+                    );
+                  },
                 ),
-                const CustomCategoryItem(
+                CustomCategoryItem(
                   imageUrl: Images.otlopIcon,
                   name: 'أطلب',
+                  onTap: () {
+                    Provider.of<ProductProvider>(context, listen: false)
+                        .getFilterProductList(context, category: 'Otlop');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const ViewCategoryProduct(
+                          category: 'أطلب',
+                        ),
+                      ),
+                    );
+                  },
                 ),
-                const CustomCategoryItem(
+                CustomCategoryItem(
                   imageUrl: Images.eventIcon,
                   name: 'ايفنتات',
+                  onTap: () {
+                    Provider.of<ProductProvider>(context, listen: false)
+                        .getFilterProductList(context, category: 'event');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const ViewCategoryProduct(
+                          category: 'ايفنتات',
+                        ),
+                      ),
+                    );
+                  },
                 ),
-                const CustomCategoryItem(
+                CustomCategoryItem(
                   imageUrl: Images.newsIcon,
                   name: 'أخبار',
+                  onTap: () async {
+                    await Provider.of<ProductProvider>(context, listen: false)
+                        .getFilterProductList(context, category: 'news');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const ViewCategoryProduct(
+                          category: 'أخبار',
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

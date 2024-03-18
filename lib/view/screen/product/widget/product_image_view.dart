@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../data/model/response/Product/product.dart';
-import '../../../../provider/localization_provider.dart';
-import '../../../../provider/product_provider.dart';
 import '../../../../provider/theme_provider.dart';
-import '../../../../provider/wishlist_provider.dart';
 import '../../../../util/app_constants.dart';
 import '../../../../util/color_resources.dart';
-import '../../../../util/dimensions.dart';
 import '../../../../util/images.dart';
 import '../../../../util/responsive.dart';
-import '../product_image_screen.dart';
-import 'favourite_button.dart';
 
 class ProductImageView extends StatelessWidget {
   ProductImageView({Key? key, required this.product}) : super(key: key);
-  final PageController _controller = PageController();
   final Product product;
 
   @override

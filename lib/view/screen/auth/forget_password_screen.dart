@@ -50,7 +50,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       padding: EdgeInsets.all(50),
                       child: Image.asset(Images.logo, height: 150, width: 200),
                     ),
-                    Text(getTranslated('FORGET_PASSWORD', context)!,
+                    Text(getTranslated('FORGET_PASSWORD', context),
                         style: cairoSemiBold),
                     Row(children: [
                       Expanded(
@@ -66,7 +66,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     ]),
                     Text(
                         getTranslated(
-                            'enter_email_for_password_reset', context)!,
+                            'enter_email_for_password_reset', context),
                         style: cairoRegular.copyWith(
                             color: Theme.of(context).hintColor,
                             fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL)),
@@ -82,12 +82,12 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       builder: (context) => !Provider.of<AuthProvider>(context)
                               .isLoading
                           ? CustomButton(
-                              buttonText: getTranslated('send_email', context)!,
+                              buttonText: getTranslated('send_email', context),
                               onTap: () {
                                 if (_controller.text.isEmpty) {
                                   showCustomSnackBar(
                                       getTranslated(
-                                          'EMAIL_MUST_BE_REQUIRED', context)!,
+                                          'EMAIL_MUST_BE_REQUIRED', context),
                                       context);
                                 } else {
                                   Provider.of<AuthProvider>(context,
@@ -122,8 +122,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           context,
           MyDialog(
             icon: Icons.send,
-            title: getTranslated('sent', context)!,
-            description: getTranslated('recovery_link_sent', context)!,
+            title: getTranslated('sent', context),
+            description: getTranslated('recovery_link_sent', context),
             rotateAngle: 5.5,
             back: () {
               Navigator.pop(context);

@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lemirageelevators/data/model/response/Product/product.dart';
-import 'package:lemirageelevators/provider/cart_provider.dart';
 import 'package:lemirageelevators/util/textStyle.dart';
 import 'package:lemirageelevators/view/screen/product/widget/product_image_view.dart';
-import 'package:lemirageelevators/view/screen/product/widget/product_specification_view.dart';
 import 'package:lemirageelevators/view/screen/product/widget/product_title_view.dart';
 import 'package:provider/provider.dart';
 import '../../../localization/language_constrants.dart';
 import '../../../provider/auth_provider.dart';
-import '../../../provider/localization_provider.dart';
 import '../../../provider/product_provider.dart';
 import '../../../provider/theme_provider.dart';
-import '../../../provider/wishlist_provider.dart';
 import '../../../util/dimensions.dart';
 
 class ProductDetails extends StatelessWidget {
@@ -23,14 +19,6 @@ class ProductDetails extends StatelessWidget {
     Provider.of<AuthProvider>(context, listen: false).user == null
         ? ""
         : Provider.of<AuthProvider>(context, listen: false).user!.userId!;
-    product.id;
-    if (Provider.of<AuthProvider>(context, listen: false).isLoggedIn()) {
-      Provider.of<WishProvider>(context, listen: false).checkWishList(
-          product.id.toString(),
-          Provider.of<AuthProvider>(context, listen: false).user!.userId!,
-          context);
-    }
-
     return Consumer<ProductProvider>(
       builder: (context, details, child) {
         return Scaffold(
@@ -45,7 +33,7 @@ class ProductDetails extends StatelessWidget {
                 },
               ),
               const SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
-              Text(getTranslated('product_details', context),
+              Text(getTranslated('التفاصيل', context),
                   style: cairoRegular.copyWith(
                       fontSize: 20,
                       color: Theme.of(context).textTheme.bodyLarge!.color)),

@@ -3,12 +3,6 @@ import 'package:lemirageelevators/localization/language_constrants.dart';
 import 'package:lemirageelevators/util/color_resources.dart';
 import 'package:lemirageelevators/util/textStyle.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../../../provider/auth_provider.dart';
-import '../../../provider/cart_provider.dart';
-import '../../../provider/profile_provider.dart';
-import '../../screen/auth/auth_screen.dart';
 
 class ErrorAlertDialog extends StatelessWidget {
   final String? errorText;
@@ -27,8 +21,7 @@ class ErrorAlertDialog extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 18, vertical: 30),
-            child: Text(errorText ?? 'error_occurred'.tr(context),
-                style: cairoBold, textAlign: TextAlign.center),
+            child: Text(errorText ?? 'error_occurred'.tr(context), style: cairoBold, textAlign: TextAlign.center),
           ),
           Divider(height: 1, color: ColorResources.HINT_TEXT_COLOR),
           Row(
@@ -41,12 +34,8 @@ class ErrorAlertDialog extends StatelessWidget {
                   child: Container(
                     padding: EdgeInsets.all(8),
                     alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.only(bottomLeft: Radius.circular(10))),
-                    child: Text(getTranslated('ok', context),
-                        style: cairoBold.copyWith(
-                            color: Theme.of(context).primaryColor)),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10))),
+                    child: Text(getTranslated('ok', context), style: cairoBold.copyWith(color: Theme.of(context).primaryColor)),
                   ),
                 ),
               ),

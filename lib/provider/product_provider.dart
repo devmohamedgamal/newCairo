@@ -1,9 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import '../data/model/body/review_body.dart';
 import '../data/model/response/Product/product.dart';
 import '../data/model/response/base/api_response.dart';
-import '../data/model/response/status_model.dart';
 import '../data/repository/product_repo.dart';
 import '../helper/api_checker.dart';
 
@@ -47,44 +45,29 @@ class ProductProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void initCategoryProductList(String id, BuildContext context) async {
-    _categoryProductList = [];
-    ApiResponse apiResponse = await productRepo.getCategoryProductList(id);
+  // get All Product List
+  Future<void> getFilterProductList(BuildContext context,
+      {bool reload = false, required String category}) async {
+      allProduct.clear();
+    ApiResponse apiResponse = await productRepo.getAllProductList();
     if (apiResponse.response != null &&
         apiResponse.response!.statusCode == 200) {
-      if (apiResponse.response!.data != null) {
-        apiResponse.response!.data.forEach(
-            (product) => _categoryProductList.add(Product.fromJson(product)));
-        _hasData = _categoryProductList.length > 1;
-        List<Product> _products = [];
-        _products.addAll(_categoryProductList);
-        _categoryProductList.clear();
-        _categoryProductList.addAll(_products.reversed);
+      for (var i = 0; i < (apiResponse.response!.data as List).length; i++) {
+        if (apiResponse.response!.data[i]['adtype'] == category) {
+          allProduct
+              .add(Product.fromJson((apiResponse.response!.data as List)[i]));
+        }
       }
+      log(allProduct.length.toString());
     } else {
       ApiChecker.checkApi(context, apiResponse);
     }
     notifyListeners();
   }
 
+  
 
-
-  Future<void> submitReview(ReviewBody reviewBody, Function callback) async {
-    _isLoading = true;
-    notifyListeners();
-    ApiResponse apiResponse = await productRepo.submitReview(reviewBody);
-    if (apiResponse.response != null &&
-        apiResponse.response!.statusCode == 200) {
-      StatusModel statusModel;
-      statusModel = StatusModel.fromJson(apiResponse.response!.data);
-      callback(statusModel.status, statusModel.massage.toString());
-    } else {
-      callback(false, "");
-    }
-    _isLoading = false;
-    notifyListeners();
-  }
-
+  
   void setQuantity(int value) {
     _quantity = value;
     notifyListeners();

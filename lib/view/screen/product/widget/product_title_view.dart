@@ -3,13 +3,10 @@ import 'package:lemirageelevators/localization/language_constrants.dart';
 import 'package:lemirageelevators/provider/product_provider.dart';
 import 'package:lemirageelevators/util/textStyle.dart';
 import 'package:provider/provider.dart';
-import 'package:share/share.dart';
 import '../../../../data/model/response/Product/product.dart';
 import '../../../../provider/localization_provider.dart';
-import '../../../../provider/theme_provider.dart';
 import '../../../../util/color_resources.dart';
 import '../../../../util/dimensions.dart';
-import '../../../baseWidget/rating_bar.dart';
 
 class ProductTitleView extends StatelessWidget {
   final Product product;
@@ -38,7 +35,7 @@ class ProductTitleView extends StatelessWidget {
                   height: 20,
                 ),
                 Text(
-                  "${product.price!} ${getTranslated('currency', context)}",
+                  "${product.price ?? 0} ${getTranslated('currency', context)}",
                   style: cairoBold.copyWith(
                       color: ColorResources.getPrimary(context),
                       fontSize: Dimensions.FONT_SIZE_LARGE),

@@ -1,17 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:lemirageelevators/provider/product_provider.dart';
-import 'package:lemirageelevators/util/responsive.dart';
 import 'package:provider/provider.dart';
+import '../../../../localization/language_constrants.dart';
+import '../../../../provider/theme_provider.dart';
+import '../../../../util/dimensions.dart';
+import '../../../../util/textStyle.dart';
 import '../../../baseWidget/product_shimmer.dart';
 import '../../../baseWidget/product_widget.dart';
 
 class ViewCategoryProduct extends StatelessWidget {
-  const ViewCategoryProduct({Key? key}) : super(key: key);
+  const ViewCategoryProduct({Key? key, required this.category})
+      : super(key: key);
+  final String category;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Row(children: [
+          InkWell(
+            child: Icon(Icons.arrow_back_ios,
+                color: Theme.of(context).textTheme.bodyLarge!.color, size: 20),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          const SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
+          Text(getTranslated(category, context),
+              style: cairoRegular.copyWith(
+                  fontSize: 20,
+                  color: Theme.of(context).textTheme.bodyLarge!.color)),
+        ]),
+        automaticallyImplyLeading: false,
+        elevation: 0,
+        backgroundColor: Provider.of<ThemeProvider>(context).darkTheme
+            ? Colors.black
+            : Colors.white.withOpacity(0.5),
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 12),
         child: SafeArea(

@@ -1,4 +1,5 @@
 // ignore_for_file: unnecessary_null_comparison
+import 'package:dio/dio.dart';
 import 'package:lemirageelevators/data/model/body/login_model.dart';
 import 'package:lemirageelevators/localization/language_constrants.dart';
 import 'package:lemirageelevators/provider/auth_provider.dart';
@@ -13,6 +14,7 @@ import 'package:lemirageelevators/view/baseWidget/textfield/custom_textfield.dar
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../baseWidget/show_custom_snakbar.dart';
+import '../../../baseWidget/web_view_screen.dart';
 import '../../home/home_screen.dart';
 import '../forget_password_screen.dart';
 
@@ -176,11 +178,18 @@ class _SignInWidgetState extends State<SignInWidget> {
   }
 
   route(bool isRoute, String errorMessage) async {
+    var response =
+        await Provider.of<AuthProvider>(context, listen: false).about();
     if (isRoute) {
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (_) => const HomeView()),
-          (route) => false);
+      if (response['fetched_about_data']['landing_page'] == "3") {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (BuildContext context) => WebViewScreen(
+                  url: 'https://www.elbascet.com/newcairo/Website/home/${loginBody.token}',
+                )));
+      } else {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (BuildContext context) => HomeView()));
+      }
     } else {
       // showCustomSnackBar(errorMessage,context);
       showAnimatedDialog(
