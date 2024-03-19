@@ -26,10 +26,10 @@ class GuestDialog extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
 
-              Text(getTranslated('THIS_SECTION_IS_LOCK', context)!,
+              Text(getTranslated('THIS_SECTION_IS_LOCK', context),
                   style: cairoBold.copyWith(fontSize: Dimensions.FONT_SIZE_LARGE)),
               SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
-              Text(getTranslated('GOTO_LOGIN_SCREEN_ANDTRYAGAIN', context)!, textAlign: TextAlign.center,
+              Text(getTranslated('GOTO_LOGIN_SCREEN_ANDTRYAGAIN', context), textAlign: TextAlign.center,
                   style: cairoRegular),
               SizedBox(height: Dimensions.PADDING_SIZE_LARGE),
 
@@ -42,7 +42,7 @@ class GuestDialog extends StatelessWidget {
                     padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10))),
-                    child: Text(getTranslated('CANCEL', context)!,
+                    child: Text(getTranslated('CANCEL', context),
                         style: cairoBold.copyWith(color: Theme.of(context).primaryColor)),
                   ),
                 )),
@@ -54,7 +54,7 @@ class GuestDialog extends StatelessWidget {
                     padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(color: Theme.of(context).primaryColor, borderRadius: BorderRadius.only(bottomRight: Radius.circular(10))),
-                    child: Text(getTranslated('LOGIN', context)!,
+                    child: Text(getTranslated('LOGIN', context),
                         style: cairoBold.copyWith(color: Colors.white)),
                   ),
                 )),

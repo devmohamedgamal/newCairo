@@ -4,7 +4,6 @@ import 'package:lemirageelevators/util/textStyle.dart';
 import '../../localization/language_constrants.dart';
 import '../../util/color_resources.dart';
 import '../../util/dimensions.dart';
-import '../../util/images.dart';
 
 class NoInternetOrDataScreen extends StatelessWidget {
   final bool isNoInternet;
@@ -19,23 +18,21 @@ class NoInternetOrDataScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(isNoInternet ? Images.no_internet : Images.no_data,
-                width: 150, height: 150),
             Text(
                 isNoInternet
-                    ? getTranslated('OPPS', context)!
-                    : getTranslated('sorry', context)!,
+                    ? getTranslated('OPPS', context)
+                    : getTranslated('sorry', context),
                 style: cairoBold.copyWith(
                   fontSize: 30,
                   color: isNoInternet
-                      ? Theme.of(context).textTheme.bodyText1!.color
+                      ? Theme.of(context).textTheme.bodyLarge!.color
                       : ColorResources.getColombiaBlue(context),
                 )),
             SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
             Text(
               isNoInternet
-                  ? getTranslated('no_internet_connection', context)!
-                  : getTranslated('no_data', context)!,
+                  ? getTranslated('no_internet_connection', context)
+                  : getTranslated('no_data', context),
               textAlign: TextAlign.center,
               style: cairoRegular,
             ),
@@ -58,7 +55,7 @@ class NoInternetOrDataScreen extends StatelessWidget {
                       child: Container(
                         width: double.infinity,
                         alignment: Alignment.center,
-                        child: Text(getTranslated('RETRY', context)!,
+                        child: Text(getTranslated('RETRY', context),
                             style: cairoSemiBold.copyWith(
                                 color: Theme.of(context).highlightColor,
                                 fontSize: Dimensions.FONT_SIZE_LARGE)),

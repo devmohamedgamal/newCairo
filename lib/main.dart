@@ -16,9 +16,11 @@ import 'package:lemirageelevators/util/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'di_container.dart' as di;
 import './util/router.dart' as router;
+import 'notification/firebase_api.dart';
 import 'notification/my_notification.dart';
 import 'view/screen/splash/splash_screen.dart';
 
@@ -32,10 +34,11 @@ Future<void> main() async {
   ]);
 
   await di.init();
+  await FirebaseApi().requestAndGetToken();
   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
   await MyNotification.initialize(flutterLocalNotificationsPlugin);
   FirebaseMessaging.onBackgroundMessage(myBackgroundMessageHandler);
-
+  await Permission.camera.request();
   final token = await FirebaseMessaging.instance.getToken();
   debugPrint('token: $token');
 

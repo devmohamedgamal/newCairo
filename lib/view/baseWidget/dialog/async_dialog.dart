@@ -28,7 +28,7 @@ class AsyncDialog extends StatelessWidget {
 
             HSpacer(10),
 
-            Text(getTranslated("async", context)!,
+            Text(getTranslated("async", context),
                 style: cairoRegular.copyWith(
                     color: ColorResources.WHITE,
                   fontSize: 18

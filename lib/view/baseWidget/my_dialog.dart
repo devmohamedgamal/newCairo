@@ -60,7 +60,7 @@ class MyDialog extends StatelessWidget {
                 padding: EdgeInsets.symmetric(
                     horizontal: Dimensions.PADDING_SIZE_LARGE),
                 child: CustomButton(
-                    buttonText: getTranslated('ok', context)!,
+                    buttonText: getTranslated('ok', context),
                     onTap: back ?? ()=> Navigator.pop(context)),
               ),
             ]),

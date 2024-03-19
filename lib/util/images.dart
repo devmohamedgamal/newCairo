@@ -1,15 +1,11 @@
 // ignore_for_file: constant_identifier_names
 
 class Images {
-  static const String no_internet = 'assets/images/opps_internet.png';
-  static const String no_data = 'assets/images/no_data.png';
   static const String logo = 'assets/images/logo.png';
   static const String background = 'assets/images/background.png';
   static const String background_1 = 'assets/images/background_1.png';
   static const String background_auth = 'assets/images/background_auth.jpg';
   static const String placeholder = 'assets/images/placeholder.jpg';
-  static const String toolbar_background =
-      'assets/images/toolbar_background.jpg';
   static const String login = 'assets/images/login.png';
 
   // home images

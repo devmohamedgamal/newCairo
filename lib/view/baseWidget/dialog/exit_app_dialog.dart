@@ -27,7 +27,7 @@ class ExitPopUp extends StatelessWidget {
                   ),
                   WSpacer(5),
                   Text(
-                    getTranslated("exit1", context)!,
+                    getTranslated("exit1", context),
                     style: TextStyle(
                         color: ColorResources.GREEN,
                         fontSize: 16,
@@ -36,7 +36,7 @@ class ExitPopUp extends StatelessWidget {
                 ],
               ),
               content: Text(
-                getTranslated("exit", context)!,
+                getTranslated("exit", context),
                 style: TextStyle(
                     color: ColorResources.BLACK,
                     fontSize: 14,
@@ -48,7 +48,7 @@ class ExitPopUp extends StatelessWidget {
                     exit(0);
                   },
                   child: Text(
-                    getTranslated("ok1", context)!,
+                    getTranslated("ok1", context),
                     style: TextStyle(
                         color: ColorResources.BLACK,
                         fontSize: 15,
@@ -61,7 +61,7 @@ class ExitPopUp extends StatelessWidget {
                     Navigator.of(context).pop();
                   },
                   child: Text(
-                    getTranslated("no", context)!,
+                    getTranslated("no", context),
                     style: TextStyle(
                         color: ColorResources.RED,
                         fontSize: 15,

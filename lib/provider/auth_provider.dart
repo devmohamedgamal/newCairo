@@ -1,7 +1,6 @@
 import 'package:lemirageelevators/data/model/body/login_model.dart';
 import 'package:lemirageelevators/data/model/body/register_model.dart';
 import 'package:lemirageelevators/data/model/response/base/api_response.dart';
-import 'package:lemirageelevators/data/model/response/social_login_model.dart';
 import 'package:lemirageelevators/data/repository/auth_repo.dart';
 import 'package:flutter/material.dart';
 import '../data/model/response/AuthModel.dart';
@@ -69,31 +68,6 @@ class AuthProvider with ChangeNotifier {
       }
       callback(authModel.status, authModel.massage.toString());
     } else {
-      callback(false, "يوجد مشكله يمكنك المحاوله في وقت لاحق");
-    }
-    notifyListeners();
-  }
-
-  /// socialLogin
-  Future socialLogin(
-      SocialLoginModel socialLogin, int signWith, Function callback) async {
-    _isLoading = true;
-    notifyListeners();
-    ApiResponse apiResponse = await authRepo.socialLogin(socialLogin);
-    _isLoading = false;
-    if (apiResponse.response != null &&
-        apiResponse.response!.statusCode == 200) {
-      AuthModel authModel;
-      authModel = AuthModel.fromJson(apiResponse.response!.data);
-      if (authModel.status!) {
-        _user = authModel.userData!;
-        _user!.signWith = signWith;
-        _user!.password = "";
-        authRepo.saveUser(_user!);
-      }
-      callback(authModel.status, authModel.massage.toString());
-    } else {
-      //here
       callback(false, "يوجد مشكله يمكنك المحاوله في وقت لاحق");
     }
     notifyListeners();

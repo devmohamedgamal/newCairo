@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "719221669445",
-    "project_id": "morc-e16cf",
-    "storage_bucket": "morc-e16cf.appspot.com"
+    "project_number": "31714300868",
+    "project_id": "new-cairo-7ab49",
+    "storage_bucket": "new-cairo-7ab49.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:719221669445:android:6070f607d75b34ecc36d2c",
+        "mobilesdk_app_id": "1:31714300868:android:f8ffd6ad2fa4ce4dd98a91",
         "android_client_info": {
           "package_name": "com.elbascet.newcairo"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyC_DhPxXXJvioc3HFqJ0Ppv2mFXwL5mHNk"
+          "current_key": "AIzaSyC_4cOq_sWDAtnHmaN_sWtswrkvfIYYzsA"
         }
       ],
       "services": {

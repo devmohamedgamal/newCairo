@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../../localization/language_constrants.dart';
 import '../../util/color_resources.dart';
 import '../../util/dimensions.dart';
-import '../../util/images.dart';
 import '../../util/textStyle.dart';
 
 class TitleRow extends StatelessWidget {

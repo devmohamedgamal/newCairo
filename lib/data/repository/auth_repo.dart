@@ -1,14 +1,11 @@
 // ignore_for_file: use_rethrow_when_possible, unnecessary_null_in_if_null_operators, await_only_futures, avoid_function_literals_in_foreach_calls
 import 'dart:convert';
-import 'dart:developer';
-import 'package:flutter/foundation.dart';
 import 'package:lemirageelevators/data/datasource/remote/dio/dio_client.dart';
 import 'package:lemirageelevators/data/datasource/remote/exception/api_error_handler.dart';
 import 'package:lemirageelevators/data/model/body/login_model.dart';
 import 'package:lemirageelevators/data/model/body/register_model.dart';
 import 'package:lemirageelevators/data/model/response/AuthModel.dart';
 import 'package:lemirageelevators/data/model/response/base/api_response.dart';
-import 'package:lemirageelevators/data/model/response/social_login_model.dart';
 import 'package:lemirageelevators/util/app_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -18,22 +15,6 @@ class AuthRepo {
   final DioClient dioClient;
   final SharedPreferences sharedPreferences;
   AuthRepo({required this.dioClient, required this.sharedPreferences});
-
-  ///socialLogin
-  Future<ApiResponse> socialLogin(SocialLoginModel socialLogin) async {
-    try {
-      debugPrint('socialLogin data: ${socialLogin.toMap()}');
-      Response response = await dioClient.post(
-        AppConstants.LOGIN_SOCIAL_URI,
-        data: socialLogin.toMap(),
-      );
-      debugPrint('socialLogin with success');
-      return ApiResponse.withSuccess(response);
-    } on DioException catch (e) {
-      return ApiResponse.withError(ApiErrorHandler.getMessage(e));
-    }
-  }
-
   ///registration
   Future<ApiResponse> registration(RegisterModel register) async {
     try {

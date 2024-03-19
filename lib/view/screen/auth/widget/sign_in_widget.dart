@@ -1,5 +1,4 @@
 // ignore_for_file: unnecessary_null_comparison
-import 'package:dio/dio.dart';
 import 'package:lemirageelevators/data/model/body/login_model.dart';
 import 'package:lemirageelevators/localization/language_constrants.dart';
 import 'package:lemirageelevators/provider/auth_provider.dart';

@@ -43,8 +43,8 @@ class NetworkInfo {
           duration: Duration(seconds: isNotConnected ? 6000 : 3),
           content: Text(
             isNotConnected
-                ? getTranslated('no_connection', context)!
-                : getTranslated('connected', context)!,
+                ? getTranslated('no_connection', context)
+                : getTranslated('connected', context),
             textAlign: TextAlign.center,
           ),
         ));

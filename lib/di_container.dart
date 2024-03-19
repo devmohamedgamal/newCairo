@@ -23,9 +23,7 @@ GetIt locator = GetIt.I;
 Future<void> init() async {
   final sharedPreferences = await SharedPreferences.getInstance();
   locator.registerLazySingleton(() => NavigationServices());
-
-  // const paymentDioInstanceName = "payment_dio";
-
+  
   // Core
   sl.registerLazySingleton(() => NetworkInfo(sl()));
   sl.registerLazySingleton(() => DioClient(AppConstants.BASE_URL, sl(),
