@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:lemirageelevators/provider/localization_provider.dart';
+import 'package:newcairo/provider/localization_provider.dart';
 import 'package:provider/provider.dart';
 
 extension GetTranslationNameOnLocalization on BuildContext {

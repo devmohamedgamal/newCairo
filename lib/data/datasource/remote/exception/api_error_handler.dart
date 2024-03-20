@@ -1,5 +1,5 @@
 // ignore_for_file: curly_braces_in_flow_control_structures, prefer_is_empty
-import 'package:lemirageelevators/data/model/response/base/error_response.dart';
+import 'package:newcairo/data/model/response/base/error_response.dart';
 import 'package:dio/dio.dart';
 
 class ApiErrorHandler {
@@ -121,6 +121,7 @@ class ApiErrorHandler {
                         "Failed to load data - status code: ${error.response!.statusCode}";
               }
               break;
+            // ignore: deprecated_member_use
             case DioErrorType.sendTimeout:
               errorDescription = "إرسال المهلة مع الخادم";
               break;

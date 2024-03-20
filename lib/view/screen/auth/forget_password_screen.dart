@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lemirageelevators/util/textStyle.dart';
+import 'package:newcairo/util/textStyle.dart';
 import 'package:provider/provider.dart';
 import '../../../localization/language_constrants.dart';
 import '../../../provider/auth_provider.dart';

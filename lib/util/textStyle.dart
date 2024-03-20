@@ -1,4 +1,4 @@
-import 'package:lemirageelevators/util/dimensions.dart';
+import 'package:newcairo/util/dimensions.dart';
 import 'package:flutter/material.dart';
 
 const cairoExtraLight = TextStyle(

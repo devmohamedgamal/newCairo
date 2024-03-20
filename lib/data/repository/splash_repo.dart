@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:lemirageelevators/util/app_constants.dart';
+import 'package:newcairo/util/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../datasource/remote/dio/dio_client.dart';
 import '../datasource/remote/exception/api_error_handler.dart';

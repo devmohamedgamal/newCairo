@@ -1,4 +1,4 @@
-import 'package:lemirageelevators/localization/app_localization.dart';
+import 'package:newcairo/localization/app_localization.dart';
 import 'package:flutter/material.dart';
 
 String getTranslated(String key, BuildContext context) {

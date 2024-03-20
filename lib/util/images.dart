@@ -18,4 +18,5 @@ class Images {
   static const String eventIcon = 'assets/images/events.png';
   static const String newsIcon = 'assets/images/news.png';
   static const String backgeoundHome = 'assets/images/main3.png';
+  static const String language = 'assets/images/language.png';
 }

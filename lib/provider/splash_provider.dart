@@ -1,4 +1,4 @@
-import 'package:lemirageelevators/data/repository/splash_repo.dart';
+import 'package:newcairo/data/repository/splash_repo.dart';
 import 'package:flutter/material.dart';
 
 class SplashProvider extends ChangeNotifier {

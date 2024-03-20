@@ -1,15 +1,15 @@
-import 'package:lemirageelevators/data/datasource/remote/dio/dio_client.dart';
-import 'package:lemirageelevators/data/datasource/remote/dio/logging_interceptor.dart';
-import 'package:lemirageelevators/data/repository/auth_repo.dart';
-import 'package:lemirageelevators/data/repository/product_repo.dart';
-import 'package:lemirageelevators/data/repository/splash_repo.dart';
-import 'package:lemirageelevators/helper/network_info.dart';
-import 'package:lemirageelevators/provider/auth_provider.dart';
-import 'package:lemirageelevators/provider/localization_provider.dart';
-import 'package:lemirageelevators/provider/product_provider.dart';
-import 'package:lemirageelevators/provider/theme_provider.dart';
-import 'package:lemirageelevators/services/navigation_services.dart';
-import 'package:lemirageelevators/util/app_constants.dart';
+import 'package:newcairo/data/datasource/remote/dio/dio_client.dart';
+import 'package:newcairo/data/datasource/remote/dio/logging_interceptor.dart';
+import 'package:newcairo/data/repository/auth_repo.dart';
+import 'package:newcairo/data/repository/product_repo.dart';
+import 'package:newcairo/data/repository/splash_repo.dart';
+import 'package:newcairo/helper/network_info.dart';
+import 'package:newcairo/provider/auth_provider.dart';
+import 'package:newcairo/provider/localization_provider.dart';
+import 'package:newcairo/provider/product_provider.dart';
+import 'package:newcairo/provider/theme_provider.dart';
+import 'package:newcairo/services/navigation_services.dart';
+import 'package:newcairo/util/app_constants.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,7 +23,7 @@ GetIt locator = GetIt.I;
 Future<void> init() async {
   final sharedPreferences = await SharedPreferences.getInstance();
   locator.registerLazySingleton(() => NavigationServices());
-  
+
   // Core
   sl.registerLazySingleton(() => NetworkInfo(sl()));
   sl.registerLazySingleton(() => DioClient(AppConstants.BASE_URL, sl(),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lemirageelevators/util/responsive.dart';
+import 'package:newcairo/util/responsive.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../util/color_resources.dart';
 import '../../util/dimensions.dart';

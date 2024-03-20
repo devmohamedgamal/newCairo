@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.pixel" "\0"
-            VALUE "FileDescription", "lemirageelevators" "\0"
+            VALUE "FileDescription", "newcairo" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "lemirageelevators" "\0"
+            VALUE "InternalName", "newcairo" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022 com.pixel. All rights reserved." "\0"
-            VALUE "OriginalFilename", "lemirageelevators.exe" "\0"
-            VALUE "ProductName", "lemirageelevators" "\0"
+            VALUE "OriginalFilename", "newcairo.exe" "\0"
+            VALUE "ProductName", "newcairo" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

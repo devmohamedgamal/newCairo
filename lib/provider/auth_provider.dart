@@ -1,7 +1,7 @@
-import 'package:lemirageelevators/data/model/body/login_model.dart';
-import 'package:lemirageelevators/data/model/body/register_model.dart';
-import 'package:lemirageelevators/data/model/response/base/api_response.dart';
-import 'package:lemirageelevators/data/repository/auth_repo.dart';
+import 'package:newcairo/data/model/body/login_model.dart';
+import 'package:newcairo/data/model/body/register_model.dart';
+import 'package:newcairo/data/model/response/base/api_response.dart';
+import 'package:newcairo/data/repository/auth_repo.dart';
 import 'package:flutter/material.dart';
 import '../data/model/response/AuthModel.dart';
 import '../data/model/response/status_model.dart';

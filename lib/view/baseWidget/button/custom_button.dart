@@ -1,6 +1,6 @@
-import 'package:lemirageelevators/provider/theme_provider.dart';
-import 'package:lemirageelevators/util/color_resources.dart';
-import 'package:lemirageelevators/util/textStyle.dart';
+import 'package:newcairo/provider/theme_provider.dart';
+import 'package:newcairo/util/color_resources.dart';
+import 'package:newcairo/util/textStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

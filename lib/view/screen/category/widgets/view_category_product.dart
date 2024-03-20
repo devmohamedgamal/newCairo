@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:lemirageelevators/provider/product_provider.dart';
+import 'package:newcairo/provider/product_provider.dart';
 import 'package:provider/provider.dart';
 import '../../../../localization/language_constrants.dart';
 import '../../../../provider/theme_provider.dart';

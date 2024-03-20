@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_if_null_operators, unnecessary_null_comparison, prefer_const_constructors, use_rethrow_when_possible
 import 'dart:io';
-import 'package:lemirageelevators/data/datasource/remote/dio/logging_interceptor.dart';
 import 'package:dio/dio.dart';
+import 'package:newcairo/data/datasource/remote/dio/logging_interceptor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DioClient {

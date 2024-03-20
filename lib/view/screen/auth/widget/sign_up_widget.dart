@@ -1,18 +1,22 @@
-import 'package:lemirageelevators/data/model/body/register_model.dart';
-import 'package:lemirageelevators/localization/language_constrants.dart';
-import 'package:lemirageelevators/provider/auth_provider.dart';
-import 'package:lemirageelevators/util/dimensions.dart';
-import 'package:lemirageelevators/view/baseWidget/button/custom_button.dart';
-import 'package:lemirageelevators/view/baseWidget/dialog/animated_custom_dialog.dart';
-import 'package:lemirageelevators/view/baseWidget/textfield/custom_password_textfield.dart';
-import 'package:lemirageelevators/view/baseWidget/textfield/custom_textfield.dart';
+import 'package:newcairo/data/model/body/register_model.dart';
+import 'package:newcairo/localization/language_constrants.dart';
+import 'package:newcairo/provider/auth_provider.dart';
+import 'package:newcairo/util/dimensions.dart';
+import 'package:newcairo/view/baseWidget/button/custom_button.dart';
+import 'package:newcairo/view/baseWidget/dialog/animated_custom_dialog.dart';
+import 'package:newcairo/view/baseWidget/textfield/custom_password_textfield.dart';
+import 'package:newcairo/view/baseWidget/textfield/custom_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:lemirageelevators/view/screen/home/home_screen.dart';
+import 'package:newcairo/view/screen/home/home_screen.dart';
 import 'package:provider/provider.dart';
 import '../../../../data/model/body/login_model.dart';
 import '../../../../helper/email_checker.dart';
+import '../../../../util/images.dart';
 import '../../../baseWidget/dialog/error_alert_dialog.dart';
+import '../../../baseWidget/dialog/language_dialog.dart';
 import '../../../baseWidget/show_custom_snakbar.dart';
+import '../../../baseWidget/web_view_screen.dart';
+import '../../../setting/settings_screen.dart';
 
 class SignUpWidget extends StatefulWidget {
   @override
@@ -166,6 +170,15 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                   onTap: addUser,
                   buttonText: getTranslated('SIGN_UP', context)),
         ),
+        SizedBox(
+          height: 24,
+        ),
+        // for change language
+        TitleButton(
+          image: Images.language,
+          title: getTranslated('choose_language', context),
+          onTap: () => showAnimatedDialog(context, LanguageDialog()),
+        ),
       ],
     );
   }
@@ -243,11 +256,19 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   }
 
   route(bool isRoute, String errorMessage) async {
+    var response =
+        await Provider.of<AuthProvider>(context, listen: false).about();
     if (isRoute) {
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (_) => const HomeView()),
-          (route) => false);
+      if (response['fetched_about_data']['landing_page'] == "5") {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (BuildContext context) => WebViewScreen(
+                  url:
+                      'https://www.elbascet.com/newcairo/Website/home/${loginBody.token}',
+                )));
+      } else {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (BuildContext context) => HomeView()));
+      }
     } else {
       showCustomSnackBar(errorMessage, context);
     }

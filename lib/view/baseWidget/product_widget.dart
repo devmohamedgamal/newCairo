@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lemirageelevators/localization/language_constrants.dart';
-import 'package:lemirageelevators/util/app_constants.dart';
-import 'package:lemirageelevators/util/responsive.dart';
-import 'package:lemirageelevators/util/textStyle.dart';
+import 'package:newcairo/localization/language_constrants.dart';
+import 'package:newcairo/util/app_constants.dart';
+import 'package:newcairo/util/responsive.dart';
+import 'package:newcairo/util/textStyle.dart';
 import 'package:provider/provider.dart';
 import '../../data/model/response/Product/product.dart';
 import '../../provider/localization_provider.dart';

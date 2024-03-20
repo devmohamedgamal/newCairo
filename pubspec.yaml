@@ -1,9 +1,9 @@
-name: lemirageelevators
+name: newcairo
 description: A new Flutter project.
 
 publish_to: "none"
 
-version: 2.3.2+10
+version: 1.0.0+2
 
 environment:
   sdk: ">=2.16.2 <3.0.0"

@@ -1,19 +1,22 @@
 // ignore_for_file: unnecessary_null_comparison
-import 'package:lemirageelevators/data/model/body/login_model.dart';
-import 'package:lemirageelevators/localization/language_constrants.dart';
-import 'package:lemirageelevators/provider/auth_provider.dart';
-import 'package:lemirageelevators/util/color_resources.dart';
-import 'package:lemirageelevators/util/dimensions.dart';
-import 'package:lemirageelevators/util/textStyle.dart';
-import 'package:lemirageelevators/view/baseWidget/button/custom_button.dart';
-import 'package:lemirageelevators/view/baseWidget/dialog/animated_custom_dialog.dart';
-import 'package:lemirageelevators/view/baseWidget/dialog/error_alert_dialog.dart';
-import 'package:lemirageelevators/view/baseWidget/textfield/custom_password_textfield.dart';
-import 'package:lemirageelevators/view/baseWidget/textfield/custom_textfield.dart';
+import 'package:newcairo/data/model/body/login_model.dart';
+import 'package:newcairo/localization/language_constrants.dart';
+import 'package:newcairo/provider/auth_provider.dart';
+import 'package:newcairo/util/color_resources.dart';
+import 'package:newcairo/util/dimensions.dart';
+import 'package:newcairo/util/textStyle.dart';
+import 'package:newcairo/view/baseWidget/button/custom_button.dart';
+import 'package:newcairo/view/baseWidget/dialog/animated_custom_dialog.dart';
+import 'package:newcairo/view/baseWidget/dialog/error_alert_dialog.dart';
+import 'package:newcairo/view/baseWidget/textfield/custom_password_textfield.dart';
+import 'package:newcairo/view/baseWidget/textfield/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../../util/images.dart';
+import '../../../baseWidget/dialog/language_dialog.dart';
 import '../../../baseWidget/show_custom_snakbar.dart';
 import '../../../baseWidget/web_view_screen.dart';
+import '../../../setting/settings_screen.dart';
 import '../../home/home_screen.dart';
 import '../forget_password_screen.dart';
 
@@ -147,6 +150,13 @@ class _SignInWidgetState extends State<SignInWidget> {
                     onTap: loginUser,
                     buttonText: getTranslated('SIGN_IN', context)),
           ),
+          SizedBox(height: 24,),
+          // for change language
+          TitleButton(
+            image: Images.language,
+            title: getTranslated('choose_language', context),
+            onTap: () => showAnimatedDialog(context, LanguageDialog()),
+          ),
         ],
       ),
     );
@@ -180,10 +190,11 @@ class _SignInWidgetState extends State<SignInWidget> {
     var response =
         await Provider.of<AuthProvider>(context, listen: false).about();
     if (isRoute) {
-      if (response['fetched_about_data']['landing_page'] == "3") {
+      if (response['fetched_about_data']['landing_page'] == "5") {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
             builder: (BuildContext context) => WebViewScreen(
-                  url: 'https://www.elbascet.com/newcairo/Website/home/${loginBody.token}',
+                  url:
+                      'https://www.elbascet.com/newcairo/Website/home/${loginBody.token}',
                 )));
       } else {
         Navigator.of(context).pushReplacement(

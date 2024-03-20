@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lemirageelevators/data/model/response/Product/product.dart';
-import 'package:lemirageelevators/util/textStyle.dart';
-import 'package:lemirageelevators/view/screen/product/widget/product_image_view.dart';
-import 'package:lemirageelevators/view/screen/product/widget/product_title_view.dart';
+import 'package:newcairo/data/model/response/Product/product.dart';
+import 'package:newcairo/util/textStyle.dart';
+import 'package:newcairo/view/screen/product/widget/product_image_view.dart';
+import 'package:newcairo/view/screen/product/widget/product_title_view.dart';
 import 'package:provider/provider.dart';
 import '../../../localization/language_constrants.dart';
 import '../../../provider/auth_provider.dart';
@@ -58,7 +58,7 @@ class ProductDetails extends StatelessWidget {
                 indent: 20,
               ),
               SizedBox(height: 10),
-                           Padding(
+              Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   product.description!,

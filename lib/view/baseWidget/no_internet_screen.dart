@@ -1,6 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:lemirageelevators/util/textStyle.dart';
+import 'package:newcairo/util/textStyle.dart';
 import '../../localization/language_constrants.dart';
 import '../../util/color_resources.dart';
 import '../../util/dimensions.dart';

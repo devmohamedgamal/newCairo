@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lemirageelevators/util/textStyle.dart';
+import 'package:newcairo/util/textStyle.dart';
 import '../../localization/language_constrants.dart';
 import '../../util/color_resources.dart';
 import '../../util/dimensions.dart';
@@ -15,7 +15,8 @@ class MyDialog extends StatelessWidget {
 
   MyDialog(
       {this.isFailed = false,
-      this.rotateAngle = 0, this.back,
+      this.rotateAngle = 0,
+      this.back,
       required this.icon,
       required this.title,
       required this.description});
@@ -45,7 +46,6 @@ class MyDialog extends StatelessWidget {
                   child: Icon(icon, size: 40, color: Colors.white)),
             ),
           ),
-
           Padding(
             padding: EdgeInsets.only(top: 40),
             child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -61,7 +61,7 @@ class MyDialog extends StatelessWidget {
                     horizontal: Dimensions.PADDING_SIZE_LARGE),
                 child: CustomButton(
                     buttonText: getTranslated('ok', context),
-                    onTap: back ?? ()=> Navigator.pop(context)),
+                    onTap: back ?? () => Navigator.pop(context)),
               ),
             ]),
           ),

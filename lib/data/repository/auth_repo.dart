@@ -1,12 +1,12 @@
 // ignore_for_file: use_rethrow_when_possible, unnecessary_null_in_if_null_operators, await_only_futures, avoid_function_literals_in_foreach_calls
 import 'dart:convert';
-import 'package:lemirageelevators/data/datasource/remote/dio/dio_client.dart';
-import 'package:lemirageelevators/data/datasource/remote/exception/api_error_handler.dart';
-import 'package:lemirageelevators/data/model/body/login_model.dart';
-import 'package:lemirageelevators/data/model/body/register_model.dart';
-import 'package:lemirageelevators/data/model/response/AuthModel.dart';
-import 'package:lemirageelevators/data/model/response/base/api_response.dart';
-import 'package:lemirageelevators/util/app_constants.dart';
+import 'package:newcairo/data/datasource/remote/dio/dio_client.dart';
+import 'package:newcairo/data/datasource/remote/exception/api_error_handler.dart';
+import 'package:newcairo/data/model/body/login_model.dart';
+import 'package:newcairo/data/model/body/register_model.dart';
+import 'package:newcairo/data/model/response/AuthModel.dart';
+import 'package:newcairo/data/model/response/base/api_response.dart';
+import 'package:newcairo/util/app_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,6 +15,7 @@ class AuthRepo {
   final DioClient dioClient;
   final SharedPreferences sharedPreferences;
   AuthRepo({required this.dioClient, required this.sharedPreferences});
+
   ///registration
   Future<ApiResponse> registration(RegisterModel register) async {
     try {

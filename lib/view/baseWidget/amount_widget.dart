@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lemirageelevators/util/textStyle.dart';
+import 'package:newcairo/util/textStyle.dart';
 import '../../util/dimensions.dart';
 
 class AmountWidget extends StatelessWidget {

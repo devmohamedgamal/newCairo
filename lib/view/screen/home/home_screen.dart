@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lemirageelevators/provider/product_provider.dart';
+import 'package:newcairo/provider/product_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../util/images.dart';
+import '../../setting/settings_screen.dart';
 import '../category/widgets/view_category_product.dart';
 
 class HomeView extends StatelessWidget {
@@ -11,6 +12,17 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => SettingsScreen(),
+            ),
+          );
+        },
+        child: Icon(Icons.settings),
+      ),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(

@@ -1,12 +1,12 @@
 // ignore_for_file: prefer_final_fields, prefer_const_constructors, sized_box_for_whitespace, use_key_in_widget_constructors, avoid_print, curly_braces_in_flow_control_structures
 import 'dart:async';
 import 'dart:developer';
-import 'package:lemirageelevators/localization/language_constrants.dart';
-import 'package:lemirageelevators/provider/auth_provider.dart';
-import 'package:lemirageelevators/util/images.dart';
-import 'package:lemirageelevators/util/responsive.dart';
-import 'package:lemirageelevators/view/screen/auth/auth_screen.dart';
-import 'package:lemirageelevators/view/screen/home/home_screen.dart';
+import 'package:newcairo/localization/language_constrants.dart';
+import 'package:newcairo/provider/auth_provider.dart';
+import 'package:newcairo/util/images.dart';
+import 'package:newcairo/util/responsive.dart';
+import 'package:newcairo/view/screen/auth/auth_screen.dart';
+import 'package:newcairo/view/screen/home/home_screen.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -87,37 +87,35 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _route() {
-        Provider.of<SplashProvider>(context, listen: false)
-            .initSharedPrefData();
-        Timer(Duration(seconds: 1), () async {
-          if (Provider.of<AuthProvider>(context, listen: false).isLoggedIn()) {
-            await Provider.of<AuthProvider>(context, listen: false).getUser();
-            await Provider.of<AuthProvider>(context, listen: false).getToken();
-            var token = Provider.of<AuthProvider>(context, listen: false).token;
-            log(token ?? 'null');
-            var response =
-                await Provider.of<AuthProvider>(context, listen: false).about();
-            if (response['fetched_about_data']['landing_page'] == "5") {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (BuildContext context) => WebViewScreen(
-                        url:
-                            'https://www.elbascet.com/newcairo/Website/home/$token',
-                      )));
-            } else {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (BuildContext context) => HomeView()));
-            }
-          } else {
-            if (Provider.of<SplashProvider>(context, listen: false)
-                .showIntro()!) {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (BuildContext context) => AuthScreen()));
-            } else {
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => AuthScreen()),
-                  (route) => false);
-            }
-          }
-        });
-    }
+    Provider.of<SplashProvider>(context, listen: false).initSharedPrefData();
+    Timer(Duration(seconds: 1), () async {
+      if (Provider.of<AuthProvider>(context, listen: false).isLoggedIn()) {
+        await Provider.of<AuthProvider>(context, listen: false).getUser();
+        await Provider.of<AuthProvider>(context, listen: false).getToken();
+        var token = Provider.of<AuthProvider>(context, listen: false).token;
+        log(token ?? 'null');
+        var response =
+            await Provider.of<AuthProvider>(context, listen: false).about();
+        if (response['fetched_about_data']['landing_page'] == "5") {
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (BuildContext context) => WebViewScreen(
+                    url:
+                        'https://www.elbascet.com/newcairo/Website/home/$token',
+                  )));
+        } else {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (BuildContext context) => HomeView()));
+        }
+      } else {
+        if (Provider.of<SplashProvider>(context, listen: false).showIntro()!) {
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (BuildContext context) => AuthScreen()));
+        } else {
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => AuthScreen()),
+              (route) => false);
+        }
+      }
+    });
+  }
 }

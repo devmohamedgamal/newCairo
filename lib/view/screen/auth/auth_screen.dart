@@ -1,14 +1,14 @@
-import 'package:lemirageelevators/localization/language_constrants.dart';
-import 'package:lemirageelevators/provider/auth_provider.dart';
-import 'package:lemirageelevators/provider/theme_provider.dart';
-import 'package:lemirageelevators/util/color_resources.dart';
-import 'package:lemirageelevators/util/dimensions.dart';
-import 'package:lemirageelevators/util/images.dart';
-import 'package:lemirageelevators/util/responsive.dart';
-import 'package:lemirageelevators/util/textStyle.dart';
-import 'package:lemirageelevators/view/baseWidget/spacer.dart';
-import 'package:lemirageelevators/view/screen/auth/widget/sign_in_widget.dart';
-import 'package:lemirageelevators/view/screen/auth/widget/sign_up_widget.dart';
+import 'package:newcairo/localization/language_constrants.dart';
+import 'package:newcairo/provider/auth_provider.dart';
+import 'package:newcairo/provider/theme_provider.dart';
+import 'package:newcairo/util/color_resources.dart';
+import 'package:newcairo/util/dimensions.dart';
+import 'package:newcairo/util/images.dart';
+import 'package:newcairo/util/responsive.dart';
+import 'package:newcairo/util/textStyle.dart';
+import 'package:newcairo/view/baseWidget/spacer.dart';
+import 'package:newcairo/view/screen/auth/widget/sign_in_widget.dart';
+import 'package:newcairo/view/screen/auth/widget/sign_up_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

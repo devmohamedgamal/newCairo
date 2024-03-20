@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lemirageelevators/util/color_resources.dart';
+import 'package:newcairo/util/color_resources.dart';
 
 ThemeData light = ThemeData(
   fontFamily: 'TitilliumWeb',
