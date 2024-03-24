@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lemirageelevators/util/textStyle.dart';
+import 'package:newcairo/util/textStyle.dart';
 import 'package:provider/provider.dart';
 import '../../../../localization/language_constrants.dart';
 import '../../../../provider/localization_provider.dart';
@@ -22,14 +22,14 @@ class LanguageDialog extends StatelessWidget {
 
         Padding(
           padding: EdgeInsets.all(Dimensions.PADDING_SIZE_DEFAULT),
-          child: Text(getTranslated('language', context)!,
+          child: Text(getTranslated('language', context),
               style: cairoSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_LARGE)),
         ),
 
         SizedBox(height: 150, child: Consumer<SplashProvider>(
           builder: (context, splash, child) {
             List<String> _valueList = [];
-            AppConstants.languages!.forEach((language) => _valueList.add(language.languageName));
+            AppConstants.languages.forEach((language) => _valueList.add(language.languageName));
             return CupertinoPicker(
               itemExtent: 40,
               useMagnifier: true,
@@ -40,7 +40,7 @@ class LanguageDialog extends StatelessWidget {
               },
               children: _valueList.map((value) {
                 return Center(child: Text(value,
-                    style: TextStyle(color: Theme.of(context).textTheme.bodyText1!.color)));
+                    style: TextStyle(color: Theme.of(context).textTheme.bodyLarge!.color)));
               }).toList(),
             );
           },
@@ -50,7 +50,7 @@ class LanguageDialog extends StatelessWidget {
         Row(children: [
           Expanded(child: TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text(getTranslated('CANCEL', context)!,
+            child: Text(getTranslated('CANCEL', context),
                 style: cairoRegular.copyWith(color: ColorResources.getYellow(context))),
           )),
           Container(
@@ -61,12 +61,12 @@ class LanguageDialog extends StatelessWidget {
           Expanded(child: TextButton(
             onPressed: () {
                 Provider.of<LocalizationProvider>(context, listen: false).setLanguage(Locale(
-                  AppConstants.languages![index].languageCode,
-                  AppConstants.languages![index].countryCode,
+                  AppConstants.languages[index].languageCode,
+                  AppConstants.languages[index].countryCode,
                 ));
               Navigator.pop(context);
             },
-            child: Text(getTranslated('ok', context)!,
+            child: Text(getTranslated('ok', context),
                 style: cairoRegular.copyWith(color: ColorResources.getGreen(context))),
           )),
         ]),

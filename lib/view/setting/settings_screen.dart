@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newcairo/view/baseWidget/web_view_screen.dart';
 import 'package:provider/provider.dart';
 import '../../../localization/language_constrants.dart';
 import '../../../provider/theme_provider.dart';
@@ -36,6 +37,24 @@ class SettingsScreen extends StatelessWidget {
               image: Images.language,
               title: getTranslated('choose_language', context),
               onTap: () => showAnimatedDialog(context, LanguageDialog()),
+            ),
+            TitleButton(
+              image: Images.about,
+              title: getTranslated('About', context),
+              onTap: () => showAnimatedDialog(context, AboutWidget()),
+            ),
+            TitleButton(
+              image: Images.about,
+              title: getTranslated('Privacy Policy', context),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => WebViewScreen(
+                          url:
+                              'https://www.elbascet.com/newcairo/Website/policy'),
+                    ));
+              },
             ),
             Spacer(),
             Container(
@@ -86,6 +105,35 @@ class TitleButton extends StatelessWidget {
       title: Text(title,
           style: cairoRegular.copyWith(fontSize: Dimensions.FONT_SIZE_LARGE)),
       onTap: onTap,
+    );
+  }
+}
+
+class AboutWidget extends StatelessWidget {
+  const AboutWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: Theme.of(context).highlightColor,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        child: const Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text('Company name : New Cairo', style: cairoRegular),
+            SizedBox(height: 10),
+            Text('Developer name : Mohamed Gamal', style: cairoRegular),
+            SizedBox(height: 10),
+            Text('Version : 1.0.0 ', style: cairoRegular),
+            SizedBox(height: 10),
+            Text(
+                'contact us :- \n Email : appnewcairo@gmail.com \n phone : +201023654681 ',
+                style: cairoRegular),
+          ],
+        ),
+      ),
     );
   }
 }

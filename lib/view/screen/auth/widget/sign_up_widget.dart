@@ -179,6 +179,18 @@ class _SignUpWidgetState extends State<SignUpWidget> {
           title: getTranslated('choose_language', context),
           onTap: () => showAnimatedDialog(context, LanguageDialog()),
         ),
+        TitleButton(
+          image: Images.about,
+          title: getTranslated('Privacy Policy', context),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => WebViewScreen(
+                      url: 'https://www.elbascet.com/newcairo/Website/policy'),
+                ));
+          },
+        ),
       ],
     );
   }

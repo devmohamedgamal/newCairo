@@ -150,12 +150,26 @@ class _SignInWidgetState extends State<SignInWidget> {
                     onTap: loginUser,
                     buttonText: getTranslated('SIGN_IN', context)),
           ),
-          SizedBox(height: 24,),
+          SizedBox(
+            height: 24,
+          ),
           // for change language
           TitleButton(
             image: Images.language,
             title: getTranslated('choose_language', context),
             onTap: () => showAnimatedDialog(context, LanguageDialog()),
+          ),
+          TitleButton(
+            image: Images.about,
+            title: getTranslated('Privacy Policy', context),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => WebViewScreen(
+                        url: 'https://www.elbascet.com/newcairo/Website/policy'),
+                  ));
+            },
           ),
         ],
       ),
