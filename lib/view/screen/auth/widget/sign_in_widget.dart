@@ -1,4 +1,5 @@
 // ignore_for_file: unnecessary_null_comparison
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:newcairo/data/model/body/login_model.dart';
 import 'package:newcairo/localization/language_constrants.dart';
 import 'package:newcairo/provider/auth_provider.dart';
@@ -193,7 +194,7 @@ class _SignInWidgetState extends State<SignInWidget> {
         loginBody.email = email;
         loginBody.password = password;
         loginBody.token =
-            Provider.of<AuthProvider>(context, listen: false).token;
+            await FirebaseMessaging.instance.getToken();
         await Provider.of<AuthProvider>(context, listen: false)
             .login(loginBody, route);
       }

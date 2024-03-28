@@ -50,8 +50,9 @@ android {
 
     defaultConfig {
         applicationId "com.elbascet.newcairo"
-        minSdkVersion 21
+        minSdkVersion 24
         targetSdkVersion 33
+        multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
@@ -66,7 +67,16 @@ android {
     }
     buildTypes {
         release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles
+                getDefaultProguardFile('proguard-android.txt')
+                'proguard-rules.pro'
+        }
+        debug{
+            minifyEnabled true
             signingConfig signingConfigs.release
+
         }
     }
 
@@ -88,6 +98,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:26.7.0')
     implementation 'com.google.firebase:firebase-messaging:23.2.1'
     implementation 'com.google.android.gms:play-services-auth:20.7.0'
+    implementation 'com.android.support:multidex:2.0.1'
 }
 
 apply plugin: 'com.google.gms.google-services'
