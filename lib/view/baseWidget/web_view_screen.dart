@@ -25,21 +25,6 @@ class _WebViewScreenState extends State<WebViewScreen> {
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
   }
 
-void addFileSelectionListener() async {
-    if (Platform.isAndroid) {
-      // final androidController = controllerGlobal as AndroidWebViewController;
-      // await androidController.setOnShowFileSelector(_androidFilePicker);
-    }
-  }
-//   Future<List<String>> _androidFilePicker(final FileSelectorParams params) async {
-//   final result = await FilePicker.platform.pickFiles();
-
-//   if (result != null && result.files.single.path != null) {
-//     final file = File(result.files.single.path!);
-//     return [file.uri.toString()];
-//   }
-//   return [];
-// }
   Future<bool> goBack(BuildContext context) async {
     if (await controllerGlobal.canGoBack()) {
       controllerGlobal.goBack();
