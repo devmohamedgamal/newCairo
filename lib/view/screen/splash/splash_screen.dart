@@ -96,7 +96,7 @@ class _SplashScreenState extends State<SplashScreen> {
         log(token ?? 'null');
         var response =
             await Provider.of<AuthProvider>(context, listen: false).about();
-        if (response['fetched_about_data']['landing_page'] == "3") {
+        if (response['fetched_about_data']['landing_page'] == "5") {
           Navigator.of(context).pushReplacement(MaterialPageRoute(
               builder: (BuildContext context) => WebViewScreen(
                     url:
